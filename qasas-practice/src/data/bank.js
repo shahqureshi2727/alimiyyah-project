@@ -114,6 +114,122 @@ export const irab = [
     answer: "nasb",
     reason: "Khabar of kaana (kooni) — nasb.",
   },
+  // From Ch. 5 — "Who Did This?"
+  {
+    sentence: "أَرَادَ النَّاسُ أَنْ يَسْجُدُوا لِلْأَصْنَامِ.",
+    target: "النَّاسُ",
+    answer: "raf",
+    reason: "Fa'il (doer) of the verb araada. Raf'.",
+  },
+  {
+    sentence: "أَرَادَ النَّاسُ أَنْ يَسْجُدُوا لِلْأَصْنَامِ.",
+    target: "لِلْأَصْنَامِ",
+    answer: "jarr",
+    reason: "Object of the preposition li — jarr.",
+  },
+  {
+    sentence: "مَنْ فَعَلَ هٰذَا بِآلِهَتِنَا؟",
+    target: "بِآلِهَتِنَا",
+    answer: "jarr",
+    reason: "Object of the preposition bi — jarr. (The final -naa is an attached pronoun / mudaf ilayh.)",
+  },
+  {
+    sentence: "بَلْ فَعَلَهُ كَبِيرُهُمْ هٰذَا.",
+    target: "كَبِيرُهُمْ",
+    answer: "raf",
+    reason: "Fa'il (doer) of fa'ala. Raf'.",
+  },
+  {
+    sentence: "أَنَّ الصَّنَمَ الأَكْبَرَ لَا يَقْدِرُ أَنْ يَمْشِيَ.",
+    target: "الصَّنَمَ",
+    answer: "nasb",
+    reason: "Ism of anna (a sister of inna) — nasb.",
+  },
+  {
+    sentence: "أَنَّ الصَّنَمَ الأَكْبَرَ لَا يَقْدِرُ أَنْ يَمْشِيَ.",
+    target: "يَمْشِيَ",
+    answer: "nasb",
+    reason: "Mudari' verb after 'an' — 'an' is a nasb-giver on the mudari', so fathah on the end.",
+  },
+  // From Ch. 6 — "A Cold Fire"
+  {
+    sentence: "اجْتَمَعَ النَّاسُ وَقَالُوا: مَاذَا نَفْعَلُ؟",
+    target: "نَفْعَلُ",
+    answer: "raf",
+    reason: "Mudari' verb with no nasb- or jazm-giver present — raf' by default (dhammah).",
+  },
+  {
+    sentence: "إِنَّ إِبْرَاهِيمَ كَسَرَ الأَصْنَامَ وَأَهَانَ الآلِهَةَ.",
+    target: "الآلِهَةَ",
+    answer: "nasb",
+    reason: "Maf'ul bihi (object) of the verb ahaana. Nasb.",
+  },
+  {
+    sentence: "مَا عِقَابُ إِبْرَاهِيمَ؟",
+    target: "عِقَابُ",
+    answer: "raf",
+    reason: "Khabar of the interrogative maa (functions like a mubtada/khabar structure). Raf'.",
+  },
+  {
+    sentence: "مَا عِقَابُ إِبْرَاهِيمَ؟",
+    target: "إِبْرَاهِيمَ",
+    answer: "jarr",
+    reason: "Mudaf ilayh of 'iqaabu — grammatically jarr, though Ibrahim is 'change-restricted' (ghayr munsarif) so it shows fathah instead of kasrah.",
+  },
+  {
+    sentence: "أَوْقَدُوا نَارًا وَأَلْقَوْا فِيهَا إِبْرَاهِيمَ.",
+    target: "نَارًا",
+    answer: "nasb",
+    reason: "Maf'ul bihi (object) of the verb awqadoo. Nasb.",
+  },
+  {
+    sentence: "أَوْقَدُوا نَارًا وَأَلْقَوْا فِيهَا إِبْرَاهِيمَ.",
+    target: "إِبْرَاهِيمَ",
+    answer: "nasb",
+    reason: "Maf'ul bihi (object) of alqaw. Nasb (shown as fathah since Ibrahim is ghayr munsarif).",
+  },
+  {
+    sentence: "لٰكِنَّ اللهَ نَصَرَ إِبْرَاهِيمَ.",
+    target: "إِبْرَاهِيمَ",
+    answer: "nasb",
+    reason: "Maf'ul bihi (object) of nasara. Nasb.",
+  },
+  {
+    sentence: "يَا نَارُ كُونِي بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.",
+    target: "نَارُ",
+    answer: "raf",
+    reason: "Munaadaa (vocative). Naaru loses its tanween because it is being called, but keeps the dhammah — raf'.",
+  },
+  {
+    sentence: "يَا نَارُ كُونِي بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.",
+    target: "سَلَامًا",
+    answer: "nasb",
+    reason: "Khabar of kaana (the imperative kooni). Nasb.",
+  },
+  {
+    sentence: "كَانَتِ النَّارُ بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.",
+    target: "النَّارُ",
+    answer: "raf",
+    reason: "Ism of kaana. Raf'.",
+  },
+  {
+    sentence: "كَانَتِ النَّارُ بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.",
+    target: "بَرْدًا",
+    answer: "nasb",
+    reason: "Khabar of kaana. Nasb.",
+  },
+  {
+    sentence: "رَأَى النَّاسُ أَنَّ إِبْرَاهِيمَ مَسْرُورٌ.",
+    target: "إِبْرَاهِيمَ",
+    answer: "nasb",
+    reason: "Ism of anna — nasb (fathah, since ghayr munsarif).",
+  },
+  {
+    sentence: "رَأَى النَّاسُ أَنَّ إِبْرَاهِيمَ مَسْرُورٌ.",
+    target: "مَسْرُورٌ",
+    answer: "raf",
+    reason: "Khabar of anna — raf'.",
+  },
 ];
 
 // MODE 2: Noun feature tagging.
@@ -131,6 +247,18 @@ export const nounFeatures = [
   { word: "الطَّعَامُ", def: "marifa", gender: "m", number: "sing" },
   { word: "الفَأْسُ", def: "marifa", gender: "f", number: "sing" },
   { word: "إِبْرَاهِيمُ", def: "marifa", gender: "m", number: "sing" },
+  // Ch. 5–6 additions
+  { word: "نَارٌ", def: "nakirah", gender: "f", number: "sing" },
+  { word: "الآلِهَةُ", def: "marifa", gender: "m", number: "plural" },
+  { word: "عِقَابٌ", def: "nakirah", gender: "m", number: "sing" },
+  { word: "جَزَاءٌ", def: "nakirah", gender: "m", number: "sing" },
+  { word: "الجَوَابُ", def: "marifa", gender: "m", number: "sing" },
+  { word: "سَلَامٌ", def: "nakirah", gender: "m", number: "sing" },
+  { word: "بَرْدٌ", def: "nakirah", gender: "m", number: "sing" },
+  { word: "الصَّنَمُ", def: "marifa", gender: "m", number: "sing" },
+  { word: "فَتًى", def: "nakirah", gender: "m", number: "sing" },
+  { word: "حَجَرٌ", def: "nakirah", gender: "m", number: "sing" },
+  { word: "الأَكْبَرُ", def: "marifa", gender: "m", number: "sing" },
 ];
 
 // MODE 3: Identify the grammatical role.
@@ -197,6 +325,56 @@ export const roles = [
     answerIndex: 1,
     reason: "taajirun is the predicate (khabar) giving information about Zayd.",
   },
+  // Ch. 5
+  {
+    words: ["فَعَلَهُ", "كَبِيرُهُمْ", "هٰذَا"],
+    role: "fa'il",
+    answerIndex: 1,
+    reason: "kabeeruhum is the doer of fa'ala.",
+  },
+  {
+    words: ["أَرَادَ", "النَّاسُ", "أَنْ", "يَسْجُدُوا"],
+    role: "fa'il",
+    answerIndex: 1,
+    reason: "an-naas is the doer of araada.",
+  },
+  // Ch. 6
+  {
+    words: ["اجْتَمَعَ", "النَّاسُ"],
+    role: "fa'il",
+    answerIndex: 1,
+    reason: "an-naas is the doer of ijtama'a.",
+  },
+  {
+    words: ["إِنَّ", "إِبْرَاهِيمَ", "كَسَرَ", "الأَصْنَامَ"],
+    role: "ism of inna",
+    answerIndex: 1,
+    reason: "Ibrahim is the ism of inna, in nasb.",
+  },
+  {
+    words: ["لٰكِنَّ", "اللهَ", "نَصَرَ", "إِبْرَاهِيمَ"],
+    role: "ism of laakinna",
+    answerIndex: 1,
+    reason: "Allah (in nasb) is the ism of laakinna, a sister of inna.",
+  },
+  {
+    words: ["كَانَتِ", "النَّارُ", "بَرْدًا"],
+    role: "ism of kaana",
+    answerIndex: 1,
+    reason: "an-naar is the ism (subject) of kaana.",
+  },
+  {
+    words: ["كَانَتِ", "النَّارُ", "بَرْدًا"],
+    role: "khabar of kaana",
+    answerIndex: 2,
+    reason: "bardan is the khabar of kaana, in nasb.",
+  },
+  {
+    words: ["يَا", "نَارُ"],
+    role: "munaadaa (the one being called)",
+    answerIndex: 1,
+    reason: "naaru is being addressed after yaa — the munaadaa.",
+  },
 ];
 
 // MODE 4: Vocabulary flashcards (Arabic -> English), pulled from the six chapters.
@@ -236,4 +414,32 @@ export const vocab = [
   { ar: "بَرْدٌ", en: "cold(ness)" },
   { ar: "سَلَامٌ", en: "peace" },
   { ar: "نَصَرَ", en: "he helped / supported" },
+  // Ch. 5
+  { ar: "رَجَعَ", en: "he returned" },
+  { ar: "دَخَلَ", en: "he entered" },
+  { ar: "أَرَادَ", en: "he intended / wanted" },
+  { ar: "تَعَجَّبَ", en: "he was astonished" },
+  { ar: "دَهِشَ", en: "he was shocked / stunned" },
+  { ar: "تَأَسَّفَ", en: "he was regretful" },
+  { ar: "فَتًى", en: "youth / young man" },
+  { ar: "آلِهَةٌ", en: "gods (plural of ilaah)" },
+  { ar: "نَطَقَ", en: "he spoke / uttered" },
+  { ar: "قَدَرَ", en: "he was able" },
+  { ar: "يَمْشِي", en: "he walks" },
+  { ar: "يَتَحَرَّكُ", en: "he moves" },
+  { ar: "خَجِلَ", en: "he was embarrassed" },
+  { ar: "يَعْقِلُ", en: "he uses reason / has sense" },
+  // Ch. 6
+  { ar: "اجْتَمَعَ", en: "he/they gathered" },
+  { ar: "أَهَانَ", en: "he disgraced / humiliated" },
+  { ar: "عِقَابٌ", en: "punishment" },
+  { ar: "جَزَاءٌ", en: "recompense / reward" },
+  { ar: "جَوَابٌ", en: "answer / reply" },
+  { ar: "حَرَّقَ", en: "he burned (something)" },
+  { ar: "أَوْقَدَ", en: "he kindled / ignited" },
+  { ar: "أَلْقَى", en: "he threw / cast" },
+  { ar: "مَسْرُورٌ", en: "happy / delighted" },
+  { ar: "سَالِمٌ", en: "safe / unharmed" },
+  { ar: "تَحَيَّرَ", en: "he was bewildered" },
+  { ar: "إِلٰهٌ", en: "god / deity" },
 ];

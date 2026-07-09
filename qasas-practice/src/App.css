@@ -53,3 +53,19 @@ button {
 [dir="rtl"] {
   font-family: 'Amiri', serif;
 }
+
+/* Loading screen */
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  color: var(--ink-light);
+}
+
+/* App content wrapper - accounts for fixed header */
+.app-content {
+  padding-top: 50px;
+}

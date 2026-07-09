@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
+import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
 const modes = [
@@ -27,7 +31,35 @@ const modes = [
   },
 ];
 
-export default function HomeScreen({ onSelectMode }) {
+const MODE_LABELS = {
+  irab: "I'rab",
+  nounFeatures: 'Noun Features',
+  roles: 'Roles',
+  vocab: 'Vocab',
+};
+
+export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
+  const { user } = useAuth();
+  const [recentResults, setRecentResults] = useState([]);
+  const [loadingResults, setLoadingResults] = useState(true);
+
+  useEffect(() => {
+    async function fetchRecentResults() {
+      if (!user) return;
+
+      try {
+        const results = await getUserRecentResults(user.uid, 5);
+        setRecentResults(results);
+      } catch (err) {
+        console.error('Error fetching recent results:', err);
+      } finally {
+        setLoadingResults(false);
+      }
+    }
+
+    fetchRecentResults();
+  }, [user]);
+
   return (
     <div className="home-screen">
       <header className="home-header">
@@ -35,19 +67,84 @@ export default function HomeScreen({ onSelectMode }) {
         <h2 className="title-en">Qasas Practice</h2>
       </header>
 
-      <div className="mode-grid">
-        {modes.map((mode) => (
-          <button
-            key={mode.id}
-            className="mode-card"
-            onClick={() => onSelectMode(mode.id)}
-          >
-            <span className="mode-title-ar">{mode.titleAr}</span>
-            <span className="mode-title-en">{mode.titleEn}</span>
-            <span className="mode-desc">{mode.description}</span>
-          </button>
-        ))}
-      </div>
+      {/* Practice modes section */}
+      <section className="home-section">
+        <h3 className="section-title">Practice</h3>
+        <div className="mode-grid">
+          {modes.map((mode) => (
+            <button
+              key={mode.id}
+              className="mode-card"
+              onClick={() => onSelectMode(mode.id)}
+            >
+              <span className="mode-title-ar">{mode.titleAr}</span>
+              <span className="mode-title-en">{mode.titleEn}</span>
+              <span className="mode-desc">{mode.description}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Quizzes section */}
+      <section className="home-section">
+        <h3 className="section-title">Quizzes</h3>
+        <button className="quiz-entry-card" onClick={onSelectQuiz}>
+          <div className="quiz-entry-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </div>
+          <div className="quiz-entry-content">
+            <span className="quiz-entry-title">Timed Quizzes</span>
+            <span className="quiz-entry-desc">
+              10 questions per round with a countdown timer
+            </span>
+          </div>
+          <div className="quiz-entry-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        </button>
+      </section>
+
+      {/* Leaderboard preview section */}
+      <section className="home-section">
+        <LeaderboardPreview />
+      </section>
+
+      {/* Recent results section */}
+      <section className="home-section">
+        <h3 className="section-title">Your Recent Results</h3>
+        <div className="recent-results">
+          {loadingResults ? (
+            <p className="results-loading">Loading...</p>
+          ) : recentResults.length === 0 ? (
+            <div className="no-results">
+              <p>No quizzes yet.</p>
+              <button className="try-quiz-link" onClick={onSelectQuiz}>
+                Try one!
+              </button>
+            </div>
+          ) : (
+            <div className="results-list">
+              {recentResults.map((result) => (
+                <div key={result.id} className="result-row">
+                  <span className="result-mode">{MODE_LABELS[result.mode]}</span>
+                  <span className="result-score">{result.score}/10</span>
+                  <span className="result-time">
+                    {Math.floor(result.durationSeconds / 60)}:{String(Math.round(result.durationSeconds % 60)).padStart(2, '0')}
+                  </span>
+                  <span className="result-date">
+                    {formatRelativeTime(result.completedAt)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

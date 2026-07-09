@@ -1,0 +1,124 @@
+/* Leaderboard Preview Styles */
+
+.leaderboard-preview {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.preview-header {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.preview-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.preview-title-group .section-title {
+  margin: 0;
+}
+
+.preview-subtitle {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  font-style: italic;
+}
+
+/* Mode tabs */
+.preview-mode-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.preview-mode-tab {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--ink-light);
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.preview-mode-tab:hover {
+  color: var(--ink);
+}
+
+.preview-mode-tab.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Content */
+.preview-content {
+  padding: 0.75rem;
+}
+
+.preview-loading,
+.preview-empty {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  color: var(--ink-light);
+}
+
+.preview-error {
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  color: var(--error);
+}
+
+.preview-no-result-banner {
+  text-align: center;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+}
+
+/* View full link */
+.preview-view-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  color: var(--accent);
+  background: var(--parchment);
+  border: none;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preview-view-full:hover {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+}
+
+.preview-view-full svg {
+  width: 16px;
+  height: 16px;
+}
