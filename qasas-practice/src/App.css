@@ -1,0 +1,71 @@
+/* Root color palette - Islamic manuscript inspired */
+:root {
+  /* Base colors */
+  --parchment: #faf7f2;
+  --cream: #f5f0e6;
+  --ink: #2c2416;
+  --ink-light: #5c5347;
+
+  /* Accent - deep teal, like Islamic geometric patterns */
+  --accent: #1a6b6d;
+  --accent-dark: #145456;
+  --accent-light: rgba(26, 107, 109, 0.1);
+
+  /* Borders */
+  --border: #d4cfc4;
+
+  /* Feedback */
+  --success: #22863a;
+  --success-bg: rgba(34, 134, 58, 0.1);
+  --error: #dc2626;
+  --error-bg: rgba(220, 38, 38, 0.1);
+}
+
+/* Reset & base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Crimson Text', Georgia, serif;
+  background-color: var(--parchment);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Ensure Arabic text has proper rendering */
+[dir="rtl"] {
+  font-family: 'Amiri', serif;
+}
+
+/* Loading screen */
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  color: var(--ink-light);
+}
+
+/* App content wrapper - accounts for fixed header */
+.app-content {
+  padding-top: 50px;
+}

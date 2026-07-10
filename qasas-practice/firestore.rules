@@ -1,0 +1,49 @@
+ rules_version = '2';                                                                                                                                                                                   
+  service cloud.firestore {                                                                                                                                                                              
+    match /databases/{database}/documents {                                                                                                                                                              
+                                                                                                                                                                                                         
+      // --- Users (unchanged from Pass 1) ---                                                                                                                                                           
+      match /users/{userId} {                                                                                                                                                                            
+        allow read: if request.auth != null &&                                                                                                                                                           
+                       (request.auth.uid == userId ||                                                                                                                                                    
+                        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin");                                                                                           
+                                                                                                                                                                                                         
+        allow create: if request.auth != null &&                                                                                                                                                         
+                         request.auth.uid == userId &&                                                                                                                                                   
+                         request.resource.data.role == "student" &&                                                                                                                                      
+                         request.resource.data.username is string &&                                                                                                                                     
+                         request.resource.data.username.size() >= 3 &&                                                                                                                                   
+                         request.resource.data.username.size() <= 20;                                                                                                                                    
+                                                                                                                                                                                                         
+        allow update, delete: if false;                                                                                                                                                                  
+      }                                                                                                                                                                                                  
+                                                                                                                                                                                                         
+      // --- Quiz results ---                                                                                                                                                                            
+      match /quizResults/{resultId} {                                                                                                                                                                    
+        // Anyone signed in can read results (needed for leaderboards).                                                                                                                                  
+        allow read: if request.auth != null;                                                                                                                                                             
+                                                                                                                                                                                                         
+        // A user can create a result document for themselves only.                                                                                                                                      
+        allow create: if request.auth != null &&                                                                                                                                                         
+                         request.resource.data.userId == request.auth.uid &&                                                                                                                             
+                         request.resource.data.username is string &&                                                                                                                                     
+                         request.resource.data.mode in ["irab", "nounFeatures", "roles", "vocab", "fiqh"] &&
+                         request.resource.data.bankSource in ["qasas", "quran", "fiqh"] &&
+                         request.resource.data.score is number &&                                                                                                                                        
+                         request.resource.data.score >= 0 &&                                                                                                                                             
+                         request.resource.data.score <= 10 &&                                                                                                                                            
+                         request.resource.data.total == 10 &&                                                                                                                                            
+                         request.resource.data.durationSeconds is number &&                                                                                                                              
+                         request.resource.data.durationSeconds > 0 &&                                                                                                                                    
+                         request.resource.data.completedAt == request.time;                                                                                                                              
+                                                                                                                                                                                                         
+        // Append-only. No edits, no deletes.                                                                                                                                                            
+        allow update, delete: if false;                                                                                                                                                                  
+      }                                                                                                                                                                                                  
+                                                                                                                                                                                                         
+      // Default deny                                                                                                                                                                                    
+      match /{document=**} {                                                                                                                                                                             
+        allow read, write: if false;                                                                                                                                                                     
+      }                                                                                                                                                                                                  
+    }                                                                                                                                                                                                    
+  }            

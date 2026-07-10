@@ -1,0 +1,164 @@
+/* Leaderboard Page Styles */
+/* Table styles are in LeaderboardTable.css */
+
+.leaderboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--parchment);
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+
+.leaderboard-title {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin: 0;
+  font-weight: 600;
+}
+
+.spacer {
+  width: 60px;
+}
+
+.back-btn {
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+  background: var(--border);
+}
+
+/* Mode tabs */
+.mode-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mode-tab {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--ink-light);
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.mode-tab:hover {
+  color: var(--ink);
+}
+
+.mode-tab.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Time toggle */
+.time-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.time-btn {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--ink-light);
+  transition: all 0.2s;
+}
+
+.time-btn:hover {
+  border-color: var(--ink-light);
+}
+
+.time-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Leaderboard content */
+.leaderboard-content {
+  flex: 1;
+  padding: 0 1rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.leaderboard-loading,
+.leaderboard-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  color: var(--ink-light);
+}
+
+.leaderboard-error {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  color: var(--error);
+  background: var(--error-bg);
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.no-result-banner {
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+}
+
+@media (min-width: 600px) {
+  .mode-tabs {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .mode-tab {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
+}

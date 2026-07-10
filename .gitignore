@@ -1,0 +1,6 @@
+.DS_Store
+.claude/settings.local.json
+
+qasas-practice/node_modules
+qasas-practice/dist
+qasas-practice/dist-ssr

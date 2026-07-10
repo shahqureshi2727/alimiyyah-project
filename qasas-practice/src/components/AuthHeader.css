@@ -1,0 +1,132 @@
+/* Auth Header Styles */
+.auth-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  z-index: 50;
+}
+
+.auth-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.auth-header-left {
+  /* Reserved for logo or app title */
+}
+
+.auth-header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* User menu */
+.user-menu-container {
+  position: relative;
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.user-menu-trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.user-menu-trigger.open {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.user-menu-name {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s;
+}
+
+.user-menu-trigger:hover .user-menu-name {
+  text-decoration-color: var(--ink-light);
+}
+
+.user-menu-chevron {
+  font-size: 0.7rem;
+  color: var(--ink-light);
+  transition: transform 0.2s;
+}
+
+.user-menu-trigger.open .user-menu-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 140px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  animation: menuFadeIn 0.15s ease;
+  z-index: 100;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-menu-item {
+  display: block;
+  width: 100%;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: none;
+  border: none;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.user-menu-item:hover,
+.user-menu-item:focus {
+  background: var(--accent-light);
+  outline: none;
+}
+
+.user-menu-item:focus {
+  background: var(--accent-light);
+}
+
+.user-menu-item + .user-menu-item {
+  border-top: 1px solid var(--border);
+}
