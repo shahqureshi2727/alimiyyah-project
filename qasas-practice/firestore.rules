@@ -27,8 +27,8 @@
         allow create: if request.auth != null &&                                                                                                                                                         
                          request.resource.data.userId == request.auth.uid &&                                                                                                                             
                          request.resource.data.username is string &&                                                                                                                                     
-                         request.resource.data.mode in ["irab", "nounFeatures", "roles", "vocab"] &&                                                                                                     
-                         request.resource.data.bankSource in ["qasas", "quran"] &&                                                                                                                       
+                         request.resource.data.mode in ["irab", "nounFeatures", "roles", "vocab", "fiqh"] &&
+                         request.resource.data.bankSource in ["qasas", "quran", "fiqh"] &&
                          request.resource.data.score is number &&                                                                                                                                        
                          request.resource.data.score >= 0 &&                                                                                                                                             
                          request.resource.data.score <= 10 &&                                                                                                                                            

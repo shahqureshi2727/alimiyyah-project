@@ -2,29 +2,27 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { submitQuizResult, formatDuration } from '../lib/quiz';
 import { irab, nounFeatures, roles, vocab } from '../data/bank';
+import { getFiqhQuestions } from '../data/fiqh';
+import { QUIZ_MODES } from '../config/subjects';
+import FiqhQuestionCard from './FiqhQuestionCard';
 import './TimedQuiz.css';
 
 const QUIZ_LENGTH = 10;
-const MODE_TIMERS = {
-  irab: 20,
-  nounFeatures: 10,
-  roles: 20,
-  vocab: 10,
-};
-
-const MODE_LABELS = {
-  irab: "I'rab",
-  nounFeatures: 'Noun Features',
-  roles: 'Grammatical Role',
-  vocab: 'Vocabulary',
-};
 
 const BANKS = {
   irab,
   nounFeatures,
   roles,
   vocab,
+  // 'fiqh' is intentionally absent here — its bank depends on the selected
+  // topic, so it's resolved dynamically in getBank() below instead of a
+  // static import.
 };
+
+function getBank(mode, topic) {
+  if (mode === 'fiqh') return getFiqhQuestions(topic || 'all');
+  return BANKS[mode];
+}
 
 // Shuffle array using Fisher-Yates
 function shuffleArray(array) {
@@ -213,11 +211,11 @@ function XIcon() {
   );
 }
 
-export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) {
+export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequest }) {
   const { user, username } = useAuth();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(MODE_TIMERS[mode]);
+  const [timeLeft, setTimeLeft] = useState(QUIZ_MODES[mode].timerSeconds);
   const [isTimerPaused, setIsTimerPaused] = useState(false);
   const [score, setScore] = useState(0);
   const [results, setResults] = useState([]);
@@ -244,11 +242,11 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
 
   // Initialize questions on mount
   useEffect(() => {
-    const bank = BANKS[mode];
+    const bank = getBank(mode, topic);
     const selected = selectQuestions(bank);
     setQuestions(selected);
     setQuestionStartTime(Date.now());
-  }, [mode]);
+  }, [mode, topic]);
 
   // Timer effect
   useEffect(() => {
@@ -258,7 +256,7 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
       setTimeLeft((prev) => {
         if (prev <= 1) {
           handleTimeout();
-          return MODE_TIMERS[mode];
+          return QUIZ_MODES[mode].timerSeconds;
         }
         return prev - 1;
       });
@@ -334,7 +332,7 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
     }
 
     setCurrentIndex(prev => prev + 1);
-    setTimeLeft(MODE_TIMERS[mode]);
+    setTimeLeft(QUIZ_MODES[mode].timerSeconds);
     setShowFeedback(false);
     setCurrentAnswer(null);
     setIsCorrect(false);
@@ -359,6 +357,8 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
         return question.words[question.answerIndex];
       case 'vocab':
         return question.ar;
+      case 'fiqh':
+        return question.prompt;
       default:
         return '';
     }
@@ -423,6 +423,7 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
           userId: user.uid,
           username,
           mode,
+          bankSource: QUIZ_MODES[mode].bankSource,
           score,
           durationSeconds: Math.round(totalDuration),
         });
@@ -701,6 +702,16 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
           </>
         );
 
+      case 'fiqh':
+        return (
+          <FiqhQuestionCard
+            question={current}
+            showFeedback={showFeedback}
+            currentAnswer={currentAnswer}
+            onAnswer={handleAnswer}
+          />
+        );
+
       default:
         return null;
     }
@@ -717,7 +728,7 @@ export default function TimedQuiz({ mode, onBack, onPlayAgain, onExitRequest }) 
         <div className="quiz-progress">
           <span>Question {currentIndex + 1} of {QUIZ_LENGTH}</span>
         </div>
-        <TimerRing timeLeft={timeLeft} totalTime={MODE_TIMERS[mode]} />
+        <TimerRing timeLeft={timeLeft} totalTime={QUIZ_MODES[mode].timerSeconds} />
         <div className="quiz-score">
           <span>{score} / {currentIndex + (showFeedback ? 1 : 0)}</span>
         </div>

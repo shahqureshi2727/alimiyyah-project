@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
+import { FIQH_TOPICS } from '../config/subjects';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
@@ -36,6 +37,7 @@ const MODE_LABELS = {
   nounFeatures: 'Noun Features',
   roles: 'Roles',
   vocab: 'Vocab',
+  fiqh: 'Fiqh',
 };
 
 export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
@@ -80,6 +82,24 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
               <span className="mode-title-ar">{mode.titleAr}</span>
               <span className="mode-title-en">{mode.titleEn}</span>
               <span className="mode-desc">{mode.description}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Fiqh practice section */}
+      <section className="home-section">
+        <h3 className="section-title">Fiqh</h3>
+        <div className="mode-grid">
+          {FIQH_TOPICS.map((topic) => (
+            <button
+              key={topic.code}
+              className="mode-card"
+              onClick={() => onSelectMode(`fiqh-${topic.code}`)}
+            >
+              <span className="mode-title-ar">الفِقْه</span>
+              <span className="mode-title-en">{topic.label}</span>
+              <span className="mode-desc">Practice rulings from this topic</span>
             </button>
           ))}
         </div>

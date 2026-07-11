@@ -2,18 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getLeaderboard, getUserBestResult } from '../lib/quiz';
+import { QUIZ_MODES } from '../config/subjects';
 import LeaderboardTable from './LeaderboardTable';
 import './LeaderboardPreview.css';
 
-const MODES = [
-  { id: 'irab', label: "I'rab" },
-  { id: 'nounFeatures', label: 'Noun Features' },
-  { id: 'roles', label: 'Roles' },
-  { id: 'vocab', label: 'Vocab' },
-];
-
-// Variable for bank source - will be configurable in Pass 3
-const currentBankSource = 'qasas';
+const MODES = Object.entries(QUIZ_MODES).map(([id, config]) => ({
+  id,
+  label: config.label,
+}));
 
 export default function LeaderboardPreview() {
   const navigate = useNavigate();
@@ -43,7 +39,7 @@ export default function LeaderboardPreview() {
         const data = await getLeaderboard({
           mode: activeMode,
           allTime: false,
-          bankSource: currentBankSource,
+          bankSource: QUIZ_MODES[activeMode].bankSource,
           maxResults: 5,
         });
 
@@ -58,7 +54,7 @@ export default function LeaderboardPreview() {
             userId: user.uid,
             mode: activeMode,
             allTime: false,
-            bankSource: currentBankSource,
+            bankSource: QUIZ_MODES[activeMode].bankSource,
           });
 
           setUserResult(userBest);

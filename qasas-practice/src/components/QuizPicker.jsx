@@ -1,3 +1,4 @@
+import { FIQH_TOPICS } from '../config/subjects';
 import './QuizPicker.css';
 
 const quizModes = [
@@ -28,6 +29,20 @@ const quizModes = [
     titleEn: 'Vocabulary',
     format: '10 cards',
     timer: '10 sec per card',
+  },
+  ...FIQH_TOPICS.map((topic) => ({
+    id: `fiqh-${topic.code}`,
+    titleAr: 'الفِقْه',
+    titleEn: `Fiqh: ${topic.label}`,
+    format: '10 questions',
+    timer: '25 sec per question',
+  })),
+  {
+    id: 'fiqh-all',
+    titleAr: 'الفِقْه',
+    titleEn: 'Fiqh: Mixed Review',
+    format: '10 questions',
+    timer: '25 sec per question',
   },
 ];
 

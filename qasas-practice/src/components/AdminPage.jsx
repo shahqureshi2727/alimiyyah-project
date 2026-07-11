@@ -10,6 +10,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { getUserDoc } from '../lib/auth';
 import { getAllQuizResults, getWeekStart, formatRelativeTime } from '../lib/quiz';
 import { irab, nounFeatures, roles, vocab } from '../data/bank';
+import { getFiqhQuestions } from '../data/fiqh';
+import { FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
 import './AdminPage.css';
 
 function NotFoundPage() {
@@ -29,6 +31,7 @@ function BankViewer() {
     noun: false,
     role: false,
     vocab: false,
+    fiqh: false,
   });
 
   const toggleSection = (section) => {
@@ -65,10 +68,20 @@ function BankViewer() {
     );
   };
 
+  const filterFiqh = (item) => {
+    if (!searchQuery) return true;
+    return (
+      item.prompt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.explanation.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
   const filteredIrab = irab.filter(filterIrab);
   const filteredNoun = nounFeatures.filter(filterNoun);
   const filteredRole = roles.filter(filterRole);
   const filteredVocab = vocab.filter(filterVocab);
+  const allFiqhQuestions = getFiqhQuestions('all');
+  const filteredFiqh = allFiqhQuestions.filter(filterFiqh);
 
   const caseColors = {
     raf: 'case-raf',
@@ -101,7 +114,7 @@ function BankViewer() {
   return (
     <div className="bank-viewer">
       <div className="bank-summary">
-        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles: {roles.length} &middot; Vocab: {vocab.length}
+        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles: {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length}
       </div>
 
       <div className="bank-search">
@@ -242,17 +255,54 @@ function BankViewer() {
             </div>
           )}
         </section>
+
+        {/* Fiqh Section */}
+        <section className="bank-section">
+          <button
+            className="section-header"
+            onClick={() => toggleSection('fiqh')}
+          >
+            <span className="section-title">Fiqh</span>
+            <span className="section-count">{filteredFiqh.length}</span>
+            <span className={`section-arrow ${expandedSections.fiqh ? 'expanded' : ''}`}>
+              &#9662;
+            </span>
+          </button>
+          {expandedSections.fiqh && (
+            <div className="section-content">
+              {FIQH_TOPICS.map((topicMeta) => {
+                const topicQuestions = filteredFiqh.filter((q) => q.topic === topicMeta.code);
+                if (topicQuestions.length === 0) return null;
+                return (
+                  <div key={topicMeta.code} className="fiqh-topic-group">
+                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    {topicQuestions.map((item) => (
+                      <div key={item.id} className="fiqh-row">
+                        <div className="fiqh-row-prompt">
+                          {item.prompt}
+                          {item.madhhab && <span className="fiqh-row-madhhab"> [{item.madhhab}]</span>}
+                        </div>
+                        <div className="fiqh-row-details">
+                          <span className="fiqh-row-type">{item.type.toUpperCase()}</span>
+                          <span className="fiqh-row-answer">
+                            {item.type === 'mcq' ? item.options[item.answerIndex] : String(item.answer)}
+                          </span>
+                          <span className="fiqh-row-sources">{item.sourceIds.join(', ')}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
       </div>
     </div>
   );
 }
 
-const MODE_LABELS = {
-  irab: "I'rab",
-  nounFeatures: 'Noun Features',
-  roles: 'Roles',
-  vocab: 'Vocab',
-};
+const MODE_LABELS = QUIZ_MODES;
 
 function ClassStats() {
   const [allResults, setAllResults] = useState([]);
@@ -536,7 +586,7 @@ function ClassStats() {
                     </td>
                     <td className="col-mode">
                       {student.weakestMode
-                        ? MODE_LABELS[student.weakestMode]
+                        ? MODE_LABELS[student.weakestMode]?.label
                         : '-'}
                     </td>
                     <td className="col-date">

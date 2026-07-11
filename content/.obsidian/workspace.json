@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "31d9913bc167f99d",
+    "type": "split",
+    "children": [
+      {
+        "id": "6cb48572dfb8b31e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "afcd13011c9558a7",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "13d37bb02a253f15",
+    "type": "split",
+    "children": [
+      {
+        "id": "9872506668d1f149",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3b74bff9285b44c9",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "1bacd3b40ccbdb17",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "5b16a132fcca2fac",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "292f22808527cd3e",
+    "type": "split",
+    "children": [
+      {
+        "id": "1374d0bd759fdade",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9aaf31480d9fb881",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "3439a5369e0b8feb",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "cba93c00130f65ed",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "4873c82826a51769",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "d41364b9c0e21180",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "afcd13011c9558a7",
+  "lastOpenFiles": [
+    "Fiqh/Fiqh-25 Salah of Masbuq.md",
+    "Fiqh/Fiqh-23 Musafir Continued and Prayer of the Sick.md",
+    "Fiqh/Fiqh-22 Vehicles and Travel.md",
+    "Fiqh/Fiqh-21 Permissible Actions and Breaking the Prayer.md",
+    "Fiqh/Fiqh-20 Makruhat of Salah.md",
+    "Fiqh/Fiqh-19 Invalidators of Salah.md",
+    "Fiqh/Fiqh-18 Sunnah Acts and Adab of Salah.md",
+    "Fiqh/Fiqh-17 Wajib Acts of Salah.md",
+    "Fiqh/Fiqh-16 Integrals of Salah.md",
+    "Fiqh/Fiqh-15 Conditions of Salah.md",
+    "Fiqh/Fiqh-14 Prohibited Times and Adhan Iqamah.md",
+    "Fiqh/Fiqh-13 Salah Prayer Times Continued.md",
+    "Fiqh/Fiqh-12 Types of Saliva and Salah Prayer Times.md",
+    "Fiqh/Fiqh-11 Casts Bandages and Purification of Filth.md",
+    "Fiqh/Fiqh-10 Wiping Over Khuffs.md",
+    "Fiqh/Fiqh-09 Tayammum.md",
+    "Fiqh/Fiqh-08 Ghusl.md",
+    "Fiqh/Fiqh-07 Nullifiers of Wudhu.md",
+    "_attachments/Fiqh-25.pdf",
+    "_attachments/Fiqh-23.pdf",
+    "_attachments/Fiqh-22.pdf",
+    "_attachments/Fiqh-21.pdf",
+    "_attachments/Fiqh-20.pdf",
+    "_attachments/Fiqh-19.pdf",
+    "_attachments/Fiqh-18.pdf",
+    "_attachments/Fiqh-17.pdf",
+    "_attachments/Fiqh-16.pdf",
+    "_attachments/Fiqh-15.pdf",
+    "Fiqh/_Fiqh-MOC.md",
+    "Fiqh/Fiqh-06 Sunan Adab and Duas of Wudhu.md",
+    "Fiqh/Fiqh-05 Faraidh of Wudhu and Misc Rulings.md",
+    "Fiqh/Fiqh-04 Wudhu Rulings and Conditions.md",
+    "Fiqh/Fiqh-03 Wudhu Occasions and Sajdah al-Tilawah.md",
+    "Fiqh/Fiqh-02 Najasah and Water.md",
+    "Fiqh/Fiqh-01 Introduction to Fiqh.md",
+    "_templates/deck-template.md"
+  ]
+}

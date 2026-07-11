@@ -6,6 +6,7 @@ import IrabMode from './components/IrabMode';
 import NounMode from './components/NounMode';
 import RoleMode from './components/RoleMode';
 import VocabMode from './components/VocabMode';
+import FiqhPracticeMode from './components/FiqhPracticeMode';
 import QuizPicker from './components/QuizPicker';
 import TimedQuiz from './components/TimedQuiz';
 import Leaderboard from './components/Leaderboard';
@@ -66,7 +67,9 @@ function PublicRoute({ children }) {
 function MainApp() {
   const navigate = useNavigate();
   const [currentMode, setCurrentMode] = useState(null);
+  const [currentTopic, setCurrentTopic] = useState(null);
   const [quizMode, setQuizMode] = useState(null);
+  const [quizTopic, setQuizTopic] = useState(null);
   const [quizInProgress, setQuizInProgress] = useState(false);
   const [showQuizPicker, setShowQuizPicker] = useState(false);
   const [scores, setScores] = useState({
@@ -74,10 +77,17 @@ function MainApp() {
     noun: 0,
     role: 0,
     vocab: 0,
+    fiqh: 0,
   });
 
   const handleSelectMode = (mode) => {
-    setCurrentMode(mode);
+    if (mode.startsWith('fiqh-')) {
+      setCurrentMode('fiqh');
+      setCurrentTopic(mode.slice('fiqh-'.length));
+    } else {
+      setCurrentMode(mode);
+      setCurrentTopic(null);
+    }
     setShowQuizPicker(false);
     setQuizMode(null);
     setQuizInProgress(false);
@@ -85,6 +95,7 @@ function MainApp() {
 
   const handleBack = () => {
     setCurrentMode(null);
+    setCurrentTopic(null);
     setShowQuizPicker(false);
     setQuizMode(null);
     setQuizInProgress(false);
@@ -98,15 +109,24 @@ function MainApp() {
   };
 
   const handleSelectQuizMode = (mode) => {
-    // Store last played mode for leaderboard default
-    localStorage.setItem('lastQuizMode', mode);
-    setQuizMode(mode);
+    if (mode.startsWith('fiqh-')) {
+      const topic = mode.slice('fiqh-'.length);
+      // Store last played mode for leaderboard default
+      localStorage.setItem('lastQuizMode', 'fiqh');
+      setQuizMode('fiqh');
+      setQuizTopic(topic);
+    } else {
+      localStorage.setItem('lastQuizMode', mode);
+      setQuizMode(mode);
+      setQuizTopic(null);
+    }
     setQuizInProgress(true);
     setShowQuizPicker(false);
   };
 
   const handleQuizBack = () => {
     setQuizMode(null);
+    setQuizTopic(null);
     setQuizInProgress(false);
     setShowQuizPicker(false);
     setCurrentMode(null);
@@ -134,6 +154,7 @@ function MainApp() {
       <ProtectedRoute hideHeader={quizInProgress}>
         <TimedQuiz
           mode={quizMode}
+          topic={quizTopic}
           onBack={handleQuizBack}
           onPlayAgain={handlePlayAgain}
           onQuizComplete={() => setQuizInProgress(false)}
@@ -188,6 +209,15 @@ function MainApp() {
               onBack={handleBack}
               score={scores.vocab}
               setScore={setModeScore('vocab')}
+            />
+          );
+        case 'fiqh':
+          return (
+            <FiqhPracticeMode
+              topic={currentTopic}
+              onBack={handleBack}
+              score={scores.fiqh}
+              setScore={setModeScore('fiqh')}
             />
           );
         default:

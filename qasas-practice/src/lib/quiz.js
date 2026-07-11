@@ -32,17 +32,18 @@ const QUIZ_RESULTS_COLLECTION = 'quizResults';
  * @param {Object} params
  * @param {string} params.userId - The user's UID
  * @param {string} params.username - The user's display name (denormalized for leaderboard)
- * @param {string} params.mode - One of: "irab", "nounFeatures", "roles", "vocab"
+ * @param {string} params.mode - One of: "irab", "nounFeatures", "roles", "vocab", "fiqh"
+ * @param {string} params.bankSource - One of: "qasas", "fiqh"
  * @param {number} params.score - 0-10
  * @param {number} params.durationSeconds - Total quiz duration in seconds
  * @returns {Promise<string>} The document ID of the created result
  */
-export async function submitQuizResult({ userId, username, mode, score, durationSeconds }) {
+export async function submitQuizResult({ userId, username, mode, bankSource, score, durationSeconds }) {
   const docRef = await addDoc(collection(db, QUIZ_RESULTS_COLLECTION), {
     userId,
     username,
     mode,
-    bankSource: 'qasas', // Always "qasas" for now. Pass 3 will add "quran".
+    bankSource,
     score,
     total: 10,
     durationSeconds,

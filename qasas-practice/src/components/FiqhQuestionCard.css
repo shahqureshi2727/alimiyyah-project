@@ -1,0 +1,87 @@
+.fiqh-question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.fiqh-madhhab-badge {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #f0e6d2;
+  color: #7a5c1e;
+}
+
+.fiqh-question-prompt {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.fiqh-mcq-choices,
+.fiqh-tf-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fiqh-tf-choices {
+  flex-direction: row;
+}
+
+.fiqh-choice-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d8d2c4;
+  border-radius: 0.75rem;
+  background: #fff;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.fiqh-tf-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.fiqh-choice-btn:disabled {
+  cursor: default;
+}
+
+.fiqh-choice-btn.correct-tapped {
+  border-color: #22863a;
+  background: #e6f4ea;
+  color: #22863a;
+}
+
+.fiqh-choice-btn.incorrect-tapped {
+  border-color: #d1242f;
+  background: #fdeeee;
+  color: #d1242f;
+}
+
+.fiqh-choice-btn.correct-outline {
+  border-color: #22863a;
+}
+
+.fiqh-choice-btn.dimmed {
+  opacity: 0.5;
+}
+
+.fiqh-explanation {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: #f6f3ea;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4a4030;
+}
