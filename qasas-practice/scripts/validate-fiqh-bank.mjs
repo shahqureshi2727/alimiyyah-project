@@ -1,12 +1,32 @@
 // Run with: npm run validate:fiqh
 //
 // Checks the Fiqh question bank for structural problems that are easy to
-// introduce by hand across ~100 questions: duplicate question IDs, malformed
-// sourceIds, MCQ options/answerIndex mismatches, missing explanations, and
-// (for the WUD topic specifically) full coverage of ruling IDs 01-97.
+// introduce by hand across hundreds of questions: duplicate question IDs,
+// malformed sourceIds, MCQ options/answerIndex mismatches, missing
+// explanations, and full ruling-ID coverage per topic (against the known
+// max NN per topic, from content/Fiqh/_Fiqh-MOC.md).
 
 import { FIQH_TOPICS } from '../src/config/subjects.js';
 import { getFiqhQuestions } from '../src/data/fiqh/index.js';
+
+// Highest ruling NN per topic, per content/Fiqh/_Fiqh-MOC.md's topic coverage table.
+const TOPIC_MAX_ID = {
+  INT: 11,
+  NJS: 24,
+  WTR: 16,
+  SJD: 7,
+  WUD: 97,
+  GHS: 28,
+  TYM: 32,
+  KHF: 14,
+  JBR: 7,
+  SLH: 132,
+  ADH: 23,
+  VEH: 10,
+  TRV: 18,
+  MRD: 14,
+  MSB: 15,
+};
 
 let failed = false;
 
@@ -55,26 +75,33 @@ for (const q of allQuestions) {
   }
 }
 
-// 3. Coverage check for WUD: every FQH-WUD-01..97 ruling must be referenced
-// by at least one question's sourceIds.
-const wudQuestions = allQuestions.filter((q) => q.topic === 'WUD');
-const coveredWudIds = new Set(
-  wudQuestions.flatMap((q) => q.sourceIds).filter((id) => id.startsWith('FQH-WUD-'))
-);
-const missingWud = [];
-for (let n = 1; n <= 97; n++) {
-  const id = `FQH-WUD-${String(n).padStart(2, '0')}`;
-  if (!coveredWudIds.has(id)) missingWud.push(id);
-}
-if (missingWud.length > 0) {
-  fail(`WUD coverage incomplete, missing: ${missingWud.join(', ')}`);
+// 3. Coverage check per topic: every FQH-<TOPIC>-01..maxNN ruling must be
+// referenced by at least one question's sourceIds.
+for (const topic of FIQH_TOPICS) {
+  const maxId = TOPIC_MAX_ID[topic.code];
+  if (!maxId) {
+    fail(`${topic.code}: no TOPIC_MAX_ID entry in this script — add one`);
+    continue;
+  }
+  const topicQuestions = allQuestions.filter((q) => q.topic === topic.code);
+  const coveredIds = new Set(
+    topicQuestions.flatMap((q) => q.sourceIds).filter((id) => id.startsWith(`FQH-${topic.code}-`))
+  );
+  const missing = [];
+  for (let n = 1; n <= maxId; n++) {
+    const id = `FQH-${topic.code}-${String(n).padStart(2, '0')}`;
+    if (!coveredIds.has(id)) missing.push(id);
+  }
+  if (missing.length > 0) {
+    fail(`${topic.code} coverage incomplete, missing: ${missing.join(', ')}`);
+  }
 }
 
 if (failed) {
   console.error(`\nValidation failed. Total questions checked: ${allQuestions.length}`);
   process.exit(1);
 } else {
-  console.log(`OK: ${allQuestions.length} questions, ${wudQuestions.length} in WUD, full FQH-WUD-01..97 coverage.`);
+  console.log(`OK: ${allQuestions.length} questions across ${FIQH_TOPICS.length} topics, full ruling coverage.`);
   for (const topic of FIQH_TOPICS) {
     const count = allQuestions.filter((q) => q.topic === topic.code).length;
     console.log(`  ${topic.code} (${topic.label}): ${count} questions`);
