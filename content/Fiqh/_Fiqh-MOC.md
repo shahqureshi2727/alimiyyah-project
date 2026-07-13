@@ -130,4 +130,22 @@ tags: [fiqh, moc]
 
 | Topic | Rulings | Question bank | Questions |
 |-------|---------|----------------|-----------|
-| WUD (Wudhu) | FQH-WUD-01…97 | `qasas-practice/src/data/fiqh/wudhu.js` | 104 (97 one-per-ruling MCQ/TF + 7 grouping questions) |
+| INT (Introduction to Fiqh) | FQH-INT-01…11 | `qasas-practice/src/data/fiqh/introduction.js` | 13 |
+| NJS (Najasah) | FQH-NJS-01…24 | `qasas-practice/src/data/fiqh/najasah.js` | 28 |
+| WTR (Water Classification) | FQH-WTR-01…16 | `qasas-practice/src/data/fiqh/water.js` | 18 |
+| SJD (Sajdah al-Tilawah) | FQH-SJD-01…07 | `qasas-practice/src/data/fiqh/sajdah-tilawah.js` | 8 |
+| WUD (Wudhu) | FQH-WUD-01…97 | `qasas-practice/src/data/fiqh/wudhu.js` | 104 |
+| GHS (Ghusl) | FQH-GHS-01…28 | `qasas-practice/src/data/fiqh/ghusl.js` | 34 |
+| TYM (Tayammum) | FQH-TYM-01…32 | `qasas-practice/src/data/fiqh/tayammum.js` | 36 |
+| KHF (Wiping over Khuffs) | FQH-KHF-01…14 | `qasas-practice/src/data/fiqh/khuffs.js` | 16 |
+| JBR (Casts & Bandages) | FQH-JBR-01…07 | `qasas-practice/src/data/fiqh/jabair.js` | 8 |
+| SLH (Salah) | FQH-SLH-01…132 | `qasas-practice/src/data/fiqh/salah.js` | 142 |
+| ADH (Adhan & Iqamah) | FQH-ADH-01…23 | `qasas-practice/src/data/fiqh/adhan.js` | 27 |
+| VEH (Prayer on Vehicles) | FQH-VEH-01…10 | `qasas-practice/src/data/fiqh/vehicles.js` | 11 |
+| TRV (Travel) | FQH-TRV-01…18 | `qasas-practice/src/data/fiqh/travel.js` | 18 |
+| MRD (Prayer of the Sick) | FQH-MRD-01…14 | `qasas-practice/src/data/fiqh/prayer-of-the-sick.js` | 15 |
+| MSB (Masbuq) | FQH-MSB-01…15 | `qasas-practice/src/data/fiqh/masbuq.js` | 17 |
+
+**Total: 495 questions across all 15 topics** (verified via `npm run validate:fiqh` — zero
+duplicate question IDs, full ruling-ID coverage per topic, all schema checks pass). No deck's
+`status:` frontmatter was changed by this pass.
