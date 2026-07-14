@@ -86,6 +86,9 @@ function MainApp() {
     if (mode.startsWith('fiqh-')) {
       setCurrentMode('fiqh');
       setCurrentTopic(mode.slice('fiqh-'.length));
+    } else if (mode.startsWith('morphology-')) {
+      setCurrentMode('morphology');
+      setCurrentTopic(mode.slice('morphology-'.length));
     } else {
       setCurrentMode(mode);
       setCurrentTopic(null);
@@ -216,6 +219,7 @@ function MainApp() {
         case 'morphology':
           return (
             <MorphologyMode
+              initialScope={currentTopic}
               onBack={handleBack}
               score={scores.morphology}
               setScore={setModeScore('morphology')}

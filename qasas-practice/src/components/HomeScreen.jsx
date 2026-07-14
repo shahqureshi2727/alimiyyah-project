@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
-import { FIQH_TOPICS } from '../config/subjects';
+import { FIQH_GROUPS, FIQH_TOPICS } from '../config/subjects';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
@@ -38,6 +38,13 @@ const modes = [
   },
 ];
 
+const arabicReviewMode = {
+  id: 'morphology-mixed',
+  titleAr: 'مُرَاجَعَة',
+  titleEn: 'Review',
+  description: 'Mixed Arabic practice, starting with morphology review',
+};
+
 const MODE_LABELS = {
   irab: "I'rab",
   nounFeatures: 'Noun Features',
@@ -51,6 +58,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   const { user } = useAuth();
   const [recentResults, setRecentResults] = useState([]);
   const [loadingResults, setLoadingResults] = useState(true);
+  const [subject, setSubject] = useState(null);
 
   useEffect(() => {
     async function fetchRecentResults() {
@@ -69,6 +77,108 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
     fetchRecentResults();
   }, [user]);
 
+  const renderCard = (mode, className = 'mode-card') => (
+    <button
+      key={mode.id}
+      className={className}
+      onClick={() => onSelectMode(mode.id)}
+    >
+      <span className="mode-title-ar">{mode.titleAr}</span>
+      <span className="mode-title-en">{mode.titleEn}</span>
+      <span className="mode-desc">{mode.description}</span>
+    </button>
+  );
+
+  const renderSubjectDoorways = () => (
+    <section className="home-section">
+      <h3 className="section-title">Choose a Subject</h3>
+      <div className="subject-grid">
+        <button className="subject-card" onClick={() => setSubject('arabic')}>
+          <span className="mode-title-ar">العَرَبِيَّة</span>
+          <span className="mode-title-en">Arabic Questions</span>
+          <span className="mode-desc">Grammar, vocabulary, and morphology practice</span>
+        </button>
+        <button className="subject-card" onClick={() => setSubject('fiqh')}>
+          <span className="mode-title-ar">الفِقْه</span>
+          <span className="mode-title-en">Fiqh Questions</span>
+          <span className="mode-desc">Tahara and prayer rulings</span>
+        </button>
+      </div>
+    </section>
+  );
+
+  const renderArabicSubject = () => (
+    <>
+      <section className="home-section">
+        <button className="back-btn subject-back" onClick={() => setSubject(null)}>
+          Back
+        </button>
+        <h3 className="section-title">Arabic Questions</h3>
+        {renderCard(arabicReviewMode, 'mode-card review-card')}
+      </section>
+
+      <section className="home-section detail-section">
+        <h3 className="section-title">Extra Review</h3>
+        <div className="mode-grid">
+          {modes.map((mode) => renderCard(mode))}
+        </div>
+      </section>
+    </>
+  );
+
+  const renderFiqhSubject = () => (
+    <>
+      <section className="home-section">
+        <button className="back-btn subject-back" onClick={() => setSubject(null)}>
+          Back
+        </button>
+        <h3 className="section-title">Fiqh Questions</h3>
+        {renderCard(
+          {
+            id: 'fiqh-all',
+            titleAr: 'مُرَاجَعَة',
+            titleEn: 'Review',
+            description: 'Mixed Tahara and Prayer review',
+          },
+          'mode-card review-card'
+        )}
+      </section>
+
+      <section className="home-section detail-section">
+        <h3 className="section-title">Tahara And Prayer</h3>
+        <div className="mode-grid">
+          {FIQH_GROUPS.map((group) =>
+            renderCard({
+              id: `fiqh-${group.code}`,
+              titleAr: group.titleAr,
+              titleEn: group.label,
+              description: group.description,
+            })
+          )}
+        </div>
+      </section>
+
+      <section className="home-section detail-section">
+        <h3 className="section-title">Focused Fiqh Review</h3>
+        {FIQH_GROUPS.map((group) => (
+          <div className="topic-group" key={group.code}>
+            <h4 className="topic-group-title">{group.label}</h4>
+            <div className="mode-grid compact-grid">
+              {FIQH_TOPICS.filter((topic) => topic.group === group.code).map((topic) =>
+                renderCard({
+                  id: `fiqh-${topic.code}`,
+                  titleAr: group.titleAr,
+                  titleEn: topic.label,
+                  description: 'Focused review',
+                })
+              )}
+            </div>
+          </div>
+        ))}
+      </section>
+    </>
+  );
+
   return (
     <div className="home-screen">
       <header className="home-header">
@@ -76,41 +186,9 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <h2 className="title-en">Qasas Practice</h2>
       </header>
 
-      {/* Practice modes section */}
-      <section className="home-section">
-        <h3 className="section-title">Practice</h3>
-        <div className="mode-grid">
-          {modes.map((mode) => (
-            <button
-              key={mode.id}
-              className="mode-card"
-              onClick={() => onSelectMode(mode.id)}
-            >
-              <span className="mode-title-ar">{mode.titleAr}</span>
-              <span className="mode-title-en">{mode.titleEn}</span>
-              <span className="mode-desc">{mode.description}</span>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Fiqh practice section */}
-      <section className="home-section">
-        <h3 className="section-title">Fiqh</h3>
-        <div className="mode-grid">
-          {FIQH_TOPICS.map((topic) => (
-            <button
-              key={topic.code}
-              className="mode-card"
-              onClick={() => onSelectMode(`fiqh-${topic.code}`)}
-            >
-              <span className="mode-title-ar">الفِقْه</span>
-              <span className="mode-title-en">{topic.label}</span>
-              <span className="mode-desc">Practice rulings from this topic</span>
-            </button>
-          ))}
-        </div>
-      </section>
+      {!subject && renderSubjectDoorways()}
+      {subject === 'arabic' && renderArabicSubject()}
+      {subject === 'fiqh' && renderFiqhSubject()}
 
       {/* Quizzes section */}
       <section className="home-section">

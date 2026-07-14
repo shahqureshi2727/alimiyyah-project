@@ -46,6 +46,7 @@
 }
 
 /* Practice mode grid */
+.subject-grid,
 .mode-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -53,6 +54,7 @@
   width: 100%;
 }
 
+.subject-card,
 .mode-card {
   display: flex;
   flex-direction: column;
@@ -66,14 +68,60 @@
   text-align: center;
 }
 
+.subject-card:hover,
 .mode-card:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.subject-card:active,
 .mode-card:active {
   transform: translateY(0);
+}
+
+.subject-card {
+  min-height: 150px;
+  justify-content: center;
+}
+
+.review-card {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  padding: 1.75rem 1rem;
+}
+
+.detail-section {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.subject-back {
+  margin: 0 0 0.75rem -0.5rem;
+}
+
+.topic-group {
+  margin-bottom: 1.5rem;
+}
+
+.topic-group:last-child {
+  margin-bottom: 0;
+}
+
+.topic-group-title {
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  color: var(--accent);
+  margin: 0 0 0.75rem;
+  font-weight: 600;
+}
+
+.compact-grid {
+  gap: 0.75rem;
+}
+
+.compact-grid .mode-card {
+  padding: 1rem 0.75rem;
 }
 
 .mode-title-ar {
@@ -260,6 +308,7 @@
 }
 
 @media (min-width: 600px) {
+  .subject-grid,
   .mode-grid {
     grid-template-columns: repeat(2, 1fr);
   }

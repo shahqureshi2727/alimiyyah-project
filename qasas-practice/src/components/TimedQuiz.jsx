@@ -49,6 +49,13 @@ function selectQuestions(bank) {
   return shuffleArray(bank).slice(0, QUIZ_LENGTH);
 }
 
+function shuffleMorphologyOptions(question) {
+  return {
+    ...question,
+    options: shuffleArray(question.options),
+  };
+}
+
 // I'rab question choices
 const irabChoices = [
   { id: 'raf', ar: 'رَفْع', en: "raf'" },
@@ -244,7 +251,9 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
   // Initialize questions on mount
   useEffect(() => {
     const bank = getBank(mode, topic);
-    const selected = selectQuestions(bank);
+    const selected = selectQuestions(bank).map((question) =>
+      mode === 'morphology' ? shuffleMorphologyOptions(question) : question
+    );
     setQuestions(selected);
     setQuestionStartTime(Date.now());
   }, [mode, topic]);

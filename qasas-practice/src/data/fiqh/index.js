@@ -32,14 +32,22 @@ const TOPIC_BANKS = {
   MSB: masbuqQuestions,
 };
 
+const GROUP_TOPICS = {
+  tahara: ['NJS', 'WTR', 'WUD', 'GHS', 'TYM', 'KHF', 'JBR'],
+  prayer: ['SJD', 'SLH', 'ADH', 'VEH', 'TRV', 'MRD', 'MSB'],
+};
+
 /**
- * Get all Fiqh questions for a topic code, or every topic if 'all'.
- * @param {string} topicCode - e.g. "WUD", or "all" for pooled mixed review.
+ * Get all Fiqh questions for a topic code, group code, or every topic if 'all'.
+ * @param {string} topicCode - e.g. "WUD", "tahara", "prayer", or "all".
  * @returns {Array} question objects
  */
 export function getFiqhQuestions(topicCode) {
   if (topicCode === 'all') {
     return Object.values(TOPIC_BANKS).flat();
+  }
+  if (GROUP_TOPICS[topicCode]) {
+    return GROUP_TOPICS[topicCode].flatMap((code) => TOPIC_BANKS[code] || []);
   }
   return TOPIC_BANKS[topicCode] || [];
 }

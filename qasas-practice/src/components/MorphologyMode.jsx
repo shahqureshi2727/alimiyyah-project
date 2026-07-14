@@ -21,6 +21,13 @@ function shuffleArray(array) {
   return shuffled;
 }
 
+function shuffleOptions(question) {
+  return {
+    ...question,
+    options: shuffleArray(question.options),
+  };
+}
+
 function CheckIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -38,15 +45,15 @@ function XIcon() {
   );
 }
 
-export default function MorphologyMode({ onBack, score, setScore }) {
-  const [scope, setScope] = useState(null);
+export default function MorphologyMode({ initialScope = null, onBack, score, setScore }) {
+  const [scope, setScope] = useState(initialScope);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(null);
   const [answered, setAnswered] = useState(false);
   const [sessionTotal, setSessionTotal] = useState(0);
 
   const questions = useMemo(
-    () => (scope ? shuffleArray(getMorphologyQuestions(scope)) : []),
+    () => (scope ? shuffleArray(getMorphologyQuestions(scope)).map(shuffleOptions) : []),
     [scope]
   );
 
@@ -76,7 +83,7 @@ export default function MorphologyMode({ onBack, score, setScore }) {
   };
 
   const handleBack = () => {
-    if (scope) {
+    if (scope && !initialScope) {
       setScope(null);
       setCurrentIndex(0);
       setSelected(null);
