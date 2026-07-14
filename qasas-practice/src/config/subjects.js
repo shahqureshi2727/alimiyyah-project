@@ -16,8 +16,21 @@ export const QUIZ_MODES = {
 
 // Fiqh topics available for topic-first navigation. Add one entry here per
 // topic once its question bank exists in src/data/fiqh/ (see
-// content/Fiqh/_Fiqh-MOC.md for the full topic list — only WUD is seeded so
-// far).
+// content/Fiqh/_Fiqh-MOC.md for the full topic list).
 export const FIQH_TOPICS = [
+  { code: 'INT', label: 'Introduction to Fiqh' },
+  { code: 'NJS', label: 'Najasah (Impurities)' },
+  { code: 'WTR', label: 'Water Classification' },
+  { code: 'SJD', label: 'Sajdah al-Tilawah' },
   { code: 'WUD', label: 'Wudhu' },
+  { code: 'GHS', label: 'Ghusl' },
+  { code: 'TYM', label: 'Tayammum' },
+  { code: 'KHF', label: 'Wiping over Khuffs' },
+  { code: 'JBR', label: 'Casts & Bandages' },
+  { code: 'SLH', label: 'Salah' },
+  { code: 'ADH', label: 'Adhan & Iqamah' },
+  { code: 'VEH', label: 'Prayer on Vehicles' },
+  { code: 'TRV', label: 'Travel (Safar)' },
+  { code: 'MRD', label: 'Prayer of the Sick' },
+  { code: 'MSB', label: 'Masbuq' },
 ];
