@@ -30,6 +30,12 @@ const modes = [
     titleEn: 'Vocabulary',
     description: 'Flashcard recall from Qasas',
   },
+  {
+    id: 'morphology',
+    titleAr: 'تَصْرِيفُ الأَفْعَال',
+    titleEn: 'Morphology',
+    description: 'Identify verb forms and meanings',
+  },
 ];
 
 const MODE_LABELS = {
@@ -37,6 +43,7 @@ const MODE_LABELS = {
   nounFeatures: 'Noun Features',
   roles: 'Roles',
   vocab: 'Vocab',
+  morphology: 'Morphology',
   fiqh: 'Fiqh',
 };
 

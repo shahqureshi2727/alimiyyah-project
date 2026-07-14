@@ -30,6 +30,13 @@ const quizModes = [
     format: '10 cards',
     timer: '10 sec per card',
   },
+  {
+    id: 'morphology',
+    titleAr: 'تَصْرِيفُ الأَفْعَال',
+    titleEn: 'Morphology: Mixed Review',
+    format: '10 questions',
+    timer: '20 sec per question',
+  },
   ...FIQH_TOPICS.map((topic) => ({
     id: `fiqh-${topic.code}`,
     titleAr: 'الفِقْه',

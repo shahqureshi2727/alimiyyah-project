@@ -1,0 +1,5036 @@
+{
+  "nodes": [
+    {
+      "id": "content_obsidian_app",
+      "label": "app.json",
+      "file_type": "code",
+      "source_file": "content/.obsidian/app.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_eslint_config",
+      "label": "eslint.config.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/eslint.config.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_name",
+      "label": "name",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_private",
+      "label": "private",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_version",
+      "label": "version",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_type",
+      "label": "type",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_scripts",
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_scripts_dev",
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_scripts_build",
+      "label": "build",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_scripts_lint",
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_scripts_preview",
+      "label": "preview",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_scripts_validate_fiqh",
+      "label": "validate:fiqh",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_dependencies",
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_dependencies_firebase",
+      "label": "firebase",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "firebase",
+      "label": "firebase",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_dependencies_react",
+      "label": "react",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "react",
+      "label": "react",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_dependencies_react_dom",
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "react_dom",
+      "label": "react-dom",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_dependencies_react_router_dom",
+      "label": "react-router-dom",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "react_router_dom",
+      "label": "react-router-dom",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies",
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_eslint_js",
+      "label": "@eslint/js",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "eslint_js",
+      "label": "@eslint/js",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_types_react",
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "types_react",
+      "label": "@types/react",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_eslint",
+      "label": "eslint",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "eslint",
+      "label": "eslint",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_eslint_plugin_react_hooks",
+      "label": "eslint-plugin-react-hooks",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "eslint_plugin_react_hooks",
+      "label": "eslint-plugin-react-hooks",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_eslint_plugin_react_refresh",
+      "label": "eslint-plugin-react-refresh",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "eslint_plugin_react_refresh",
+      "label": "eslint-plugin-react-refresh",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_globals",
+      "label": "globals",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "globals",
+      "label": "globals",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_package_devdependencies_vite",
+      "label": "vite",
+      "file_type": "code",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "vite",
+      "label": "vite",
+      "file_type": "concept",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank",
+      "label": "validate-fiqh-bank.mjs",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank_fail",
+      "label": "fail()",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank_allquestions",
+      "label": "allQuestions",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank_seenids",
+      "label": "seenIds",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank_wudquestions",
+      "label": "wudQuestions",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L60",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank_coveredwudids",
+      "label": "coveredWudIds",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L61",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_scripts_validate_fiqh_bank_missingwud",
+      "label": "missingWud",
+      "file_type": "code",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L64",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_app",
+      "label": "App.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_app_loadingscreen",
+      "label": "LoadingScreen()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_app_protectedroute",
+      "label": "ProtectedRoute()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_app_publicroute",
+      "label": "PublicRoute()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L52",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_app_mainapp",
+      "label": "MainApp()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L67",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_app_app",
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L246",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_adminpage",
+      "label": "AdminPage.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_adminpage_notfoundpage",
+      "label": "NotFoundPage()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_adminpage_bankviewer",
+      "label": "BankViewer()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_adminpage_classstats",
+      "label": "ClassStats()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L307",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_adminpage_adminpage",
+      "label": "AdminPage()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L608",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_authheader",
+      "label": "AuthHeader.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_authheader_authheader",
+      "label": "AuthHeader()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhpracticemode",
+      "label": "FiqhPracticeMode.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhpracticemode_shufflearray",
+      "label": "shuffleArray()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhpracticemode_fiqhpracticemode",
+      "label": "FiqhPracticeMode()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhquestioncard",
+      "label": "FiqhQuestionCard.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhquestioncard_madhhab_labels",
+      "label": "MADHHAB_LABELS",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhquestioncard_checkicon",
+      "label": "CheckIcon()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhquestioncard_xicon",
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_fiqhquestioncard_fiqhquestioncard",
+      "label": "FiqhQuestionCard()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_forgotpassword",
+      "label": "ForgotPassword.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_forgotpassword_forgotpassword",
+      "label": "ForgotPassword()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_homescreen",
+      "label": "HomeScreen.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_homescreen_modes",
+      "label": "modes",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_homescreen_mode_labels",
+      "label": "MODE_LABELS",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_homescreen_homescreen",
+      "label": "HomeScreen()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L43",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_irabmode",
+      "label": "IrabMode.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_irabmode_shufflearray",
+      "label": "shuffleArray()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_irabmode_highlighttarget",
+      "label": "highlightTarget()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_irabmode_choices",
+      "label": "choices",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_irabmode_irabmode",
+      "label": "IrabMode()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboard",
+      "label": "Leaderboard.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboard_modes",
+      "label": "MODES",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboard_leaderboard",
+      "label": "Leaderboard()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboardpreview",
+      "label": "LeaderboardPreview.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboardpreview_modes",
+      "label": "MODES",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboardpreview_leaderboardpreview",
+      "label": "LeaderboardPreview()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboardtable",
+      "label": "LeaderboardTable.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_leaderboardtable_leaderboardtable",
+      "label": "LeaderboardTable()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_login",
+      "label": "Login.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_login_login",
+      "label": "Login()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_nounmode",
+      "label": "NounMode.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_nounmode_shufflearray",
+      "label": "shuffleArray()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_nounmode_defoptions",
+      "label": "defOptions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_nounmode_genderoptions",
+      "label": "genderOptions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_nounmode_numberoptions",
+      "label": "numberOptions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_nounmode_nounmode",
+      "label": "NounMode()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_quizpicker",
+      "label": "QuizPicker.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_quizpicker_quizmodes",
+      "label": "quizModes",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_quizpicker_quizpicker",
+      "label": "QuizPicker()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L49",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_rolemode",
+      "label": "RoleMode.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_rolemode_shufflearray",
+      "label": "shuffleArray()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_rolemode_rolemode",
+      "label": "RoleMode()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_signup",
+      "label": "Signup.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_signup_signup",
+      "label": "Signup()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz",
+      "label": "TimedQuiz.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_banks",
+      "label": "BANKS",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_getbank",
+      "label": "getBank()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L22",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_shufflearray",
+      "label": "shuffleArray()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_selectquestions",
+      "label": "selectQuestions()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_irabchoices",
+      "label": "irabChoices",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L52",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_defoptions",
+      "label": "defOptions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L59",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_genderoptions",
+      "label": "genderOptions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L64",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_numberoptions",
+      "label": "numberOptions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L69",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_highlighttarget",
+      "label": "highlightTarget()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L75",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_timerring",
+      "label": "TimerRing()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L92",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_confetti",
+      "label": "Confetti()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L134",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_exitdialog",
+      "label": "ExitDialog()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L153",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_checkicon",
+      "label": "CheckIcon()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L196",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_xicon",
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L205",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_timedquiz_timedquiz",
+      "label": "TimedQuiz()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L214",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_vocabmode",
+      "label": "VocabMode.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_vocabmode_shufflearray",
+      "label": "shuffleArray()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_components_vocabmode_vocabmode",
+      "label": "VocabMode()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_config_subjects",
+      "label": "subjects.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/config/subjects.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_config_subjects_quiz_modes",
+      "label": "QUIZ_MODES",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/config/subjects.js",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_config_subjects_fiqh_topics",
+      "label": "FIQH_TOPICS",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/config/subjects.js",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_contexts_authcontext",
+      "label": "AuthContext.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_contexts_authcontext_authcontext",
+      "label": "AuthContext",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_contexts_authcontext_useauth",
+      "label": "useAuth()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_contexts_authcontext_authprovider",
+      "label": "AuthProvider()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_bank",
+      "label": "bank.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_bank_irab",
+      "label": "irab",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_bank_nounfeatures",
+      "label": "nounFeatures",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L237",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_bank_roles",
+      "label": "roles",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L267",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_bank_vocab",
+      "label": "vocab",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L381",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_fiqh_index",
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_fiqh_index_topic_banks",
+      "label": "TOPIC_BANKS",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "label": "getFiqhQuestions()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_fiqh_wudhu",
+      "label": "wudhu.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/fiqh/wudhu.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_data_fiqh_wudhu_wudhuquestions",
+      "label": "wudhuQuestions",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/data/fiqh/wudhu.js",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth",
+      "label": "auth.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_usernametoauthemail",
+      "label": "usernameToAuthEmail()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_reserved_usernames",
+      "label": "RESERVED_USERNAMES",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_validateusername",
+      "label": "validateUsername()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L32",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_validatepassword",
+      "label": "validatePassword()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L61",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_signup",
+      "label": "signUp()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L73",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_signin",
+      "label": "signIn()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L115",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_signout",
+      "label": "signOut()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L127",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_getuserdoc",
+      "label": "getUserDoc()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L131",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_auth_resetpassword",
+      "label": "resetPassword()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L142",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_firebase",
+      "label": "firebase.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_firebase_firebaseconfig",
+      "label": "firebaseConfig",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_firebase_app",
+      "label": "app",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_firebase_auth",
+      "label": "auth",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_firebase_db",
+      "label": "db",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz",
+      "label": "quiz.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_submitquizresult",
+      "label": "submitQuizResult()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L41",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_getuserrecentresults",
+      "label": "getUserRecentResults()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L61",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_getweekstart",
+      "label": "getWeekStart()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L81",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_getleaderboard",
+      "label": "getLeaderboard()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L102",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_getuserbestresult",
+      "label": "getUserBestResult()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L145",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_getallquizresults",
+      "label": "getAllQuizResults()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L188",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_formatduration",
+      "label": "formatDuration()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L207",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_formatrelativetime",
+      "label": "formatRelativeTime()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L223",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_lib_quiz_formatleaderboardtime",
+      "label": "formatLeaderboardTime()",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L265",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_src_main",
+      "label": "main.jsx",
+      "file_type": "code",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_vercel",
+      "label": "vercel.json",
+      "file_type": "code",
+      "source_file": "qasas-practice/vercel.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_vercel_rewrites",
+      "label": "rewrites",
+      "file_type": "code",
+      "source_file": "qasas-practice/vercel.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "qasas_practice_vite_config",
+      "label": "vite.config.js",
+      "file_type": "code",
+      "source_file": "qasas-practice/vite.config.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "qasas_practice_eslint_config",
+      "target": "ref_eslint_js",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/eslint.config.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_eslint_config",
+      "target": "ref_globals",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/eslint.config.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_eslint_config",
+      "target": "ref_eslint_plugin_react_hooks",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/eslint.config.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_eslint_config",
+      "target": "ref_eslint_plugin_react_refresh",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/eslint.config.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_eslint_config",
+      "target": "ref_eslint_config",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/eslint.config.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_private",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_version",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_type",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_scripts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_scripts",
+      "target": "qasas_practice_package_scripts_dev",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_scripts",
+      "target": "qasas_practice_package_scripts_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_scripts",
+      "target": "qasas_practice_package_scripts_lint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_scripts",
+      "target": "qasas_practice_package_scripts_preview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_scripts",
+      "target": "qasas_practice_package_scripts_validate_fiqh",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_dependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_dependencies",
+      "target": "qasas_practice_package_dependencies_firebase",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_dependencies_firebase",
+      "target": "firebase",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_dependencies",
+      "target": "qasas_practice_package_dependencies_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_dependencies_react",
+      "target": "react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_dependencies",
+      "target": "qasas_practice_package_dependencies_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_dependencies_react_dom",
+      "target": "react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_dependencies",
+      "target": "qasas_practice_package_dependencies_react_router_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_dependencies_react_router_dom",
+      "target": "react_router_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package",
+      "target": "qasas_practice_package_devdependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_eslint_js",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_eslint_js",
+      "target": "eslint_js",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_types_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_types_react",
+      "target": "types_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_types_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_types_react_dom",
+      "target": "types_react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_vitejs_plugin_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_vitejs_plugin_react",
+      "target": "vitejs_plugin_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_eslint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_eslint",
+      "target": "eslint",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_eslint_plugin_react_hooks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_eslint_plugin_react_hooks",
+      "target": "eslint_plugin_react_hooks",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_eslint_plugin_react_refresh",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_eslint_plugin_react_refresh",
+      "target": "eslint_plugin_react_refresh",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_globals",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_globals",
+      "target": "globals",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_package_devdependencies",
+      "target": "qasas_practice_package_devdependencies_vite",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_package_devdependencies_vite",
+      "target": "vite",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_src_config_subjects_fiqh_topics",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_src_data_fiqh_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_scripts_validate_fiqh_bank_fail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_scripts_validate_fiqh_bank_allquestions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_scripts_validate_fiqh_bank_seenids",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_scripts_validate_fiqh_bank_wudquestions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_scripts_validate_fiqh_bank_coveredwudids",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_scripts_validate_fiqh_bank",
+      "target": "qasas_practice_scripts_validate_fiqh_bank_missingwud",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/scripts/validate-fiqh-bank.mjs",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_homescreen",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_irabmode",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_nounmode",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_rolemode",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_vocabmode",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_fiqhpracticemode",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_quizpicker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_timedquiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_leaderboard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_adminpage",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_login",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_signup",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_forgotpassword",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_authheader",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_app_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_app_loadingscreen",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_app_protectedroute",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_app_publicroute",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_app_mainapp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_app_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L246",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_lib_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_lib_auth_getuserdoc",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_lib_quiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_lib_quiz_getallquizresults",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_lib_quiz_getweekstart",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_lib_quiz_formatrelativetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_bank",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_bank_irab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_bank_nounfeatures",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_bank_roles",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_bank_vocab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_fiqh_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_config_subjects_fiqh_topics",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_config_subjects_quiz_modes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_adminpage_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_components_adminpage_notfoundpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_components_adminpage_bankviewer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_components_adminpage_classstats",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L307",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage",
+      "target": "qasas_practice_src_components_adminpage_adminpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L608",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_authheader_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader",
+      "target": "qasas_practice_src_components_authheader_authheader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "qasas_practice_src_data_fiqh_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "qasas_practice_src_components_fiqhquestioncard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_modecommon_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "qasas_practice_src_components_fiqhpracticemode_shufflearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "qasas_practice_src_components_fiqhpracticemode_fiqhpracticemode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode_fiqhpracticemode",
+      "target": "qasas_practice_src_components_fiqhpracticemode_shufflearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhquestioncard",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_fiqhquestioncard_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhquestioncard",
+      "target": "qasas_practice_src_components_fiqhquestioncard_madhhab_labels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhquestioncard",
+      "target": "qasas_practice_src_components_fiqhquestioncard_checkicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhquestioncard",
+      "target": "qasas_practice_src_components_fiqhquestioncard_xicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhquestioncard",
+      "target": "qasas_practice_src_components_fiqhquestioncard_fiqhquestioncard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhQuestionCard.jsx",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword",
+      "target": "qasas_practice_src_lib_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword",
+      "target": "qasas_practice_src_lib_auth_resetpassword",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_auth_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword",
+      "target": "qasas_practice_src_components_forgotpassword_forgotpassword",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_lib_quiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_lib_quiz_getuserrecentresults",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_lib_quiz_formatrelativetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_config_subjects_fiqh_topics",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_components_leaderboardpreview",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_homescreen_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_components_homescreen_modes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_components_homescreen_mode_labels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_components_homescreen_homescreen",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "qasas_practice_src_data_bank",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "qasas_practice_src_data_bank_irab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_modecommon_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "qasas_practice_src_components_irabmode_shufflearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "qasas_practice_src_components_irabmode_highlighttarget",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "qasas_practice_src_components_irabmode_choices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode",
+      "target": "qasas_practice_src_components_irabmode_irabmode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode_irabmode",
+      "target": "qasas_practice_src_components_irabmode_shufflearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_irabmode_irabmode",
+      "target": "qasas_practice_src_components_irabmode_highlighttarget",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/IrabMode.jsx",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_lib_quiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_lib_quiz_getleaderboard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_lib_quiz_getuserbestresult",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_config_subjects_quiz_modes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_components_leaderboardtable",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_leaderboard_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_components_leaderboard_modes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_components_leaderboard_leaderboard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_lib_quiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_lib_quiz_getleaderboard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_lib_quiz_getuserbestresult",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_config_subjects_quiz_modes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_components_leaderboardtable",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_leaderboardpreview_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_components_leaderboardpreview_modes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_components_leaderboardpreview_leaderboardpreview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable",
+      "target": "qasas_practice_src_lib_quiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable",
+      "target": "qasas_practice_src_lib_quiz_formatleaderboardtime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_leaderboardtable_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable",
+      "target": "qasas_practice_src_components_leaderboardtable_leaderboardtable",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login",
+      "target": "qasas_practice_src_lib_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login",
+      "target": "qasas_practice_src_lib_auth_signin",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_auth_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login",
+      "target": "qasas_practice_src_components_login_login",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_data_bank",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_data_bank_nounfeatures",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_modecommon_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_components_nounmode_shufflearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_components_nounmode_defoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_components_nounmode_genderoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_components_nounmode_numberoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode",
+      "target": "qasas_practice_src_components_nounmode_nounmode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_nounmode_nounmode",
+      "target": "qasas_practice_src_components_nounmode_shufflearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/NounMode.jsx",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_quizpicker",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_quizpicker",
+      "target": "qasas_practice_src_config_subjects_fiqh_topics",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_quizpicker",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_quizpicker_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_quizpicker",
+      "target": "qasas_practice_src_components_quizpicker_quizmodes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_quizpicker",
+      "target": "qasas_practice_src_components_quizpicker_quizpicker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/QuizPicker.jsx",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode",
+      "target": "qasas_practice_src_data_bank",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode",
+      "target": "qasas_practice_src_data_bank_roles",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_modecommon_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode",
+      "target": "qasas_practice_src_components_rolemode_shufflearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode",
+      "target": "qasas_practice_src_components_rolemode_rolemode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_rolemode_rolemode",
+      "target": "qasas_practice_src_components_rolemode_shufflearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/RoleMode.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "qasas_practice_src_lib_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "qasas_practice_src_lib_auth_signup",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "qasas_practice_src_lib_auth_validateusername",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "qasas_practice_src_lib_auth_validatepassword",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_auth_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup",
+      "target": "qasas_practice_src_components_signup_signup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_lib_quiz",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_lib_quiz_submitquizresult",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_lib_quiz_formatduration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_bank",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_bank_irab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_bank_nounfeatures",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_bank_roles",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_bank_vocab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_fiqh_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_config_subjects",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_config_subjects_quiz_modes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_fiqhquestioncard",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_timedquiz_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_banks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_getbank",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_shufflearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_selectquestions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_irabchoices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_defoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_genderoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_numberoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_highlighttarget",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_timerring",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_confetti",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_exitdialog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_checkicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_xicon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L205",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_timedquiz",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L214",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_selectquestions",
+      "target": "qasas_practice_src_components_timedquiz_shufflearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_getbank",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L245",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_selectquestions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L246",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_timedquiz",
+      "target": "qasas_practice_src_components_timedquiz_highlighttarget",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L515",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode",
+      "target": "qasas_practice_src_data_bank",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode",
+      "target": "qasas_practice_src_data_bank_vocab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_components_modecommon_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode",
+      "target": "qasas_practice_src_components_vocabmode_shufflearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode",
+      "target": "qasas_practice_src_components_vocabmode_vocabmode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_vocabmode_vocabmode",
+      "target": "qasas_practice_src_components_vocabmode_shufflearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/VocabMode.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_config_subjects",
+      "target": "qasas_practice_src_config_subjects_quiz_modes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/config/subjects.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_config_subjects",
+      "target": "qasas_practice_src_config_subjects_fiqh_topics",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/config/subjects.js",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "ref_firebase_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_lib_firebase",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_lib_firebase_auth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_lib_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_lib_auth_getuserdoc",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_lib_auth_signout",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_contexts_authcontext_authcontext",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext",
+      "target": "qasas_practice_src_contexts_authcontext_authprovider",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_bank",
+      "target": "qasas_practice_src_data_bank_irab",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_bank",
+      "target": "qasas_practice_src_data_bank_nounfeatures",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L237",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_bank",
+      "target": "qasas_practice_src_data_bank_roles",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L267",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_bank",
+      "target": "qasas_practice_src_data_bank_vocab",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/bank.js",
+      "source_location": "L381",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_fiqh_index",
+      "target": "qasas_practice_src_data_fiqh_wudhu",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_fiqh_index",
+      "target": "qasas_practice_src_data_fiqh_wudhu_wudhuquestions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_fiqh_index",
+      "target": "qasas_practice_src_data_fiqh_index_topic_banks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_fiqh_index",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/fiqh/index.js",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_data_fiqh_wudhu",
+      "target": "qasas_practice_src_data_fiqh_wudhu_wudhuquestions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/data/fiqh/wudhu.js",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "ref_firebase_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "ref_firebase_firestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_firebase",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_firebase_auth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_firebase_db",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_usernametoauthemail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_reserved_usernames",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_validateusername",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_validatepassword",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_signup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_signin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_signout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_getuserdoc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth",
+      "target": "qasas_practice_src_lib_auth_resetpassword",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L142",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth_signup",
+      "target": "qasas_practice_src_lib_auth_validateusername",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth_signup",
+      "target": "qasas_practice_src_lib_auth_validatepassword",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth_signup",
+      "target": "qasas_practice_src_lib_auth_usernametoauthemail",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth_signin",
+      "target": "qasas_practice_src_lib_auth_usernametoauthemail",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth_resetpassword",
+      "target": "qasas_practice_src_lib_auth_usernametoauthemail",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "ref_firebase_app",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "ref_firebase_auth",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "ref_firebase_firestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "qasas_practice_src_lib_firebase_firebaseconfig",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "qasas_practice_src_lib_firebase_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "qasas_practice_src_lib_firebase_auth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_firebase",
+      "target": "qasas_practice_src_lib_firebase_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/firebase.js",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "ref_firebase_firestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_firebase",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_firebase_db",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_submitquizresult",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_getuserrecentresults",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_getweekstart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_getleaderboard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_getuserbestresult",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L145",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_getallquizresults",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_formatduration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L207",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_formatrelativetime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz",
+      "target": "qasas_practice_src_lib_quiz_formatleaderboardtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L265",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz_getleaderboard",
+      "target": "qasas_practice_src_lib_quiz_getweekstart",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_quiz_getuserbestresult",
+      "target": "qasas_practice_src_lib_quiz_getweekstart",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/lib/quiz.js",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "ref_react_dom_client",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "ref_react_router_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "qasas_practice_src_contexts_authcontext",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "qasas_practice_src_contexts_authcontext_authprovider",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "users_muazsadique_documents_alimiyyah_project_main_qasas_practice_src_index_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "qasas_practice_src_app",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_vercel",
+      "target": "qasas_practice_vercel_rewrites",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/vercel.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_vite_config",
+      "target": "ref_vite",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/vite.config.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_vite_config",
+      "target": "ref_vitejs_plugin_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/vite.config.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_homescreen_homescreen",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_irabmode_irabmode",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_nounmode_nounmode",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_rolemode_rolemode",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_vocabmode_vocabmode",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_fiqhpracticemode_fiqhpracticemode",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_quizpicker_quizpicker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_timedquiz_timedquiz",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_leaderboard_leaderboard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_adminpage_adminpage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_login_login",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_signup_signup",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_forgotpassword_forgotpassword",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app",
+      "target": "qasas_practice_src_components_authheader_authheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode",
+      "target": "qasas_practice_src_components_fiqhquestioncard_fiqhquestioncard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen",
+      "target": "qasas_practice_src_components_leaderboardpreview_leaderboardpreview",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard",
+      "target": "qasas_practice_src_components_leaderboardtable_leaderboardtable",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview",
+      "target": "qasas_practice_src_components_leaderboardtable_leaderboardtable",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz",
+      "target": "qasas_practice_src_components_fiqhquestioncard_fiqhquestioncard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_main",
+      "target": "qasas_practice_src_app_app",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/main.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app_protectedroute",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_app_publicroute",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/App.jsx",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage_bankviewer",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage_classstats",
+      "target": "qasas_practice_src_lib_quiz_getallquizresults",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L318",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage_classstats",
+      "target": "qasas_practice_src_lib_quiz_getweekstart",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L333",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage_classstats",
+      "target": "qasas_practice_src_lib_quiz_formatrelativetime",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L594",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_getbank",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_adminpage_adminpage",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/AdminPage.jsx",
+      "source_location": "L610",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_authheader_authheader",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/AuthHeader.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_fiqhpracticemode_fiqhpracticemode",
+      "target": "qasas_practice_src_data_fiqh_index_getfiqhquestions",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/FiqhPracticeMode.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_forgotpassword_forgotpassword",
+      "target": "qasas_practice_src_lib_auth_resetpassword",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/ForgotPassword.jsx",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen_homescreen",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_homescreen_homescreen",
+      "target": "qasas_practice_src_lib_quiz_formatrelativetime",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/HomeScreen.jsx",
+      "source_location": "L160",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboard_leaderboard",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/Leaderboard.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardpreview_leaderboardpreview",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/LeaderboardPreview.jsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable_leaderboardtable",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_leaderboardtable_leaderboardtable",
+      "target": "qasas_practice_src_lib_quiz_formatleaderboardtime",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/LeaderboardTable.jsx",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_login_login",
+      "target": "qasas_practice_src_lib_auth_signin",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/Login.jsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup_signup",
+      "target": "qasas_practice_src_lib_auth_validateusername",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup_signup",
+      "target": "qasas_practice_src_lib_auth_validatepassword",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_signup_signup",
+      "target": "qasas_practice_src_lib_auth_signup",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/Signup.jsx",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_timedquiz",
+      "target": "qasas_practice_src_contexts_authcontext_useauth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_timedquiz",
+      "target": "qasas_practice_src_lib_quiz_submitquizresult",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L422",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_components_timedquiz_timedquiz",
+      "target": "qasas_practice_src_lib_quiz_formatduration",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/components/TimedQuiz.jsx",
+      "source_location": "L457",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_contexts_authcontext_authprovider",
+      "target": "qasas_practice_src_lib_auth_getuserdoc",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/contexts/AuthContext.jsx",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "qasas_practice_src_lib_auth_validateusername",
+      "target": "qasas_practice_src_lib_auth_reserved_usernames",
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "qasas-practice/src/lib/auth.js",
+      "source_location": "L54",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

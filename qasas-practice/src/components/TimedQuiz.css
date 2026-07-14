@@ -186,6 +186,69 @@
   margin-bottom: 1.5rem;
 }
 
+.quiz-morphology-card {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-morphology-card .quiz-word {
+  color: var(--accent);
+  margin-bottom: 0;
+}
+
+.quiz-morphology-base {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+  width: 100%;
+  background: var(--cream);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 0 1rem 0.75rem;
+  font-family: 'Crimson Text', 'Amiri', serif;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.quiz-morphology-label {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 0 1rem 1rem;
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  color: var(--ink-light);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.quiz-inline-explanation {
+  width: 100%;
+  max-width: 520px;
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--ink);
+}
+
+.quiz-inline-explanation.correct {
+  background: var(--success-bg);
+  border: 1px solid var(--success);
+}
+
+.quiz-inline-explanation.incorrect {
+  background: var(--error-bg);
+  border: 1px solid var(--error);
+}
+
 /* Inline feedback icons */
 .inline-icon {
   width: 18px;

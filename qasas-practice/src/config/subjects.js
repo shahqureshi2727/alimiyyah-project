@@ -10,6 +10,7 @@ export const QUIZ_MODES = {
   nounFeatures: { label: 'Noun Features', bankSource: 'qasas', timerSeconds: 10 },
   roles: { label: 'Grammatical Role', bankSource: 'qasas', timerSeconds: 20 },
   vocab: { label: 'Vocabulary', bankSource: 'qasas', timerSeconds: 10 },
+  morphology: { label: 'Morphology', bankSource: 'qasas', timerSeconds: 20 },
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
 };
 

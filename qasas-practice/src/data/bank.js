@@ -1,5 +1,13 @@
 // src/data/bank.js
 
+export {
+  MORPHOLOGY_CATEGORIES,
+  MORPHOLOGY_SCOPE_LABELS,
+  MORPHOLOGY_SCOPES,
+  getMorphologyQuestions,
+  morphology,
+} from './morphology.js';
+
 // MODE 1: I'rab identification.
 // `sentence` is the full Arabic sentence (keep harakat).
 // `target` is the exact highlighted word string as it appears in `sentence`.

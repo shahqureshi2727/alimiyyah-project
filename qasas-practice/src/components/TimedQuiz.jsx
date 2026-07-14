@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { submitQuizResult, formatDuration } from '../lib/quiz';
-import { irab, nounFeatures, roles, vocab } from '../data/bank';
+import { irab, nounFeatures, morphology, roles, vocab } from '../data/bank';
 import { getFiqhQuestions } from '../data/fiqh';
 import { QUIZ_MODES } from '../config/subjects';
 import FiqhQuestionCard from './FiqhQuestionCard';
@@ -12,6 +12,7 @@ const QUIZ_LENGTH = 10;
 const BANKS = {
   irab,
   nounFeatures,
+  morphology,
   roles,
   vocab,
   // 'fiqh' is intentionally absent here — its bank depends on the selected
@@ -355,6 +356,8 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
         return question.word;
       case 'roles':
         return question.words[question.answerIndex];
+      case 'morphology':
+        return question.verb;
       case 'vocab':
         return question.ar;
       case 'fiqh':
@@ -659,6 +662,58 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
                 );
               })}
             </div>
+          </>
+        );
+
+      case 'morphology':
+        return (
+          <>
+            <h2 className="quiz-question-text">Choose the correct verb meaning</h2>
+            <div className="quiz-morphology-card">
+              <div className="quiz-word" dir="rtl">{current.verb}</div>
+              <div className="quiz-morphology-base" dir="rtl">
+                <span>{current.baseVerb}</span>
+                <span dir="ltr">= {current.baseMeaning}</span>
+              </div>
+              <div className="quiz-morphology-label" dir="rtl">{current.arabicLabel}</div>
+            </div>
+            <div className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}>
+              {current.options.map((option) => {
+                const isTapped = option === currentAnswer;
+                const isCorrectAnswer = option === current.answer;
+                let className = 'quiz-choice-btn';
+
+                if (showFeedback) {
+                  if (isTapped && isCorrectAnswer) {
+                    className += ' correct-tapped';
+                  } else if (isTapped && !isCorrectAnswer) {
+                    className += ' incorrect-tapped';
+                  } else if (isCorrectAnswer) {
+                    className += ' correct-outline';
+                  } else {
+                    className += ' dimmed';
+                  }
+                }
+
+                return (
+                  <button
+                    key={option}
+                    className={className}
+                    onClick={() => handleAnswer(option === current.answer, option)}
+                    disabled={showFeedback}
+                  >
+                    <span className="choice-en">{option}</span>
+                    {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
+                    {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
+                  </button>
+                );
+              })}
+            </div>
+            {showFeedback && (
+              <p className={`quiz-inline-explanation ${isCorrect ? 'correct' : 'incorrect'}`}>
+                Correct: {current.answer}. {current.explanation}
+              </p>
+            )}
           </>
         );
 
