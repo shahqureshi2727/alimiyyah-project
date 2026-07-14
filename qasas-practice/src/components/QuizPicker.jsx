@@ -1,4 +1,4 @@
-import { FIQH_TOPICS } from '../config/subjects';
+import { FIQH_GROUPS } from '../config/subjects';
 import './QuizPicker.css';
 
 const quizModes = [
@@ -30,20 +30,27 @@ const quizModes = [
     format: '10 cards',
     timer: '10 sec per card',
   },
-  ...FIQH_TOPICS.map((topic) => ({
-    id: `fiqh-${topic.code}`,
-    titleAr: 'الفِقْه',
-    titleEn: `Fiqh: ${topic.label}`,
+  {
+    id: 'morphology',
+    titleAr: 'تَصْرِيفُ الأَفْعَال',
+    titleEn: 'Morphology: Mixed Review',
     format: '10 questions',
-    timer: '25 sec per question',
-  })),
+    timer: '20 sec per question',
+  },
   {
     id: 'fiqh-all',
     titleAr: 'الفِقْه',
-    titleEn: 'Fiqh: Mixed Review',
+    titleEn: 'Fiqh: Review',
     format: '10 questions',
     timer: '25 sec per question',
   },
+  ...FIQH_GROUPS.map((group) => ({
+    id: `fiqh-${group.code}`,
+    titleAr: 'الفِقْه',
+    titleEn: `Fiqh: ${group.label}`,
+    format: '10 questions',
+    timer: '25 sec per question',
+  })),
 ];
 
 export default function QuizPicker({ onSelectMode, onBack }) {

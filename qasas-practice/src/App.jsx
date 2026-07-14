@@ -6,6 +6,7 @@ import IrabMode from './components/IrabMode';
 import NounMode from './components/NounMode';
 import RoleMode from './components/RoleMode';
 import VocabMode from './components/VocabMode';
+import MorphologyMode from './components/MorphologyMode';
 import FiqhPracticeMode from './components/FiqhPracticeMode';
 import QuizPicker from './components/QuizPicker';
 import TimedQuiz from './components/TimedQuiz';
@@ -77,6 +78,7 @@ function MainApp() {
     noun: 0,
     role: 0,
     vocab: 0,
+    morphology: 0,
     fiqh: 0,
   });
 
@@ -84,6 +86,9 @@ function MainApp() {
     if (mode.startsWith('fiqh-')) {
       setCurrentMode('fiqh');
       setCurrentTopic(mode.slice('fiqh-'.length));
+    } else if (mode.startsWith('morphology-')) {
+      setCurrentMode('morphology');
+      setCurrentTopic(mode.slice('morphology-'.length));
     } else {
       setCurrentMode(mode);
       setCurrentTopic(null);
@@ -209,6 +214,15 @@ function MainApp() {
               onBack={handleBack}
               score={scores.vocab}
               setScore={setModeScore('vocab')}
+            />
+          );
+        case 'morphology':
+          return (
+            <MorphologyMode
+              initialScope={currentTopic}
+              onBack={handleBack}
+              score={scores.morphology}
+              setScore={setModeScore('morphology')}
             />
           );
         case 'fiqh':

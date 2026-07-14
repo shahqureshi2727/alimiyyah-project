@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useSettings } from '../contexts/settings';
 import './AuthHeader.css';
 
 export default function AuthHeader({ hidden = false }) {
   const { username, isAdmin, signOut } = useAuth();
+  const { settings, setArabicScript, setTheme } = useSettings();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -22,6 +25,11 @@ export default function AuthHeader({ hidden = false }) {
   const handleAdmin = () => {
     setMenuOpen(false);
     navigate('/admin');
+  };
+
+  const handleSettings = () => {
+    setMenuOpen(false);
+    setSettingsOpen(true);
   };
 
   // Close menu on outside click
@@ -149,6 +157,13 @@ export default function AuthHeader({ hidden = false }) {
                 <button
                   className="user-menu-item"
                   role="menuitem"
+                  onClick={handleSettings}
+                >
+                  Settings
+                </button>
+                <button
+                  className="user-menu-item"
+                  role="menuitem"
                   onClick={handleSignOut}
                 >
                   Sign out
@@ -158,6 +173,59 @@ export default function AuthHeader({ hidden = false }) {
           </div>
         </div>
       </div>
+      {settingsOpen && (
+        <div className="settings-overlay" role="presentation">
+          <div className="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+            <div className="settings-panel-header">
+              <h2 id="settings-title">Settings</h2>
+              <button
+                className="settings-close"
+                onClick={() => setSettingsOpen(false)}
+                aria-label="Close settings"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="settings-group">
+              <span className="settings-label">Theme</span>
+              <div className="settings-options">
+                {[
+                  ['light', 'Light'],
+                  ['dark', 'Dark'],
+                  ['system', 'System'],
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    className={`settings-option ${settings.theme === value ? 'active' : ''}`}
+                    onClick={() => setTheme(value)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="settings-group">
+              <span className="settings-label">Arabic Script</span>
+              <div className="settings-options">
+                {[
+                  ['madina', 'Madina'],
+                  ['indopak', 'Indo-Pak'],
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    className={`settings-option ${settings.arabicScript === value ? 'active' : ''}`}
+                    onClick={() => setArabicScript(value)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

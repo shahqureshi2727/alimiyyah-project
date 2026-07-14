@@ -48,11 +48,11 @@
 }
 
 .user-menu-trigger:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--accent-light);
 }
 
 .user-menu-trigger.open {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--accent-light);
 }
 
 .user-menu-name {
@@ -129,4 +129,107 @@
 
 .user-menu-item + .user-menu-item {
   border-top: 1px solid var(--border);
+}
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5rem 1rem 1rem;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.settings-panel {
+  width: 100%;
+  max-width: 420px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+  padding: 1rem;
+  animation: menuFadeIn 0.15s ease;
+}
+
+.settings-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.settings-panel-header h2 {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.settings-close {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--parchment);
+  color: var(--ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.settings-close:hover,
+.settings-close:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.settings-label {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.settings-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.settings-option {
+  flex: 1;
+  min-width: 96px;
+  padding: 0.75rem 0.8rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.settings-option:hover,
+.settings-option:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.settings-option.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
 }

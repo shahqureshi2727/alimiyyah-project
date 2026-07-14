@@ -1,4 +1,10 @@
 /* Root color palette - Islamic manuscript inspired */
+@font-face {
+  font-family: 'Indopak Nastaleeq';
+  src: url('https://static-cdn.tarteel.ai/qul/fonts/nastaleeq/Hanafi/normal-v4.2.2/with-waqf-lazmi/font.ttf') format('truetype');
+  font-display: swap;
+}
+
 :root {
   /* Base colors */
   --parchment: #faf7f2;
@@ -19,6 +25,48 @@
   --success-bg: rgba(34, 134, 58, 0.1);
   --error: #dc2626;
   --error-bg: rgba(220, 38, 38, 0.1);
+
+  /* Typography */
+  --arabic-font: 'Amiri', serif;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --parchment: #181713;
+  --cream: #242118;
+  --ink: #f3eadb;
+  --ink-light: #c8bca9;
+  --accent: #63b3b5;
+  --accent-dark: #8bd0d1;
+  --accent-light: rgba(99, 179, 181, 0.16);
+  --border: #403a2e;
+  --success: #7fbd7a;
+  --success-bg: rgba(127, 189, 122, 0.16);
+  --error: #f08a84;
+  --error-bg: rgba(240, 138, 132, 0.16);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] {
+    --parchment: #181713;
+    --cream: #242118;
+    --ink: #f3eadb;
+    --ink-light: #c8bca9;
+    --accent: #63b3b5;
+    --accent-dark: #8bd0d1;
+    --accent-light: rgba(99, 179, 181, 0.16);
+    --border: #403a2e;
+    --success: #7fbd7a;
+    --success-bg: rgba(127, 189, 122, 0.16);
+    --error: #f08a84;
+    --error-bg: rgba(240, 138, 132, 0.16);
+    color-scheme: dark;
+  }
+}
+
+:root[data-arabic-script="indopak"] {
+  --arabic-font: 'Indopak Nastaleeq', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Noto Naskh Arabic', 'Amiri', serif;
 }
 
 /* Reset & base styles */
@@ -51,7 +99,21 @@ button {
 
 /* Ensure Arabic text has proper rendering */
 [dir="rtl"] {
-  font-family: 'Amiri', serif;
+  font-family: var(--arabic-font);
+}
+
+.title-ar,
+.mode-title-ar,
+.quiz-mode-title-ar,
+.choice-ar,
+.opt-ar,
+.quiz-word,
+.morphology-scope-ar,
+.morphology-verb,
+.morphology-label,
+.quiz-morphology-label,
+.fiqh-madhhab-badge {
+  font-family: var(--arabic-font);
 }
 
 /* Loading screen */

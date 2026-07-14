@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "validate:fiqh": "node scripts/validate-fiqh-bank.mjs"
+    "validate:fiqh": "node scripts/validate-fiqh-bank.mjs",
+    "validate:morphology": "node scripts/validate-morphology-bank.mjs"
   },
   "dependencies": {
     "firebase": "^12.15.0",

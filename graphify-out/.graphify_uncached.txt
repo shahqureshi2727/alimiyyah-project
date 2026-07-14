@@ -1,0 +1,63 @@
+/Users/muazsadique/Documents/alimiyyah-project-main/2026-07-10-fiqh-quiz-section-design.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-01 Introduction to Fiqh.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-02 Najasah and Water.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-03 Wudhu Occasions and Sajdah al-Tilawah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-04 Wudhu Rulings and Conditions.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-05 Faraidh of Wudhu and Misc Rulings.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-06 Sunan Adab and Duas of Wudhu.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-07 Nullifiers of Wudhu.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-08 Ghusl.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-09 Tayammum.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-10 Wiping Over Khuffs.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-11 Casts Bandages and Purification of Filth.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-12 Types of Saliva and Salah Prayer Times.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-13 Salah Prayer Times Continued.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-14 Prohibited Times and Adhan Iqamah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-15 Conditions of Salah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-16 Integrals of Salah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-17 Wajib Acts of Salah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-18 Sunnah Acts and Adab of Salah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-19 Invalidators of Salah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-20 Makruhat of Salah.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-21 Permissible Actions and Breaking the Prayer.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-22 Vehicles and Travel.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-23 Musafir Continued and Prayer of the Sick.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/Fiqh-25 Salah of Masbuq.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/Fiqh/_Fiqh-MOC.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/README.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_templates/deck-template.md
+/Users/muazsadique/Documents/alimiyyah-project-main/docs/superpowers/plans/2026-07-10-fiqh-quiz-section.md
+/Users/muazsadique/Documents/alimiyyah-project-main/docs/superpowers/specs/2026-07-10-fiqh-quiz-section-design.md
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice-app-prompt.md
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/README.md
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/index.html
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/qasas-ui-patch-header-and-feedback.md
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-01.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-02.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-03.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-04.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-05.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-06.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-07.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-08.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-09.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-10.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-11.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-12.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-13.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-14.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-15.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-16.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-17.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-18.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-19.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-20.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-21.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-22.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-23.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/content/_attachments/Fiqh-25.pdf
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/public/favicon.svg
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/public/icons.svg
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/src/assets/hero.png
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/src/assets/react.svg
+/Users/muazsadique/Documents/alimiyyah-project-main/qasas-practice/src/assets/vite.svg

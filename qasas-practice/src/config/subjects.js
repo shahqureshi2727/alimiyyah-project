@@ -10,6 +10,7 @@ export const QUIZ_MODES = {
   nounFeatures: { label: 'Noun Features', bankSource: 'qasas', timerSeconds: 10 },
   roles: { label: 'Grammatical Role', bankSource: 'qasas', timerSeconds: 20 },
   vocab: { label: 'Vocabulary', bankSource: 'qasas', timerSeconds: 10 },
+  morphology: { label: 'Morphology', bankSource: 'qasas', timerSeconds: 20 },
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
 };
 
@@ -26,19 +27,33 @@ export const ARABIC_TOPICS = [
 // topic once its question bank exists in src/data/fiqh/ (see
 // content/Fiqh/_Fiqh-MOC.md for the full topic list).
 export const FIQH_TOPICS = [
-  { code: 'INT', label: 'Introduction to Fiqh' },
-  { code: 'NJS', label: 'Najasah (Impurities)' },
-  { code: 'WTR', label: 'Water Classification' },
-  { code: 'SJD', label: 'Sajdah al-Tilawah' },
-  { code: 'WUD', label: 'Wudhu' },
-  { code: 'GHS', label: 'Ghusl' },
-  { code: 'TYM', label: 'Tayammum' },
-  { code: 'KHF', label: 'Wiping over Khuffs' },
-  { code: 'JBR', label: 'Casts & Bandages' },
-  { code: 'SLH', label: 'Salah' },
-  { code: 'ADH', label: 'Adhan & Iqamah' },
-  { code: 'VEH', label: 'Prayer on Vehicles' },
-  { code: 'TRV', label: 'Travel (Safar)' },
-  { code: 'MRD', label: 'Prayer of the Sick' },
-  { code: 'MSB', label: 'Masbuq' },
+  { code: 'NJS', label: 'Najasah (Impurities)', group: 'tahara' },
+  { code: 'WTR', label: 'Water Classification', group: 'tahara' },
+  { code: 'WUD', label: 'Wudhu', group: 'tahara' },
+  { code: 'GHS', label: 'Ghusl', group: 'tahara' },
+  { code: 'TYM', label: 'Tayammum', group: 'tahara' },
+  { code: 'KHF', label: 'Wiping over Khuffs', group: 'tahara' },
+  { code: 'JBR', label: 'Casts & Bandages', group: 'tahara' },
+  { code: 'SJD', label: 'Sajdah al-Tilawah', group: 'prayer' },
+  { code: 'SLH', label: 'Salah', group: 'prayer' },
+  { code: 'ADH', label: 'Adhan & Iqamah', group: 'prayer' },
+  { code: 'VEH', label: 'Prayer on Vehicles', group: 'prayer' },
+  { code: 'TRV', label: 'Travel (Safar)', group: 'prayer' },
+  { code: 'MRD', label: 'Prayer of the Sick', group: 'prayer' },
+  { code: 'MSB', label: 'Masbuq', group: 'prayer' },
+];
+
+export const FIQH_GROUPS = [
+  {
+    code: 'tahara',
+    label: 'Tahara',
+    titleAr: 'الطَّهَارَة',
+    description: 'Purification, wudhu, ghusl, tayammum, khuffs, and related rulings',
+  },
+  {
+    code: 'prayer',
+    label: 'Prayer',
+    titleAr: 'الصَّلَاة',
+    description: 'Salah, adhan, travel, vehicles, sickness, masbuq, and prayer rulings',
+  },
 ];
