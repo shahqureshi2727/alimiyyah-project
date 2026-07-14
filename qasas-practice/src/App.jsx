@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import HomeScreen from './components/HomeScreen';
 import IrabMode from './components/IrabMode';
@@ -12,6 +12,7 @@ import QuizPicker from './components/QuizPicker';
 import TimedQuiz from './components/TimedQuiz';
 import Leaderboard from './components/Leaderboard';
 import AdminPage from './components/AdminPage';
+import WeaknessDashboard from './components/WeaknessDashboard';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
@@ -66,7 +67,6 @@ function PublicRoute({ children }) {
 
 // Main app with practice mode navigation
 function MainApp() {
-  const navigate = useNavigate();
   const [currentMode, setCurrentMode] = useState(null);
   const [currentTopic, setCurrentTopic] = useState(null);
   const [quizMode, setQuizMode] = useState(null);
@@ -120,6 +120,10 @@ function MainApp() {
       localStorage.setItem('lastQuizMode', 'fiqh');
       setQuizMode('fiqh');
       setQuizTopic(topic);
+    } else if (mode === 'review') {
+      localStorage.setItem('lastQuizMode', 'review');
+      setQuizMode('review');
+      setQuizTopic(null);
     } else {
       localStorage.setItem('lastQuizMode', mode);
       setQuizMode(mode);
@@ -297,6 +301,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <Leaderboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/weakness"
+        element={
+          <ProtectedRoute>
+            <WeaknessDashboard />
           </ProtectedRoute>
         }
       />

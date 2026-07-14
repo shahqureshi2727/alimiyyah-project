@@ -6,12 +6,16 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserDoc } from '../lib/auth';
 import { getAllQuizResults, getWeekStart, formatRelativeTime } from '../lib/quiz';
+import { db } from '../lib/firebase';
+import { statusFor } from '../lib/weakness';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { getFiqhQuestions } from '../data/fiqh';
-import { FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
+import { ARABIC_TOPICS, FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
+import { WeaknessHeatmap } from './WeaknessDashboard';
 import './AdminPage.css';
 
 function NotFoundPage() {
@@ -24,7 +28,6 @@ function NotFoundPage() {
 }
 
 function BankViewer() {
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedSections, setExpandedSections] = useState({
     irab: false,
@@ -482,7 +485,7 @@ function ClassStats() {
     }
   };
 
-  const SortIcon = ({ column }) => {
+  const sortIcon = (column) => {
     if (sortBy !== column) return null;
     return <span className="sort-icon">{sortDirection === 'asc' ? ' \u25B2' : ' \u25BC'}</span>;
   };
@@ -548,21 +551,21 @@ function ClassStats() {
                     onClick={() => handleSort('username')}
                   >
                     Username
-                    <SortIcon column="username" />
+                    {sortIcon('username')}
                   </th>
                   <th
                     className="sortable col-num"
                     onClick={() => handleSort('quizzesWeek')}
                   >
                     Quizzes (Week)
-                    <SortIcon column="quizzesWeek" />
+                    {sortIcon('quizzesWeek')}
                   </th>
                   <th
                     className="sortable col-num"
                     onClick={() => handleSort('avgScoreWeek')}
                   >
                     Avg Score (Week)
-                    <SortIcon column="avgScoreWeek" />
+                    {sortIcon('avgScoreWeek')}
                   </th>
                   <th className="col-mode">Weakest Mode</th>
                   <th
@@ -570,7 +573,7 @@ function ClassStats() {
                     onClick={() => handleSort('lastActive')}
                   >
                     Last Active
-                    <SortIcon column="lastActive" />
+                    {sortIcon('lastActive')}
                   </th>
                 </tr>
               </thead>
@@ -599,6 +602,120 @@ function ClassStats() {
               </tbody>
             </table>
           </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+function AdminWeaknessView() {
+  const [profiles, setProfiles] = useState([]);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchProfiles() {
+      try {
+        const snapshot = await getDocs(collection(db, 'weaknessProfiles'));
+        const rows = snapshot.docs.map((profileDoc) => ({
+          id: profileDoc.id,
+          ...profileDoc.data(),
+        }));
+        setProfiles(rows);
+        setSelectedUserId(rows[0]?.userId || rows[0]?.id || null);
+      } catch (err) {
+        console.error('Error loading weakness profiles:', err);
+        setError('Failed to load weakness profiles.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProfiles();
+  }, []);
+
+  const topicMeta = useMemo(() => [...FIQH_TOPICS, ...ARABIC_TOPICS], []);
+
+  const classProfile = useMemo(() => {
+    const topics = {};
+
+    for (const topic of topicMeta) {
+      const states = profiles
+        .map((profile) => profile.topics?.[topic.code])
+        .filter(Boolean);
+      if (states.length === 0) continue;
+
+      const attempts = states.reduce((sum, state) => sum + (state.attempts || 0), 0);
+      const score = states.reduce((sum, state) => sum + (state.score || 0), 0) / states.length;
+      topics[topic.code] = {
+        attempts,
+        score,
+        status: statusFor(score, attempts),
+      };
+    }
+
+    return { topics };
+  }, [profiles, topicMeta]);
+
+  const reteachTopics = useMemo(() => topicMeta
+    .map((topic) => {
+      const states = profiles
+        .map((profile) => profile.topics?.[topic.code])
+        .filter(Boolean);
+      const weakCount = states.filter((state) => state.status === 'weak').length;
+      return {
+        ...topic,
+        weakShare: states.length > 0 ? weakCount / states.length : 0,
+        studentCount: states.length,
+      };
+    })
+    .filter((topic) => topic.studentCount > 0 && topic.weakShare > 0)
+    .sort((a, b) => b.weakShare - a.weakShare)
+    .slice(0, 8), [profiles, topicMeta]);
+
+  const selectedProfile = profiles.find((profile) => (profile.userId || profile.id) === selectedUserId);
+
+  if (loading) return <div className="stats-loading">Loading weakness data...</div>;
+  if (error) return <div className="stats-error">{error}</div>;
+  if (profiles.length === 0) return <p className="no-students">No weakness profiles yet.</p>;
+
+  return (
+    <div className="admin-weakness">
+      <section className="stats-overview">
+        <h2>Topics To Reteach</h2>
+        <div className="reteach-list">
+          {reteachTopics.length === 0 ? (
+            <p className="no-students">No weak class topics yet.</p>
+          ) : reteachTopics.map((topic) => (
+            <div key={topic.code} className="reteach-row">
+              <span>{topic.label}</span>
+              <strong>{Math.round(topic.weakShare * 100)}% weak</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <WeaknessHeatmap profile={classProfile} title="Class Heatmap" />
+
+      <section className="student-drilldown">
+        <h2>Student Drill-Down</h2>
+        <select
+          className="student-select"
+          value={selectedUserId || ''}
+          onChange={(event) => setSelectedUserId(event.target.value)}
+        >
+          {profiles.map((profile) => (
+            <option key={profile.userId || profile.id} value={profile.userId || profile.id}>
+              {profile.username || profile.userId || profile.id}
+            </option>
+          ))}
+        </select>
+        {selectedProfile && (
+          <WeaknessHeatmap
+            profile={selectedProfile}
+            title={`${selectedProfile.username || 'Student'} Heatmap`}
+          />
         )}
       </section>
     </div>
@@ -668,11 +785,18 @@ export default function AdminPage() {
         >
           Class Stats
         </button>
+        <button
+          className={`admin-tab ${activeTab === 'weakness' ? 'active' : ''}`}
+          onClick={() => setActiveTab('weakness')}
+        >
+          Weakness
+        </button>
       </div>
 
       <div className="admin-content">
         {activeTab === 'bank' && <BankViewer />}
         {activeTab === 'stats' && <ClassStats />}
+        {activeTab === 'weakness' && <AdminWeaknessView />}
       </div>
     </div>
   );

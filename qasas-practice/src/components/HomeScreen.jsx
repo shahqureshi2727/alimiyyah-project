@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
 import { FIQH_GROUPS, FIQH_TOPICS } from '../config/subjects';
@@ -56,6 +57,7 @@ const MODE_LABELS = {
 
 export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [recentResults, setRecentResults] = useState([]);
   const [loadingResults, setLoadingResults] = useState(true);
   const [subject, setSubject] = useState(null);
@@ -204,6 +206,26 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
             <span className="quiz-entry-title">Timed Quizzes</span>
             <span className="quiz-entry-desc">
               10 questions per round with a countdown timer
+            </span>
+          </div>
+          <div className="quiz-entry-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        </button>
+        <button className="quiz-entry-card strength-card" onClick={() => navigate('/weakness')}>
+          <div className="quiz-entry-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="11" width="4" height="9" />
+              <rect x="10" y="5" width="4" height="15" />
+              <rect x="17" y="8" width="4" height="12" />
+            </svg>
+          </div>
+          <div className="quiz-entry-content">
+            <span className="quiz-entry-title">Strength Map</span>
+            <span className="quiz-entry-desc">
+              See weak, developing, and strong topics
             </span>
           </div>
           <div className="quiz-entry-arrow">

@@ -12,6 +12,7 @@ export const QUIZ_MODES = {
   vocab: { label: 'Vocabulary', bankSource: 'qasas', timerSeconds: 10 },
   morphology: { label: 'Morphology', bankSource: 'qasas', timerSeconds: 20 },
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
+  review: { label: 'Weak Spots Review', bankSource: 'mixed', timerSeconds: 20 },
 };
 
 // Arabic topics available for topic-first navigation. Add one entry here per
@@ -21,6 +22,13 @@ export const ARABIC_TOPICS = [
   { code: 'NF', label: 'Noun Features', mode: 'nounFeatures' },
   { code: 'ROL', label: 'Grammatical Role', mode: 'roles' },
   { code: 'VOC', label: 'Vocabulary', mode: 'vocab' },
+  { code: 'MOR_PST_ACT', label: 'Morphology: Past Active', mode: 'morphology' },
+  { code: 'MOR_PST_PAS', label: 'Morphology: Past Passive', mode: 'morphology' },
+  { code: 'MOR_MDR_ACT', label: 'Morphology: Mudari Active', mode: 'morphology' },
+  { code: 'MOR_MDR_PAS', label: 'Morphology: Mudari Passive', mode: 'morphology' },
+  { code: 'MOR_MDR_NEG', label: 'Morphology: Negative Mudari', mode: 'morphology' },
+  { code: 'MOR_CMD_AMR', label: 'Morphology: Imperative', mode: 'morphology' },
+  { code: 'MOR_CMD_NAH', label: 'Morphology: Prohibitive', mode: 'morphology' },
 ];
 
 // Fiqh topics available for topic-first navigation. Add one entry here per

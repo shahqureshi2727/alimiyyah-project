@@ -24,7 +24,7 @@ export default function ForgotPassword() {
     try {
       const result = await resetPassword(username);
       setMessage(result.message);
-    } catch (err) {
+    } catch {
       setError('Something went wrong. Please try again.');
     } finally {
       setLoading(false);

@@ -141,6 +141,40 @@
   color: white;
 }
 
+.admin-weakness,
+.student-drilldown {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.reteach-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.reteach-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.student-select {
+  max-width: 320px;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--ink);
+}
+
 /* Bank Viewer */
 .bank-viewer {
   padding: 0;

@@ -120,7 +120,7 @@ export async function signIn(username, password) {
     return userCredential.user;
   } catch (err) {
     // Don't distinguish between "no such user" and "wrong password"
-    throw new Error('Incorrect username or password.');
+    throw new Error('Incorrect username or password.', { cause: err });
   }
 }
 

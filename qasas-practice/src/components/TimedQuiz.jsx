@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
-import { submitQuizResult, formatDuration } from '../lib/quiz';
+import { submitAnswerEvents, submitQuizResult, formatDuration } from '../lib/quiz';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
-import { irab, nounFeatures, morphology, roles, vocab } from '../data/bank';
+import { morphology } from '../data/morphology';
 import { getFiqhQuestions } from '../data/fiqh';
-import { QUIZ_MODES } from '../config/subjects';
+import { ARABIC_TOPICS, FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
+import { db } from '../lib/firebase';
+import { reviewWeights } from '../lib/weakness';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import './TimedQuiz.css';
 
 const QUIZ_LENGTH = 10;
+const warnedMissingQuestionMeta = new Set();
 
 const BANKS = {
   irab,
@@ -21,9 +25,117 @@ const BANKS = {
   // static import.
 };
 
+const REVIEW_BANKS = [
+  ...irab.map((question) => ({ ...question, reviewMode: 'irab' })),
+  ...nounFeatures.map((question) => ({ ...question, reviewMode: 'nounFeatures' })),
+  ...roles.map((question) => ({ ...question, reviewMode: 'roles' })),
+  ...vocab.map((question) => ({ ...question, reviewMode: 'vocab' })),
+  ...morphology.map((question) => ({ ...question, reviewMode: 'morphology' })),
+  ...getFiqhQuestions('all').map((question) => ({ ...question, reviewMode: 'fiqh' })),
+];
+
 function getBank(mode, topic) {
   if (mode === 'fiqh') return getFiqhQuestions(topic || 'all');
+  if (mode === 'review') return REVIEW_BANKS;
   return BANKS[mode];
+}
+
+function selectWeightedReviewQuestions(bank, profile, missedIds) {
+  const weights = reviewWeights(profile);
+  const weakTopics = new Set(Object.keys(weights));
+  const candidates = bank.filter((question) => weakTopics.has(question.topic));
+  const missed = candidates.filter((question) => missedIds.has(question.id));
+  const fresh = candidates.filter((question) => !missedIds.has(question.id));
+  const ordered = [...shuffleArray(missed), ...shuffleArray(fresh)];
+  const selected = [];
+  const seenIds = new Set();
+
+  while (selected.length < QUIZ_LENGTH && ordered.length > 0) {
+    let bestIndex = 0;
+    let bestRoll = -1;
+    ordered.forEach((question, index) => {
+      const roll = Math.random() * (weights[question.topic] || 0);
+      if (roll > bestRoll) {
+        bestRoll = roll;
+        bestIndex = index;
+      }
+    });
+    const [question] = ordered.splice(bestIndex, 1);
+    if (!seenIds.has(question.id)) {
+      selected.push(question);
+      seenIds.add(question.id);
+    }
+  }
+
+  if (selected.length === 0) return selectQuestions(bank);
+  if (selected.length < QUIZ_LENGTH) {
+    const fill = shuffleArray(bank.filter((question) => !seenIds.has(question.id)));
+    return [...selected, ...fill.slice(0, QUIZ_LENGTH - selected.length)];
+  }
+  return selected;
+}
+
+function topicGroupFor(topicCode, mode) {
+  const fiqhTopic = FIQH_TOPICS.find((topic) => topic.code === topicCode);
+  if (fiqhTopic) return fiqhTopic.group;
+  const arabicTopic = ARABIC_TOPICS.find((topic) => topic.code === topicCode);
+  if (arabicTopic) return arabicTopic.mode;
+  return mode === 'fiqh' ? null : mode;
+}
+
+function warnMissingMetaOnce(key, message) {
+  if (warnedMissingQuestionMeta.has(key)) return;
+  warnedMissingQuestionMeta.add(key);
+  console.warn(message);
+}
+
+function currentTime() {
+  return Date.now();
+}
+
+function getQuestionTarget(mode, question) {
+  switch (mode) {
+    case 'irab':
+      return question.target;
+    case 'nounFeatures':
+      return question.word;
+    case 'roles':
+      return question.words[question.answerIndex];
+    case 'morphology':
+      return question.verb;
+    case 'vocab':
+      return question.ar;
+    case 'fiqh':
+      return question.prompt;
+    default:
+      return '';
+  }
+}
+
+function getAnswerEventResult(question, correct, mode, index) {
+  const fallbackTopic = mode;
+  const topicCode = question?.topic || fallbackTopic;
+  const questionId = question?.id || `${mode}-${index + 1}`;
+
+  if (!question?.topic) {
+    warnMissingMetaOnce(
+      `${mode}:topic`,
+      `Question topic missing for ${mode}; falling back to "${fallbackTopic}" for weakness tracking.`
+    );
+  }
+  if (!question?.id) {
+    warnMissingMetaOnce(
+      `${mode}:id`,
+      `Question id missing for ${mode}; using a session fallback id for weakness tracking.`
+    );
+  }
+
+  return {
+    questionId,
+    topic: topicCode,
+    group: topicGroupFor(topicCode, mode),
+    correct,
+  };
 }
 
 // Shuffle array using Fisher-Yates
@@ -148,8 +260,8 @@ function Confetti() {
           key={i}
           className="confetti-piece"
           style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 0.5}s`,
+            left: `${(i * 37) % 100}%`,
+            animationDelay: `${((i * 11) % 10) / 20}s`,
             backgroundColor: ['#1a6b6d', '#22863a', '#ea580c', '#7c3aed', '#db2777'][i % 5],
           }}
         />
@@ -220,7 +332,7 @@ function XIcon() {
   );
 }
 
-export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequest }) {
+export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComplete }) {
   const { user, username } = useAuth();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -232,8 +344,8 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
   const [currentAnswer, setCurrentAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
-  const [startTime] = useState(Date.now());
-  const [questionStartTime, setQuestionStartTime] = useState(Date.now());
+  const [startTime] = useState(() => currentTime());
+  const [questionStartTime, setQuestionStartTime] = useState(() => currentTime());
   const [totalDuration, setTotalDuration] = useState(0);
   const [saveStatus, setSaveStatus] = useState(null); // null, 'saving', 'saved', 'error'
   const [showExitDialog, setShowExitDialog] = useState(false);
@@ -251,32 +363,49 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
 
   // Initialize questions on mount
   useEffect(() => {
-    const bank = getBank(mode, topic);
-    const selected = selectQuestions(bank).map((question) =>
-      mode === 'morphology' ? shuffleMorphologyOptions(question) : question
-    );
-    setQuestions(selected);
-    setQuestionStartTime(Date.now());
-  }, [mode, topic]);
+    let cancelled = false;
 
-  // Timer effect
-  useEffect(() => {
-    if (quizComplete || isTimerPaused || questions.length === 0 || showExitDialog) return;
+    async function loadQuestions() {
+      const bank = getBank(mode, topic);
+      let selected;
 
-    timerRef.current = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          handleTimeout();
-          return QUIZ_MODES[mode].timerSeconds;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+      if (mode === 'review' && user) {
+        const profileSnap = await getDoc(doc(db, 'weaknessProfiles', user.uid));
+        const profile = profileSnap.exists() ? profileSnap.data() : { topics: {} };
+        const wrongSnap = await getDocs(query(
+          collection(db, 'answerEvents'),
+          where('userId', '==', user.uid),
+          where('correct', '==', false)
+        ));
+        const missedIds = new Set(wrongSnap.docs.map((eventDoc) => eventDoc.data().questionId));
+        selected = selectWeightedReviewQuestions(bank, profile, missedIds);
+      } else {
+        selected = selectQuestions(bank);
+      }
+
+      const prepared = selected.map((question) =>
+        (question.reviewMode || mode) === 'morphology' ? shuffleMorphologyOptions(question) : question
+      );
+
+      if (!cancelled) {
+        setQuestions(prepared);
+        setQuestionStartTime(currentTime());
+      }
+    }
+
+    loadQuestions().catch((err) => {
+      console.error('Error loading quiz questions:', err);
+      if (!cancelled) {
+        const fallback = selectQuestions(getBank(mode, topic));
+        setQuestions(fallback);
+        setQuestionStartTime(currentTime());
+      }
+    });
 
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      cancelled = true;
     };
-  }, [currentIndex, quizComplete, isTimerPaused, questions.length, mode, showExitDialog]);
+  }, [mode, topic, user]);
 
   // Vocab auto-flip after 4 seconds
   useEffect(() => {
@@ -310,35 +439,13 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
     };
   }, [quizComplete]);
 
-  const handleTimeout = useCallback(() => {
-    if (quizComplete || showFeedback) return;
-
-    const questionTime = (Date.now() - questionStartTime) / 1000;
-    const current = questions[currentIndex];
-
-    setIsCorrect(false);
-    setCurrentAnswer('timeout');
-    setShowFeedback(true);
-    setIsTimerPaused(true);
-
-    // Record result
-    const targetDisplay = getQuestionTarget(mode, current);
-    setResults(prev => [...prev, {
-      question: current,
-      correct: false,
-      timeTaken: questionTime,
-      target: targetDisplay,
-    }]);
-
-    setTimeout(() => advanceQuestion(), 1000);
-  }, [currentIndex, questions, questionStartTime, quizComplete, showFeedback, mode]);
-
-  const advanceQuestion = () => {
+  const advanceQuestion = useCallback(() => {
     if (currentIndex >= QUIZ_LENGTH - 1) {
       // Quiz complete
-      const duration = (Date.now() - startTime) / 1000;
+      const duration = (currentTime() - startTime) / 1000;
       setTotalDuration(duration);
       setQuizComplete(true);
+      onQuizComplete?.();
       return;
     }
 
@@ -356,32 +463,58 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
     setSelectedNumber(null);
     setFlipped(false);
     setVocabChoice(null);
-  };
+  }, [currentIndex, mode, onQuizComplete, startTime]);
 
-  const getQuestionTarget = (mode, question) => {
-    switch (mode) {
-      case 'irab':
-        return question.target;
-      case 'nounFeatures':
-        return question.word;
-      case 'roles':
-        return question.words[question.answerIndex];
-      case 'morphology':
-        return question.verb;
-      case 'vocab':
-        return question.ar;
-      case 'fiqh':
-        return question.prompt;
-      default:
-        return '';
-    }
-  };
+  const handleTimeout = useCallback(() => {
+    if (quizComplete || showFeedback) return;
+
+    const questionTime = (currentTime() - questionStartTime) / 1000;
+    const current = questions[currentIndex];
+    const currentMode = current?.reviewMode || mode;
+
+    setIsCorrect(false);
+    setCurrentAnswer('timeout');
+    setShowFeedback(true);
+    setIsTimerPaused(true);
+
+    // Record result
+    const targetDisplay = getQuestionTarget(currentMode, current);
+    setResults(prev => [...prev, {
+      question: current,
+      correct: false,
+      timeTaken: questionTime,
+      target: targetDisplay,
+      answerEvent: getAnswerEventResult(current, false, currentMode, currentIndex),
+    }]);
+
+    setTimeout(() => advanceQuestion(), 1000);
+  }, [advanceQuestion, currentIndex, questions, questionStartTime, quizComplete, showFeedback, mode]);
+
+  // Timer effect
+  useEffect(() => {
+    if (quizComplete || isTimerPaused || questions.length === 0 || showExitDialog) return;
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          handleTimeout();
+          return QUIZ_MODES[mode].timerSeconds;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [currentIndex, quizComplete, isTimerPaused, questions.length, mode, showExitDialog, handleTimeout]);
 
   const handleAnswer = (correct, answer) => {
     if (showFeedback || quizComplete) return;
 
-    const questionTime = (Date.now() - questionStartTime) / 1000;
+    const questionTime = (currentTime() - questionStartTime) / 1000;
     const current = questions[currentIndex];
+    const currentMode = current?.reviewMode || mode;
 
     setIsCorrect(correct);
     setCurrentAnswer(answer);
@@ -398,12 +531,13 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
     }
 
     // Record result
-    const targetDisplay = getQuestionTarget(mode, current);
+    const targetDisplay = getQuestionTarget(currentMode, current);
     setResults(prev => [...prev, {
       question: current,
       correct,
       timeTaken: questionTime,
       target: targetDisplay,
+      answerEvent: getAnswerEventResult(current, correct, currentMode, currentIndex),
     }]);
 
     setTimeout(() => advanceQuestion(), 1000);
@@ -432,13 +566,21 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
     const saveResult = async () => {
       setSaveStatus('saving');
       try {
-        await submitQuizResult({
+        const quizResultId = await submitQuizResult({
           userId: user.uid,
           username,
           mode,
           bankSource: QUIZ_MODES[mode].bankSource,
           score,
           durationSeconds: Math.round(totalDuration),
+        });
+        await submitAnswerEvents({
+          userId: user.uid,
+          username,
+          mode,
+          bankSource: QUIZ_MODES[mode].bankSource,
+          results: results.map((result) => result.answerEvent).filter(Boolean),
+          quizResultId,
         });
         setSaveStatus('saved');
       } catch (err) {
@@ -448,7 +590,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
     };
 
     saveResult();
-  }, [quizComplete, user, username, mode, score, totalDuration, saveStatus]);
+  }, [quizComplete, user, username, mode, score, totalDuration, saveStatus, results]);
 
   if (questions.length === 0) {
     return (
@@ -516,10 +658,11 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
   }
 
   const current = questions[currentIndex];
+  const currentMode = current?.reviewMode || mode;
 
   // Render question based on mode
   const renderQuestion = () => {
-    switch (mode) {
+    switch (currentMode) {
       case 'irab':
         return (
           <>
@@ -563,7 +706,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
           </>
         );
 
-      case 'nounFeatures':
+      case 'nounFeatures': {
         const allSelected = selectedDef && selectedGender && selectedNumber;
         const checkAnswer = () => {
           const correct = selectedDef === current.def &&
@@ -633,6 +776,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onExitRequ
             )}
           </>
         );
+      }
 
       case 'roles':
         return (

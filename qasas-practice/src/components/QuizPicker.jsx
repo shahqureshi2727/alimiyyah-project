@@ -3,6 +3,13 @@ import './QuizPicker.css';
 
 const quizModes = [
   {
+    id: 'review',
+    titleAr: 'مُرَاجَعَةُ الضَّعْف',
+    titleEn: 'Review Your Weak Spots',
+    format: '10 targeted questions',
+    timer: 'adaptive topic mix',
+  },
+  {
     id: 'irab',
     titleAr: 'تَحْدِيدُ الإِعْرَاب',
     titleEn: "I'rab",

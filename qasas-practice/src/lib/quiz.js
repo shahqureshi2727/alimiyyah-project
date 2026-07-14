@@ -15,6 +15,8 @@
 import {
   collection,
   addDoc,
+  doc,
+  getDoc,
   query,
   where,
   orderBy,
@@ -22,10 +24,14 @@ import {
   getDocs,
   serverTimestamp,
   Timestamp,
+  writeBatch,
 } from 'firebase/firestore';
 import { db } from './firebase';
+import { updateProfile } from './weakness';
 
 const QUIZ_RESULTS_COLLECTION = 'quizResults';
+const ANSWER_EVENTS_COLLECTION = 'answerEvents';
+const WEAKNESS_PROFILES_COLLECTION = 'weaknessProfiles';
 
 /**
  * Submit a quiz result to Firestore.
@@ -50,6 +56,58 @@ export async function submitQuizResult({ userId, username, mode, bankSource, sco
     completedAt: serverTimestamp(),
   });
   return docRef.id;
+}
+
+/**
+ * Submit per-question answer events and update the user's weakness profile.
+ * This mirrors the quiz-result honesty model: client-written data is fine for
+ * class use; a future Cloud Function on answerEvents is the upgrade path if
+ * server-side integrity becomes necessary.
+ */
+export async function submitAnswerEvents({ userId, username, mode, bankSource, results, quizResultId = null }) {
+  const validResults = (results || []).filter(
+    (result) => result?.questionId && result?.topic && typeof result.correct === 'boolean'
+  );
+
+  if (validResults.length === 0) return null;
+
+  const profileRef = doc(db, WEAKNESS_PROFILES_COLLECTION, userId);
+  const profileSnap = await getDoc(profileRef);
+  const existingProfile = profileSnap.exists() ? profileSnap.data() : { userId, username, topics: {} };
+  const answeredAt = Timestamp.fromDate(new Date());
+  const profile = updateProfile(existingProfile, validResults.map((result) => ({
+    topic: result.topic,
+    correct: result.correct,
+    answeredAt,
+  })));
+
+  const batch = writeBatch(db);
+
+  for (const result of validResults) {
+    const eventRef = doc(collection(db, ANSWER_EVENTS_COLLECTION));
+    batch.set(eventRef, {
+      userId,
+      username,
+      mode,
+      bankSource,
+      topic: result.topic,
+      group: result.group || null,
+      questionId: result.questionId,
+      correct: result.correct,
+      answeredAt: serverTimestamp(),
+      quizResultId,
+    });
+  }
+
+  batch.set(profileRef, {
+    ...profile,
+    userId,
+    username,
+    updatedAt: serverTimestamp(),
+  }, { merge: true });
+
+  await batch.commit();
+  return profile;
 }
 
 /**
