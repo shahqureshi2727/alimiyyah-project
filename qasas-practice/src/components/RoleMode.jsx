@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { roles } from '../data/bank';
+import { roles } from '../data/arabic';
 import './ModeCommon.css';
 
 function shuffleArray(array) {

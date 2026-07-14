@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { irab } from '../data/bank';
+import { irab } from '../data/arabic';
 import './ModeCommon.css';
 
 function shuffleArray(array) {
