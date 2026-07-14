@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { submitQuizResult, formatDuration } from '../lib/quiz';
+import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { irab, nounFeatures, morphology, roles, vocab } from '../data/bank';
 import { getFiqhQuestions } from '../data/fiqh';
 import { QUIZ_MODES } from '../config/subjects';

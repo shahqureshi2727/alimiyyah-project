@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserDoc } from '../lib/auth';
 import { getAllQuizResults, getWeekStart, formatRelativeTime } from '../lib/quiz';
-import { irab, nounFeatures, roles, vocab } from '../data/bank';
+import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { getFiqhQuestions } from '../data/fiqh';
 import { FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
 import './AdminPage.css';

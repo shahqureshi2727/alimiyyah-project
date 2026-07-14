@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { vocab } from '../data/bank';
+import { vocab } from '../data/arabic';
 import './ModeCommon.css';
 
 function shuffleArray(array) {

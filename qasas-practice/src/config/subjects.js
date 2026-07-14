@@ -14,6 +14,15 @@ export const QUIZ_MODES = {
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
 };
 
+// Arabic topics available for topic-first navigation. Add one entry here per
+// topic once its question bank exists in src/data/arabic/.
+export const ARABIC_TOPICS = [
+  { code: 'IRB', label: "I'rab Identification", mode: 'irab' },
+  { code: 'NF', label: 'Noun Features', mode: 'nounFeatures' },
+  { code: 'ROL', label: 'Grammatical Role', mode: 'roles' },
+  { code: 'VOC', label: 'Vocabulary', mode: 'vocab' },
+];
+
 // Fiqh topics available for topic-first navigation. Add one entry here per
 // topic once its question bank exists in src/data/fiqh/ (see
 // content/Fiqh/_Fiqh-MOC.md for the full topic list).
