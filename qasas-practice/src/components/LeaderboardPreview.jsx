@@ -14,19 +14,14 @@ const MODES = Object.entries(QUIZ_MODES).map(([id, config]) => ({
 export default function LeaderboardPreview() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [activeMode, setActiveMode] = useState('irab');
+  const [activeMode, setActiveMode] = useState(() => {
+    const lastMode = localStorage.getItem('lastQuizMode');
+    return lastMode && MODES.find((m) => m.id === lastMode) ? lastMode : 'irab';
+  });
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [userResult, setUserResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Load last played mode from localStorage
-  useEffect(() => {
-    const lastMode = localStorage.getItem('lastQuizMode');
-    if (lastMode && MODES.find((m) => m.id === lastMode)) {
-      setActiveMode(lastMode);
-    }
-  }, []);
 
   // Fetch leaderboard data
   useEffect(() => {

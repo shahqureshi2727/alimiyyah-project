@@ -10,6 +10,18 @@ export const MORPHOLOGY_CATEGORIES = [
   'prohibitive',
 ];
 
+export const MORPHOLOGY_CATEGORY_TOPICS = {
+  pastActive: 'MOR_PST_ACT',
+  pastPassive: 'MOR_PST_PAS',
+  mudariActive: 'MOR_MDR_ACT',
+  mudariPassive: 'MOR_MDR_PAS',
+  mudariNegative: 'MOR_MDR_NEG',
+  imperative: 'MOR_CMD_AMR',
+  prohibitive: 'MOR_CMD_NAH',
+};
+
+export const MORPHOLOGY_TOPIC_CODES = Object.values(MORPHOLOGY_CATEGORY_TOPICS);
+
 export const MORPHOLOGY_SCOPE_LABELS = {
   mixed: { ar: 'مُرَاجَعَة', en: 'Mixed Review' },
   past: { ar: 'مَاضِي', en: 'Past Tense' },
@@ -192,6 +204,7 @@ function makePastQuestion(verb, form, category, index) {
 
   return {
     id: `MOR-${passive ? 'PST-PAS' : 'PST-ACT'}-${String(index).padStart(3, '0')}`,
+    topic: MORPHOLOGY_CATEGORY_TOPICS[category],
     category,
     scope: 'past',
     verb: `${passive ? verb.pastPassiveStem : verb.pastActiveStem}${form.suffix}`,
@@ -216,6 +229,7 @@ function makeMudariQuestion(verb, form, category, index) {
 
   return {
     id: `MOR-${negative ? 'MDR-NEG' : passive ? 'MDR-PAS' : 'MDR-ACT'}-${String(index).padStart(3, '0')}`,
+    topic: MORPHOLOGY_CATEGORY_TOPICS[category],
     category,
     scope: 'mudari',
     verb: `${negative ? 'لَا ' : ''}${form.prefix}${stem}${form.suffix}`,
@@ -238,6 +252,7 @@ function makeCommandQuestion(verb, form, category, index) {
 
   return {
     id: `MOR-${prohibitive ? 'CMD-NAH' : 'CMD-AMR'}-${String(index).padStart(3, '0')}`,
+    topic: MORPHOLOGY_CATEGORY_TOPICS[category],
     category,
     scope: 'amrNahi',
     verb: prohibitive

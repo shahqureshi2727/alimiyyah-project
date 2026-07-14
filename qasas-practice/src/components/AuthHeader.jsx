@@ -27,6 +27,11 @@ export default function AuthHeader({ hidden = false }) {
     navigate('/admin');
   };
 
+  const handleWeakness = () => {
+    setMenuOpen(false);
+    navigate('/weakness');
+  };
+
   const handleSettings = () => {
     setMenuOpen(false);
     setSettingsOpen(true);
@@ -154,6 +159,13 @@ export default function AuthHeader({ hidden = false }) {
                     Admin
                   </button>
                 )}
+                <button
+                  className="user-menu-item"
+                  role="menuitem"
+                  onClick={handleWeakness}
+                >
+                  Strength map
+                </button>
                 <button
                   className="user-menu-item"
                   role="menuitem"

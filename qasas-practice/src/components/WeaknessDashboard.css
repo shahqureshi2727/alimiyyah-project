@@ -1,0 +1,125 @@
+.weakness-dashboard {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.weakness-state {
+  color: var(--ink-light);
+  font-family: 'Crimson Text', serif;
+  text-align: center;
+}
+
+.weakness-state.error {
+  color: #b91c1c;
+}
+
+.weakness-header {
+  margin-bottom: 1.5rem;
+}
+
+.weakness-header h1,
+.weakness-heatmap h2,
+.heatmap-section h3,
+.heatmap-group h4,
+.weakness-empty h2 {
+  font-family: 'Crimson Text', serif;
+  color: var(--ink);
+  margin: 0;
+}
+
+.weakness-header h1 {
+  font-size: 2rem;
+}
+
+.weakness-header p,
+.weakness-empty p {
+  color: var(--ink-light);
+  margin: 0.35rem 0 0;
+}
+
+.weakness-empty {
+  border: 1px solid var(--border);
+  background: var(--parchment);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.weakness-heatmap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.heatmap-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.heatmap-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.65rem;
+}
+
+.heatmap-cell {
+  min-height: 96px;
+  border: 1px solid var(--border);
+  border-left-width: 5px;
+  border-radius: 8px;
+  background: var(--cream);
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.heatmap-cell-title {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.heatmap-cell-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.65rem;
+  color: var(--ink-light);
+  font-size: 0.88rem;
+}
+
+.status-weak {
+  border-left-color: #dc2626;
+  background: #fef2f2;
+}
+
+.status-developing {
+  border-left-color: #d97706;
+  background: #fffbeb;
+}
+
+.status-strong {
+  border-left-color: #16a34a;
+  background: #f0fdf4;
+}
+
+.status-empty {
+  border-left-color: var(--border);
+  background: var(--parchment);
+}
+
+@media (max-width: 640px) {
+  .weakness-dashboard {
+    padding-inline: 0.75rem;
+  }
+
+  .heatmap-grid {
+    grid-template-columns: 1fr;
+  }
+}

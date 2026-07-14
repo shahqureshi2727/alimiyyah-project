@@ -1,13 +1,13 @@
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-13 11:46pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-14 7:32pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 13 obs (4,943t read) | 538,431t work | 99% savings
+Stats: 21 obs (8,212t read) | 710,531t work | 99% savings
 
 ### Jul 13, 2026
 516 9:42p 🔵 Graphify Session Initiated on Current Directory
@@ -25,14 +25,15 @@ Stats: 13 obs (4,943t read) | 538,431t work | 99% savings
 528 9:46p 🟣 Graphify Chunk 02 Extracted — Fiqh Quiz Section Knowledge Graph
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:49 PM)
-**Investigated**: Chunk completion status polled repeatedly; chunk_02.json confirmed written and verified present on disk alongside chunks 05–09
+### Jul 14, 2026
+529 7:30p 🟣 Arabic Questions Schema Extended with ID and Topics Fields
+530 " 🔵 Weakness Finder Feature: Full Technical Specification Read
+531 " 🔵 Superpowers Plugin Version Mismatch: 6.0.3 Missing, 6.1.1 Installed
+532 7:31p 🔵 Arabic Question Banks Already Have id and topic Fields — Except morphology.js
+533 " 🔴 validate-morphology-bank.mjs Patched to Check topic Field — Blocked on Missing Export
+534 " 🟣 morphology.js Now Exports topic Fields and MORPHOLOGY_TOPIC_CODES — Validator Passes
+535 7:32p 🔵 Build Blocked: TimedQuiz.jsx Has Duplicate Imports; Codebase Has 14 Pre-existing Lint Errors
+536 " 🔵 Runtime Verification: morphology.js topic Tagging Confirmed Correct Across All 160 Questions
 
-**Learned**: Chunk 02 was written by a subagent (not just found from a prior run) — the Write tool was called to produce it. The chunk_02.json content is identical across two separate Write calls, confirming idempotent subagent output. After writing, the ls check confirmed 6 chunks now exist: 02, 05, 06, 07, 08, 09. Chunks 01, 03, 04 remain pending.
-
-**Completed**: graphify-out/.graphify_chunk_02.json written — Fiqh quiz section knowledge graph covering design doc, 20-task implementation plan, all React components, data layer, config, backend rules, and content vault docs. Chunks 05–09 were already complete from a prior run. Total: 6 of 9 chunks done.
-
-**Next Steps**: Waiting on chunks 01, 03, 04 (PDF-heavy Fiqh source material batches) to complete extraction by their subagents. Once all 9 chunk files exist, proceed to: merge (Step B3) → build graph (Step 4) → health check (Step 4.5) → label communities (Step 5) → generate HTML (Step 6) → cleanup + report (Step 9).
-
-
-Access 538k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 711k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

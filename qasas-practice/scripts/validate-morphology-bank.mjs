@@ -5,6 +5,7 @@
 
 import {
   MORPHOLOGY_CATEGORIES,
+  MORPHOLOGY_TOPIC_CODES,
   MORPHOLOGY_SCOPES,
   getMorphologyQuestions,
 } from '../src/data/morphology.js';
@@ -18,6 +19,7 @@ function fail(msg) {
 
 const allQuestions = getMorphologyQuestions('mixed');
 const categories = new Set(MORPHOLOGY_CATEGORIES);
+const topics = new Set(MORPHOLOGY_TOPIC_CODES);
 const scopes = new Set(MORPHOLOGY_SCOPES);
 
 if (allQuestions.length < 120) {
@@ -30,6 +32,7 @@ for (const q of allQuestions) {
   seenIds.add(q.id);
 
   if (!/^MOR-[A-Z]+-[A-Z]+-\d{3}$/.test(q.id)) fail(`${q.id}: bad id format`);
+  if (!topics.has(q.topic)) fail(`${q.id}: invalid topic "${q.topic}"`);
   if (!categories.has(q.category)) fail(`${q.id}: invalid category "${q.category}"`);
   if (!scopes.has(q.scope)) fail(`${q.id}: invalid scope "${q.scope}"`);
   if (!q.verb || typeof q.verb !== 'string') fail(`${q.id}: missing verb`);

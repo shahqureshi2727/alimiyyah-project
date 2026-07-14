@@ -5,6 +5,7 @@ import { getUserDoc, signOut as authSignOut } from '../lib/auth';
 
 const AuthContext = createContext(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
