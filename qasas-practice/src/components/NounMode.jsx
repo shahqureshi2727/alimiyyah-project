@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { nounFeatures } from '../data/arabic';
+import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import './ModeCommon.css';
 
 function shuffleArray(array) {
@@ -28,6 +29,7 @@ const numberOptions = [
 ];
 
 export default function NounMode({ onBack, score, setScore }) {
+  const trackWeaknessAnswer = useWeaknessTracking();
   const questions = useMemo(() => shuffleArray(nounFeatures), []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedDef, setSelectedDef] = useState(null);
@@ -54,7 +56,10 @@ export default function NounMode({ onBack, score, setScore }) {
     setChecked(true);
     setSessionTotal((prev) => prev + 1);
 
-    if (defCorrect && genderCorrect && numberCorrect) {
+    const correct = defCorrect && genderCorrect && numberCorrect;
+    void trackWeaknessAnswer({ question: current, correct, mode: 'nounFeatures', index: currentIndex });
+
+    if (correct) {
       setScore((prev) => prev + 1);
     }
   };

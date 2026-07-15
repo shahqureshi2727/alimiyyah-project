@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { vocab } from '../data/arabic';
+import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import './ModeCommon.css';
 
 function shuffleArray(array) {
@@ -12,6 +13,7 @@ function shuffleArray(array) {
 }
 
 export default function VocabMode({ onBack, score, setScore }) {
+  const trackWeaknessAnswer = useWeaknessTracking();
   const cards = useMemo(() => shuffleArray(vocab), []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -27,6 +29,7 @@ export default function VocabMode({ onBack, score, setScore }) {
 
   const handleGrade = (knew) => {
     setSessionTotal((prev) => prev + 1);
+    void trackWeaknessAnswer({ question: current, correct: knew, mode: 'vocab', index: currentIndex });
     if (knew) {
       setScore((prev) => prev + 1);
     }

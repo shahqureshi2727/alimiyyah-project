@@ -5,14 +5,14 @@ import { submitAnswerEvents, submitQuizResult, formatDuration } from '../lib/qui
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { morphology } from '../data/morphology';
 import { getFiqhQuestions } from '../data/fiqh';
-import { ARABIC_TOPICS, FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
+import { QUIZ_MODES } from '../config/subjects';
 import { db } from '../lib/firebase';
+import { questionResultFromAnswer } from '../lib/question-results';
 import { reviewWeights } from '../lib/weakness';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import './TimedQuiz.css';
 
 const QUIZ_LENGTH = 10;
-const warnedMissingQuestionMeta = new Set();
 
 const BANKS = {
   irab,
@@ -75,20 +75,6 @@ function selectWeightedReviewQuestions(bank, profile, missedIds) {
   return selected;
 }
 
-function topicGroupFor(topicCode, mode) {
-  const fiqhTopic = FIQH_TOPICS.find((topic) => topic.code === topicCode);
-  if (fiqhTopic) return fiqhTopic.group;
-  const arabicTopic = ARABIC_TOPICS.find((topic) => topic.code === topicCode);
-  if (arabicTopic) return arabicTopic.mode;
-  return mode === 'fiqh' ? null : mode;
-}
-
-function warnMissingMetaOnce(key, message) {
-  if (warnedMissingQuestionMeta.has(key)) return;
-  warnedMissingQuestionMeta.add(key);
-  console.warn(message);
-}
-
 function currentTime() {
   return Date.now();
 }
@@ -110,32 +96,6 @@ function getQuestionTarget(mode, question) {
     default:
       return '';
   }
-}
-
-function getAnswerEventResult(question, correct, mode, index) {
-  const fallbackTopic = mode;
-  const topicCode = question?.topic || fallbackTopic;
-  const questionId = question?.id || `${mode}-${index + 1}`;
-
-  if (!question?.topic) {
-    warnMissingMetaOnce(
-      `${mode}:topic`,
-      `Question topic missing for ${mode}; falling back to "${fallbackTopic}" for weakness tracking.`
-    );
-  }
-  if (!question?.id) {
-    warnMissingMetaOnce(
-      `${mode}:id`,
-      `Question id missing for ${mode}; using a session fallback id for weakness tracking.`
-    );
-  }
-
-  return {
-    questionId,
-    topic: topicCode,
-    group: topicGroupFor(topicCode, mode),
-    correct,
-  };
 }
 
 // Shuffle array using Fisher-Yates
@@ -484,7 +444,12 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       correct: false,
       timeTaken: questionTime,
       target: targetDisplay,
-      answerEvent: getAnswerEventResult(current, false, currentMode, currentIndex),
+      answerEvent: questionResultFromAnswer({
+        question: current,
+        correct: false,
+        mode: currentMode,
+        index: currentIndex,
+      }),
     }]);
 
     setTimeout(() => advanceQuestion(), 1000);
@@ -537,7 +502,12 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       correct,
       timeTaken: questionTime,
       target: targetDisplay,
-      answerEvent: getAnswerEventResult(current, correct, currentMode, currentIndex),
+      answerEvent: questionResultFromAnswer({
+        question: current,
+        correct,
+        mode: currentMode,
+        index: currentIndex,
+      }),
     }]);
 
     setTimeout(() => advanceQuestion(), 1000);

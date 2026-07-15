@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { roles } from '../data/arabic';
+import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import './ModeCommon.css';
 
 function shuffleArray(array) {
@@ -12,6 +13,7 @@ function shuffleArray(array) {
 }
 
 export default function RoleMode({ onBack, score, setScore }) {
+  const trackWeaknessAnswer = useWeaknessTracking();
   const questions = useMemo(() => shuffleArray(roles), []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -25,7 +27,9 @@ export default function RoleMode({ onBack, score, setScore }) {
     setSelectedIndex(index);
     setAnswered(true);
     setSessionTotal((prev) => prev + 1);
-    if (index === current.answerIndex) {
+    const correct = index === current.answerIndex;
+    void trackWeaknessAnswer({ question: current, correct, mode: 'roles', index: currentIndex });
+    if (correct) {
       setScore((prev) => prev + 1);
     }
   };

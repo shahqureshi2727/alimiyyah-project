@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { irab } from '../data/arabic';
+import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import './ModeCommon.css';
 
 function shuffleArray(array) {
@@ -34,6 +35,7 @@ const choices = [
 ];
 
 export default function IrabMode({ onBack, score, setScore }) {
+  const trackWeaknessAnswer = useWeaknessTracking();
   const questions = useMemo(() => shuffleArray(irab), []);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -47,7 +49,9 @@ export default function IrabMode({ onBack, score, setScore }) {
     setSelected(choiceId);
     setAnswered(true);
     setSessionTotal((prev) => prev + 1);
-    if (choiceId === current.answer) {
+    const correct = choiceId === current.answer;
+    void trackWeaknessAnswer({ question: current, correct, mode: 'irab', index: currentIndex });
+    if (correct) {
       setScore((prev) => prev + 1);
     }
   };
