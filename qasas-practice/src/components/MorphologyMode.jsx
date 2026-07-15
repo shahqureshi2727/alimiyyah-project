@@ -3,6 +3,7 @@ import {
   MORPHOLOGY_SCOPE_LABELS,
   getMorphologyQuestions,
 } from '../data/bank';
+import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import './ModeCommon.css';
 
 const scopeCards = [
@@ -46,6 +47,7 @@ function XIcon() {
 }
 
 export default function MorphologyMode({ initialScope = null, onBack, score, setScore }) {
+  const trackWeaknessAnswer = useWeaknessTracking();
   const [scope, setScope] = useState(initialScope);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -71,7 +73,9 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
     setSelected(option);
     setAnswered(true);
     setSessionTotal((prev) => prev + 1);
-    if (option === current.answer) {
+    const correct = option === current.answer;
+    void trackWeaknessAnswer({ question: current, correct, mode: 'morphology', index: currentIndex });
+    if (correct) {
       setScore((prev) => prev + 1);
     }
   };

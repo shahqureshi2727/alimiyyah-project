@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { getFiqhQuestions } from '../data/fiqh';
+import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import './ModeCommon.css';
 
@@ -13,6 +14,7 @@ function shuffleArray(array) {
 }
 
 export default function FiqhPracticeMode({ topic, onBack, score, setScore }) {
+  const trackWeaknessAnswer = useWeaknessTracking();
   const questions = useMemo(() => shuffleArray(getFiqhQuestions(topic)), [topic]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState(null);
@@ -26,6 +28,7 @@ export default function FiqhPracticeMode({ topic, onBack, score, setScore }) {
     setCurrentAnswer(answer);
     setAnswered(true);
     setSessionTotal((prev) => prev + 1);
+    void trackWeaknessAnswer({ question: current, correct, mode: 'fiqh', index: currentIndex });
     if (correct) {
       setScore((prev) => prev + 1);
     }
