@@ -1,3 +1,4 @@
+import { useShuffledOptions } from '../hooks/useShuffledOptions';
 import './FiqhQuestionCard.css';
 
 const MADHHAB_LABELS = {
@@ -29,10 +30,11 @@ function XIcon() {
  * @param {Object} props
  * @param {Object} props.question - a question object from src/data/fiqh
  * @param {boolean} props.showFeedback - whether to reveal correct/incorrect state
- * @param {*} props.currentAnswer - the answer the learner picked (answerIndex for mcq, boolean for tf)
+ * @param {*} props.currentAnswer - the answer the learner picked (option value for mcq, boolean for tf)
  * @param {(correct: boolean, answer: *) => void} props.onAnswer - called when the learner answers
  */
 export default function FiqhQuestionCard({ question, showFeedback, currentAnswer, onAnswer }) {
+  const shuffledOptions = useShuffledOptions(question.options, question.id);
   const madhhabBadge = question.madhhab && (
     <span className="fiqh-madhhab-badge">{MADHHAB_LABELS[question.madhhab] || question.madhhab}</span>
   );
@@ -80,14 +82,16 @@ export default function FiqhQuestionCard({ question, showFeedback, currentAnswer
   }
 
   // mcq
+  const correctAnswer = question.options[question.answerIndex];
+
   return (
     <div className="fiqh-question-card">
       {madhhabBadge}
       <h2 className="fiqh-question-prompt">{question.prompt}</h2>
       <div className={`fiqh-mcq-choices ${showFeedback ? 'feedback-shown' : ''}`}>
-        {question.options.map((option, index) => {
-          const isTapped = currentAnswer === index;
-          const isCorrectAnswer = index === question.answerIndex;
+        {shuffledOptions.map((option, index) => {
+          const isTapped = currentAnswer === option;
+          const isCorrectAnswer = option === correctAnswer;
           let className = 'fiqh-choice-btn fiqh-mcq-btn';
 
           if (showFeedback) {
@@ -101,7 +105,7 @@ export default function FiqhQuestionCard({ question, showFeedback, currentAnswer
             <button
               key={index}
               className={className}
-              onClick={() => onAnswer(index === question.answerIndex, index)}
+              onClick={() => onAnswer(option === correctAnswer, option)}
               disabled={showFeedback}
             >
               {option}

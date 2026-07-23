@@ -38,6 +38,7 @@
 }
 
 .preview-mode-tab {
+  min-height: 44px;
   font-family: 'Crimson Text', serif;
   font-size: 0.85rem;
   padding: 0.4rem 0.75rem;
@@ -102,6 +103,7 @@
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
+  min-height: 44px;
   padding: 0.875rem;
   font-family: 'Crimson Text', serif;
   font-size: 0.95rem;

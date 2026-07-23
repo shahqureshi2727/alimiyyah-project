@@ -11,7 +11,7 @@
 }
 
 .weakness-state.error {
-  color: #b91c1c;
+  color: var(--status-weak);
 }
 
 .weakness-header {
@@ -95,18 +95,18 @@
 }
 
 .status-weak {
-  border-left-color: #dc2626;
-  background: #fef2f2;
+  border-left-color: var(--status-weak);
+  background: var(--status-weak-bg);
 }
 
 .status-developing {
-  border-left-color: #d97706;
-  background: #fffbeb;
+  border-left-color: var(--status-developing);
+  background: var(--status-developing-bg);
 }
 
 .status-strong {
-  border-left-color: #16a34a;
-  background: #f0fdf4;
+  border-left-color: var(--status-strong);
+  background: var(--status-strong-bg);
 }
 
 .status-empty {

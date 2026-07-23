@@ -1,64 +1,70 @@
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-14 8:04pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-23 4:35pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 46 obs (17,941t read) | 1,526,502t work | 99% savings
+Stats: 50 obs (21,215t read) | 1,340,916t work | 98% savings
 
 ### Jul 13, 2026
-516 9:42p 🔵 Graphify Session Initiated on Current Directory
-517 " 🔵 Alimiyyah Project Codebase Composition Discovered
-518 " 🔵 AST Extraction Yielded 169 Nodes and 378 Edges; 7 Config Files Produced Zero Nodes
-519 " 🔵 Alimiyyah Project Content: Fiqh Curriculum (25 Lessons) + Qasas Practice App
-520 9:44p 🔵 Graphify Semantic Extraction Queue Confirmed: 34 Docs, 24 PDFs, 5 Images
-521 " 🔵 Graphify Extraction Subagent Prompt Spec Loaded
-522 " 🔵 Graphify Chunking Strategy: Fiqh Lessons Separated from Misc Docs for Parallel Extraction
-523 " 🟣 Graphify Launched 9-Chunk Parallel Semantic Extraction via Async Subagents
-524 9:45p 🔵 Ilm Arena: Two-Layer Content Model and Obsidian Vault Conventions
-525 " 🔵 Qasas Practice App: Architecture, Firebase Setup, Admin Pattern, and UI Patch History
-526 " 🔵 Fiqh Quiz Section: 20-Task Implementation Plan for Wudhu Question Bank
-527 " 🟣 Third Graphify Subagent Launched: Fiqh PDFs 01-12 (Chunk 3 of 9)
-528 9:46p 🟣 Graphify Chunk 02 Extracted — Fiqh Quiz Section Knowledge Graph
+S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
-S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:49 PM)
 ### Jul 14, 2026
-529 7:30p 🟣 Arabic Questions Schema Extended with ID and Topics Fields
-530 " 🔵 Weakness Finder Feature: Full Technical Specification Read
-531 " 🔵 Superpowers Plugin Version Mismatch: 6.0.3 Missing, 6.1.1 Installed
-532 7:31p 🔵 Arabic Question Banks Already Have id and topic Fields — Except morphology.js
-533 " 🔴 validate-morphology-bank.mjs Patched to Check topic Field — Blocked on Missing Export
-534 " 🟣 morphology.js Now Exports topic Fields and MORPHOLOGY_TOPIC_CODES — Validator Passes
-535 7:32p 🔵 Build Blocked: TimedQuiz.jsx Has Duplicate Imports; Codebase Has 14 Pre-existing Lint Errors
-536 " 🔵 Runtime Verification: morphology.js topic Tagging Confirmed Correct Across All 160 Questions
-537 7:33p 🔵 Weakness Finder Implementation Plan Exists in Both qasas-practice/docs/ and docs/superpowers/plans/
-538 " ✅ Feature Branch codex/weakness-finder Created from main
-539 " 🔴 TimedQuiz.jsx Build-Blocking Duplicate Import — Confirmed
-540 " 🔴 Data Layer Architecture: bank.js vs arabic/index.js
-542 7:35p ✅ Weakness Scoring Core Implemented: config/weakness.js + lib/weakness.js + Tests
-543 " ✅ quiz.js Extended with submitAnswerEvents() — Batch Write to answerEvents + weaknessProfiles
-547 7:36p ✅ TimedQuiz.jsx — Build-Blocking Duplicate Import Fixed + Answer Event Pipeline Wired
-549 7:37p ✅ WeaknessDashboard.jsx + CSS Created — Student Heatmap Component
-550 " ✅ App.jsx, AuthHeader.jsx, HomeScreen.jsx — /weakness Route + Navigation Entry Points Added
-551 " 🔴 Implementation Plan Progress: Steps 1–4 Complete, Step 5 In Progress
-552 " ✅ Step 5 Complete — Review Quiz Builder Added to TimedQuiz + subjects.js
-554 " ✅ Step 5 Complete — Review Quiz Entry Points Added to QuizPicker and App.jsx Routing
-555 " 🔴 AdminPage Has Two Tabs (bank, stats) — Needs Third 'weakness' Tab for Step 6
-556 7:39p ✅ AdminPage.jsx: Third 'Weakness' Tab Added with AdminWeaknessView and Two Pre-Existing Lint Errors Fixed
 557 7:43p ✅ firestore.rules + AdminPage.css Updated — Step 6 Fully Complete
-558 " 🔴 Step 7 Lint Run Found 20 Errors Across 6 Files Before Any Fixes
-559 " ✅ TimedQuiz.jsx Refactored to Fix All 10 Lint Errors — Structural Changes Applied
-560 " ✅ Batch Lint Fixes Applied to 5 Pre-Existing Error Files
-561 " ✅ All 7 Steps Complete — npm run lint (exit 0), npm run build (exit 0), npm test (5/5 passing), Both Bank Validators OK
 562 7:46p 🔵 firestore.rules Final State Verified — All 4 Collections Secured
 563 " 🔵 answerEvents Query Uses Two Equality Filters — No Composite Index in firestore.indexes.json
 564 " 🔵 qasas-practice Tech Stack — React 19, Firebase 12, Vite 8, vitest 4 (ESM)
 565 7:47p ✅ firestore.indexes.json Extended with Two Per-User quizResults Composite Indexes
 566 " 🔵 Git Status Shows Only 2 Unstaged Files — Majority of Weakness Finder Changes Were Committed
 567 7:48p 🔵 Firebase Deploy Blocked — No Auth Credentials in Codex Environment
+568 8:04p ⚖️ New Requirement: Extend Weakness Tracking to All Quiz Modes, Not Just TimedQuiz
+569 8:05p 🔴 All Five Non-Timed Quiz Components Identified and Analyzed
+570 " 🔴 Implementation Pattern for Per-Answer Tracking in Infinite Practice Modes
+571 8:09p 🔴 Weakness Tracking Extended to All Quiz Modes — Clean Implementation Complete
+572 " ⚖️ Pending: Commit Weakness-Tracking Changes Then Push Branch
+### Jul 23, 2026
+651 3:49p 🔵 Quiz System: Correct Answer Always First Option Bug Identified
+652 3:50p 🔵 Quiz System: 9 Components Contain Multiple-Choice / Correct-Answer Logic
+653 " 🔵 Confirmed: `answerIndex`-Based Correctness Bug in FiqhQuestionCard and TimedQuiz; `shuffleArray` Duplicated 7 Times
+654 3:52p 🔵 Fiqh Data Bank: Vast Majority of MCQ Questions Have `answerIndex: 0`
+655 " 🔵 MorphologyMode Is Correct; FiqhQuestionCard and TimedQuiz Morphology Path Are the Only Broken Sites
+656 3:53p 🔵 RoleMode Uses `answerIndex` Correctly; AdminPage Display Uses It Safely; No Hardcoded `options[0]` Patterns Anywhere
+657 " 🔵 TimedQuiz Morphology Path: Options Shuffled But Correctness Still Checked By Original Index — Live Bug Confirmed
+658 3:54p 🔵 Correction: TimedQuiz Morphology Path Is Value-Based and Correct — Only FiqhQuestionCard MCQ Is Buggy
+659 " 🔵 Project Uses `eslint-plugin-react-hooks` with `exhaustive-deps` — Fix Must Declare `useMemo` Dependencies Correctly
+660 3:55p 🔵 Pre-Fix Baseline: Lint Passes Clean; `src/hooks/` Contains Only `useWeaknessTracking.js`
+661 " 🔵 Test Files Exist Only in `src/lib/` — No Component or Hook Tests Present
+662 " 🔵 Test Setup: Vitest 4.x with No jsdom or Testing Library — Hook Tests Must Target Pure Functions
+663 " 🔵 TimedQuiz Architecture: `shuffleMorphologyOptions` Applied at Question Selection Time, Not Render Time; Fiqh MCQ Bug Also Affects Review Mode
+664 " 🔵 TimedQuiz Question Preparation: Morphology Options Shuffled Once at Mount; Fiqh MCQ Options Pass Through Unmodified
+665 " 🔵 No Biased `array.sort(() => Math.random())` Shuffle Exists Anywhere in the Codebase
+666 3:56p 🔵 Complete `src/lib/` and `src/hooks/` Directory Contents Confirmed Before Implementation
+667 " 🟣 Created `src/lib/shuffle.test.js` with Three Fisher-Yates Correctness Tests
+668 3:57p 🟣 TDD Red Phase Confirmed: `shuffle.test.js` Fails with "Cannot find module './shuffle'"
+669 " 🟣 Created `src/lib/shuffle.js` and `src/hooks/useShuffledOptions.js` — Shared Shuffle Infrastructure Now Exists
+670 3:58p 🔴 FiqhQuestionCard: `useShuffledOptions` Hook Wired In — MCQ Options Now Shuffle Per Question
+671 " 🔴 FiqhQuestionCard MCQ Bug Fixed: Options Now Shuffled and Correctness Determined by Value
+672 " 🔄 Deduplication Started: Local `shuffleArray` Removed from `FiqhPracticeMode.jsx`, Replaced with Shared Import
+673 " 🔄 Local `shuffleArray` Removed from `IrabMode.jsx` and `NounMode.jsx` — Shared Import Added
+674 3:59p 🔄 Local `shuffleArray` Removed from `RoleMode.jsx` and `VocabMode.jsx` — 6 of 7 Duplicates Now Eliminated
+675 " 🔵 MorphologyMode Has a Broken `shuffleOptions` Reference After Refactor — Immediate Follow-up Edit Required
+676 " 🔄 MorphologyMode Fully Refactored: Local Shuffle Removed, `useShuffledOptions` Wired In, Render Updated
+677 4:00p 🔴 TimedQuiz.jsx: Local `shuffleArray` Deleted, Shared Import Added — `shuffleMorphologyOptions` Retained and Now Uses Shared Implementation
+S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
+680 4:04p ⚖️ UI Bug Fix Plan: Dark Mode Contrast + Button Spacing
+681 " 🔵 alimiyyah-project: No Tailwind Config Found; Component-Scoped CSS Architecture
+682 " 🔵 No Dark Mode Implemented at All in qasas-practice
+683 " 🔵 Pre-existing Uncommitted Work: Shuffle Utilities and Quiz Mode Refactors
+684 4:05p 🔵 Dark Mode Strategy: data-theme Attribute on :root via SettingsContext
+685 " 🔵 Dark Mode Contrast Bug: Hardcoded Light Hex Colors in Component CSS Files
+686 " 🔵 Button Spacing Bug: Timed Quizzes and Strength Map Cards Have No Gap
+687 " 🔵 WeaknessTracking Already Integrated Across All Quiz Mode Components
+688 4:06p 🔵 Complete Hardcoded Color Audit: Full Line-by-Line Findings Across All CSS Files
+689 " 🔵 Touch Target Audit: All Interactive Controls Meet 44px Minimum
+690 4:09p 🔴 Both UI Bugs Fully Fixed: All Tests Pass, Build Clean
 
-Access 1527k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1341k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

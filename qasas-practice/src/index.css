@@ -17,8 +17,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Crimson Text', Georgia, serif;
-  background-color: #faf7f2;
-  color: #2c2416;
+  background-color: var(--parchment, #faf7f2);
+  color: var(--text-primary, #2c2416);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,17 +1,9 @@
 import { useState, useMemo } from 'react';
 import { getFiqhQuestions } from '../data/fiqh';
 import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
+import { shuffleArray } from '../lib/shuffle';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import './ModeCommon.css';
-
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
 
 export default function FiqhPracticeMode({ topic, onBack, score, setScore }) {
   const trackWeaknessAnswer = useWeaknessTracking();

@@ -19,6 +19,38 @@
                          request.resource.data.username.size() <= 20;                                                                                                                                    
                                                                                                                                                                                                          
         allow update, delete: if false;                                                                                                                                                                  
+
+        match /topicStats/{statId} {
+          allow read: if request.auth != null &&
+                        (request.auth.uid == userId || isAdmin());
+
+          allow create, update: if request.auth != null &&
+                                 request.auth.uid == userId &&
+                                 request.resource.data.keys().hasOnly([
+                                   "userId",
+                                   "category",
+                                   "subtopic",
+                                   "attempts",
+                                   "correct",
+                                   "lastAttempted",
+                                   "ewmaScore"
+                                 ]) &&
+                                 request.resource.data.userId == userId &&
+                                 request.resource.data.category in ["fiqh", "hadith", "arabic", "tafsir"] &&
+                                 request.resource.data.subtopic is string &&
+                                 statId == request.resource.data.category + "_" + request.resource.data.subtopic &&
+                                 request.resource.data.attempts is int &&
+                                 request.resource.data.attempts >= 1 &&
+                                 request.resource.data.correct is int &&
+                                 request.resource.data.correct >= 0 &&
+                                 request.resource.data.correct <= request.resource.data.attempts &&
+                                 request.resource.data.ewmaScore is number &&
+                                 request.resource.data.ewmaScore >= 0 &&
+                                 request.resource.data.ewmaScore <= 1 &&
+                                 request.resource.data.lastAttempted == request.time;
+
+          allow delete: if false;
+        }
       }                                                                                                                                                                                                  
                                                                                                                                                                                                          
       // --- Quiz results ---                                                                                                                                                                            

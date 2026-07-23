@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
-import { db } from '../lib/firebase';
 import { ARABIC_TOPICS, FIQH_GROUPS, FIQH_TOPICS } from '../config/subjects';
+import { getUserTopicProfile } from '../lib/topic-stats-firestore';
 import './WeaknessDashboard.css';
 
 const STATUS_LABELS = {
@@ -83,8 +82,7 @@ export default function WeaknessDashboard() {
     async function fetchProfile() {
       if (!user) return;
       try {
-        const snapshot = await getDoc(doc(db, 'weaknessProfiles', user.uid));
-        setProfile(snapshot.exists() ? snapshot.data() : { topics: {} });
+        setProfile(await getUserTopicProfile(user.uid));
       } catch (err) {
         console.error('Error loading weakness profile:', err);
         setError('Could not load weakness data.');
@@ -114,4 +112,3 @@ export default function WeaknessDashboard() {
     </main>
   );
 }
-

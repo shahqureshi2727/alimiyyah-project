@@ -11,6 +11,9 @@
   --cream: #f5f0e6;
   --ink: #2c2416;
   --ink-light: #5c5347;
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-light);
+  --text-muted: var(--ink-light);
 
   /* Accent - deep teal, like Islamic geometric patterns */
   --accent: #1a6b6d;
@@ -25,6 +28,25 @@
   --success-bg: rgba(34, 134, 58, 0.1);
   --error: #dc2626;
   --error-bg: rgba(220, 38, 38, 0.1);
+  --warning: #9a4d08;
+  --warning-bg: rgba(180, 83, 9, 0.1);
+  --fiqh-badge-bg: #f0e6d2;
+  --fiqh-badge-text: #7a5c1e;
+  --fiqh-explanation-bg: #f6f3ea;
+  --fiqh-explanation-text: #4a4030;
+  --status-weak: #b91c1c;
+  --status-weak-bg: #fef2f2;
+  --status-developing: #b45309;
+  --status-developing-bg: #fffbeb;
+  --status-strong: #166534;
+  --status-strong-bg: #f0fdf4;
+  --rank-gold: #9f7416;
+  --rank-silver: #737373;
+  --rank-bronze: #a05a2c;
+  --tag-purple: #6d28d9;
+  --tag-pink: #be185d;
+  --tag-teal: #0f766e;
+  --tag-blue: #2563eb;
 
   /* Typography */
   --arabic-font: 'Amiri', serif;
@@ -36,6 +58,9 @@
   --cream: #242118;
   --ink: #f3eadb;
   --ink-light: #c8bca9;
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-light);
+  --text-muted: var(--ink-light);
   --accent: #63b3b5;
   --accent-dark: #8bd0d1;
   --accent-light: rgba(99, 179, 181, 0.16);
@@ -44,6 +69,25 @@
   --success-bg: rgba(127, 189, 122, 0.16);
   --error: #f08a84;
   --error-bg: rgba(240, 138, 132, 0.16);
+  --warning: #f7c56d;
+  --warning-bg: rgba(247, 197, 109, 0.16);
+  --fiqh-badge-bg: rgba(247, 197, 109, 0.14);
+  --fiqh-badge-text: #f7d08a;
+  --fiqh-explanation-bg: rgba(245, 240, 230, 0.07);
+  --fiqh-explanation-text: var(--text-secondary);
+  --status-weak: #f08a84;
+  --status-weak-bg: rgba(240, 138, 132, 0.15);
+  --status-developing: #f7c56d;
+  --status-developing-bg: rgba(247, 197, 109, 0.14);
+  --status-strong: #93d58d;
+  --status-strong-bg: rgba(147, 213, 141, 0.14);
+  --rank-gold: #f5d36f;
+  --rank-silver: #d6d2c8;
+  --rank-bronze: #e0a172;
+  --tag-purple: #c4a2ff;
+  --tag-pink: #f4a0c9;
+  --tag-teal: #70ddd4;
+  --tag-blue: #9fc3ff;
   color-scheme: dark;
 }
 
@@ -53,6 +97,9 @@
     --cream: #242118;
     --ink: #f3eadb;
     --ink-light: #c8bca9;
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-light);
+    --text-muted: var(--ink-light);
     --accent: #63b3b5;
     --accent-dark: #8bd0d1;
     --accent-light: rgba(99, 179, 181, 0.16);
@@ -61,6 +108,25 @@
     --success-bg: rgba(127, 189, 122, 0.16);
     --error: #f08a84;
     --error-bg: rgba(240, 138, 132, 0.16);
+    --warning: #f7c56d;
+    --warning-bg: rgba(247, 197, 109, 0.16);
+    --fiqh-badge-bg: rgba(247, 197, 109, 0.14);
+    --fiqh-badge-text: #f7d08a;
+    --fiqh-explanation-bg: rgba(245, 240, 230, 0.07);
+    --fiqh-explanation-text: var(--text-secondary);
+    --status-weak: #f08a84;
+    --status-weak-bg: rgba(240, 138, 132, 0.15);
+    --status-developing: #f7c56d;
+    --status-developing-bg: rgba(247, 197, 109, 0.14);
+    --status-strong: #93d58d;
+    --status-strong-bg: rgba(147, 213, 141, 0.14);
+    --rank-gold: #f5d36f;
+    --rank-silver: #d6d2c8;
+    --rank-bronze: #e0a172;
+    --tag-purple: #c4a2ff;
+    --tag-pink: #f4a0c9;
+    --tag-teal: #70ddd4;
+    --tag-blue: #9fc3ff;
     color-scheme: dark;
   }
 }
@@ -86,7 +152,7 @@ html {
 body {
   font-family: 'Crimson Text', Georgia, serif;
   background-color: var(--parchment);
-  color: var(--ink);
+  color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
