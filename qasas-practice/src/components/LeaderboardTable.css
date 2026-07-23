@@ -76,17 +76,17 @@
 
 /* Top 3 special styling */
 .leaderboard-table tbody tr:nth-child(1) .col-rank {
-  color: #d4af37;
+  color: var(--rank-gold);
   font-weight: 700;
 }
 
 .leaderboard-table tbody tr:nth-child(2) .col-rank {
-  color: #a8a8a8;
+  color: var(--rank-silver);
   font-weight: 700;
 }
 
 .leaderboard-table tbody tr:nth-child(3) .col-rank {
-  color: #cd7f32;
+  color: var(--rank-bronze);
   font-weight: 700;
 }
 

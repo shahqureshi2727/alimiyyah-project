@@ -195,45 +195,47 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
       {/* Quizzes section */}
       <section className="home-section">
         <h3 className="section-title">Quizzes</h3>
-        <button className="quiz-entry-card" onClick={onSelectQuiz}>
-          <div className="quiz-entry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          </div>
-          <div className="quiz-entry-content">
-            <span className="quiz-entry-title">Timed Quizzes</span>
-            <span className="quiz-entry-desc">
-              10 questions per round with a countdown timer
-            </span>
-          </div>
-          <div className="quiz-entry-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </div>
-        </button>
-        <button className="quiz-entry-card strength-card" onClick={() => navigate('/weakness')}>
-          <div className="quiz-entry-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="11" width="4" height="9" />
-              <rect x="10" y="5" width="4" height="15" />
-              <rect x="17" y="8" width="4" height="12" />
-            </svg>
-          </div>
-          <div className="quiz-entry-content">
-            <span className="quiz-entry-title">Strength Map</span>
-            <span className="quiz-entry-desc">
-              See weak, developing, and strong topics
-            </span>
-          </div>
-          <div className="quiz-entry-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </div>
-        </button>
+        <div className="quiz-entry-list">
+          <button className="quiz-entry-card" onClick={onSelectQuiz}>
+            <div className="quiz-entry-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div className="quiz-entry-content">
+              <span className="quiz-entry-title">Timed Quizzes</span>
+              <span className="quiz-entry-desc">
+                10 questions per round with a countdown timer
+              </span>
+            </div>
+            <div className="quiz-entry-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+          <button className="quiz-entry-card strength-card" onClick={() => navigate('/weakness')}>
+            <div className="quiz-entry-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="11" width="4" height="9" />
+                <rect x="10" y="5" width="4" height="15" />
+                <rect x="17" y="8" width="4" height="12" />
+              </svg>
+            </div>
+            <div className="quiz-entry-content">
+              <span className="quiz-entry-title">Strength Map</span>
+              <span className="quiz-entry-desc">
+                See weak, developing, and strong topics
+              </span>
+            </div>
+            <div className="quiz-entry-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </div>
+          </button>
+        </div>
       </section>
 
       {/* Leaderboard preview section */}

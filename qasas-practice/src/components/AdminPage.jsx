@@ -6,11 +6,10 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserDoc } from '../lib/auth';
 import { getAllQuizResults, getWeekStart, formatRelativeTime } from '../lib/quiz';
-import { db } from '../lib/firebase';
+import { getAllTopicStatsProfiles } from '../lib/topic-stats-firestore';
 import { statusFor } from '../lib/weakness';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { getFiqhQuestions } from '../data/fiqh';
@@ -617,11 +616,7 @@ function AdminWeaknessView() {
   useEffect(() => {
     async function fetchProfiles() {
       try {
-        const snapshot = await getDocs(collection(db, 'weaknessProfiles'));
-        const rows = snapshot.docs.map((profileDoc) => ({
-          id: profileDoc.id,
-          ...profileDoc.data(),
-        }));
+        const rows = await getAllTopicStatsProfiles();
         setProfiles(rows);
         setSelectedUserId(rows[0]?.userId || rows[0]?.id || null);
       } catch (err) {

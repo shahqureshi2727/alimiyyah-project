@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { submitAnswerEvents, submitQuizResult, formatDuration } from '../lib/quiz';
+import { getUserTopicProfile } from '../lib/topic-stats-firestore';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { morphology } from '../data/morphology';
 import { getFiqhQuestions } from '../data/fiqh';
@@ -9,6 +10,7 @@ import { QUIZ_MODES } from '../config/subjects';
 import { db } from '../lib/firebase';
 import { questionResultFromAnswer } from '../lib/question-results';
 import { reviewWeights } from '../lib/weakness';
+import { shuffleArray } from '../lib/shuffle';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import './TimedQuiz.css';
 
@@ -96,16 +98,6 @@ function getQuestionTarget(mode, question) {
     default:
       return '';
   }
-}
-
-// Shuffle array using Fisher-Yates
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
 }
 
 // Select 10 unique questions, with wraparound if bank is too small
@@ -330,8 +322,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       let selected;
 
       if (mode === 'review' && user) {
-        const profileSnap = await getDoc(doc(db, 'weaknessProfiles', user.uid));
-        const profile = profileSnap.exists() ? profileSnap.data() : { topics: {} };
+        const profile = await getUserTopicProfile(user.uid);
         const wrongSnap = await getDocs(query(
           collection(db, 'answerEvents'),
           where('userId', '==', user.uid),

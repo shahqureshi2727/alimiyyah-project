@@ -4,6 +4,8 @@ import {
   getMorphologyQuestions,
 } from '../data/bank';
 import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
+import { useShuffledOptions } from '../hooks/useShuffledOptions';
+import { shuffleArray } from '../lib/shuffle';
 import './ModeCommon.css';
 
 const scopeCards = [
@@ -12,22 +14,6 @@ const scopeCards = [
   { id: 'mudari', description: 'Active, passive, and negative mudari forms' },
   { id: 'amrNahi', description: 'Second-person command forms' },
 ];
-
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
-function shuffleOptions(question) {
-  return {
-    ...question,
-    options: shuffleArray(question.options),
-  };
-}
 
 function CheckIcon() {
   return (
@@ -55,11 +41,12 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
   const [sessionTotal, setSessionTotal] = useState(0);
 
   const questions = useMemo(
-    () => (scope ? shuffleArray(getMorphologyQuestions(scope)).map(shuffleOptions) : []),
+    () => (scope ? shuffleArray(getMorphologyQuestions(scope)) : []),
     [scope]
   );
 
   const current = questions[currentIndex];
+  const shuffledOptions = useShuffledOptions(current?.options, current?.id);
 
   const handleScopeSelect = (nextScope) => {
     setScope(nextScope);
@@ -156,7 +143,7 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
         </div>
 
         <div className="choices morphology-choices">
-          {current.options.map((option) => {
+          {shuffledOptions.map((option) => {
             let className = 'choice-btn morphology-choice-btn';
             if (answered) {
               if (option === current.answer) {

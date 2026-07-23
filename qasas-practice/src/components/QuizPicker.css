@@ -29,6 +29,7 @@
 }
 
 .back-btn {
+  min-height: 44px;
   font-family: 'Crimson Text', serif;
   font-size: 1rem;
   color: var(--ink);
@@ -99,6 +100,7 @@
 }
 
 .quiz-start-btn {
+  min-height: 44px;
   font-family: 'Crimson Text', serif;
   font-size: 1rem;
   font-weight: 500;
