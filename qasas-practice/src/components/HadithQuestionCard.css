@@ -39,11 +39,12 @@
   border-radius: 8px;
   background: var(--cream);
   color: var(--text-primary);
-  font-family: 'Amiri', serif;
+  font-family: var(--arabic-font);
   font-size: 1.55rem;
   line-height: 2.1;
   text-align: center;
   white-space: pre-line;
+  text-wrap: balance;
 }
 
 .hadith-mcq-choices {

@@ -30,6 +30,15 @@ describe('hadith question bank', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
+  it('uses clean Unicode Arabic instead of PDF extraction artifacts', () => {
+    const extractionArtifacts = /[\u202a-\u202e\ufb50-\ufdff\ufe70-\ufeff]/;
+
+    for (const question of hadithQuestions) {
+      expect(question.arabicText).not.toMatch(extractionArtifacts);
+      expect(question.arabicText).not.toMatch(/\s{2,}/);
+    }
+  });
+
   it('has visible topic metadata for every question topic', () => {
     const topicCodes = new Set(HADITH_TOPICS.map((topic) => topic.code));
 

@@ -1,27 +1,19 @@
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-23 5:33pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-23 6:00pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (22,815t read) | 1,690,603t work | 99% savings
+Stats: 50 obs (24,253t read) | 2,053,363t work | 99% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 ### Jul 23, 2026
-663 3:55p 🔵 TimedQuiz Architecture: `shuffleMorphologyOptions` Applied at Question Selection Time, Not Render Time; Fiqh MCQ Bug Also Affects Review Mode
-664 " 🔵 TimedQuiz Question Preparation: Morphology Options Shuffled Once at Mount; Fiqh MCQ Options Pass Through Unmodified
-665 " 🔵 No Biased `array.sort(() => Math.random())` Shuffle Exists Anywhere in the Codebase
-666 3:56p 🔵 Complete `src/lib/` and `src/hooks/` Directory Contents Confirmed Before Implementation
-667 " 🟣 Created `src/lib/shuffle.test.js` with Three Fisher-Yates Correctness Tests
-668 3:57p 🟣 TDD Red Phase Confirmed: `shuffle.test.js` Fails with "Cannot find module './shuffle'"
-669 " 🟣 Created `src/lib/shuffle.js` and `src/hooks/useShuffledOptions.js` — Shared Shuffle Infrastructure Now Exists
-670 3:58p 🔴 FiqhQuestionCard: `useShuffledOptions` Hook Wired In — MCQ Options Now Shuffle Per Question
-671 " 🔴 FiqhQuestionCard MCQ Bug Fixed: Options Now Shuffled and Correctness Determined by Value
+671 3:58p 🔴 FiqhQuestionCard MCQ Bug Fixed: Options Now Shuffled and Correctness Determined by Value
 672 " 🔄 Deduplication Started: Local `shuffleArray` Removed from `FiqhPracticeMode.jsx`, Replaced with Shared Import
 673 " 🔄 Local `shuffleArray` Removed from `IrabMode.jsx` and `NounMode.jsx` — Shared Import Added
 674 3:59p 🔄 Local `shuffleArray` Removed from `RoleMode.jsx` and `VocabMode.jsx` — 6 of 7 Duplicates Now Eliminated
@@ -64,6 +56,14 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 714 5:31p 🔵 Hadith PDF Page Count Inventory — Higher Page Counts Signal Multi-Hadith Files
 716 " 🟣 Hadith Content Layer Bootstrapped: 195 Source Records Extracted Across 25 Decks
 717 5:32p 🔵 Hadith Content Layer Validated and Untracked — Arabic RTL Text Preserved in CSV
+718 5:33p 🔵 Existing Implementation Plan and App Architecture Mapped for Hadith Section Integration
+719 5:34p 🔵 TimedQuiz, FiqhQuestionCard, and WeaknessTracking Architecture Fully Mapped for Hadith Integration
+720 5:35p 🔵 topic-stats.js Already Anticipates 'hadith' Category; WeaknessDashboard and HomeScreen Need Manual Hadith Wiring
+721 " 🔵 All Fiqh MCQ Data Files Hardcode answerIndex: 0 — FiqhQuestionCard Handles Shuffle Internally
+722 5:37p 🔵 Hadith Data Layer and Core Library Wiring Complete — 37 Questions, All 8 Tests Green
+729 5:42p 🔵 Arabic Font Rendering Issues Reported in Indo-Pak and Madani Script Sections
+730 5:53p 🔵 Primary Session Pivoting to Arabic Script UI Bug — Systematic Debugging Approach Loading
+731 " 🔵 Arabic Script System Architecture Discovered — Two Script Modes via CSS Data Attribute
 
-Access 1691k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 2053k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

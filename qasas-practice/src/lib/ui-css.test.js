@@ -113,6 +113,7 @@ describe('theme CSS', () => {
       'components/Leaderboard.css': ['.back-btn', '.mode-tab', '.time-btn'],
       'components/LeaderboardPreview.css': ['.preview-mode-tab', '.preview-view-full'],
       'components/FiqhQuestionCard.css': ['.fiqh-choice-btn'],
+      'components/HadithQuestionCard.css': ['.hadith-choice-btn'],
     };
 
     for (const [file, selectors] of Object.entries(selectorsByFile)) {
@@ -124,5 +125,11 @@ describe('theme CSS', () => {
         ).toMatch(/min-height:\s*44px/);
       }
     }
+  });
+
+  test('Hadith Arabic text uses the shared script font variable', () => {
+    expect(rulesForSelector(css('components/HadithQuestionCard.css'), '.hadith-arabic-text')).toMatch(
+      /font-family:\s*var\(--arabic-font\)/
+    );
   });
 });

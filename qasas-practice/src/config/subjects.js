@@ -77,3 +77,44 @@ export const HADITH_TOPICS = [
     description: 'Arabic hadith text with English translation recall',
   },
 ];
+
+// Tafsir topics available for verse-by-verse recall and translation MCQs.
+// Source records are extracted under content/Tafsir/.
+export const TAFSIR_TOPICS = [
+  {
+    code: 'ASR',
+    label: 'Surah Al-Asr',
+    titleAr: 'سُورَةُ العَصْر',
+    description: 'Verse-by-verse translation and tafsir notes',
+  },
+  {
+    code: 'FIL',
+    label: 'Surah Al-Fil',
+    titleAr: 'سُورَةُ الفِيل',
+    description: 'Verse-by-verse translation and tafsir notes',
+  },
+  {
+    code: 'QUR',
+    label: 'Surah Quraysh',
+    titleAr: 'سُورَةُ قُرَيْش',
+    description: 'Verse-by-verse translation and tafsir notes',
+  },
+  {
+    code: 'MAU',
+    label: "Surah Al-Ma'un",
+    titleAr: 'سُورَةُ المَاعُون',
+    description: 'Verse-by-verse translation and tafsir notes',
+  },
+  {
+    code: 'KAW',
+    label: 'Surah Al-Kawthar',
+    titleAr: 'سُورَةُ الكَوْثَر',
+    description: 'Verse-by-verse translation and tafsir notes',
+  },
+  {
+    code: 'KAF',
+    label: 'Surah Al-Kafirun',
+    titleAr: 'سُورَةُ الكَافِرُون',
+    description: 'Verse-by-verse translation and tafsir notes',
+  },
+];
