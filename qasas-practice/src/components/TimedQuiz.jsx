@@ -7,6 +7,7 @@ import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { morphology } from '../data/morphology';
 import { getFiqhQuestions } from '../data/fiqh';
 import { getHadithQuestions } from '../data/hadith';
+import { getTafsirQuestions } from '../data/tafsir';
 import { QUIZ_MODES } from '../config/subjects';
 import { db } from '../lib/firebase';
 import { questionResultFromAnswer } from '../lib/question-results';
@@ -14,6 +15,7 @@ import { reviewWeights } from '../lib/weakness';
 import { shuffleArray } from '../lib/shuffle';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import HadithQuestionCard from './HadithQuestionCard';
+import TafsirQuestionCard from './TafsirQuestionCard';
 import './TimedQuiz.css';
 
 const QUIZ_LENGTH = 10;
@@ -28,6 +30,7 @@ const BANKS = {
   // topic, so it's resolved dynamically in getBank() below instead of a
   // static import.
   // 'hadith' follows the same topic-scoped pattern.
+  // 'tafsir' follows the same topic-scoped pattern.
 };
 
 const REVIEW_BANKS = [
@@ -38,11 +41,13 @@ const REVIEW_BANKS = [
   ...morphology.map((question) => ({ ...question, reviewMode: 'morphology' })),
   ...getFiqhQuestions('all').map((question) => ({ ...question, reviewMode: 'fiqh' })),
   ...getHadithQuestions('all').map((question) => ({ ...question, reviewMode: 'hadith' })),
+  ...getTafsirQuestions('all').map((question) => ({ ...question, reviewMode: 'tafsir' })),
 ];
 
 function getBank(mode, topic) {
   if (mode === 'fiqh') return getFiqhQuestions(topic || 'all');
   if (mode === 'hadith') return getHadithQuestions(topic || 'all');
+  if (mode === 'tafsir') return getTafsirQuestions(topic || 'all');
   if (mode === 'review') return REVIEW_BANKS;
   return BANKS[mode];
 }
@@ -101,6 +106,8 @@ function getQuestionTarget(mode, question) {
     case 'fiqh':
       return question.prompt;
     case 'hadith':
+      return question.arabicText;
+    case 'tafsir':
       return question.arabicText;
     default:
       return '';
@@ -892,6 +899,16 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       case 'hadith':
         return (
           <HadithQuestionCard
+            question={current}
+            showFeedback={showFeedback}
+            currentAnswer={currentAnswer}
+            onAnswer={handleAnswer}
+          />
+        );
+
+      case 'tafsir':
+        return (
+          <TafsirQuestionCard
             question={current}
             showFeedback={showFeedback}
             currentAnswer={currentAnswer}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
 import { FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
+import { getTafsirSurahOptions } from '../data/tafsir';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
@@ -54,6 +55,7 @@ const MODE_LABELS = {
   morphology: 'Morphology',
   fiqh: 'Fiqh',
   hadith: 'Hadith',
+  tafsir: 'Tafsir',
 };
 
 export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
@@ -62,6 +64,8 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   const [recentResults, setRecentResults] = useState([]);
   const [loadingResults, setLoadingResults] = useState(true);
   const [subject, setSubject] = useState(null);
+  const [selectedTafsirSurah, setSelectedTafsirSurah] = useState('');
+  const tafsirSurahOptions = getTafsirSurahOptions();
 
   useEffect(() => {
     async function fetchRecentResults() {
@@ -110,6 +114,11 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
           <span className="mode-title-ar">الحَدِيث</span>
           <span className="mode-title-en">Hadith Questions</span>
           <span className="mode-desc">Match Arabic hadith texts to their translations</span>
+        </button>
+        <button className="subject-card" onClick={() => setSubject('tafsir')}>
+          <span className="mode-title-ar">التَّفْسِير</span>
+          <span className="mode-title-en">Tafsir Questions</span>
+          <span className="mode-desc">Translate short surahs ayah by ayah</span>
         </button>
       </div>
     </section>
@@ -221,6 +230,55 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
     </>
   );
 
+  const renderTafsirSubject = () => (
+    <>
+      <section className="home-section">
+        <button className="back-btn subject-back" onClick={() => setSubject(null)}>
+          Back
+        </button>
+        <h3 className="section-title">Tafsir Questions</h3>
+        {renderCard(
+          {
+            id: 'tafsir-all',
+            titleAr: 'مُرَاجَعَة',
+            titleEn: 'Mixed Review',
+            description: 'Arabic ayat with English translation choices',
+          },
+          'mode-card review-card'
+        )}
+      </section>
+
+      <section className="home-section detail-section">
+        <h3 className="section-title">Surah Selection</h3>
+        <div className="tafsir-select-panel">
+          <label className="tafsir-select-label" htmlFor="tafsir-surah-select">
+            Choose a surah
+          </label>
+          <select
+            id="tafsir-surah-select"
+            className="tafsir-surah-select"
+            value={selectedTafsirSurah}
+            onChange={(event) => setSelectedTafsirSurah(event.target.value)}
+          >
+            <option value="">Select a surah...</option>
+            {tafsirSurahOptions.map((surah) => (
+              <option key={surah.code} value={surah.code}>
+                {surah.label} ({surah.ayahCount} ayat)
+              </option>
+            ))}
+          </select>
+          <button
+            className="tafsir-start-btn"
+            disabled={!selectedTafsirSurah}
+            onClick={() => onSelectMode(`tafsir-verse-${selectedTafsirSurah}`)}
+          >
+            Start verse by verse
+          </button>
+        </div>
+      </section>
+    </>
+  );
+
   return (
     <div className="home-screen">
       <header className="home-header">
@@ -232,6 +290,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
       {subject === 'arabic' && renderArabicSubject()}
       {subject === 'fiqh' && renderFiqhSubject()}
       {subject === 'hadith' && renderHadithSubject()}
+      {subject === 'tafsir' && renderTafsirSubject()}
 
       {/* Quizzes section */}
       <section className="home-section">

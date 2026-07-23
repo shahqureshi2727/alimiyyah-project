@@ -1,0 +1,107 @@
+.tafsir-question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.tafsir-source-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.tafsir-source-badge {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--fiqh-badge-bg);
+  color: var(--fiqh-badge-text);
+  font-weight: 600;
+}
+
+.tafsir-ayah-number {
+  font-weight: 600;
+}
+
+.tafsir-question-prompt {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tafsir-arabic-text {
+  width: 100%;
+  padding: 1.15rem 1rem;
+  border-block: 2px solid var(--accent-light);
+  border-inline: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--text-primary);
+  font-family: var(--arabic-font);
+  font-size: 1.65rem;
+  line-height: 2.2;
+  text-align: center;
+  white-space: pre-line;
+  text-wrap: balance;
+}
+
+.tafsir-mcq-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tafsir-choice-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.tafsir-choice-btn:disabled {
+  cursor: default;
+}
+
+.tafsir-choice-btn.correct-tapped {
+  border-color: var(--success);
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.tafsir-choice-btn.incorrect-tapped {
+  border-color: var(--error);
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.tafsir-choice-btn.correct-outline {
+  border-color: var(--success);
+}
+
+.tafsir-choice-btn.dimmed {
+  opacity: 0.5;
+}
+
+.tafsir-explanation {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--fiqh-explanation-bg);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--fiqh-explanation-text);
+}

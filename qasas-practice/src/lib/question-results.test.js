@@ -34,6 +34,22 @@ describe('questionResultFromAnswer', () => {
     });
   });
 
+  it('uses the tafsir surah topic as the tracking group for tagged tafsir questions', () => {
+    const result = questionResultFromAnswer({
+      question: { id: 'TFS-FIL-001-MCQ', topic: 'FIL' },
+      correct: true,
+      mode: 'tafsir',
+      index: 0,
+    });
+
+    expect(result).toEqual({
+      questionId: 'TFS-FIL-001-MCQ',
+      topic: 'FIL',
+      group: 'FIL',
+      correct: true,
+    });
+  });
+
   it('falls back to mode and session id when metadata is missing', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 

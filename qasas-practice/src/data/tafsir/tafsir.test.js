@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { TAFSIR_TOPICS } from '../../config/subjects';
 import {
   getTafsirQuestions,
+  getTafsirSurahOptions,
   getTafsirVerseRecords,
   tafsirMcqQuestions,
   tafsirVerseRecords,
@@ -78,6 +79,17 @@ describe('tafsir source verse bank', () => {
     expect(getTafsirQuestions('all')).toHaveLength(tafsirMcqQuestions.length);
     expect(getTafsirQuestions('FIL')).toHaveLength(5);
     expect(getTafsirQuestions('missing')).toEqual([]);
+  });
+
+  it('exports surah dropdown options sorted by surah number', () => {
+    expect(getTafsirSurahOptions()).toEqual([
+      expect.objectContaining({ code: 'ASR', label: 'Surah Al-Asr', surahNumber: 103, ayahCount: 3 }),
+      expect.objectContaining({ code: 'FIL', label: 'Surah Al-Fil', surahNumber: 105, ayahCount: 5 }),
+      expect.objectContaining({ code: 'QUR', label: 'Surah Quraysh', surahNumber: 106, ayahCount: 4 }),
+      expect.objectContaining({ code: 'MAU', label: "Surah Al-Ma'un", surahNumber: 107, ayahCount: 7 }),
+      expect.objectContaining({ code: 'KAW', label: 'Surah Al-Kawthar', surahNumber: 108, ayahCount: 3 }),
+      expect.objectContaining({ code: 'KAF', label: 'Surah Al-Kafirun', surahNumber: 109, ayahCount: 6 }),
+    ]);
   });
 
   it('has visible topic metadata for every extracted surah', () => {

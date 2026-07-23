@@ -13,6 +13,7 @@ export const QUIZ_MODES = {
   morphology: { label: 'Morphology', bankSource: 'qasas', timerSeconds: 20 },
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
   hadith: { label: 'Hadith', bankSource: 'hadith', timerSeconds: 25 },
+  tafsir: { label: 'Tafsir', bankSource: 'tafsir', timerSeconds: 25 },
   review: { label: 'Weak Spots Review', bankSource: 'mixed', timerSeconds: 20 },
 };
 
