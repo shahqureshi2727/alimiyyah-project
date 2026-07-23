@@ -1,43 +1,19 @@
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-23 6:00pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-23 6:38pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (24,253t read) | 2,053,363t work | 99% savings
+Stats: 50 obs (23,349t read) | 1,363,294t work | 98% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 ### Jul 23, 2026
-671 3:58p 🔴 FiqhQuestionCard MCQ Bug Fixed: Options Now Shuffled and Correctness Determined by Value
-672 " 🔄 Deduplication Started: Local `shuffleArray` Removed from `FiqhPracticeMode.jsx`, Replaced with Shared Import
-673 " 🔄 Local `shuffleArray` Removed from `IrabMode.jsx` and `NounMode.jsx` — Shared Import Added
-674 3:59p 🔄 Local `shuffleArray` Removed from `RoleMode.jsx` and `VocabMode.jsx` — 6 of 7 Duplicates Now Eliminated
-675 " 🔵 MorphologyMode Has a Broken `shuffleOptions` Reference After Refactor — Immediate Follow-up Edit Required
-676 " 🔄 MorphologyMode Fully Refactored: Local Shuffle Removed, `useShuffledOptions` Wired In, Render Updated
-677 4:00p 🔴 TimedQuiz.jsx: Local `shuffleArray` Deleted, Shared Import Added — `shuffleMorphologyOptions` Retained and Now Uses Shared Implementation
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
-680 4:04p ⚖️ UI Bug Fix Plan: Dark Mode Contrast + Button Spacing
-681 " 🔵 alimiyyah-project: No Tailwind Config Found; Component-Scoped CSS Architecture
-682 " 🔵 No Dark Mode Implemented at All in qasas-practice
-683 " 🔵 Pre-existing Uncommitted Work: Shuffle Utilities and Quiz Mode Refactors
-684 4:05p 🔵 Dark Mode Strategy: data-theme Attribute on :root via SettingsContext
-685 " 🔵 Dark Mode Contrast Bug: Hardcoded Light Hex Colors in Component CSS Files
-686 " 🔵 Button Spacing Bug: Timed Quizzes and Strength Map Cards Have No Gap
-687 " 🔵 WeaknessTracking Already Integrated Across All Quiz Mode Components
-688 4:06p 🔵 Complete Hardcoded Color Audit: Full Line-by-Line Findings Across All CSS Files
-689 " 🔵 Touch Target Audit: All Interactive Controls Meet 44px Minimum
-690 4:09p 🔴 Both UI Bugs Fully Fixed: All Tests Pass, Build Clean
-691 4:19p 🔵 topicStats not written after quiz submission — user-reported bug
-695 4:27p 🔴 topicStats write bug resolved — Strength Map flow verified working end-to-end
-696 4:28p 🟣 TDD RED phase started for aggregateTopicStatsFromEvents — historical migration utility
-692 4:36p 🟣 topic-stats migration fully implemented and verified — lint, tests, build all green
-693 " 🔵 firestore.indexes.json missing topicStats COLLECTION_GROUP index — admin Strength Map will fail
-694 " 🔵 Root cause hypothesis for topicStats not appearing: Firestore rule rejects transaction write
 697 4:52p 🔴 aggregateTopicStatsFromEvents implemented — TDD GREEN phase in progress
 699 " 🟣 Migration script created: scripts/migrate-topic-stats.mjs with dry-run/apply modes
 700 " 🔴 weakness-finder-plan.md updated to reflect shipped topicStats model — weaknessProfiles marked legacy
@@ -64,6 +40,30 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 729 5:42p 🔵 Arabic Font Rendering Issues Reported in Indo-Pak and Madani Script Sections
 730 5:53p 🔵 Primary Session Pivoting to Arabic Script UI Bug — Systematic Debugging Approach Loading
 731 " 🔵 Arabic Script System Architecture Discovered — Two Script Modes via CSS Data Attribute
+732 6:01p 🟣 Quranic Surah Content Extraction Task Initiated
+733 " ⚖️ PDF Extraction Strategy: Visual Rendering Over Text Extraction
+734 " 🔵 Alimiyyah Project Architecture: Two-Layer Content + App Model
+735 " 🔵 Implementation Plan: Phases 0–2 Complete, Phase 3 (Tafsir) Is Next
+736 " 🔵 App Source Structure: Data Banks, Hooks, and Firestore Integration
+737 6:02p 🔵 Hadith PDF Extraction Script: Precedent Pattern for Surah Extraction
+738 " 🔵 Six Surah PDFs Confirmed Accessible: Page Counts and Metadata
+739 " 🔵 Poppler Tool Locations: Split Between Homebrew and Bundled Runtime
+740 6:03p 🔵 pdftoppm PNG Rendering Timed Out on Large Canva Surah PDFs
+741 " 🔵 Surah Text Extraction Succeeded: English Notes Readable, Arabic Verse Text Absent
+742 6:04p 🟣 All 6 Surah Text Files Successfully Extracted to tmp/pdfs/tafsir-raw/
+743 " 🔵 Tafsir Integration Points and Arabic Unicode Quality Constraint
+744 " ⚖️ TDD Approach Chosen for Tafsir Data Module
+745 6:05p 🟣 Tafsir Test Suite Written and Confirmed Failing (TDD Red Phase)
+746 " ⚖️ quran.com API v4 Chosen for Clean Arabic Ayah Text in Both Scripts
+747 6:06p 🔵 Surah Slide-to-Ayah Mapping Confirmed: Non-1:1 Ratio Requires Manual Slide Assignment
+748 " 🟣 Tafsir Phase 3 Data Module — All Tests Green, Build Passing
+749 6:14p 🔴 App Architecture Context for Tafsir UI Integration
+751 " ⚖️ Tafsir UI Design Approved — Implementation Phase Begins
+750 6:19p 🔴 Full Tafsir Integration Surface — All Files Requiring Changes
+752 6:37p 🔵 Git Working Tree Clean — Tafsir Implementation Not Yet Started
+753 " 🔵 Design Spec Format Used in This Project — Morphology Spec as Template
+754 6:38p 🟣 Tafsir Section Design Spec Written and Saved
+755 " 🔵 Tafsir Spec Verified Clean — No TODOs or Placeholders
 
-Access 2053k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1363k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
