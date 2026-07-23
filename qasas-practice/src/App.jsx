@@ -9,6 +9,7 @@ import VocabMode from './components/VocabMode';
 import MorphologyMode from './components/MorphologyMode';
 import FiqhPracticeMode from './components/FiqhPracticeMode';
 import HadithPracticeMode from './components/HadithPracticeMode';
+import TafsirPracticeMode from './components/TafsirPracticeMode';
 import QuizPicker from './components/QuizPicker';
 import TimedQuiz from './components/TimedQuiz';
 import Leaderboard from './components/Leaderboard';
@@ -70,6 +71,7 @@ function PublicRoute({ children }) {
 function MainApp() {
   const [currentMode, setCurrentMode] = useState(null);
   const [currentTopic, setCurrentTopic] = useState(null);
+  const [currentVariant, setCurrentVariant] = useState('mcq');
   const [quizMode, setQuizMode] = useState(null);
   const [quizTopic, setQuizTopic] = useState(null);
   const [quizInProgress, setQuizInProgress] = useState(false);
@@ -82,21 +84,34 @@ function MainApp() {
     morphology: 0,
     fiqh: 0,
     hadith: 0,
+    tafsir: 0,
   });
 
   const handleSelectMode = (mode) => {
     if (mode.startsWith('fiqh-')) {
       setCurrentMode('fiqh');
       setCurrentTopic(mode.slice('fiqh-'.length));
+      setCurrentVariant('mcq');
     } else if (mode.startsWith('hadith-')) {
       setCurrentMode('hadith');
       setCurrentTopic(mode.slice('hadith-'.length));
+      setCurrentVariant('mcq');
+    } else if (mode.startsWith('tafsir-verse-')) {
+      setCurrentMode('tafsir');
+      setCurrentTopic(mode.slice('tafsir-verse-'.length));
+      setCurrentVariant('verse');
+    } else if (mode.startsWith('tafsir-')) {
+      setCurrentMode('tafsir');
+      setCurrentTopic(mode.slice('tafsir-'.length));
+      setCurrentVariant('mcq');
     } else if (mode.startsWith('morphology-')) {
       setCurrentMode('morphology');
       setCurrentTopic(mode.slice('morphology-'.length));
+      setCurrentVariant('mcq');
     } else {
       setCurrentMode(mode);
       setCurrentTopic(null);
+      setCurrentVariant('mcq');
     }
     setShowQuizPicker(false);
     setQuizMode(null);
@@ -106,6 +121,7 @@ function MainApp() {
   const handleBack = () => {
     setCurrentMode(null);
     setCurrentTopic(null);
+    setCurrentVariant('mcq');
     setShowQuizPicker(false);
     setQuizMode(null);
     setQuizInProgress(false);
@@ -255,6 +271,16 @@ function MainApp() {
               onBack={handleBack}
               score={scores.hadith}
               setScore={setModeScore('hadith')}
+            />
+          );
+        case 'tafsir':
+          return (
+            <TafsirPracticeMode
+              variant={currentVariant}
+              topic={currentTopic}
+              onBack={handleBack}
+              score={scores.tafsir}
+              setScore={setModeScore('tafsir')}
             />
           );
         default:

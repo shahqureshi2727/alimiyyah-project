@@ -45,6 +45,13 @@ const quizModes = [
     timer: '20 sec per question',
   },
   {
+    id: 'tafsir',
+    titleAr: 'التَّفْسِير',
+    titleEn: 'Tafsir: Mixed Review',
+    format: '10 questions',
+    timer: '25 sec per question',
+  },
+  {
     id: 'fiqh-all',
     titleAr: 'الفِقْه',
     titleEn: 'Fiqh: Review',

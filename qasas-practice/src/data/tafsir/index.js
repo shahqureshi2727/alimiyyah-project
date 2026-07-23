@@ -1,6 +1,8 @@
 // Tafsir verse records generated from content/Tafsir/tafsir-source-verses.json.
 // Arabic text is sourced from the Quran.com Quran Foundation API, not the Canva PDF text layer.
 
+import { TAFSIR_TOPICS } from '../../config/subjects.js';
+
 export const tafsirVerseRecords = [
   {
     "id": "TFS-ASR-001",
@@ -1242,4 +1244,26 @@ export function getTafsirVerseRecords(topic = 'all') {
 export function getTafsirQuestions(topic = 'all') {
   if (topic === 'all') return tafsirMcqQuestions;
   return tafsirMcqQuestions.filter((question) => question.topic === topic);
+}
+
+export function getTafsirSurahOptions() {
+  const counts = tafsirVerseRecords.reduce((acc, record) => {
+    acc[record.topic] = (acc[record.topic] || 0) + 1;
+    return acc;
+  }, {});
+
+  return TAFSIR_TOPICS
+    .filter((topic) => counts[topic.code])
+    .map((topic) => {
+      const firstRecord = tafsirVerseRecords.find((record) => record.topic === topic.code);
+      return {
+        code: topic.code,
+        label: topic.label,
+        titleAr: topic.titleAr,
+        description: topic.description,
+        ayahCount: counts[topic.code],
+        surahNumber: firstRecord.surahNumber,
+      };
+    })
+    .sort((left, right) => left.surahNumber - right.surahNumber);
 }

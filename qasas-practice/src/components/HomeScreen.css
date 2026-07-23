@@ -117,6 +117,57 @@
   font-weight: 600;
 }
 
+.tafsir-select-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--cream);
+}
+
+.tafsir-select-label {
+  color: var(--ink-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tafsir-surah-select {
+  min-height: 44px;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--parchment);
+  color: var(--ink);
+  font: inherit;
+}
+
+.tafsir-surah-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.tafsir-start-btn {
+  min-height: 44px;
+  align-self: flex-start;
+  padding: 0.7rem 1.25rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.tafsir-start-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .compact-grid {
   gap: 0.75rem;
 }
