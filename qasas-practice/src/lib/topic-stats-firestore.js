@@ -19,6 +19,7 @@ const TOPIC_STATS_SUBCOLLECTION = 'topicStats';
 
 export async function recordAttempt({ userId, mode, bankSource, topic, wasCorrect }) {
   const category = categoryForTopic(topic, mode, bankSource);
+  const answeredAt = new Date();
   const statRef = doc(
     db,
     USERS_COLLECTION,
@@ -37,6 +38,7 @@ export async function recordAttempt({ userId, mode, bankSource, topic, wasCorrec
       existing,
       wasCorrect,
       lastAttempted: serverTimestamp(),
+      answeredAt,
     });
 
     transaction.set(statRef, next, { merge: true });

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   aggregateTopicStatsFromEvents,
   categoryForTopic,
+  nextReviewSchedule,
   nextTopicStat,
   profileFromTopicStats,
   topicStatDocId,
@@ -52,6 +53,56 @@ describe('topic stats', () => {
     expect(recovery.attempts).toBe(2);
     expect(recovery.correct).toBe(1);
     expect(recovery.ewmaScore).toBeCloseTo(0.79);
+  });
+
+  it('grows the spaced-review interval after correct answers and caps it at 30 days', () => {
+    const answeredAt = new Date('2026-07-23T12:00:00.000Z');
+
+    expect(nextReviewSchedule({
+      existing: { reviewIntervalDays: 5 },
+      wasCorrect: true,
+      answeredAt,
+    })).toEqual({
+      reviewIntervalDays: 9,
+      nextDueAt: new Date('2026-08-01T12:00:00.000Z'),
+    });
+
+    expect(nextReviewSchedule({
+      existing: { reviewIntervalDays: 30 },
+      wasCorrect: true,
+      answeredAt,
+    }).reviewIntervalDays).toBe(30);
+  });
+
+  it('resets spaced review to tomorrow after incorrect answers', () => {
+    const answeredAt = new Date('2026-07-23T12:00:00.000Z');
+
+    expect(nextReviewSchedule({
+      existing: { reviewIntervalDays: 12 },
+      wasCorrect: false,
+      answeredAt,
+    })).toEqual({
+      reviewIntervalDays: 1,
+      nextDueAt: new Date('2026-07-24T12:00:00.000Z'),
+    });
+  });
+
+  it('adds spaced-review fields to the next topic stat document', () => {
+    const next = nextTopicStat({
+      userId: 'u1',
+      category: 'tafsir',
+      subtopic: 'FIL',
+      existing: { attempts: 1, correct: 0, ewmaScore: 0.7, reviewIntervalDays: 1 },
+      wasCorrect: true,
+      lastAttempted: 'server-time',
+      answeredAt: new Date('2026-07-23T12:00:00.000Z'),
+    });
+
+    expect(next).toMatchObject({
+      reviewIntervalDays: 2,
+      nextDueAt: new Date('2026-07-25T12:00:00.000Z'),
+      lastAttempted: 'server-time',
+    });
   });
 
   it('adapts flat topic stat docs into the existing heatmap profile shape', () => {

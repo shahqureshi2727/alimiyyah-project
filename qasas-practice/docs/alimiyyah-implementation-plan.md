@@ -11,8 +11,8 @@ Don't build top-to-bottom as listed in the request — some items are foundation
 1. **Phase 0 — Bug fixes** (#3 answer bias, #4 dark mode/spacing): completed. Shared Fisher-Yates shuffle infrastructure is in place, Fiqh MCQ correctness is value-based after render-time shuffling, and dark-mode/spacing fixes are shipped.
 2. **Phase 1 — Data model overhaul** (#5 strength map foundation): completed. Quiz submissions write `answerEvents` and aggregate into Firestore `users/{uid}/topicStats/{category}_{subtopic}` docs.
 3. **Phase 2 — Hadith section** (#1): implemented. This is the simplest new content type and the first new category plugged into the Firestore topic-stats model.
-4. **Phase 3 — Tafsir section** (#2): most complex piece (verse-by-verse fuzzy matching), build once the pattern from Phase 2 is proven.
-5. **Phase 4 — Daily review quiz** (#6): needs question banks from Hadith/Tafsir/Fiqh/Arabic *and* the strength data from Phase 1 to be meaningful. This is the last piece, not the first.
+4. **Phase 3 — Tafsir section** (#2): implemented. Mixed MCQs, surah selection, and verse-by-verse free-response scoring are wired into topic stats.
+5. **Phase 4 — Daily review quiz** (#6): implemented. The review flow now uses all four question banks, weak-topic ranking, due spaced review, and broad cold-start mixing.
 
 ---
 
@@ -112,9 +112,9 @@ newScore = alpha * (correct ? 1 : 0) + (1 - alpha) * oldScore;
 
 ---
 
-## Phase 3: Tafsir Section
+## Phase 3: Tafsir Section — Implemented
 
-This is the most involved piece — two sub-features.
+This was the most involved piece — two sub-features are now in place.
 
 ### 2a. Multiple choice — mixed-up verses
 
@@ -146,13 +146,13 @@ The requirement ("mark which words are off") means you need alignment, not just 
 
 ---
 
-## Phase 4: Daily Review Quiz
+## Phase 4: Daily Review Quiz — Implemented
 
 ### 6. Adaptive daily review (5–10 min)
 
-This is the payoff feature for the data model built in Phase 1 — it only works well once Hadith and Tafsir question banks exist (Phase 2–3), so it's correctly last.
+This is the payoff feature for the data model built in Phase 1. It now runs as "Today's Review" using the Arabic, Fiqh, Hadith, and Tafsir question banks.
 
-**Session composition (target ~12–15 questions for a 5–10 min session):**
+**Session composition (15 questions for a 5–10 min session):**
 - **~40% weak-topic questions** — pulled from Firestore `topicStats` docs with the lowest EWMA scores across all 4 categories (so weak fiqh topics compete fairly with weak arabic topics, not siloed).
 - **~30% spaced-repetition due items** — see below.
 - **~30% general mix** — random across categories, weighted by category size, to keep broad coverage and avoid the review feeling repetitive.
@@ -166,12 +166,12 @@ This is the payoff feature for the data model built in Phase 1 — it only works
 
 **Selection query shape (pseudocode):**
 ```js
-const weakTopics = await getTopicsSortedByScore(userId, { limit: N, ascending: true });
-const dueTopics = await getTopicsWhere(userId, 'nextDueAt <= now()');
+const topicStats = await getUserTopicStats(userId);
+const missedQuestionIds = await getMissedQuestionIds(userId);
 const questions = [
-  ...pickQuestionsFromTopics(weakTopics, count: 5-6),
-  ...pickQuestionsFromTopics(dueTopics, count: 4-5),
-  ...pickRandomAcrossCategories(count: 4),
+  ...pickQuestionsFromLowestEwmaTopics(topicStats, count: 6),
+  ...pickQuestionsFromDueTopics(topicStats, count: 5),
+  ...pickBroadCategoryMix(count: 4),
 ];
 ```
 
@@ -185,5 +185,5 @@ const questions = [
 | 0 | Fix dark mode + spacing (#4) | Completed |
 | 1 | Strength map data model + UI overhaul (#5) | Completed |
 | 2 | Hadith section (#1) | Implemented |
-| 3 | Tafsir MCQ + verse-by-verse fuzzy matching (#2) | Phase 1 |
-| 4 | Daily review quiz (#6) | Phases 1–3 |
+| 3 | Tafsir MCQ + verse-by-verse fuzzy matching (#2) | Implemented |
+| 4 | Daily review quiz (#6) | Implemented |
