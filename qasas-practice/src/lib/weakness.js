@@ -4,7 +4,7 @@ import {
   RECENCY_WEIGHT,
   STRONG_MIN,
   WEAK_MAX,
-} from '../config/weakness';
+} from '../config/weakness.js';
 
 export function statusFor(score, attempts) {
   if (score >= STRONG_MIN) return 'strong';

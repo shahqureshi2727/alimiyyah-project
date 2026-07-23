@@ -11,6 +11,31 @@ acted on through **targeted review quizzes** and a **strong/weak heatmap dashboa
 
 ---
 
+## Implementation status — July 23, 2026
+
+The current implementation uses `users/{userId}/topicStats/{category_subtopic}` as the
+Strength Map source of truth. The earlier `weaknessProfiles/{userId}` design below is
+now legacy and should not receive new app writes.
+
+Current shipped model:
+
+```
+users/{userId}/topicStats/{category_subtopic}
+  userId:        string
+  category:      "fiqh" | "hadith" | "arabic" | "tafsir"
+  subtopic:      string        // topic code, such as "WUD" or "IRB"
+  attempts:      number
+  correct:       number
+  lastAttempted: timestamp
+  ewmaScore:     number        // 0..1, new = 0.3 * result + 0.7 * old
+```
+
+`answerEvents` remains the append-only historical event log. Historical migration is
+handled by `npm run migrate:topic-stats`, which dry-runs by default and writes only when
+passed `-- --apply`.
+
+---
+
 ## 1. What exists today (and the gaps)
 
 **Already in place**
@@ -61,33 +86,30 @@ answerEvents/{eventId}
 Write these in the same submit path as `quizResults` (batched write, one round trip).
 For a 10-question quiz that's 10 event docs + 1 result doc.
 
-### 2b. `weaknessProfiles/{userId}` — derived, one doc per user
+### 2b. `users/{userId}/topicStats/{category_subtopic}` — derived, one doc per topic
 
-A compact rollup the app reads for the dashboard and to weight review quizzes. Updated
-incrementally on each quiz submit (cheap) rather than recomputed from scratch.
+A compact rollup the app reads for the dashboard and to weight review quizzes. This is a
+subcollection under each user so rules can scope normal reads/writes to `request.auth.uid`
+without requiring a top-level `userId` filter on every user-facing query.
 
 ```
-weaknessProfiles/{userId}
-  userId:   string
-  username: string
-  updatedAt: timestamp
-  topics: {
-    WUD: {
-      attempts: number,
-      score: number,        // recency-weighted accuracy 0..1 (see §3)
-      lastSeen: timestamp,
-      streak: number,       // consecutive correct, for "recovering" state
-      status: "weak" | "developing" | "strong"
-    },
-    NJS: { ... },
-    ...
-  }
+users/{userId}/topicStats/{category_subtopic}
+  userId:        string
+  category:      "fiqh" | "hadith" | "arabic" | "tafsir"
+  subtopic:      string
+  attempts:      number
+  correct:       number
+  lastAttempted: timestamp
+  ewmaScore:     number
 ```
+
+`weaknessProfiles/{userId}` can remain in Firestore temporarily for rollback/history, but
+the app no longer reads or writes it for Strength Map state.
 
 ### 2c. Aggregate for admin (choose one)
 
-- **Simplest:** admin dashboard queries all `weaknessProfiles` (fine for a mosque-class
-  roster of tens of students; one read per student).
+- **Current:** admin dashboard uses a `collectionGroup("topicStats")` read and groups the
+  documents by `userId` client-side.
 - **Scales better:** a `classWeakness` summary doc updated by a Cloud Function, giving
   per-topic averages across the class without reading every profile. Add later only if
   the roster grows.
@@ -102,7 +124,8 @@ student's flag clears as they improve — no slow-to-recover lifetime average.
 On each answered question for a topic:
 
 ```
-w = 0.7                      // recency weight; recent answers count ~2–3x older ones
+w = 0.3                      // recent result weight
+newScore = 0.3 * result + 0.7 * oldScore
 x = correct ? 1 : 0
 score_new = w * x + (1 - w) * score_old      // score starts at 1.0 (assume-competent)
 attempts += 1
@@ -132,11 +155,10 @@ Notes:
 1. **Question components** (`FiqhPracticeMode`, `IrabMode`, `NounMode`, `RoleMode`,
    `VocabMode`, `MorphologyMode`) already know each question and whether the answer was
    correct. Collect a per-question result array during the quiz.
-2. **`src/lib/quiz.js`** — extend `submitQuizResult` (or add `submitAnswerEvents`) to
-   write the 10 `answerEvents` + update `weaknessProfiles/{uid}` in one `writeBatch`.
-3. **New `src/lib/weakness.js`** — pure functions: `updateProfile(profile, events)`,
-   `getWeakTopics(profile, n)`, `statusFor(score, attempts)`. Unit-test these; they're
-   the brain and have no Firebase dependency.
+2. **`src/lib/quiz.js`** — `submitAnswerEvents` writes the 10 `answerEvents` and then
+   calls the shared topic-stat write path.
+3. **`src/lib/topic-stats.js` + `src/lib/topic-stats-firestore.js`** — pure EWMA/category
+   logic plus Firestore transaction writes through `recordAttempt`.
 4. **New `src/components/WeaknessDashboard.jsx`** — the strong/weak heatmap for students.
 5. **`QuizPicker` / `TimedQuiz`** — add a "Review weak spots" entry that builds a quiz
    weighted toward the student's weak topics (see §5).
@@ -175,9 +197,14 @@ match /answerEvents/{eventId} {
   allow update, delete: if false;               // append-only
 }
 
-match /weaknessProfiles/{userId} {
+match /users/{userId}/topicStats/{statId} {
   allow read:  if signed-in && (userId == uid || isAdmin());
-  allow write: if signed-in && userId == uid;   // client-derived; or lock to a Function
+  allow create, update: if signed-in
+                        && userId == uid
+                        && request.resource.data.userId == uid
+                        && request.resource.data.category in ["fiqh", "hadith", "arabic", "tafsir"]
+                        && request.resource.data.lastAttempted == request.time;
+  allow delete: if false;
 }
 ```
 
@@ -193,12 +220,14 @@ ever matters, move the profile write into a Cloud Function triggered by `answerE
 1. Add stable `id` + `topic`/`category` tags to the Arabic banks (blocks everything for
    non-Fiqh modes; Fiqh already has them, so you can pilot on Fiqh first).
 2. `src/config/weakness.js` (constants) + `src/lib/weakness.js` (pure logic) + unit tests.
-3. Extend the submit path to write `answerEvents` + update `weaknessProfiles` in a batch.
+3. Extend the submit path to write `answerEvents` + update `topicStats` through
+   `recordAttempt`.
 4. Firestore rules for the two new collections; test in the emulator.
 5. `WeaknessDashboard` heatmap for students.
 6. "Review weak spots" quiz builder in `QuizPicker`/`TimedQuiz`.
 7. Admin class-wide + per-student view in `AdminPage`.
-8. (Optional, later) Cloud Function for server-side profile computation + `classWeakness`.
+8. Run the one-time historical migration from `answerEvents` into `topicStats`.
+9. (Optional, later) Cloud Function for server-side profile computation + `classWeakness`.
 
 **Pilot suggestion:** ship steps 2–5 on Fiqh only (it's already tagged), validate the
 scoring feels right with real students, then roll out to the Arabic modes once tagged.

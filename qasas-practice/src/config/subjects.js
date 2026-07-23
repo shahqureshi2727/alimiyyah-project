@@ -12,6 +12,7 @@ export const QUIZ_MODES = {
   vocab: { label: 'Vocabulary', bankSource: 'qasas', timerSeconds: 10 },
   morphology: { label: 'Morphology', bankSource: 'qasas', timerSeconds: 20 },
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
+  hadith: { label: 'Hadith', bankSource: 'hadith', timerSeconds: 25 },
   review: { label: 'Weak Spots Review', bankSource: 'mixed', timerSeconds: 20 },
 };
 
@@ -63,5 +64,16 @@ export const FIQH_GROUPS = [
     label: 'Prayer',
     titleAr: 'الصَّلَاة',
     description: 'Salah, adhan, travel, vehicles, sickness, masbuq, and prayer rulings',
+  },
+];
+
+// Hadith topics available for topic-first navigation. The first bank is built
+// from the extracted Arba'een slides in content/Hadith/.
+export const HADITH_TOPICS = [
+  {
+    code: 'ARB40',
+    label: "Arba'een Hadith",
+    titleAr: 'الأَرْبَعُون',
+    description: 'Arabic hadith text with English translation recall',
   },
 ];

@@ -13,7 +13,8 @@ import { getAllTopicStatsProfiles } from '../lib/topic-stats-firestore';
 import { statusFor } from '../lib/weakness';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { getFiqhQuestions } from '../data/fiqh';
-import { ARABIC_TOPICS, FIQH_TOPICS, QUIZ_MODES } from '../config/subjects';
+import { getHadithQuestions } from '../data/hadith';
+import { ARABIC_TOPICS, FIQH_TOPICS, HADITH_TOPICS, QUIZ_MODES } from '../config/subjects';
 import { WeaknessHeatmap } from './WeaknessDashboard';
 import './AdminPage.css';
 
@@ -34,6 +35,7 @@ function BankViewer() {
     role: false,
     vocab: false,
     fiqh: false,
+    hadith: false,
   });
 
   const toggleSection = (section) => {
@@ -78,12 +80,22 @@ function BankViewer() {
     );
   };
 
+  const filterHadith = (item) => {
+    if (!searchQuery) return true;
+    return (
+      item.arabicText.includes(searchQuery) ||
+      item.correctTranslation.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
   const filteredIrab = irab.filter(filterIrab);
   const filteredNoun = nounFeatures.filter(filterNoun);
   const filteredRole = roles.filter(filterRole);
   const filteredVocab = vocab.filter(filterVocab);
   const allFiqhQuestions = getFiqhQuestions('all');
   const filteredFiqh = allFiqhQuestions.filter(filterFiqh);
+  const allHadithQuestions = getHadithQuestions('all');
+  const filteredHadith = allHadithQuestions.filter(filterHadith);
 
   const caseColors = {
     raf: 'case-raf',
@@ -116,7 +128,7 @@ function BankViewer() {
   return (
     <div className="bank-viewer">
       <div className="bank-summary">
-        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles: {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length}
+        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles: {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length} &middot; Hadith: {allHadithQuestions.length}
       </div>
 
       <div className="bank-search">
@@ -289,6 +301,45 @@ function BankViewer() {
                           <span className="fiqh-row-answer">
                             {item.type === 'mcq' ? item.options[item.answerIndex] : String(item.answer)}
                           </span>
+                          <span className="fiqh-row-sources">{item.sourceIds.join(', ')}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        {/* Hadith Section */}
+        <section className="bank-section">
+          <button
+            className="section-header"
+            onClick={() => toggleSection('hadith')}
+          >
+            <span className="section-title">Hadith</span>
+            <span className="section-count">{filteredHadith.length}</span>
+            <span className={`section-arrow ${expandedSections.hadith ? 'expanded' : ''}`}>
+              &#9662;
+            </span>
+          </button>
+          {expandedSections.hadith && (
+            <div className="section-content">
+              {HADITH_TOPICS.map((topicMeta) => {
+                const topicQuestions = filteredHadith.filter((q) => q.topic === topicMeta.code);
+                if (topicQuestions.length === 0) return null;
+                return (
+                  <div key={topicMeta.code} className="fiqh-topic-group">
+                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    {topicQuestions.map((item) => (
+                      <div key={item.id} className="fiqh-row">
+                        <div className="fiqh-row-prompt" dir="rtl">
+                          {item.arabicText}
+                        </div>
+                        <div className="fiqh-row-details">
+                          <span className="fiqh-row-type">MCQ</span>
+                          <span className="fiqh-row-answer">{item.correctTranslation}</span>
                           <span className="fiqh-row-sources">{item.sourceIds.join(', ')}</span>
                         </div>
                       </div>
