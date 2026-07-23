@@ -8,6 +8,7 @@ import RoleMode from './components/RoleMode';
 import VocabMode from './components/VocabMode';
 import MorphologyMode from './components/MorphologyMode';
 import FiqhPracticeMode from './components/FiqhPracticeMode';
+import HadithPracticeMode from './components/HadithPracticeMode';
 import QuizPicker from './components/QuizPicker';
 import TimedQuiz from './components/TimedQuiz';
 import Leaderboard from './components/Leaderboard';
@@ -80,12 +81,16 @@ function MainApp() {
     vocab: 0,
     morphology: 0,
     fiqh: 0,
+    hadith: 0,
   });
 
   const handleSelectMode = (mode) => {
     if (mode.startsWith('fiqh-')) {
       setCurrentMode('fiqh');
       setCurrentTopic(mode.slice('fiqh-'.length));
+    } else if (mode.startsWith('hadith-')) {
+      setCurrentMode('hadith');
+      setCurrentTopic(mode.slice('hadith-'.length));
     } else if (mode.startsWith('morphology-')) {
       setCurrentMode('morphology');
       setCurrentTopic(mode.slice('morphology-'.length));
@@ -119,6 +124,11 @@ function MainApp() {
       // Store last played mode for leaderboard default
       localStorage.setItem('lastQuizMode', 'fiqh');
       setQuizMode('fiqh');
+      setQuizTopic(topic);
+    } else if (mode.startsWith('hadith-')) {
+      const topic = mode.slice('hadith-'.length);
+      localStorage.setItem('lastQuizMode', 'hadith');
+      setQuizMode('hadith');
       setQuizTopic(topic);
     } else if (mode === 'review') {
       localStorage.setItem('lastQuizMode', 'review');
@@ -236,6 +246,15 @@ function MainApp() {
               onBack={handleBack}
               score={scores.fiqh}
               setScore={setModeScore('fiqh')}
+            />
+          );
+        case 'hadith':
+          return (
+            <HadithPracticeMode
+              topic={currentTopic}
+              onBack={handleBack}
+              score={scores.hadith}
+              setScore={setModeScore('hadith')}
             />
           );
         default:

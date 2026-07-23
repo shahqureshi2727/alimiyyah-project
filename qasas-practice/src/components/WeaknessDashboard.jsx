@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { ARABIC_TOPICS, FIQH_GROUPS, FIQH_TOPICS } from '../config/subjects';
+import { ARABIC_TOPICS, FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
 import { getUserTopicProfile } from '../lib/topic-stats-firestore';
 import './WeaknessDashboard.css';
 
@@ -61,6 +61,12 @@ export function WeaknessHeatmap({ profile, title = 'Topic Strength' }) {
             </div>
           </div>
         ))}
+      </section>
+      <section className="heatmap-section">
+        <h3>Hadith</h3>
+        <div className="heatmap-grid">
+          {HADITH_TOPICS.map(renderTopic)}
+        </div>
       </section>
       <section className="heatmap-section">
         <h3>Arabic</h3>

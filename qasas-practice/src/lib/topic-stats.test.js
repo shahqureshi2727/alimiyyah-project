@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  aggregateTopicStatsFromEvents,
   categoryForTopic,
   nextTopicStat,
   profileFromTopicStats,
@@ -14,6 +15,7 @@ describe('topic stats', () => {
 
   it('derives category from topic code when review mode mixes banks', () => {
     expect(categoryForTopic('WUD', 'review', 'mixed')).toBe('fiqh');
+    expect(categoryForTopic('ARB40', 'review', 'mixed')).toBe('hadith');
     expect(categoryForTopic('MOR_PST_ACT', 'review', 'mixed')).toBe('arabic');
     expect(categoryForTopic('IRB', 'irab', 'qasas')).toBe('arabic');
   });
@@ -63,7 +65,34 @@ describe('topic stats', () => {
       score: 0.4,
       lastSeen: 'a',
       status: 'weak',
+      });
+      expect(profile.topics.IRB.status).toBe('strong');
     });
-    expect(profile.topics.IRB.status).toBe('strong');
+
+  it('aggregates historical answer events in chronological order by user category and topic', () => {
+    const stats = aggregateTopicStatsFromEvents([
+      { userId: 'u1', topic: 'WUD', correct: true, answeredAt: { toMillis: () => 3000 } },
+      { userId: 'u1', topic: 'WUD', correct: false, answeredAt: { toMillis: () => 1000 } },
+      { userId: 'u2', topic: 'IRB', correct: true, answeredAt: { toMillis: () => 2000 } },
+    ]);
+
+    expect(stats).toHaveLength(2);
+    expect(stats[0]).toMatchObject({
+      id: 'u1_fiqh_WUD',
+      docId: 'fiqh_WUD',
+      path: 'users/u1/topicStats/fiqh_WUD',
+      userId: 'u1',
+      category: 'fiqh',
+      subtopic: 'WUD',
+      attempts: 2,
+      correct: 1,
+    });
+    expect(stats[0].ewmaScore).toBeCloseTo(0.79);
+    expect(stats[1]).toMatchObject({
+      path: 'users/u2/topicStats/arabic_IRB',
+      attempts: 1,
+      correct: 1,
+      ewmaScore: 1,
+    });
   });
-});
+  });

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
-import { FIQH_GROUPS, FIQH_TOPICS } from '../config/subjects';
+import { FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
@@ -53,6 +53,7 @@ const MODE_LABELS = {
   vocab: 'Vocab',
   morphology: 'Morphology',
   fiqh: 'Fiqh',
+  hadith: 'Hadith',
 };
 
 export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
@@ -104,6 +105,11 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
           <span className="mode-title-ar">الفِقْه</span>
           <span className="mode-title-en">Fiqh Questions</span>
           <span className="mode-desc">Tahara and prayer rulings</span>
+        </button>
+        <button className="subject-card" onClick={() => setSubject('hadith')}>
+          <span className="mode-title-ar">الحَدِيث</span>
+          <span className="mode-title-en">Hadith Questions</span>
+          <span className="mode-desc">Match Arabic hadith texts to their translations</span>
         </button>
       </div>
     </section>
@@ -181,6 +187,40 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
     </>
   );
 
+  const renderHadithSubject = () => (
+    <>
+      <section className="home-section">
+        <button className="back-btn subject-back" onClick={() => setSubject(null)}>
+          Back
+        </button>
+        <h3 className="section-title">Hadith Questions</h3>
+        {renderCard(
+          {
+            id: 'hadith-all',
+            titleAr: 'مُرَاجَعَة',
+            titleEn: 'Review',
+            description: 'Mixed Hadith translation review',
+          },
+          'mode-card review-card'
+        )}
+      </section>
+
+      <section className="home-section detail-section">
+        <h3 className="section-title">Focused Hadith Review</h3>
+        <div className="mode-grid">
+          {HADITH_TOPICS.map((topic) =>
+            renderCard({
+              id: `hadith-${topic.code}`,
+              titleAr: topic.titleAr,
+              titleEn: topic.label,
+              description: topic.description,
+            })
+          )}
+        </div>
+      </section>
+    </>
+  );
+
   return (
     <div className="home-screen">
       <header className="home-header">
@@ -191,6 +231,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
       {!subject && renderSubjectDoorways()}
       {subject === 'arabic' && renderArabicSubject()}
       {subject === 'fiqh' && renderFiqhSubject()}
+      {subject === 'hadith' && renderHadithSubject()}
 
       {/* Quizzes section */}
       <section className="home-section">

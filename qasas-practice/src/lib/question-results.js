@@ -1,4 +1,4 @@
-import { ARABIC_TOPICS, FIQH_TOPICS } from '../config/subjects';
+import { ARABIC_TOPICS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
 
 const warnedMissingQuestionMeta = new Set();
 
@@ -11,6 +11,8 @@ function warnMissingMetaOnce(key, message) {
 export function topicGroupFor(topicCode, mode) {
   const fiqhTopic = FIQH_TOPICS.find((topic) => topic.code === topicCode);
   if (fiqhTopic) return fiqhTopic.group;
+  const hadithTopic = HADITH_TOPICS.find((topic) => topic.code === topicCode);
+  if (hadithTopic) return hadithTopic.code;
   const arabicTopic = ARABIC_TOPICS.find((topic) => topic.code === topicCode);
   if (arabicTopic) return arabicTopic.mode;
   return mode === 'fiqh' ? null : mode;

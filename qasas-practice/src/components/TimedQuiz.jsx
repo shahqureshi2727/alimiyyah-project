@@ -6,12 +6,14 @@ import { getUserTopicProfile } from '../lib/topic-stats-firestore';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { morphology } from '../data/morphology';
 import { getFiqhQuestions } from '../data/fiqh';
+import { getHadithQuestions } from '../data/hadith';
 import { QUIZ_MODES } from '../config/subjects';
 import { db } from '../lib/firebase';
 import { questionResultFromAnswer } from '../lib/question-results';
 import { reviewWeights } from '../lib/weakness';
 import { shuffleArray } from '../lib/shuffle';
 import FiqhQuestionCard from './FiqhQuestionCard';
+import HadithQuestionCard from './HadithQuestionCard';
 import './TimedQuiz.css';
 
 const QUIZ_LENGTH = 10;
@@ -25,6 +27,7 @@ const BANKS = {
   // 'fiqh' is intentionally absent here — its bank depends on the selected
   // topic, so it's resolved dynamically in getBank() below instead of a
   // static import.
+  // 'hadith' follows the same topic-scoped pattern.
 };
 
 const REVIEW_BANKS = [
@@ -34,10 +37,12 @@ const REVIEW_BANKS = [
   ...vocab.map((question) => ({ ...question, reviewMode: 'vocab' })),
   ...morphology.map((question) => ({ ...question, reviewMode: 'morphology' })),
   ...getFiqhQuestions('all').map((question) => ({ ...question, reviewMode: 'fiqh' })),
+  ...getHadithQuestions('all').map((question) => ({ ...question, reviewMode: 'hadith' })),
 ];
 
 function getBank(mode, topic) {
   if (mode === 'fiqh') return getFiqhQuestions(topic || 'all');
+  if (mode === 'hadith') return getHadithQuestions(topic || 'all');
   if (mode === 'review') return REVIEW_BANKS;
   return BANKS[mode];
 }
@@ -95,6 +100,8 @@ function getQuestionTarget(mode, question) {
       return question.ar;
     case 'fiqh':
       return question.prompt;
+    case 'hadith':
+      return question.arabicText;
     default:
       return '';
   }
@@ -875,6 +882,16 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       case 'fiqh':
         return (
           <FiqhQuestionCard
+            question={current}
+            showFeedback={showFeedback}
+            currentAnswer={currentAnswer}
+            onAnswer={handleAnswer}
+          />
+        );
+
+      case 'hadith':
+        return (
+          <HadithQuestionCard
             question={current}
             showFeedback={showFeedback}
             currentAnswer={currentAnswer}

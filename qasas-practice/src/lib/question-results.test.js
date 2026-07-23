@@ -18,6 +18,22 @@ describe('questionResultFromAnswer', () => {
     });
   });
 
+  it('uses the hadith topic as the tracking group for tagged hadith questions', () => {
+    const result = questionResultFromAnswer({
+      question: { id: 'HDT-ARB40-Q01', topic: 'ARB40' },
+      correct: true,
+      mode: 'hadith',
+      index: 0,
+    });
+
+    expect(result).toEqual({
+      questionId: 'HDT-ARB40-Q01',
+      topic: 'ARB40',
+      group: 'ARB40',
+      correct: true,
+    });
+  });
+
   it('falls back to mode and session id when metadata is missing', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
@@ -36,4 +52,3 @@ describe('questionResultFromAnswer', () => {
     warn.mockRestore();
   });
 });
-

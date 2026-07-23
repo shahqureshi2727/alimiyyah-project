@@ -1,4 +1,4 @@
-import { FIQH_GROUPS } from '../config/subjects';
+import { FIQH_GROUPS, HADITH_TOPICS } from '../config/subjects';
 import './QuizPicker.css';
 
 const quizModes = [
@@ -55,6 +55,13 @@ const quizModes = [
     id: `fiqh-${group.code}`,
     titleAr: 'الفِقْه',
     titleEn: `Fiqh: ${group.label}`,
+    format: '10 questions',
+    timer: '25 sec per question',
+  })),
+  ...HADITH_TOPICS.map((topic) => ({
+    id: `hadith-${topic.code}`,
+    titleAr: topic.titleAr,
+    titleEn: `Hadith: ${topic.label}`,
     format: '10 questions',
     timer: '25 sec per question',
   })),
