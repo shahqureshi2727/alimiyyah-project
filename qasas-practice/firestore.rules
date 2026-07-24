@@ -33,7 +33,9 @@
                                    "attempts",
                                    "correct",
                                    "lastAttempted",
-                                   "ewmaScore"
+                                   "ewmaScore",
+                                   "reviewIntervalDays",
+                                   "nextDueAt"
                                  ]) &&
                                  request.resource.data.userId == userId &&
                                  request.resource.data.category in ["fiqh", "hadith", "arabic", "tafsir"] &&
@@ -47,6 +49,11 @@
                                  request.resource.data.ewmaScore is number &&
                                  request.resource.data.ewmaScore >= 0 &&
                                  request.resource.data.ewmaScore <= 1 &&
+                                 request.resource.data.reviewIntervalDays is int &&
+                                 request.resource.data.reviewIntervalDays >= 1 &&
+                                 request.resource.data.reviewIntervalDays <= 30 &&
+                                 request.resource.data.nextDueAt is timestamp &&
+                                 request.resource.data.nextDueAt > request.time &&
                                  request.resource.data.lastAttempted == request.time;
 
           allow delete: if false;
@@ -62,12 +69,18 @@
         allow create: if request.auth != null &&                                                                                                                                                         
                          request.resource.data.userId == request.auth.uid &&                                                                                                                             
                          request.resource.data.username is string &&                                                                                                                                     
-                         request.resource.data.mode in ["irab", "nounFeatures", "roles", "vocab", "morphology", "fiqh", "review"] &&
-                         request.resource.data.bankSource in ["qasas", "quran", "fiqh", "mixed"] &&
+                         request.resource.data.mode in ["irab", "nounFeatures", "roles", "vocab", "morphology", "fiqh", "hadith", "tafsir", "review"] &&
+                         request.resource.data.bankSource in ["qasas", "quran", "fiqh", "hadith", "tafsir", "mixed"] &&
                          request.resource.data.score is number &&                                                                                                                                        
                          request.resource.data.score >= 0 &&                                                                                                                                             
-                         request.resource.data.score <= 10 &&                                                                                                                                            
-                         request.resource.data.total == 10 &&                                                                                                                                            
+                         request.resource.data.total is int &&
+                         request.resource.data.total >= 1 &&
+                         request.resource.data.total <= 15 &&
+                         request.resource.data.score <= request.resource.data.total &&
+                         (
+                           (request.resource.data.mode == "review" && request.resource.data.total <= 15) ||
+                           (request.resource.data.mode != "review" && request.resource.data.total == 10)
+                         ) &&
                          request.resource.data.durationSeconds is number &&                                                                                                                              
                          request.resource.data.durationSeconds > 0 &&                                                                                                                                    
                          request.resource.data.completedAt == request.time;                                                                                                                              

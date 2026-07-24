@@ -14,7 +14,7 @@ export const QUIZ_MODES = {
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
   hadith: { label: 'Hadith', bankSource: 'hadith', timerSeconds: 25 },
   tafsir: { label: 'Tafsir', bankSource: 'tafsir', timerSeconds: 25 },
-  review: { label: 'Weak Spots Review', bankSource: 'mixed', timerSeconds: 20 },
+  review: { label: "Today's Review", bankSource: 'mixed', timerSeconds: 20 },
 };
 
 // Arabic topics available for topic-first navigation. Add one entry here per

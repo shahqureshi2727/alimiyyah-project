@@ -4,10 +4,10 @@ import './QuizPicker.css';
 const quizModes = [
   {
     id: 'review',
-    titleAr: 'مُرَاجَعَةُ الضَّعْف',
-    titleEn: 'Review Your Weak Spots',
-    format: '10 targeted questions',
-    timer: 'adaptive topic mix',
+    titleAr: 'مُرَاجَعَةُ اليَوْم',
+    titleEn: "Today's Review",
+    format: '15 questions',
+    timer: 'weak + due topic mix',
   },
   {
     id: 'irab',

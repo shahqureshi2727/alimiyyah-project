@@ -304,9 +304,9 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
               </svg>
             </div>
             <div className="quiz-entry-content">
-              <span className="quiz-entry-title">Timed Quizzes</span>
+              <span className="quiz-entry-title">Daily Review & Quizzes</span>
               <span className="quiz-entry-desc">
-                10 questions per round with a countdown timer
+                Today's adaptive review plus timed quiz rounds
               </span>
             </div>
             <div className="quiz-entry-arrow">

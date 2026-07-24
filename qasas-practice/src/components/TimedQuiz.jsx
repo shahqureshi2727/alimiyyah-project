@@ -2,7 +2,12 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { submitAnswerEvents, submitQuizResult, formatDuration } from '../lib/quiz';
-import { getUserTopicProfile } from '../lib/topic-stats-firestore';
+import { getUserTopicStats } from '../lib/topic-stats-firestore';
+import {
+  DAILY_REVIEW_LENGTH,
+  buildDailyReviewBank,
+  selectDailyReviewQuestions,
+} from '../lib/daily-review';
 import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { morphology } from '../data/morphology';
 import { getFiqhQuestions } from '../data/fiqh';
@@ -11,14 +16,13 @@ import { getTafsirQuestions } from '../data/tafsir';
 import { QUIZ_MODES } from '../config/subjects';
 import { db } from '../lib/firebase';
 import { questionResultFromAnswer } from '../lib/question-results';
-import { reviewWeights } from '../lib/weakness';
 import { shuffleArray } from '../lib/shuffle';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import HadithQuestionCard from './HadithQuestionCard';
 import TafsirQuestionCard from './TafsirQuestionCard';
 import './TimedQuiz.css';
 
-const QUIZ_LENGTH = 10;
+const STANDARD_QUIZ_LENGTH = 10;
 
 const BANKS = {
   irab,
@@ -33,58 +37,12 @@ const BANKS = {
   // 'tafsir' follows the same topic-scoped pattern.
 };
 
-const REVIEW_BANKS = [
-  ...irab.map((question) => ({ ...question, reviewMode: 'irab' })),
-  ...nounFeatures.map((question) => ({ ...question, reviewMode: 'nounFeatures' })),
-  ...roles.map((question) => ({ ...question, reviewMode: 'roles' })),
-  ...vocab.map((question) => ({ ...question, reviewMode: 'vocab' })),
-  ...morphology.map((question) => ({ ...question, reviewMode: 'morphology' })),
-  ...getFiqhQuestions('all').map((question) => ({ ...question, reviewMode: 'fiqh' })),
-  ...getHadithQuestions('all').map((question) => ({ ...question, reviewMode: 'hadith' })),
-  ...getTafsirQuestions('all').map((question) => ({ ...question, reviewMode: 'tafsir' })),
-];
-
 function getBank(mode, topic) {
   if (mode === 'fiqh') return getFiqhQuestions(topic || 'all');
   if (mode === 'hadith') return getHadithQuestions(topic || 'all');
   if (mode === 'tafsir') return getTafsirQuestions(topic || 'all');
-  if (mode === 'review') return REVIEW_BANKS;
+  if (mode === 'review') return buildDailyReviewBank();
   return BANKS[mode];
-}
-
-function selectWeightedReviewQuestions(bank, profile, missedIds) {
-  const weights = reviewWeights(profile);
-  const weakTopics = new Set(Object.keys(weights));
-  const candidates = bank.filter((question) => weakTopics.has(question.topic));
-  const missed = candidates.filter((question) => missedIds.has(question.id));
-  const fresh = candidates.filter((question) => !missedIds.has(question.id));
-  const ordered = [...shuffleArray(missed), ...shuffleArray(fresh)];
-  const selected = [];
-  const seenIds = new Set();
-
-  while (selected.length < QUIZ_LENGTH && ordered.length > 0) {
-    let bestIndex = 0;
-    let bestRoll = -1;
-    ordered.forEach((question, index) => {
-      const roll = Math.random() * (weights[question.topic] || 0);
-      if (roll > bestRoll) {
-        bestRoll = roll;
-        bestIndex = index;
-      }
-    });
-    const [question] = ordered.splice(bestIndex, 1);
-    if (!seenIds.has(question.id)) {
-      selected.push(question);
-      seenIds.add(question.id);
-    }
-  }
-
-  if (selected.length === 0) return selectQuestions(bank);
-  if (selected.length < QUIZ_LENGTH) {
-    const fill = shuffleArray(bank.filter((question) => !seenIds.has(question.id)));
-    return [...selected, ...fill.slice(0, QUIZ_LENGTH - selected.length)];
-  }
-  return selected;
 }
 
 function currentTime() {
@@ -114,18 +72,19 @@ function getQuestionTarget(mode, question) {
   }
 }
 
-// Select 10 unique questions, with wraparound if bank is too small
-function selectQuestions(bank) {
-  if (bank.length < QUIZ_LENGTH) {
-    console.warn(`Bank has only ${bank.length} items, less than ${QUIZ_LENGTH}. Allowing repeats.`);
+// Select unique questions, with wraparound if a focused bank is too small.
+function selectQuestions(bank, length = STANDARD_QUIZ_LENGTH) {
+  if (bank.length === 0) return [];
+  if (bank.length < length) {
+    console.warn(`Bank has only ${bank.length} items, less than ${length}. Allowing repeats.`);
     const shuffled = shuffleArray(bank);
     const questions = [];
-    for (let i = 0; i < QUIZ_LENGTH; i++) {
+    for (let i = 0; i < length; i++) {
       questions.push(shuffled[i % shuffled.length]);
     }
     return questions;
   }
-  return shuffleArray(bank).slice(0, QUIZ_LENGTH);
+  return shuffleArray(bank).slice(0, length);
 }
 
 function shuffleMorphologyOptions(question) {
@@ -336,14 +295,19 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       let selected;
 
       if (mode === 'review' && user) {
-        const profile = await getUserTopicProfile(user.uid);
+        const topicStats = await getUserTopicStats(user.uid);
         const wrongSnap = await getDocs(query(
           collection(db, 'answerEvents'),
           where('userId', '==', user.uid),
           where('correct', '==', false)
         ));
         const missedIds = new Set(wrongSnap.docs.map((eventDoc) => eventDoc.data().questionId));
-        selected = selectWeightedReviewQuestions(bank, profile, missedIds);
+        selected = selectDailyReviewQuestions({
+          bank,
+          topicStats,
+          missedQuestionIds: missedIds,
+          length: DAILY_REVIEW_LENGTH,
+        });
       } else {
         selected = selectQuestions(bank);
       }
@@ -361,7 +325,10 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     loadQuestions().catch((err) => {
       console.error('Error loading quiz questions:', err);
       if (!cancelled) {
-        const fallback = selectQuestions(getBank(mode, topic));
+        const fallbackBank = getBank(mode, topic);
+        const fallback = mode === 'review'
+          ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
+          : selectQuestions(fallbackBank);
         setQuestions(fallback);
         setQuestionStartTime(currentTime());
       }
@@ -374,14 +341,15 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
   // Vocab auto-flip after 4 seconds
   useEffect(() => {
-    if (mode !== 'vocab' || quizComplete || showFeedback || flipped) return;
+    const activeMode = questions[currentIndex]?.reviewMode || mode;
+    if (activeMode !== 'vocab' || quizComplete || showFeedback || flipped) return;
 
     const timer = setTimeout(() => {
       setFlipped(true);
     }, 4000);
 
     return () => clearTimeout(timer);
-  }, [currentIndex, mode, quizComplete, showFeedback, flipped]);
+  }, [currentIndex, mode, questions, quizComplete, showFeedback, flipped]);
 
   // Handle browser back button
   useEffect(() => {
@@ -405,7 +373,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   }, [quizComplete]);
 
   const advanceQuestion = useCallback(() => {
-    if (currentIndex >= QUIZ_LENGTH - 1) {
+    if (currentIndex >= questions.length - 1) {
       // Quiz complete
       const duration = (currentTime() - startTime) / 1000;
       setTotalDuration(duration);
@@ -428,7 +396,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     setSelectedNumber(null);
     setFlipped(false);
     setVocabChoice(null);
-  }, [currentIndex, mode, onQuizComplete, startTime]);
+  }, [currentIndex, mode, onQuizComplete, questions.length, startTime]);
 
   const handleTimeout = useCallback(() => {
     if (quizComplete || showFeedback) return;
@@ -496,7 +464,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     }
 
     // For vocab, track the choice
-    if (mode === 'vocab') {
+    if (currentMode === 'vocab') {
       setVocabChoice(answer);
     }
 
@@ -547,6 +515,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
           mode,
           bankSource: QUIZ_MODES[mode].bankSource,
           score,
+          total: questions.length,
           durationSeconds: Math.round(totalDuration),
         });
         await submitAnswerEvents({
@@ -565,7 +534,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     };
 
     saveResult();
-  }, [quizComplete, user, username, mode, score, totalDuration, saveStatus, results]);
+  }, [quizComplete, user, username, mode, score, totalDuration, saveStatus, results, questions.length]);
 
   if (questions.length === 0) {
     return (
@@ -577,17 +546,20 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
   // Results screen
   if (quizComplete) {
-    const isHighScore = score >= 9;
+    const totalQuestions = questions.length || STANDARD_QUIZ_LENGTH;
+    const scoreRate = totalQuestions > 0 ? score / totalQuestions : 0;
+    const isHighScore = scoreRate >= 0.9;
+    const isGoodScore = scoreRate >= 0.6;
 
     return (
       <div className="quiz-results">
         {isHighScore && <Confetti />}
-        <div className={`results-header ${isHighScore ? 'high-score' : score >= 6 ? 'good-score' : 'low-score'}`}>
-          <h1 className="results-score">{score} / {QUIZ_LENGTH}</h1>
+        <div className={`results-header ${isHighScore ? 'high-score' : isGoodScore ? 'good-score' : 'low-score'}`}>
+          <h1 className="results-score">{score} / {totalQuestions}</h1>
           <p className="results-time">{formatDuration(Math.round(totalDuration))}</p>
           {isHighScore && <p className="results-message">Excellent work!</p>}
-          {!isHighScore && score >= 6 && <p className="results-message">Good job! Keep practicing.</p>}
-          {score < 6 && <p className="results-message">Keep going! You'll improve.</p>}
+          {!isHighScore && isGoodScore && <p className="results-message">Good job! Keep practicing.</p>}
+          {!isGoodScore && <p className="results-message">Keep going! You'll improve.</p>}
           <div className="save-status">
             {saveStatus === 'saving' && <span className="saving">Saving...</span>}
             {saveStatus === 'saved' && <span className="saved">Saved</span>}
@@ -930,7 +902,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
       <header className="quiz-header">
         <div className="quiz-progress">
-          <span>Question {currentIndex + 1} of {QUIZ_LENGTH}</span>
+          <span>Question {currentIndex + 1} of {questions.length}</span>
         </div>
         <TimerRing timeLeft={timeLeft} totalTime={QUIZ_MODES[mode].timerSeconds} />
         <div className="quiz-score">

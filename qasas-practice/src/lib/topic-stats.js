@@ -4,6 +4,10 @@ import { statusFor, reviewWeights } from './weakness.js';
 export const TOPIC_STAT_RECENT_WEIGHT = 0.3;
 export const TOPIC_STAT_INITIAL_SCORE = 1;
 export const TOPIC_STAT_CATEGORIES = ['fiqh', 'hadith', 'arabic', 'tafsir'];
+export const REVIEW_INTERVAL_INITIAL_DAYS = 1;
+export const REVIEW_INTERVAL_GROWTH = 1.8;
+export const REVIEW_INTERVAL_MAX_DAYS = 30;
+const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 const ARABIC_TOPIC_CODES = new Set(ARABIC_TOPICS.map((topic) => topic.code));
 const FIQH_TOPIC_CODES = new Set([...FIQH_TOPICS.map((topic) => topic.code), 'INT']);
@@ -22,12 +26,42 @@ export function categoryForTopic(topic, mode, bankSource) {
   return 'arabic';
 }
 
-export function nextTopicStat({ userId, category, subtopic, existing, wasCorrect, lastAttempted }) {
+function timestampMillis(value) {
+  if (!value) return 0;
+  if (typeof value.toMillis === 'function') return value.toMillis();
+  if (value instanceof Date) return value.getTime();
+  if (typeof value === 'number') return value;
+  if (typeof value === 'string') {
+    const parsed = Date.parse(value);
+    return Number.isNaN(parsed) ? 0 : parsed;
+  }
+  if (typeof value.seconds === 'number') return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1e6);
+  return 0;
+}
+
+export function nextReviewSchedule({ existing, wasCorrect, answeredAt }) {
+  const previousInterval =
+    typeof existing?.reviewIntervalDays === 'number'
+      ? Math.max(REVIEW_INTERVAL_INITIAL_DAYS, existing.reviewIntervalDays)
+      : REVIEW_INTERVAL_INITIAL_DAYS;
+  const reviewIntervalDays = wasCorrect
+    ? Math.min(REVIEW_INTERVAL_MAX_DAYS, Math.ceil(previousInterval * REVIEW_INTERVAL_GROWTH))
+    : REVIEW_INTERVAL_INITIAL_DAYS;
+  const answeredMillis = timestampMillis(answeredAt);
+
+  return {
+    reviewIntervalDays,
+    nextDueAt: answeredMillis ? new Date(answeredMillis + reviewIntervalDays * DAY_IN_MS) : null,
+  };
+}
+
+export function nextTopicStat({ userId, category, subtopic, existing, wasCorrect, lastAttempted, answeredAt = lastAttempted }) {
   const previousScore =
     typeof existing?.ewmaScore === 'number' ? existing.ewmaScore : TOPIC_STAT_INITIAL_SCORE;
   const resultScore = wasCorrect ? 1 : 0;
   const ewmaScore =
     TOPIC_STAT_RECENT_WEIGHT * resultScore + (1 - TOPIC_STAT_RECENT_WEIGHT) * previousScore;
+  const reviewSchedule = nextReviewSchedule({ existing, wasCorrect, answeredAt });
 
   return {
     userId,
@@ -37,6 +71,7 @@ export function nextTopicStat({ userId, category, subtopic, existing, wasCorrect
     correct: (existing?.correct || 0) + (wasCorrect ? 1 : 0),
     lastAttempted,
     ewmaScore,
+    ...reviewSchedule,
   };
 }
 
@@ -63,16 +98,7 @@ export function reviewWeightsFromTopicStats(stats = []) {
 }
 
 function eventMillis(event) {
-  const value = event?.answeredAt;
-  if (!value) return 0;
-  if (typeof value.toMillis === 'function') return value.toMillis();
-  if (value instanceof Date) return value.getTime();
-  if (typeof value === 'string') {
-    const parsed = Date.parse(value);
-    return Number.isNaN(parsed) ? 0 : parsed;
-  }
-  if (typeof value.seconds === 'number') return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1e6);
-  return 0;
+  return timestampMillis(event?.answeredAt);
 }
 
 export function aggregateTopicStatsFromEvents(events = []) {

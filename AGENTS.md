@@ -1,30 +1,19 @@
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-23 6:38pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-23 6:56pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (23,349t read) | 1,363,294t work | 98% savings
+Stats: 50 obs (22,663t read) | 1,306,928t work | 98% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
-697 4:52p 🔴 aggregateTopicStatsFromEvents implemented — TDD GREEN phase in progress
-699 " 🟣 Migration script created: scripts/migrate-topic-stats.mjs with dry-run/apply modes
-700 " 🔴 weakness-finder-plan.md updated to reflect shipped topicStats model — weaknessProfiles marked legacy
-703 4:54p 🔴 Migration script fails: Node ESM requires explicit .js extensions on source imports
-704 4:59p 🔴 Fixed ESM import extensions in topic-stats.js and weakness.js for Node compatibility
-705 " 🔴 ESM extension fix verified — topic-stats imports correctly in raw Node.js, all gates pass
-706 5:01p 🔵 Production Firestore confirmed: 36 topicStats docs across 4 users — collectionGroup query works
-707 5:02p 🟣 Historical migration completed: 142 answerEvents → 36 topicStats docs written to production
-708 5:04p 🔵 alimiyyah-implementation-plan.md: full 4-phase product roadmap with Phase 1 (Strength Map) now complete
-709 5:05p 🔵 Phase 0 shuffle fix is already shipped — answerIndex is positional in data but UI compares by value after shuffle
-710 5:29p 🔵 Alimiyyah Hadith PDF Collection Identified for Conversion
 711 5:30p 🔵 alimiyyah-project-main: Existing Fiqh Quiz Architecture and Question Format
 712 " 🔵 Hadith PDF Inventory: 25 Files Confirmed, Hadith 8 and 25 Missing
 713 " 🔵 Hadith PDFs Are Canva Slide Decks — File Names Don't Match Hadith Numbers Inside
@@ -64,6 +53,17 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 753 " 🔵 Design Spec Format Used in This Project — Morphology Spec as Template
 754 6:38p 🟣 Tafsir Section Design Spec Written and Saved
 755 " 🔵 Tafsir Spec Verified Clean — No TODOs or Placeholders
+757 " ⚖️ Implementation Plan Phase Begins — writing-plans, TDD, and frontend-design Skills Loaded
+756 6:39p ✅ Tafsir Design Spec Committed to Git
+758 " 🔵 Complete Tafsir Data Layer File Inventory Confirmed
+759 " 🔵 All 19 Tafsir Data Files Confirmed Committed to Git
+761 " 🟣 Tafsir Implementation Plan Written — 5 Tasks, 19 Files
+760 6:40p 🔵 Clean Test Baseline — 30/30 Tests Passing Before Tafsir UI Implementation
+762 6:41p 🔴 Implementation Plan Committed — Task 1 Now In Progress
+763 6:43p 🔴 Tasks 1 and 2 Complete — 38 Tests Passing, Task 3 Now In Progress
+764 6:44p 🔴 Task 3 RED Phase Confirmed — Component Smoke Tests Written and Failing
+765 " 🟣 TafsirQuestionCard.jsx Implemented
+766 " 🟣 TafsirVerseCard, TafsirPracticeMode, and TafsirQuestionCard.css All Implemented
 
-Access 1363k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1307k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
