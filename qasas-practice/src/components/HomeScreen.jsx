@@ -353,7 +353,9 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
               {recentResults.map((result) => (
                 <div key={result.id} className="result-row">
                   <span className="result-mode">{MODE_LABELS[result.mode]}</span>
-                  <span className="result-score">{result.score}/10</span>
+                  <span className="result-score">
+                    {result.score}/{result.total}
+                  </span>
                   <span className="result-time">
                     {Math.floor(result.durationSeconds / 60)}:
                     {String(Math.round(result.durationSeconds % 60)).padStart(2, '0')}
