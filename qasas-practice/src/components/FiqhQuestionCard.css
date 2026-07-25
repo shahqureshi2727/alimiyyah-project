@@ -46,7 +46,9 @@
   font-size: 1rem;
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .fiqh-tf-btn {

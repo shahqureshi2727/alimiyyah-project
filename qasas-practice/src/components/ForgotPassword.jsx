@@ -65,8 +65,8 @@ export default function ForgotPassword() {
         </div>
 
         <div className="auth-note">
-          <strong>Note:</strong> If you didn't provide a recovery email when signing up,
-          please ask your teacher to reset your password.
+          <strong>Note:</strong> If you didn't provide a recovery email when signing up, please ask
+          your teacher to reset your password.
         </div>
       </form>
     </div>

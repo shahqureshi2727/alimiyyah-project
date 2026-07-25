@@ -10,13 +10,14 @@ export const travelQuestions = [
     type: 'mcq',
     prompt: 'When does a person become a traveller (musāfir) for the purposes of travel rulings?',
     options: [
-      'Once they leave their place of residence intending to travel to a destination requiring at least three days\' travel at a moderate pace',
+      "Once they leave their place of residence intending to travel to a destination requiring at least three days' travel at a moderate pace",
       'As soon as they leave their house for any reason',
       'Only once they cross an international border',
       'Only after spending one night away from home',
     ],
     answerIndex: 0,
-    explanation: 'Travel rulings apply once a person leaves home intending to travel a distance requiring at least three days at a moderate pace.',
+    explanation:
+      'Travel rulings apply once a person leaves home intending to travel a distance requiring at least three days at a moderate pace.',
   },
   {
     id: 'FQH-TRV-Q02',
@@ -33,9 +34,15 @@ export const travelQuestions = [
     topic: 'TRV',
     type: 'mcq',
     prompt: 'A traveller may shorten (qaṣr) which prayers to two rakʿahs each?',
-    options: ['Ẓuhr, ʿAṣr, and ʿIshāʾ', 'Fajr, Ẓuhr, and Maghrib', 'All five daily prayers', 'Only Jumuʿah'],
+    options: [
+      'Ẓuhr, ʿAṣr, and ʿIshāʾ',
+      'Fajr, Ẓuhr, and Maghrib',
+      'All five daily prayers',
+      'Only Jumuʿah',
+    ],
     answerIndex: 0,
-    explanation: 'A traveller may shorten the four-rakʿah obligatory prayers — Ẓuhr, ʿAṣr, and ʿIshāʾ — to two rakʿahs each.',
+    explanation:
+      'A traveller may shorten the four-rakʿah obligatory prayers — Ẓuhr, ʿAṣr, and ʿIshāʾ — to two rakʿahs each.',
   },
   {
     id: 'FQH-TRV-Q04',
@@ -44,7 +51,8 @@ export const travelQuestions = [
     type: 'tf',
     prompt: 'True or False: Fajr and Maghrib are never shortened, even for a traveller.',
     answer: true,
-    explanation: 'Correct — Fajr and Maghrib are not four-rakʿah prayers, so qaṣr does not apply to them.',
+    explanation:
+      'Correct — Fajr and Maghrib are not four-rakʿah prayers, so qaṣr does not apply to them.',
   },
   {
     id: 'FQH-TRV-Q05',
@@ -59,14 +67,16 @@ export const travelQuestions = [
       'Only when they return to their home country',
     ],
     answerIndex: 0,
-    explanation: 'A traveller becomes a resident again once they reach a city/village and intend to stay 15 full days or more.',
+    explanation:
+      'A traveller becomes a resident again once they reach a city/village and intend to stay 15 full days or more.',
   },
   {
     id: 'FQH-TRV-Q06',
     sourceIds: ['FQH-TRV-06'],
     topic: 'TRV',
     type: 'tf',
-    prompt: 'True or False: Once a traveller becomes a resident again, the four-rakʿah Ṣalāh must be prayed in full and fasting in Ramaḍān is required.',
+    prompt:
+      'True or False: Once a traveller becomes a resident again, the four-rakʿah Ṣalāh must be prayed in full and fasting in Ramaḍān is required.',
     answer: true,
     explanation: 'Correct — becoming a resident again removes the travel concessions.',
   },
@@ -75,7 +85,8 @@ export const travelQuestions = [
     sourceIds: ['FQH-TRV-07'],
     topic: 'TRV',
     type: 'mcq',
-    prompt: 'If a traveller intends to stay somewhere for fewer than 15 days, what is their status?',
+    prompt:
+      'If a traveller intends to stay somewhere for fewer than 15 days, what is their status?',
     options: [
       'They remain a traveller — qaṣr continues and the fasting choice remains',
       'They immediately become a resident',
@@ -83,42 +94,54 @@ export const travelQuestions = [
       'Their travel rulings end immediately',
     ],
     answerIndex: 0,
-    explanation: 'Intending to stay fewer than 15 days keeps a person a traveller, with qaṣr and the fasting concession continuing.',
+    explanation:
+      'Intending to stay fewer than 15 days keeps a person a traveller, with qaṣr and the fasting concession continuing.',
   },
   {
     id: 'FQH-TRV-Q08',
     sourceIds: ['FQH-TRV-08'],
     topic: 'TRV',
     type: 'tf',
-    prompt: 'True or False: Travel rulings end when the traveller enters the limits of their permanent residence.',
+    prompt:
+      'True or False: Travel rulings end when the traveller enters the limits of their permanent residence.',
     answer: true,
-    explanation: 'Correct — reaching the limits of one\'s permanent residence ends travel rulings.',
+    explanation: "Correct — reaching the limits of one's permanent residence ends travel rulings.",
   },
   {
     id: 'FQH-TRV-Q09',
     sourceIds: ['FQH-TRV-09'],
     topic: 'TRV',
     type: 'mcq',
-    prompt: 'If a traveller prays behind a resident imam during the prayer\'s valid time, how many rakʿahs do they pray?',
-    options: ['The full four rakʿahs, not shortened', 'Two rakʿahs, shortened as usual', 'Three rakʿahs', 'Whatever the imam decides for them'],
+    prompt:
+      "If a traveller prays behind a resident imam during the prayer's valid time, how many rakʿahs do they pray?",
+    options: [
+      'The full four rakʿahs, not shortened',
+      'Two rakʿahs, shortened as usual',
+      'Three rakʿahs',
+      'Whatever the imam decides for them',
+    ],
     answerIndex: 0,
-    explanation: 'A traveller praying behind a resident imam follows him and prays the full four rakʿahs, not shortened.',
+    explanation:
+      'A traveller praying behind a resident imam follows him and prays the full four rakʿahs, not shortened.',
   },
   {
     id: 'FQH-TRV-Q10',
     sourceIds: ['FQH-TRV-10'],
     topic: 'TRV',
     type: 'tf',
-    prompt: 'True or False: If a traveller prays behind a resident imam after the prayer\'s time has ended, that Ṣalāh is invalid.',
+    prompt:
+      "True or False: If a traveller prays behind a resident imam after the prayer's time has ended, that Ṣalāh is invalid.",
     answer: true,
-    explanation: 'Correct — praying behind a resident imam outside the valid prayer time invalidates the Ṣalāh.',
+    explanation:
+      'Correct — praying behind a resident imam outside the valid prayer time invalidates the Ṣalāh.',
   },
   {
     id: 'FQH-TRV-Q11',
     sourceIds: ['FQH-TRV-11'],
     topic: 'TRV',
     type: 'mcq',
-    prompt: 'A resident prays behind a travelling imam who shortens his prayer to two rakʿahs. What does the resident do after the imam finishes?',
+    prompt:
+      'A resident prays behind a travelling imam who shortens his prayer to two rakʿahs. What does the resident do after the imam finishes?',
     options: [
       'Stands and completes the remaining two rakʿahs himself',
       'Ends the prayer along with the imam, having only prayed two rakʿahs',
@@ -126,23 +149,27 @@ export const travelQuestions = [
       'Leaves the congregation and prays alone from the start',
     ],
     answerIndex: 0,
-    explanation: 'When a travelling imam completes his shortened prayer, a resident follower stands and completes the remaining two rakʿahs himself.',
+    explanation:
+      'When a travelling imam completes his shortened prayer, a resident follower stands and completes the remaining two rakʿahs himself.',
   },
   {
     id: 'FQH-TRV-Q12',
     sourceIds: ['FQH-TRV-12'],
     topic: 'TRV',
     type: 'tf',
-    prompt: 'True or False: If a travelling imam mistakenly prays a full four rakʿahs and a resident follows him throughout, the resident\'s farḍ Ṣalāh becomes invalid and counts only as voluntary.',
+    prompt:
+      "True or False: If a travelling imam mistakenly prays a full four rakʿahs and a resident follows him throughout, the resident's farḍ Ṣalāh becomes invalid and counts only as voluntary.",
     answer: true,
-    explanation: 'Correct — following a traveling imam\'s mistaken four rakʿahs invalidates the resident\'s farḍ prayer, though it still counts as nafl.',
+    explanation:
+      "Correct — following a traveling imam's mistaken four rakʿahs invalidates the resident's farḍ prayer, though it still counts as nafl.",
   },
   {
     id: 'FQH-TRV-Q13',
     sourceIds: ['FQH-TRV-13'],
     topic: 'TRV',
     type: 'mcq',
-    prompt: 'For qaḍāʾ (making up missed prayers) purposes, what determines the status of a missed Ṣalāh?',
+    prompt:
+      'For qaḍāʾ (making up missed prayers) purposes, what determines the status of a missed Ṣalāh?',
     options: [
       'When it originally became farḍ upon the person',
       'Where the person is when they make it up',
@@ -150,26 +177,31 @@ export const travelQuestions = [
       'Whether the person remembers missing it',
     ],
     answerIndex: 0,
-    explanation: 'The status of any Ṣalāh, for qaḍāʾ purposes, is based on when it originally became farḍ upon the person.',
+    explanation:
+      'The status of any Ṣalāh, for qaḍāʾ purposes, is based on when it originally became farḍ upon the person.',
   },
   {
     id: 'FQH-TRV-Q14',
     sourceIds: ['FQH-TRV-14'],
     topic: 'TRV',
     type: 'tf',
-    prompt: 'True or False: A four-rakʿah Ṣalāh missed while travelling is made up as two rakʿahs, even if the make-up prayer happens after returning home.',
+    prompt:
+      'True or False: A four-rakʿah Ṣalāh missed while travelling is made up as two rakʿahs, even if the make-up prayer happens after returning home.',
     answer: true,
-    explanation: 'Correct — the status at the time it became farḍ (while travelling) determines the qaḍāʾ amount.',
+    explanation:
+      'Correct — the status at the time it became farḍ (while travelling) determines the qaḍāʾ amount.',
   },
   {
     id: 'FQH-TRV-Q15',
     sourceIds: ['FQH-TRV-15'],
     topic: 'TRV',
     type: 'mcq',
-    prompt: 'A four-rakʿah Ṣalāh missed while resident is made up as how many rakʿahs, even if made up while travelling?',
+    prompt:
+      'A four-rakʿah Ṣalāh missed while resident is made up as how many rakʿahs, even if made up while travelling?',
     options: ['Four rakʿahs', 'Two rakʿahs', 'Three rakʿahs', 'It depends on the imam'],
     answerIndex: 0,
-    explanation: 'A prayer missed while resident is made up as four rakʿahs, even if the qaḍāʾ happens while travelling.',
+    explanation:
+      'A prayer missed while resident is made up as four rakʿahs, even if the qaḍāʾ happens while travelling.',
   },
   {
     id: 'FQH-TRV-Q16',
@@ -178,22 +210,25 @@ export const travelQuestions = [
     type: 'mcq',
     prompt: 'The number of rakʿahs to make up for a missed Ṣalāh is based on what?',
     options: [
-      'The person\'s status (resident or traveller) at the end of the original prayer\'s time',
-      'The person\'s status at the moment they make up the prayer',
+      "The person's status (resident or traveller) at the end of the original prayer's time",
+      "The person's status at the moment they make up the prayer",
       'Whichever status gives fewer rakʿahs',
-      'The imam\'s discretion at the time of qaḍāʾ',
+      "The imam's discretion at the time of qaḍāʾ",
     ],
     answerIndex: 0,
-    explanation: 'The ruling on how many rakʿahs to make up is based on the person\'s status at the end of the original prayer\'s time, not when making it up.',
+    explanation:
+      "The ruling on how many rakʿahs to make up is based on the person's status at the end of the original prayer's time, not when making it up.",
   },
   {
     id: 'FQH-TRV-Q17',
     sourceIds: ['FQH-TRV-17'],
     topic: 'TRV',
     type: 'tf',
-    prompt: 'True or False: A traveller on a permissible journey and one on a journey involving disobedience receive the same travel concessions (qaṣr, fasting option).',
+    prompt:
+      'True or False: A traveller on a permissible journey and one on a journey involving disobedience receive the same travel concessions (qaṣr, fasting option).',
     answer: true,
-    explanation: 'Correct — both types of travellers are treated equally regarding travel concessions.',
+    explanation:
+      'Correct — both types of travellers are treated equally regarding travel concessions.',
   },
   {
     id: 'FQH-TRV-Q18',
@@ -208,6 +243,7 @@ export const travelQuestions = [
       'Only qaṣr is forfeited, not the fasting concession',
     ],
     answerIndex: 0,
-    explanation: 'The sinfulness of a journey does not remove the legal rulings/concessions of travel.',
+    explanation:
+      'The sinfulness of a journey does not remove the legal rulings/concessions of travel.',
   },
 ];

@@ -38,7 +38,11 @@ export function updateProfile(profile = {}, events = []) {
 
   for (const event of events) {
     if (!event?.topic) continue;
-    topics[event.topic] = applyAnswer(topics[event.topic], Boolean(event.correct), event.answeredAt);
+    topics[event.topic] = applyAnswer(
+      topics[event.topic],
+      Boolean(event.correct),
+      event.answeredAt
+    );
   }
 
   return {

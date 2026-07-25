@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
-import {
-  MORPHOLOGY_SCOPE_LABELS,
-  getMorphologyQuestions,
-} from '../data/bank';
+import { MORPHOLOGY_SCOPE_LABELS, getMorphologyQuestions } from '../data/bank';
 import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import { useShuffledOptions } from '../hooks/useShuffledOptions';
 import { shuffleArray } from '../lib/shuffle';
@@ -61,7 +58,12 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
     setAnswered(true);
     setSessionTotal((prev) => prev + 1);
     const correct = option === current.answer;
-    void trackWeaknessAnswer({ question: current, correct, mode: 'morphology', index: currentIndex });
+    void trackWeaknessAnswer({
+      question: current,
+      correct,
+      mode: 'morphology',
+      index: currentIndex,
+    });
     if (correct) {
       setScore((prev) => prev + 1);
     }
@@ -91,7 +93,9 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
           <button className="back-btn" onClick={onBack}>
             Back
           </button>
-          <span className="score">{score} / {sessionTotal}</span>
+          <span className="score">
+            {score} / {sessionTotal}
+          </span>
         </header>
 
         <div className="mode-content">
@@ -105,7 +109,9 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
                   className="morphology-scope-card"
                   onClick={() => handleScopeSelect(card.id)}
                 >
-                  <span className="morphology-scope-ar" dir="rtl">{label.ar}</span>
+                  <span className="morphology-scope-ar" dir="rtl">
+                    {label.ar}
+                  </span>
                   <span className="morphology-scope-en">{label.en}</span>
                   <span className="morphology-scope-desc">{card.description}</span>
                 </button>
@@ -134,12 +140,16 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
         <h2 className="mode-title">{MORPHOLOGY_SCOPE_LABELS[scope].en}</h2>
 
         <div className="morphology-card">
-          <div className="morphology-verb" dir="rtl">{current.verb}</div>
+          <div className="morphology-verb" dir="rtl">
+            {current.verb}
+          </div>
           <div className="morphology-base" dir="rtl">
             <span>{current.baseVerb}</span>
             <span dir="ltr">= {current.baseMeaning}</span>
           </div>
-          <div className="morphology-label" dir="rtl">{current.arabicLabel}</div>
+          <div className="morphology-label" dir="rtl">
+            {current.arabicLabel}
+          </div>
         </div>
 
         <div className="choices morphology-choices">
@@ -170,9 +180,7 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
 
         {answered && (
           <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
-            <div className="feedback-icon">
-              {isCorrect ? <CheckIcon /> : <XIcon />}
-            </div>
+            <div className="feedback-icon">{isCorrect ? <CheckIcon /> : <XIcon />}</div>
             <p className="feedback-reason">
               Correct: {current.answer}.<br />
               {current.explanation}

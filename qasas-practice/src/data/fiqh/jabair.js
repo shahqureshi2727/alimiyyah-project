@@ -8,7 +8,8 @@ export const jabairQuestions = [
     sourceIds: ['FQH-JBR-01'],
     topic: 'JBR',
     type: 'mcq',
-    prompt: 'If a person has a broken or wounded limb, what may they do instead of washing that limb during wuḍūʾ?',
+    prompt:
+      'If a person has a broken or wounded limb, what may they do instead of washing that limb during wuḍūʾ?',
     options: [
       'Wipe over the cast, bandage, or dressing covering it, for as long as the injury remains',
       'Skip washing that limb entirely with no substitute action',
@@ -16,16 +17,19 @@ export const jabairQuestions = [
       'Wash the limb anyway using warm water only',
     ],
     answerIndex: 0,
-    explanation: 'A person with a broken or wounded limb may wipe over the cast, bandage, or dressing instead of washing it, for as long as the injury remains.',
+    explanation:
+      'A person with a broken or wounded limb may wipe over the cast, bandage, or dressing instead of washing it, for as long as the injury remains.',
   },
   {
     id: 'FQH-JBR-Q02',
     sourceIds: ['FQH-JBR-02'],
     topic: 'JBR',
     type: 'tf',
-    prompt: 'True or False: Wiping over a cast or bandage is permissible even if it was put on while the person was in a state of major or minor ritual impurity.',
+    prompt:
+      'True or False: Wiping over a cast or bandage is permissible even if it was put on while the person was in a state of major or minor ritual impurity.',
     answer: true,
-    explanation: 'Correct — the state of purity at the time the cast/bandage was applied does not affect the permissibility of wiping over it.',
+    explanation:
+      'Correct — the state of purity at the time the cast/bandage was applied does not affect the permissibility of wiping over it.',
   },
   {
     id: 'FQH-JBR-Q03',
@@ -40,23 +44,27 @@ export const jabairQuestions = [
       'Exactly half of the cast',
     ],
     answerIndex: 0,
-    explanation: 'It is not required to wipe the entire cast — only part of it — though a weaker opinion holds that wiping the entire cast is required.',
+    explanation:
+      'It is not required to wipe the entire cast — only part of it — though a weaker opinion holds that wiping the entire cast is required.',
   },
   {
     id: 'FQH-JBR-Q04',
     sourceIds: ['FQH-JBR-04'],
     topic: 'JBR',
     type: 'tf',
-    prompt: 'True or False: Exposed skin visible between gaps in a dressing must be washed separately during wuḍūʾ.',
+    prompt:
+      'True or False: Exposed skin visible between gaps in a dressing must be washed separately during wuḍūʾ.',
     answer: false,
-    explanation: 'False — it is not necessary to wash any exposed skin visible between gaps in the dressing.',
+    explanation:
+      'False — it is not necessary to wash any exposed skin visible between gaps in the dressing.',
   },
   {
     id: 'FQH-JBR-Q05',
     sourceIds: ['FQH-JBR-05'],
     topic: 'JBR',
     type: 'mcq',
-    prompt: 'If a cast falls off before the injury heals, what happens to the prayers already prayed while wiping over it?',
+    prompt:
+      'If a cast falls off before the injury heals, what happens to the prayers already prayed while wiping over it?',
     options: [
       'They remain valid and do not need to be repeated',
       'They must all be repeated (qaḍāʾ)',
@@ -64,23 +72,27 @@ export const jabairQuestions = [
       'They become invalid retroactively',
     ],
     answerIndex: 0,
-    explanation: 'If a cast falls off before healing, the previous wiping and the prayers already prayed remain valid — they do not need to be repeated.',
+    explanation:
+      'If a cast falls off before healing, the previous wiping and the prayers already prayed remain valid — they do not need to be repeated.',
   },
   {
     id: 'FQH-JBR-Q06',
     sourceIds: ['FQH-JBR-06'],
     topic: 'JBR',
     type: 'tf',
-    prompt: 'True or False: Wiping over an injured area covered by a cast or bandage counts as washing that area for the purposes of wuḍūʾ or ghusl.',
+    prompt:
+      'True or False: Wiping over an injured area covered by a cast or bandage counts as washing that area for the purposes of wuḍūʾ or ghusl.',
     answer: true,
-    explanation: 'Correct — wiping over the cast/bandage is treated as equivalent to washing that area.',
+    explanation:
+      'Correct — wiping over the cast/bandage is treated as equivalent to washing that area.',
   },
   {
     id: 'FQH-JBR-Q07',
     sourceIds: ['FQH-JBR-07'],
     topic: 'JBR',
     type: 'mcq',
-    prompt: 'If a new cast replaces an old one that had already been wiped, what is the ruling on wiping the new one?',
+    prompt:
+      'If a new cast replaces an old one that had already been wiped, what is the ruling on wiping the new one?',
     options: [
       'Not obligatory, but recommended (mustaḥabb)',
       'Obligatory, with no exception',
@@ -88,7 +100,8 @@ export const jabairQuestions = [
       'Only required if the new cast is a different colour',
     ],
     answerIndex: 0,
-    explanation: 'It is not obligatory to wipe a replacement cast again if the original had already been wiped, though doing so is recommended.',
+    explanation:
+      'It is not obligatory to wipe a replacement cast again if the original had already been wiped, though doing so is recommended.',
   },
   {
     id: 'FQH-JBR-Q08',
@@ -103,6 +116,7 @@ export const jabairQuestions = [
       'Only the exposed skin needs washing, not the cast itself',
     ],
     answerIndex: 0,
-    explanation: 'Per the stronger opinion, only part of the cast needs to be wiped, and exposed skin visible between dressing gaps does not need to be washed.',
+    explanation:
+      'Per the stronger opinion, only part of the cast needs to be wiped, and exposed skin visible between dressing gaps does not need to be washed.',
   },
 ];

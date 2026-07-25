@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { ARABIC_TOPICS, FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS } from '../config/subjects';
+import {
+  ARABIC_TOPICS,
+  FIQH_GROUPS,
+  FIQH_TOPICS,
+  HADITH_TOPICS,
+  TAFSIR_TOPICS,
+} from '../config/subjects';
 import { getUserTopicProfile } from '../lib/topic-stats-firestore';
 import './WeaknessDashboard.css';
 
@@ -19,10 +25,14 @@ export function WeaknessHeatmap({ profile, title = 'Topic Strength' }) {
   const topics = profile?.topics || {};
   const hasData = Object.keys(topics).length > 0;
 
-  const fiqhGroups = useMemo(() => FIQH_GROUPS.map((group) => ({
-    ...group,
-    topics: FIQH_TOPICS.filter((topic) => topic.group === group.code),
-  })), []);
+  const fiqhGroups = useMemo(
+    () =>
+      FIQH_GROUPS.map((group) => ({
+        ...group,
+        topics: FIQH_TOPICS.filter((topic) => topic.group === group.code),
+      })),
+    []
+  );
 
   if (!hasData) {
     return (
@@ -56,29 +66,21 @@ export function WeaknessHeatmap({ profile, title = 'Topic Strength' }) {
         {fiqhGroups.map((group) => (
           <div key={group.code} className="heatmap-group">
             <h4>{group.label}</h4>
-            <div className="heatmap-grid">
-              {group.topics.map(renderTopic)}
-            </div>
+            <div className="heatmap-grid">{group.topics.map(renderTopic)}</div>
           </div>
         ))}
       </section>
       <section className="heatmap-section">
         <h3>Hadith</h3>
-        <div className="heatmap-grid">
-          {HADITH_TOPICS.map(renderTopic)}
-        </div>
+        <div className="heatmap-grid">{HADITH_TOPICS.map(renderTopic)}</div>
       </section>
       <section className="heatmap-section">
         <h3>Tafsir</h3>
-        <div className="heatmap-grid">
-          {TAFSIR_TOPICS.map(renderTopic)}
-        </div>
+        <div className="heatmap-grid">{TAFSIR_TOPICS.map(renderTopic)}</div>
       </section>
       <section className="heatmap-section">
         <h3>Arabic</h3>
-        <div className="heatmap-grid">
-          {ARABIC_TOPICS.map(renderTopic)}
-        </div>
+        <div className="heatmap-grid">{ARABIC_TOPICS.map(renderTopic)}</div>
       </section>
     </div>
   );

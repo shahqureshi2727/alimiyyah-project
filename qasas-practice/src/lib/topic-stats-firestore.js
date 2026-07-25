@@ -68,7 +68,9 @@ export async function recordAttempts({ userId, mode, bankSource, results }) {
 }
 
 export async function getUserTopicStats(userId) {
-  const snapshot = await getDocs(collection(db, USERS_COLLECTION, userId, TOPIC_STATS_SUBCOLLECTION));
+  const snapshot = await getDocs(
+    collection(db, USERS_COLLECTION, userId, TOPIC_STATS_SUBCOLLECTION)
+  );
   return snapshot.docs.map((statDoc) => ({
     id: statDoc.id,
     ...statDoc.data(),
@@ -84,7 +86,9 @@ export async function getAllTopicStatsProfiles() {
     getDocs(collectionGroup(db, TOPIC_STATS_SUBCOLLECTION)),
     getDocs(collection(db, USERS_COLLECTION)),
   ]);
-  const usernames = new Map(usersSnapshot.docs.map((userDoc) => [userDoc.id, userDoc.data().username]));
+  const usernames = new Map(
+    usersSnapshot.docs.map((userDoc) => [userDoc.id, userDoc.data().username])
+  );
   const statsByUser = new Map();
 
   for (const statDoc of statsSnapshot.docs) {

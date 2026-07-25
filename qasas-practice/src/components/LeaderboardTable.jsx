@@ -42,9 +42,7 @@ export default function LeaderboardTable({
               <td className="col-rank">{index + 1}</td>
               <td className="col-name">{result.username}</td>
               <td className="col-score">{result.score}/10</td>
-              <td className="col-time">
-                {formatLeaderboardTime(result.durationSeconds)}
-              </td>
+              <td className="col-time">{formatLeaderboardTime(result.durationSeconds)}</td>
             </tr>
           );
         })}
@@ -59,9 +57,7 @@ export default function LeaderboardTable({
               <td className="col-rank">{userRank}</td>
               <td className="col-name">You: {userResult.username}</td>
               <td className="col-score">{userResult.score}/10</td>
-              <td className="col-time">
-                {formatLeaderboardTime(userResult.durationSeconds)}
-              </td>
+              <td className="col-time">{formatLeaderboardTime(userResult.durationSeconds)}</td>
             </tr>
           </>
         )}

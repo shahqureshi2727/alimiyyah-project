@@ -109,9 +109,7 @@ export default function LeaderboardPreview() {
             )}
 
             {leaderboardData.length === 0 ? (
-              <div className="preview-empty">
-                No results yet this week. Be the first!
-              </div>
+              <div className="preview-empty">No results yet this week. Be the first!</div>
             ) : (
               <LeaderboardTable
                 data={leaderboardData}
@@ -127,10 +125,7 @@ export default function LeaderboardPreview() {
       </div>
 
       {/* View full leaderboard link */}
-      <button
-        className="preview-view-full"
-        onClick={() => navigate('/leaderboard')}
-      >
+      <button className="preview-view-full" onClick={() => navigate('/leaderboard')}>
         View full leaderboard
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <polyline points="9 18 15 12 9 6" />

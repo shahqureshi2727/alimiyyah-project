@@ -16,14 +16,16 @@ export const sajdahTilawahQuestions = [
       'A voluntary prostration of gratitude for good news',
     ],
     answerIndex: 0,
-    explanation: 'Sajdah al-Tilāwah is a prostration of recitation performed when a sajdah verse is recited or heard.',
+    explanation:
+      'Sajdah al-Tilāwah is a prostration of recitation performed when a sajdah verse is recited or heard.',
   },
   {
     id: 'FQH-SJD-Q02',
     sourceIds: ['FQH-SJD-02'],
     topic: 'SJD',
     type: 'tf',
-    prompt: 'True or False: Sajdah al-Tilāwah becomes required both for the one who recites a sajdah verse themselves, and for one who hears it recited live.',
+    prompt:
+      'True or False: Sajdah al-Tilāwah becomes required both for the one who recites a sajdah verse themselves, and for one who hears it recited live.',
     answer: true,
     explanation: 'Correct — it is required whether reciting yourself or hearing it live.',
   },
@@ -32,26 +34,31 @@ export const sajdahTilawahQuestions = [
     sourceIds: ['FQH-SJD-03'],
     topic: 'SJD',
     type: 'mcq',
-    prompt: 'If the same sajdah verse is recited 50 times within one sitting, how many sajdahs are required?',
+    prompt:
+      'If the same sajdah verse is recited 50 times within one sitting, how many sajdahs are required?',
     options: ['One', 'Fifty', 'None', 'Two'],
     answerIndex: 0,
-    explanation: 'Only one sajdah is required if the same verse is recited multiple times within one sitting, even up to ten or a hundred times.',
+    explanation:
+      'Only one sajdah is required if the same verse is recited multiple times within one sitting, even up to ten or a hundred times.',
   },
   {
     id: 'FQH-SJD-Q04',
     sourceIds: ['FQH-SJD-04'],
     topic: 'SJD',
     type: 'tf',
-    prompt: 'True or False: If the same sajdah verse is recited in the masjid and then again later at home, only one sajdah is required in total, since it is the same verse.',
+    prompt:
+      'True or False: If the same sajdah verse is recited in the masjid and then again later at home, only one sajdah is required in total, since it is the same verse.',
     answer: false,
-    explanation: 'False — a new sajdah becomes wājib each time the verse is recited in a different sitting; the masjid recitation and the home recitation each require their own sajdah.',
+    explanation:
+      'False — a new sajdah becomes wājib each time the verse is recited in a different sitting; the masjid recitation and the home recitation each require their own sajdah.',
   },
   {
     id: 'FQH-SJD-Q05',
     sourceIds: ['FQH-SJD-05'],
     topic: 'SJD',
     type: 'mcq',
-    prompt: 'Whose obligation is it to perform Sajdah al-Tilāwah when a sajdah verse is recited in a gathering?',
+    prompt:
+      'Whose obligation is it to perform Sajdah al-Tilāwah when a sajdah verse is recited in a gathering?',
     options: [
       'Both the reciter and anyone listening live',
       'Only the reciter, not the listeners',
@@ -59,23 +66,27 @@ export const sajdahTilawahQuestions = [
       'Neither — it is only obligatory when reciting alone',
     ],
     answerIndex: 0,
-    explanation: 'The obligation of Sajdah al-Tilāwah applies equally to the reciter and to the one who listens live.',
+    explanation:
+      'The obligation of Sajdah al-Tilāwah applies equally to the reciter and to the one who listens live.',
   },
   {
     id: 'FQH-SJD-Q06',
     sourceIds: ['FQH-SJD-06'],
     topic: 'SJD',
     type: 'tf',
-    prompt: 'True or False: Hearing a sajdah verse played back from a recorded video or app requires performing Sajdah al-Tilāwah.',
+    prompt:
+      'True or False: Hearing a sajdah verse played back from a recorded video or app requires performing Sajdah al-Tilāwah.',
     answer: false,
-    explanation: 'False — no Sajdah al-Tilāwah is required when a sajdah verse is heard from a recording or a replay of a pre-recorded talk.',
+    explanation:
+      'False — no Sajdah al-Tilāwah is required when a sajdah verse is heard from a recording or a replay of a pre-recorded talk.',
   },
   {
     id: 'FQH-SJD-Q07',
     sourceIds: ['FQH-SJD-07'],
     topic: 'SJD',
     type: 'mcq',
-    prompt: 'In which of the following cases IS Sajdah al-Tilāwah required upon hearing a sajdah verse?',
+    prompt:
+      'In which of the following cases IS Sajdah al-Tilāwah required upon hearing a sajdah verse?',
     options: [
       'Hearing it via a live broadcast or masjid transmitter',
       'Hearing it from a pre-recorded talk',
@@ -83,14 +94,16 @@ export const sajdahTilawahQuestions = [
       'Hearing it from a phone app',
     ],
     answerIndex: 0,
-    explanation: 'Sajdah al-Tilāwah is required when the verse is heard live — e.g. via live broadcast, masjid transmitters, or live radio/streaming — but not from recordings.',
+    explanation:
+      'Sajdah al-Tilāwah is required when the verse is heard live — e.g. via live broadcast, masjid transmitters, or live radio/streaming — but not from recordings.',
   },
   {
     id: 'FQH-SJD-Q08',
     sourceIds: ['FQH-SJD-06', 'FQH-SJD-07'],
     topic: 'SJD',
     type: 'mcq',
-    prompt: 'What distinguishes when hearing a sajdah verse requires performing the sajdah, versus when it does not?',
+    prompt:
+      'What distinguishes when hearing a sajdah verse requires performing the sajdah, versus when it does not?',
     options: [
       'Whether it is heard live (required) versus from a recording or replay (not required)',
       'Whether it is heard in Arabic versus in translation',
@@ -98,6 +111,7 @@ export const sajdahTilawahQuestions = [
       'Whether the listener is male or female',
     ],
     answerIndex: 0,
-    explanation: 'The determining factor is whether the verse is heard live (broadcast, transmitter, streaming) versus from a recording or a replay, which does not require it.',
+    explanation:
+      'The determining factor is whether the verse is heard live (broadcast, transmitter, streaming) versus from a recording or a replay, which does not require it.',
   },
 ];

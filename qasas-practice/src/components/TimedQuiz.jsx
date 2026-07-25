@@ -150,14 +150,7 @@ function TimerRing({ timeLeft, totalTime }) {
   return (
     <div className="timer-ring-container">
       <svg className="timer-ring" viewBox="0 0 100 100">
-        <circle
-          className="timer-ring-bg"
-          cx="50"
-          cy="50"
-          r="45"
-          fill="none"
-          strokeWidth="8"
-        />
+        <circle className="timer-ring-bg" cx="50" cy="50" r="45" fill="none" strokeWidth="8" />
         <circle
           className={`timer-ring-progress ${colorClass}`}
           cx="50"
@@ -219,17 +212,10 @@ function ExitDialog({ onCancel, onConfirm }) {
         <h2>Exit quiz?</h2>
         <p>Your progress won't be saved.</p>
         <div className="exit-dialog-buttons">
-          <button
-            ref={cancelRef}
-            className="exit-dialog-btn cancel"
-            onClick={onCancel}
-          >
+          <button ref={cancelRef} className="exit-dialog-btn cancel" onClick={onCancel}>
             Cancel
           </button>
-          <button
-            className="exit-dialog-btn confirm"
-            onClick={onConfirm}
-          >
+          <button className="exit-dialog-btn confirm" onClick={onConfirm}>
             Exit
           </button>
         </div>
@@ -241,7 +227,13 @@ function ExitDialog({ onCancel, onConfirm }) {
 // Inline check icon
 function CheckIcon() {
   return (
-    <svg className="inline-icon check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg
+      className="inline-icon check"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -250,7 +242,13 @@ function CheckIcon() {
 // Inline X icon
 function XIcon() {
   return (
-    <svg className="inline-icon x" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg
+      className="inline-icon x"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+    >
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
@@ -296,11 +294,13 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
       if (mode === 'review' && user) {
         const topicStats = await getUserTopicStats(user.uid);
-        const wrongSnap = await getDocs(query(
-          collection(db, 'answerEvents'),
-          where('userId', '==', user.uid),
-          where('correct', '==', false)
-        ));
+        const wrongSnap = await getDocs(
+          query(
+            collection(db, 'answerEvents'),
+            where('userId', '==', user.uid),
+            where('correct', '==', false)
+          )
+        );
         const missedIds = new Set(wrongSnap.docs.map((eventDoc) => eventDoc.data().questionId));
         selected = selectDailyReviewQuestions({
           bank,
@@ -313,7 +313,9 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       }
 
       const prepared = selected.map((question) =>
-        (question.reviewMode || mode) === 'morphology' ? shuffleMorphologyOptions(question) : question
+        (question.reviewMode || mode) === 'morphology'
+          ? shuffleMorphologyOptions(question)
+          : question
       );
 
       if (!cancelled) {
@@ -326,9 +328,10 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       console.error('Error loading quiz questions:', err);
       if (!cancelled) {
         const fallbackBank = getBank(mode, topic);
-        const fallback = mode === 'review'
-          ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
-          : selectQuestions(fallbackBank);
+        const fallback =
+          mode === 'review'
+            ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
+            : selectQuestions(fallbackBank);
         setQuestions(fallback);
         setQuestionStartTime(currentTime());
       }
@@ -382,7 +385,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       return;
     }
 
-    setCurrentIndex(prev => prev + 1);
+    setCurrentIndex((prev) => prev + 1);
     setTimeLeft(QUIZ_MODES[mode].timerSeconds);
     setShowFeedback(false);
     setCurrentAnswer(null);
@@ -412,21 +415,32 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
     // Record result
     const targetDisplay = getQuestionTarget(currentMode, current);
-    setResults(prev => [...prev, {
-      question: current,
-      correct: false,
-      timeTaken: questionTime,
-      target: targetDisplay,
-      answerEvent: questionResultFromAnswer({
+    setResults((prev) => [
+      ...prev,
+      {
         question: current,
         correct: false,
-        mode: currentMode,
-        index: currentIndex,
-      }),
-    }]);
+        timeTaken: questionTime,
+        target: targetDisplay,
+        answerEvent: questionResultFromAnswer({
+          question: current,
+          correct: false,
+          mode: currentMode,
+          index: currentIndex,
+        }),
+      },
+    ]);
 
     setTimeout(() => advanceQuestion(), 1000);
-  }, [advanceQuestion, currentIndex, questions, questionStartTime, quizComplete, showFeedback, mode]);
+  }, [
+    advanceQuestion,
+    currentIndex,
+    questions,
+    questionStartTime,
+    quizComplete,
+    showFeedback,
+    mode,
+  ]);
 
   // Timer effect
   useEffect(() => {
@@ -445,7 +459,15 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [currentIndex, quizComplete, isTimerPaused, questions.length, mode, showExitDialog, handleTimeout]);
+  }, [
+    currentIndex,
+    quizComplete,
+    isTimerPaused,
+    questions.length,
+    mode,
+    showExitDialog,
+    handleTimeout,
+  ]);
 
   const handleAnswer = (correct, answer) => {
     if (showFeedback || quizComplete) return;
@@ -460,7 +482,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     setIsTimerPaused(true);
 
     if (correct) {
-      setScore(prev => prev + 1);
+      setScore((prev) => prev + 1);
     }
 
     // For vocab, track the choice
@@ -470,18 +492,21 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
     // Record result
     const targetDisplay = getQuestionTarget(currentMode, current);
-    setResults(prev => [...prev, {
-      question: current,
-      correct,
-      timeTaken: questionTime,
-      target: targetDisplay,
-      answerEvent: questionResultFromAnswer({
+    setResults((prev) => [
+      ...prev,
+      {
         question: current,
         correct,
-        mode: currentMode,
-        index: currentIndex,
-      }),
-    }]);
+        timeTaken: questionTime,
+        target: targetDisplay,
+        answerEvent: questionResultFromAnswer({
+          question: current,
+          correct,
+          mode: currentMode,
+          index: currentIndex,
+        }),
+      },
+    ]);
 
     setTimeout(() => advanceQuestion(), 1000);
   };
@@ -534,7 +559,17 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     };
 
     saveResult();
-  }, [quizComplete, user, username, mode, score, totalDuration, saveStatus, results, questions.length]);
+  }, [
+    quizComplete,
+    user,
+    username,
+    mode,
+    score,
+    totalDuration,
+    saveStatus,
+    results,
+    questions.length,
+  ]);
 
   if (questions.length === 0) {
     return (
@@ -554,11 +589,17 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     return (
       <div className="quiz-results">
         {isHighScore && <Confetti />}
-        <div className={`results-header ${isHighScore ? 'high-score' : isGoodScore ? 'good-score' : 'low-score'}`}>
-          <h1 className="results-score">{score} / {totalQuestions}</h1>
+        <div
+          className={`results-header ${isHighScore ? 'high-score' : isGoodScore ? 'good-score' : 'low-score'}`}
+        >
+          <h1 className="results-score">
+            {score} / {totalQuestions}
+          </h1>
           <p className="results-time">{formatDuration(Math.round(totalDuration))}</p>
           {isHighScore && <p className="results-message">Excellent work!</p>}
-          {!isHighScore && isGoodScore && <p className="results-message">Good job! Keep practicing.</p>}
+          {!isHighScore && isGoodScore && (
+            <p className="results-message">Good job! Keep practicing.</p>
+          )}
           {!isGoodScore && <p className="results-message">Keep going! You'll improve.</p>}
           <div className="save-status">
             {saveStatus === 'saving' && <span className="saving">Saving...</span>}
@@ -571,9 +612,14 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
           <h2>Question Breakdown</h2>
           <div className="breakdown-list">
             {results.map((result, idx) => (
-              <div key={idx} className={`breakdown-row ${result.correct ? 'correct' : 'incorrect'}`}>
+              <div
+                key={idx}
+                className={`breakdown-row ${result.correct ? 'correct' : 'incorrect'}`}
+              >
                 <span className="breakdown-num">Q{idx + 1}</span>
-                <span className="breakdown-target" dir="rtl">{result.target}</span>
+                <span className="breakdown-target" dir="rtl">
+                  {result.target}
+                </span>
                 <span className="breakdown-status">
                   {result.correct ? (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -656,9 +702,10 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       case 'nounFeatures': {
         const allSelected = selectedDef && selectedGender && selectedNumber;
         const checkAnswer = () => {
-          const correct = selectedDef === current.def &&
-                         selectedGender === current.gender &&
-                         selectedNumber === current.number;
+          const correct =
+            selectedDef === current.def &&
+            selectedGender === current.gender &&
+            selectedNumber === current.number;
           handleAnswer(correct, { selectedDef, selectedGender, selectedNumber });
         };
 
@@ -706,18 +753,34 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
         return (
           <>
             <h2 className="quiz-question-text">Tag the noun features</h2>
-            <div className="quiz-word" dir="rtl">{current.word}</div>
+            <div className="quiz-word" dir="rtl">
+              {current.word}
+            </div>
             <div className="quiz-feature-groups">
-              {renderNounOptionGroup('Definiteness', defOptions, selectedDef, setSelectedDef, current.def)}
-              {renderNounOptionGroup('Gender', genderOptions, selectedGender, setSelectedGender, current.gender)}
-              {renderNounOptionGroup('Number', numberOptions, selectedNumber, setSelectedNumber, current.number)}
+              {renderNounOptionGroup(
+                'Definiteness',
+                defOptions,
+                selectedDef,
+                setSelectedDef,
+                current.def
+              )}
+              {renderNounOptionGroup(
+                'Gender',
+                genderOptions,
+                selectedGender,
+                setSelectedGender,
+                current.gender
+              )}
+              {renderNounOptionGroup(
+                'Number',
+                numberOptions,
+                selectedNumber,
+                setSelectedNumber,
+                current.number
+              )}
             </div>
             {!showFeedback && (
-              <button
-                className="quiz-check-btn"
-                onClick={checkAnswer}
-                disabled={!allSelected}
-              >
+              <button className="quiz-check-btn" onClick={checkAnswer} disabled={!allSelected}>
                 Check
               </button>
             )}
@@ -731,7 +794,10 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
             <h2 className="quiz-question-text">
               Tap the <span className="role-name">{current.role}</span>
             </h2>
-            <div className={`quiz-words-container ${showFeedback ? 'feedback-shown' : ''}`} dir="rtl">
+            <div
+              className={`quiz-words-container ${showFeedback ? 'feedback-shown' : ''}`}
+              dir="rtl"
+            >
               {current.words.map((word, index) => {
                 const isTapped = index === currentAnswer;
                 const isCorrectAnswer = index === current.answerIndex;
@@ -771,12 +837,16 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
           <>
             <h2 className="quiz-question-text">Choose the correct verb meaning</h2>
             <div className="quiz-morphology-card">
-              <div className="quiz-word" dir="rtl">{current.verb}</div>
+              <div className="quiz-word" dir="rtl">
+                {current.verb}
+              </div>
               <div className="quiz-morphology-base" dir="rtl">
                 <span>{current.baseVerb}</span>
                 <span dir="ltr">= {current.baseMeaning}</span>
               </div>
-              <div className="quiz-morphology-label" dir="rtl">{current.arabicLabel}</div>
+              <div className="quiz-morphology-label" dir="rtl">
+                {current.arabicLabel}
+              </div>
             </div>
             <div className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}>
               {current.options.map((option) => {
@@ -832,9 +902,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
                 <div className="flashcard-front" dir="rtl">
                   {current.ar}
                 </div>
-                <div className="flashcard-back">
-                  {current.en}
-                </div>
+                <div className="flashcard-back">{current.en}</div>
               </div>
             </div>
             {flipped && (
@@ -902,25 +970,22 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
       <header className="quiz-header">
         <div className="quiz-progress">
-          <span>Question {currentIndex + 1} of {questions.length}</span>
+          <span>
+            Question {currentIndex + 1} of {questions.length}
+          </span>
         </div>
         <TimerRing timeLeft={timeLeft} totalTime={QUIZ_MODES[mode].timerSeconds} />
         <div className="quiz-score">
-          <span>{score} / {currentIndex + (showFeedback ? 1 : 0)}</span>
+          <span>
+            {score} / {currentIndex + (showFeedback ? 1 : 0)}
+          </span>
         </div>
       </header>
 
-      <div className="quiz-content">
-        {renderQuestion()}
-      </div>
+      <div className="quiz-content">{renderQuestion()}</div>
 
       {/* Exit confirmation dialog */}
-      {showExitDialog && (
-        <ExitDialog
-          onCancel={handleExitCancel}
-          onConfirm={handleExitConfirm}
-        />
-      )}
+      {showExitDialog && <ExitDialog onCancel={handleExitCancel} onConfirm={handleExitConfirm} />}
     </div>
   );
 }

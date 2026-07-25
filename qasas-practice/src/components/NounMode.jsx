@@ -49,7 +49,12 @@ export default function NounMode({ onBack, score, setScore }) {
     setSessionTotal((prev) => prev + 1);
 
     const correct = defCorrect && genderCorrect && numberCorrect;
-    void trackWeaknessAnswer({ question: current, correct, mode: 'nounFeatures', index: currentIndex });
+    void trackWeaknessAnswer({
+      question: current,
+      correct,
+      mode: 'nounFeatures',
+      index: currentIndex,
+    });
 
     if (correct) {
       setScore((prev) => prev + 1);

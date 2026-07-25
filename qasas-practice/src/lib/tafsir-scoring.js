@@ -57,10 +57,7 @@ const STOPWORDS = new Set([
 ]);
 
 export function normalizeTranslation(value = '') {
-  let normalized = String(value)
-    .toLowerCase()
-    .replace(/[‘’]/g, "'")
-    .replace(/[“”]/g, '"');
+  let normalized = String(value).toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
 
   for (const [pattern, replacement] of CONTRACTIONS) {
     normalized = normalized.replace(pattern, replacement);
@@ -94,11 +91,7 @@ function editDistance(left, right) {
     current[0] = i;
     for (let j = 1; j <= right.length; j += 1) {
       const cost = left[i - 1] === right[j - 1] ? 0 : 1;
-      current[j] = Math.min(
-        previous[j] + 1,
-        current[j - 1] + 1,
-        previous[j - 1] + cost
-      );
+      current[j] = Math.min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + cost);
     }
     previous.splice(0, previous.length, ...current);
   }
@@ -124,9 +117,10 @@ function scoreAgainstReference(reference, answer) {
   const totalWeight = referenceTokens.reduce((sum, token) => sum + wordWeight(token), 0);
 
   for (const referenceToken of referenceTokens) {
-    const answerIndex = answerTokens.findIndex((answerToken, index) => (
-      !matchedAnswerIndexes.has(index) && isCloseToken(referenceToken, answerToken)
-    ));
+    const answerIndex = answerTokens.findIndex(
+      (answerToken, index) =>
+        !matchedAnswerIndexes.has(index) && isCloseToken(referenceToken, answerToken)
+    );
 
     if (answerIndex === -1) {
       missingWords.push(referenceToken);
@@ -160,5 +154,7 @@ export function scoreTafsirAnswer(reference, answer, acceptableVariants = []) {
   const candidates = [reference, ...acceptableVariants].filter(Boolean);
   const scored = candidates.map((candidate) => scoreAgainstReference(candidate, answer));
 
-  return scored.sort((left, right) => right.score - left.score)[0] || scoreAgainstReference('', answer);
+  return (
+    scored.sort((left, right) => right.score - left.score)[0] || scoreAgainstReference('', answer)
+  );
 }
