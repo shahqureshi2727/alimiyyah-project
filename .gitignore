@@ -4,3 +4,6 @@
 qasas-practice/node_modules
 qasas-practice/dist
 qasas-practice/dist-ssr
+graphify-out/
+scripts/__pycache__/
+content/.obsidian/workspace.json
