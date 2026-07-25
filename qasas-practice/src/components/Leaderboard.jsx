@@ -45,7 +45,7 @@ export default function Leaderboard() {
         setLeaderboardData(data);
 
         // Check if user is in top 20
-        const userInTop20 = data.findIndex(r => r.userId === user.uid);
+        const userInTop20 = data.findIndex((r) => r.userId === user.uid);
 
         if (userInTop20 !== -1) {
           setUserResult(null);
@@ -96,7 +96,7 @@ export default function Leaderboard() {
     }
   }, [activeMode, timeWindow, user]);
 
-  const isUserInTop20 = leaderboardData.some(r => r.userId === user?.uid);
+  const isUserInTop20 = leaderboardData.some((r) => r.userId === user?.uid);
 
   return (
     <div className="leaderboard">

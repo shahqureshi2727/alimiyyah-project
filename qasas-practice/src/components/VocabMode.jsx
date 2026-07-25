@@ -21,7 +21,12 @@ export default function VocabMode({ onBack, score, setScore }) {
 
   const handleGrade = (knew) => {
     setSessionTotal((prev) => prev + 1);
-    void trackWeaknessAnswer({ question: current, correct: knew, mode: 'vocab', index: currentIndex });
+    void trackWeaknessAnswer({
+      question: current,
+      correct: knew,
+      mode: 'vocab',
+      index: currentIndex,
+    });
     if (knew) {
       setScore((prev) => prev + 1);
     }
@@ -43,17 +48,12 @@ export default function VocabMode({ onBack, score, setScore }) {
       <div className="mode-content vocab-content">
         <h2 className="mode-title">Tap to reveal meaning</h2>
 
-        <div
-          className={`flashcard ${flipped ? 'flipped' : ''}`}
-          onClick={handleFlip}
-        >
+        <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
           <div className="flashcard-inner">
             <div className="flashcard-front" dir="rtl">
               {current.ar}
             </div>
-            <div className="flashcard-back">
-              {current.en}
-            </div>
+            <div className="flashcard-back">{current.en}</div>
           </div>
         </div>
 

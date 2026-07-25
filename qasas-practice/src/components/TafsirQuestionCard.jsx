@@ -3,7 +3,13 @@ import './TafsirQuestionCard.css';
 
 function CheckIcon() {
   return (
-    <svg className="inline-icon check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg
+      className="inline-icon check"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -11,7 +17,13 @@ function CheckIcon() {
 
 function XIcon() {
   return (
-    <svg className="inline-icon x" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg
+      className="inline-icon x"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+    >
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
@@ -62,11 +74,7 @@ export default function TafsirQuestionCard({ question, showFeedback, currentAnsw
           );
         })}
       </div>
-      {showFeedback && (
-        <p className="tafsir-explanation">
-          Correct: {question.correctTranslation}
-        </p>
-      )}
+      {showFeedback && <p className="tafsir-explanation">Correct: {question.correctTranslation}</p>}
     </div>
   );
 }

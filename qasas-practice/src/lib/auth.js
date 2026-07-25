@@ -11,17 +11,11 @@ import {
   sendPasswordResetEmail,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import {
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from './firebase';
 
 // Synthesize a fake email from username for Firebase Auth
-export const usernameToAuthEmail = (username) =>
-  `${username.toLowerCase().trim()}@qasas.local`;
+export const usernameToAuthEmail = (username) => `${username.toLowerCase().trim()}@qasas.local`;
 
 // Reserved usernames that cannot be used
 const RESERVED_USERNAMES = ['admin', 'administrator', 'root', 'teacher', 'moderator'];
@@ -47,7 +41,8 @@ export function validateUsername(username) {
   if (!USERNAME_REGEX.test(trimmed)) {
     return {
       valid: false,
-      error: 'Username must start with a letter and contain only letters, numbers, and underscores.'
+      error:
+        'Username must start with a letter and contain only letters, numbers, and underscores.',
     };
   }
 
@@ -164,14 +159,14 @@ export async function resetPassword(username) {
     await sendPasswordResetEmail(auth, authEmail);
     return {
       success: true,
-      message: 'If this account has a recovery email, a reset link has been sent.'
+      message: 'If this account has a recovery email, a reset link has been sent.',
     };
   } catch (err) {
     if (err.code === 'auth/user-not-found') {
       // Don't reveal if user exists
       return {
         success: true,
-        message: 'If this account exists and has a recovery email, a reset link has been sent.'
+        message: 'If this account exists and has a recovery email, a reset link has been sent.',
       };
     }
     throw err;

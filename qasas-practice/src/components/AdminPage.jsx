@@ -15,7 +15,13 @@ import { irab, nounFeatures, roles, vocab } from '../data/arabic';
 import { getFiqhQuestions } from '../data/fiqh';
 import { getHadithQuestions } from '../data/hadith';
 import { getTafsirQuestions } from '../data/tafsir';
-import { ARABIC_TOPICS, FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS, QUIZ_MODES } from '../config/subjects';
+import {
+  ARABIC_TOPICS,
+  FIQH_TOPICS,
+  HADITH_TOPICS,
+  TAFSIR_TOPICS,
+  QUIZ_MODES,
+} from '../config/subjects';
 import { WeaknessHeatmap } from './WeaknessDashboard';
 import './AdminPage.css';
 
@@ -50,10 +56,7 @@ function BankViewer() {
   // Filter functions
   const filterIrab = (item) => {
     if (!searchQuery) return true;
-    return (
-      item.sentence.includes(searchQuery) ||
-      item.target.includes(searchQuery)
-    );
+    return item.sentence.includes(searchQuery) || item.target.includes(searchQuery);
   };
 
   const filterNoun = (item) => {
@@ -69,8 +72,7 @@ function BankViewer() {
   const filterVocab = (item) => {
     if (!searchQuery) return true;
     return (
-      item.ar.includes(searchQuery) ||
-      item.en.toLowerCase().includes(searchQuery.toLowerCase())
+      item.ar.includes(searchQuery) || item.en.toLowerCase().includes(searchQuery.toLowerCase())
     );
   };
 
@@ -141,7 +143,9 @@ function BankViewer() {
   return (
     <div className="bank-viewer">
       <div className="bank-summary">
-        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles: {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length} &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir: {allTafsirQuestions.length}
+        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles:{' '}
+        {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length}{' '}
+        &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir: {allTafsirQuestions.length}
       </div>
 
       <div className="bank-search">
@@ -158,10 +162,7 @@ function BankViewer() {
       <div className="bank-sections">
         {/* I'rab Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('irab')}
-          >
+          <button className="section-header" onClick={() => toggleSection('irab')}>
             <span className="section-title">I'rab</span>
             <span className="section-count">{filteredIrab.length}</span>
             <span className={`section-arrow ${expandedSections.irab ? 'expanded' : ''}`}>
@@ -176,9 +177,7 @@ function BankViewer() {
                     {item.sentence.split(item.target).map((part, i, arr) => (
                       <span key={i}>
                         {part}
-                        {i < arr.length - 1 && (
-                          <span className="irab-target">{item.target}</span>
-                        )}
+                        {i < arr.length - 1 && <span className="irab-target">{item.target}</span>}
                       </span>
                     ))}
                   </div>
@@ -196,10 +195,7 @@ function BankViewer() {
 
         {/* Noun Features Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('noun')}
-          >
+          <button className="section-header" onClick={() => toggleSection('noun')}>
             <span className="section-title">Noun Features</span>
             <span className="section-count">{filteredNoun.length}</span>
             <span className={`section-arrow ${expandedSections.noun ? 'expanded' : ''}`}>
@@ -210,7 +206,9 @@ function BankViewer() {
             <div className="section-content">
               {filteredNoun.map((item, idx) => (
                 <div key={idx} className="noun-row">
-                  <span className="noun-word" dir="rtl">{item.word}</span>
+                  <span className="noun-word" dir="rtl">
+                    {item.word}
+                  </span>
                   <div className="noun-tags">
                     <span className="noun-tag tag-def">{defLabels[item.def]}</span>
                     <span className="noun-tag tag-gender">{genderLabels[item.gender]}</span>
@@ -224,10 +222,7 @@ function BankViewer() {
 
         {/* Roles Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('role')}
-          >
+          <button className="section-header" onClick={() => toggleSection('role')}>
             <span className="section-title">Roles</span>
             <span className="section-count">{filteredRole.length}</span>
             <span className={`section-arrow ${expandedSections.role ? 'expanded' : ''}`}>
@@ -240,10 +235,7 @@ function BankViewer() {
                 <div key={idx} className="role-row">
                   <div className="role-sentence" dir="rtl">
                     {item.words.map((word, i) => (
-                      <span
-                        key={i}
-                        className={i === item.answerIndex ? 'role-answer' : ''}
-                      >
+                      <span key={i} className={i === item.answerIndex ? 'role-answer' : ''}>
                         {word}
                         {i < item.words.length - 1 && ' '}
                       </span>
@@ -261,10 +253,7 @@ function BankViewer() {
 
         {/* Vocab Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('vocab')}
-          >
+          <button className="section-header" onClick={() => toggleSection('vocab')}>
             <span className="section-title">Vocab</span>
             <span className="section-count">{filteredVocab.length}</span>
             <span className={`section-arrow ${expandedSections.vocab ? 'expanded' : ''}`}>
@@ -275,7 +264,9 @@ function BankViewer() {
             <div className="section-content">
               {filteredVocab.map((item, idx) => (
                 <div key={idx} className="vocab-row">
-                  <span className="vocab-ar" dir="rtl">{item.ar}</span>
+                  <span className="vocab-ar" dir="rtl">
+                    {item.ar}
+                  </span>
                   <span className="vocab-en">{item.en}</span>
                 </div>
               ))}
@@ -285,10 +276,7 @@ function BankViewer() {
 
         {/* Fiqh Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('fiqh')}
-          >
+          <button className="section-header" onClick={() => toggleSection('fiqh')}>
             <span className="section-title">Fiqh</span>
             <span className="section-count">{filteredFiqh.length}</span>
             <span className={`section-arrow ${expandedSections.fiqh ? 'expanded' : ''}`}>
@@ -302,17 +290,23 @@ function BankViewer() {
                 if (topicQuestions.length === 0) return null;
                 return (
                   <div key={topicMeta.code} className="fiqh-topic-group">
-                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    <h4 className="fiqh-topic-heading">
+                      {topicMeta.label} ({topicQuestions.length})
+                    </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
                         <div className="fiqh-row-prompt">
                           {item.prompt}
-                          {item.madhhab && <span className="fiqh-row-madhhab"> [{item.madhhab}]</span>}
+                          {item.madhhab && (
+                            <span className="fiqh-row-madhhab"> [{item.madhhab}]</span>
+                          )}
                         </div>
                         <div className="fiqh-row-details">
                           <span className="fiqh-row-type">{item.type.toUpperCase()}</span>
                           <span className="fiqh-row-answer">
-                            {item.type === 'mcq' ? item.options[item.answerIndex] : String(item.answer)}
+                            {item.type === 'mcq'
+                              ? item.options[item.answerIndex]
+                              : String(item.answer)}
                           </span>
                           <span className="fiqh-row-sources">{item.sourceIds.join(', ')}</span>
                         </div>
@@ -327,10 +321,7 @@ function BankViewer() {
 
         {/* Hadith Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('hadith')}
-          >
+          <button className="section-header" onClick={() => toggleSection('hadith')}>
             <span className="section-title">Hadith</span>
             <span className="section-count">{filteredHadith.length}</span>
             <span className={`section-arrow ${expandedSections.hadith ? 'expanded' : ''}`}>
@@ -344,7 +335,9 @@ function BankViewer() {
                 if (topicQuestions.length === 0) return null;
                 return (
                   <div key={topicMeta.code} className="fiqh-topic-group">
-                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    <h4 className="fiqh-topic-heading">
+                      {topicMeta.label} ({topicQuestions.length})
+                    </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
                         <div className="fiqh-row-prompt" dir="rtl">
@@ -366,10 +359,7 @@ function BankViewer() {
 
         {/* Tafsir Section */}
         <section className="bank-section">
-          <button
-            className="section-header"
-            onClick={() => toggleSection('tafsir')}
-          >
+          <button className="section-header" onClick={() => toggleSection('tafsir')}>
             <span className="section-title">Tafsir</span>
             <span className="section-count">{filteredTafsir.length}</span>
             <span className={`section-arrow ${expandedSections.tafsir ? 'expanded' : ''}`}>
@@ -383,7 +373,9 @@ function BankViewer() {
                 if (topicQuestions.length === 0) return null;
                 return (
                   <div key={topicMeta.code} className="fiqh-topic-group">
-                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    <h4 className="fiqh-topic-heading">
+                      {topicMeta.label} ({topicQuestions.length})
+                    </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
                         <div className="fiqh-row-prompt" dir="rtl">
@@ -438,9 +430,7 @@ function ClassStats() {
     const weekStart = getWeekStart();
 
     // Filter results for this week
-    const weekResults = allResults.filter(
-      (r) => r.completedAt >= weekStart
-    );
+    const weekResults = allResults.filter((r) => r.completedAt >= weekStart);
 
     // Class overview
     const totalQuizzesWeek = weekResults.length;
@@ -500,9 +490,7 @@ function ClassStats() {
       }
 
       // Last active
-      const lastResult = student.allResults.sort(
-        (a, b) => b.completedAt - a.completedAt
-      )[0];
+      const lastResult = student.allResults.sort((a, b) => b.completedAt - a.completedAt)[0];
 
       return {
         userId: student.userId,
@@ -530,9 +518,7 @@ function ClassStats() {
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter((s) =>
-        s.username.toLowerCase().includes(query)
-      );
+      result = result.filter((s) => s.username.toLowerCase().includes(query));
     }
 
     // Sort
@@ -543,9 +529,7 @@ function ClassStats() {
         case 'username':
           aVal = a.username.toLowerCase();
           bVal = b.username.toLowerCase();
-          return sortDirection === 'asc'
-            ? aVal.localeCompare(bVal)
-            : bVal.localeCompare(aVal);
+          return sortDirection === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
 
         case 'quizzesWeek':
           aVal = a.quizzesWeek;
@@ -619,9 +603,7 @@ function ClassStats() {
             <span className="overview-label">Active students this week</span>
           </div>
           <div className="overview-card">
-            <span className="overview-value">
-              {stats.avgScoreWeek.toFixed(1)}
-            </span>
+            <span className="overview-value">{stats.avgScoreWeek.toFixed(1)}</span>
             <span className="overview-label">Average score this week</span>
           </div>
         </div>
@@ -648,32 +630,20 @@ function ClassStats() {
             <table className="student-table">
               <thead>
                 <tr>
-                  <th
-                    className="sortable"
-                    onClick={() => handleSort('username')}
-                  >
+                  <th className="sortable" onClick={() => handleSort('username')}>
                     Username
                     {sortIcon('username')}
                   </th>
-                  <th
-                    className="sortable col-num"
-                    onClick={() => handleSort('quizzesWeek')}
-                  >
+                  <th className="sortable col-num" onClick={() => handleSort('quizzesWeek')}>
                     Quizzes (Week)
                     {sortIcon('quizzesWeek')}
                   </th>
-                  <th
-                    className="sortable col-num"
-                    onClick={() => handleSort('avgScoreWeek')}
-                  >
+                  <th className="sortable col-num" onClick={() => handleSort('avgScoreWeek')}>
                     Avg Score (Week)
                     {sortIcon('avgScoreWeek')}
                   </th>
                   <th className="col-mode">Weakest Mode</th>
-                  <th
-                    className="sortable col-date"
-                    onClick={() => handleSort('lastActive')}
-                  >
+                  <th className="sortable col-date" onClick={() => handleSort('lastActive')}>
                     Last Active
                     {sortIcon('lastActive')}
                   </th>
@@ -685,19 +655,13 @@ function ClassStats() {
                     <td>{student.username}</td>
                     <td className="col-num">{student.quizzesWeek}</td>
                     <td className="col-num">
-                      {student.avgScoreWeek !== null
-                        ? student.avgScoreWeek.toFixed(1)
-                        : '-'}
+                      {student.avgScoreWeek !== null ? student.avgScoreWeek.toFixed(1) : '-'}
                     </td>
                     <td className="col-mode">
-                      {student.weakestMode
-                        ? MODE_LABELS[student.weakestMode]?.label
-                        : '-'}
+                      {student.weakestMode ? MODE_LABELS[student.weakestMode]?.label : '-'}
                     </td>
                     <td className="col-date">
-                      {student.lastActive
-                        ? formatRelativeTime(student.lastActive)
-                        : '-'}
+                      {student.lastActive ? formatRelativeTime(student.lastActive) : '-'}
                     </td>
                   </tr>
                 ))}
@@ -733,15 +697,16 @@ function AdminWeaknessView() {
     fetchProfiles();
   }, []);
 
-  const topicMeta = useMemo(() => [...FIQH_TOPICS, ...HADITH_TOPICS, ...TAFSIR_TOPICS, ...ARABIC_TOPICS], []);
+  const topicMeta = useMemo(
+    () => [...FIQH_TOPICS, ...HADITH_TOPICS, ...TAFSIR_TOPICS, ...ARABIC_TOPICS],
+    []
+  );
 
   const classProfile = useMemo(() => {
     const topics = {};
 
     for (const topic of topicMeta) {
-      const states = profiles
-        .map((profile) => profile.topics?.[topic.code])
-        .filter(Boolean);
+      const states = profiles.map((profile) => profile.topics?.[topic.code]).filter(Boolean);
       if (states.length === 0) continue;
 
       const attempts = states.reduce((sum, state) => sum + (state.attempts || 0), 0);
@@ -756,23 +721,27 @@ function AdminWeaknessView() {
     return { topics };
   }, [profiles, topicMeta]);
 
-  const reteachTopics = useMemo(() => topicMeta
-    .map((topic) => {
-      const states = profiles
-        .map((profile) => profile.topics?.[topic.code])
-        .filter(Boolean);
-      const weakCount = states.filter((state) => state.status === 'weak').length;
-      return {
-        ...topic,
-        weakShare: states.length > 0 ? weakCount / states.length : 0,
-        studentCount: states.length,
-      };
-    })
-    .filter((topic) => topic.studentCount > 0 && topic.weakShare > 0)
-    .sort((a, b) => b.weakShare - a.weakShare)
-    .slice(0, 8), [profiles, topicMeta]);
+  const reteachTopics = useMemo(
+    () =>
+      topicMeta
+        .map((topic) => {
+          const states = profiles.map((profile) => profile.topics?.[topic.code]).filter(Boolean);
+          const weakCount = states.filter((state) => state.status === 'weak').length;
+          return {
+            ...topic,
+            weakShare: states.length > 0 ? weakCount / states.length : 0,
+            studentCount: states.length,
+          };
+        })
+        .filter((topic) => topic.studentCount > 0 && topic.weakShare > 0)
+        .sort((a, b) => b.weakShare - a.weakShare)
+        .slice(0, 8),
+    [profiles, topicMeta]
+  );
 
-  const selectedProfile = profiles.find((profile) => (profile.userId || profile.id) === selectedUserId);
+  const selectedProfile = profiles.find(
+    (profile) => (profile.userId || profile.id) === selectedUserId
+  );
 
   if (loading) return <div className="stats-loading">Loading weakness data...</div>;
   if (error) return <div className="stats-error">{error}</div>;
@@ -785,12 +754,14 @@ function AdminWeaknessView() {
         <div className="reteach-list">
           {reteachTopics.length === 0 ? (
             <p className="no-students">No weak class topics yet.</p>
-          ) : reteachTopics.map((topic) => (
-            <div key={topic.code} className="reteach-row">
-              <span>{topic.label}</span>
-              <strong>{Math.round(topic.weakShare * 100)}% weak</strong>
-            </div>
-          ))}
+          ) : (
+            reteachTopics.map((topic) => (
+              <div key={topic.code} className="reteach-row">
+                <span>{topic.label}</span>
+                <strong>{Math.round(topic.weakShare * 100)}% weak</strong>
+              </div>
+            ))
+          )}
         </div>
       </section>
 

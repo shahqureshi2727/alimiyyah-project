@@ -62,4 +62,3 @@ describe('weakness scoring', () => {
     expect(reviewWeights(profile)).toEqual({ A: 0.7, B: 0.4 });
   });
 });
-

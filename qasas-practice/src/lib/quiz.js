@@ -43,7 +43,15 @@ const ANSWER_EVENTS_COLLECTION = 'answerEvents';
  * @param {number} params.durationSeconds - Total quiz duration in seconds
  * @returns {Promise<string>} The document ID of the created result
  */
-export async function submitQuizResult({ userId, username, mode, bankSource, score, total = 10, durationSeconds }) {
+export async function submitQuizResult({
+  userId,
+  username,
+  mode,
+  bankSource,
+  score,
+  total = 10,
+  durationSeconds,
+}) {
   const docRef = await addDoc(collection(db, QUIZ_RESULTS_COLLECTION), {
     userId,
     username,
@@ -63,7 +71,14 @@ export async function submitQuizResult({ userId, username, mode, bankSource, sco
  * class use; a future Cloud Function on answerEvents is the upgrade path if
  * server-side integrity becomes necessary.
  */
-export async function submitAnswerEvents({ userId, username, mode, bankSource, results, quizResultId = null }) {
+export async function submitAnswerEvents({
+  userId,
+  username,
+  mode,
+  bankSource,
+  results,
+  quizResultId = null,
+}) {
   const validResults = (results || []).filter(
     (result) => result?.questionId && result?.topic && typeof result.correct === 'boolean'
   );
@@ -107,7 +122,7 @@ export async function getUserRecentResults(userId, maxResults = 5) {
   );
 
   const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
+  return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
     completedAt: doc.data().completedAt?.toDate() || new Date(),
@@ -139,7 +154,12 @@ export function getWeekStart() {
  * @param {number} params.maxResults - Maximum results to return (default 20)
  * @returns {Promise<Array>} Array of leaderboard entries
  */
-export async function getLeaderboard({ mode, allTime = false, bankSource = 'qasas', maxResults = 20 }) {
+export async function getLeaderboard({
+  mode,
+  allTime = false,
+  bankSource = 'qasas',
+  maxResults = 20,
+}) {
   let q;
 
   if (allTime) {
@@ -166,7 +186,7 @@ export async function getLeaderboard({ mode, allTime = false, bankSource = 'qasa
   }
 
   const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
+  return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
     completedAt: doc.data().completedAt?.toDate() || new Date(),
@@ -226,13 +246,10 @@ export async function getUserBestResult({ userId, mode, allTime = false, bankSou
  * @returns {Promise<Array>} Array of all quiz results
  */
 export async function getAllQuizResults() {
-  const q = query(
-    collection(db, QUIZ_RESULTS_COLLECTION),
-    orderBy('completedAt', 'desc')
-  );
+  const q = query(collection(db, QUIZ_RESULTS_COLLECTION), orderBy('completedAt', 'desc'));
 
   const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
+  return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
     completedAt: doc.data().completedAt?.toDate() || new Date(),

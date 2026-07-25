@@ -15,19 +15,14 @@ function averageScore(results) {
   return Math.round((total / results.length) * 100);
 }
 
-export default function TafsirPracticeMode({
-  variant = 'mcq',
-  topic,
-  onBack,
-  score,
-  setScore,
-}) {
+export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack, score, setScore }) {
   const trackWeaknessAnswer = useWeaknessTracking();
   const isVerseMode = variant === 'verse';
   const questions = useMemo(
-    () => (isVerseMode
-      ? getTafsirVerseRecords(topic || 'all')
-      : shuffleArray(getTafsirQuestions(topic || 'all'))),
+    () =>
+      isVerseMode
+        ? getTafsirVerseRecords(topic || 'all')
+        : shuffleArray(getTafsirQuestions(topic || 'all')),
     [isVerseMode, topic]
   );
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -77,7 +72,12 @@ export default function TafsirPracticeMode({
     setVerseFeedback(feedback);
     setSessionTotal((prev) => prev + 1);
     setVerseResults((prev) => [...prev, { verse: current, ...feedback }]);
-    void trackWeaknessAnswer({ question: trackedQuestion, correct, mode: 'tafsir', index: currentIndex });
+    void trackWeaknessAnswer({
+      question: trackedQuestion,
+      correct,
+      mode: 'tafsir',
+      index: currentIndex,
+    });
 
     if (correct) {
       setScore((prev) => prev + 1);
@@ -108,7 +108,9 @@ export default function TafsirPracticeMode({
     return (
       <div className="mode-container">
         <header className="mode-header">
-          <button className="back-btn" onClick={onBack}>Back</button>
+          <button className="back-btn" onClick={onBack}>
+            Back
+          </button>
         </header>
         <div className="mode-content">
           <p>No Tafsir questions available for this selection yet.</p>
@@ -122,8 +124,12 @@ export default function TafsirPracticeMode({
     return (
       <div className="mode-container">
         <header className="mode-header">
-          <button className="back-btn" onClick={onBack}>Back</button>
-          <span className="score">{correctCount} / {verseResults.length}</span>
+          <button className="back-btn" onClick={onBack}>
+            Back
+          </button>
+          <span className="score">
+            {correctCount} / {verseResults.length}
+          </span>
         </header>
         <div className="mode-content">
           <div className="tafsir-summary">

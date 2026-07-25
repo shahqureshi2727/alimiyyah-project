@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "format": "prettier \"src/**/*.{js,jsx,css}\" --write",
+    "format:check": "prettier \"src/**/*.{js,jsx,css}\" --check",
     "test": "vitest run",
     "preview": "vite preview",
     "validate:fiqh": "node scripts/validate-fiqh-bank.mjs",
@@ -25,10 +27,12 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.3.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "firebase-admin": "^14.2.0",
     "globals": "^17.6.0",
+    "prettier": "^3.9.6",
     "vite": "^8.0.12",
     "vitest": "^4.1.10"
   }

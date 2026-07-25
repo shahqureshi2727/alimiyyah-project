@@ -45,7 +45,8 @@ describe('tafsir source verse bank', () => {
   });
 
   it('uses clean Unicode Arabic instead of PDF extraction artifacts', () => {
-    const extractionArtifacts = /[\u200e\u200f\u202a-\u202e\ue000-\uf8ff\ufb50-\ufdff\ufe70-\ufeff]/;
+    const extractionArtifacts =
+      /[\u200e\u200f\u202a-\u202e\ue000-\uf8ff\ufb50-\ufdff\ufe70-\ufeff]/;
 
     for (const record of tafsirVerseRecords) {
       expect(record.arabicText).not.toMatch(extractionArtifacts);
@@ -83,12 +84,42 @@ describe('tafsir source verse bank', () => {
 
   it('exports surah dropdown options sorted by surah number', () => {
     expect(getTafsirSurahOptions()).toEqual([
-      expect.objectContaining({ code: 'ASR', label: 'Surah Al-Asr', surahNumber: 103, ayahCount: 3 }),
-      expect.objectContaining({ code: 'FIL', label: 'Surah Al-Fil', surahNumber: 105, ayahCount: 5 }),
-      expect.objectContaining({ code: 'QUR', label: 'Surah Quraysh', surahNumber: 106, ayahCount: 4 }),
-      expect.objectContaining({ code: 'MAU', label: "Surah Al-Ma'un", surahNumber: 107, ayahCount: 7 }),
-      expect.objectContaining({ code: 'KAW', label: 'Surah Al-Kawthar', surahNumber: 108, ayahCount: 3 }),
-      expect.objectContaining({ code: 'KAF', label: 'Surah Al-Kafirun', surahNumber: 109, ayahCount: 6 }),
+      expect.objectContaining({
+        code: 'ASR',
+        label: 'Surah Al-Asr',
+        surahNumber: 103,
+        ayahCount: 3,
+      }),
+      expect.objectContaining({
+        code: 'FIL',
+        label: 'Surah Al-Fil',
+        surahNumber: 105,
+        ayahCount: 5,
+      }),
+      expect.objectContaining({
+        code: 'QUR',
+        label: 'Surah Quraysh',
+        surahNumber: 106,
+        ayahCount: 4,
+      }),
+      expect.objectContaining({
+        code: 'MAU',
+        label: "Surah Al-Ma'un",
+        surahNumber: 107,
+        ayahCount: 7,
+      }),
+      expect.objectContaining({
+        code: 'KAW',
+        label: 'Surah Al-Kawthar',
+        surahNumber: 108,
+        ayahCount: 3,
+      }),
+      expect.objectContaining({
+        code: 'KAF',
+        label: 'Surah Al-Kafirun',
+        surahNumber: 109,
+        ayahCount: 6,
+      }),
     ]);
   });
 

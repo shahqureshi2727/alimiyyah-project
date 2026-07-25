@@ -16,16 +16,19 @@ export const prayerOfTheSickQuestions = [
       'Never — standing is always required if physically possible at all',
     ],
     answerIndex: 0,
-    explanation: 'A person may pray seated if standing is difficult or harmful due to severe pain or fear of worsening illness/delayed recovery.',
+    explanation:
+      'A person may pray seated if standing is difficult or harmful due to severe pain or fear of worsening illness/delayed recovery.',
   },
   {
     id: 'FQH-MRD-Q02',
     sourceIds: ['FQH-MRD-02'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: A person praying seated still performs the normal bowing (rukūʿ) and prostration (sujūd), and may sit in any comfortable manner.',
+    prompt:
+      'True or False: A person praying seated still performs the normal bowing (rukūʿ) and prostration (sujūd), and may sit in any comfortable manner.',
     answer: true,
-    explanation: 'Correct — normal rukūʿ and sujūd are still performed while seated, in any comfortable sitting position.',
+    explanation:
+      'Correct — normal rukūʿ and sujūd are still performed while seated, in any comfortable sitting position.',
   },
   {
     id: 'FQH-MRD-Q03',
@@ -40,14 +43,16 @@ export const prayerOfTheSickQuestions = [
       'Ask someone else to pray on their behalf',
     ],
     answerIndex: 0,
-    explanation: 'A sick person who can stand for only part of the prayer must stand for as much as they are able.',
+    explanation:
+      'A sick person who can stand for only part of the prayer must stand for as much as they are able.',
   },
   {
     id: 'FQH-MRD-Q04',
     sourceIds: ['FQH-MRD-04'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: A person who cannot bow or prostrate should pray using head gestures, with the gesture for sujūd lower than the gesture for rukūʿ.',
+    prompt:
+      'True or False: A person who cannot bow or prostrate should pray using head gestures, with the gesture for sujūd lower than the gesture for rukūʿ.',
     answer: true,
     explanation: 'Correct — the sujūd gesture must be lower than the rukūʿ gesture.',
   },
@@ -64,14 +69,16 @@ export const prayerOfTheSickQuestions = [
       'It is valid as long as the person intends the difference',
     ],
     answerIndex: 0,
-    explanation: 'The Ṣalāh is not valid if the gesture for sujūd is the same as the gesture for rukūʿ — the sujūd gesture must be distinctly lower.',
+    explanation:
+      'The Ṣalāh is not valid if the gesture for sujūd is the same as the gesture for rukūʿ — the sujūd gesture must be distinctly lower.',
   },
   {
     id: 'FQH-MRD-Q06',
     sourceIds: ['FQH-MRD-06'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: A sick person performs whatever they are able of Qurʾān recitation, tasbīḥ, and tashahhud; whatever they cannot perform is waived.',
+    prompt:
+      'True or False: A sick person performs whatever they are able of Qurʾān recitation, tasbīḥ, and tashahhud; whatever they cannot perform is waived.',
     answer: true,
     explanation: 'Correct — ability determines what is performed, and inability waives the rest.',
   },
@@ -88,14 +95,16 @@ export const prayerOfTheSickQuestions = [
       'They must stop praying until sitting becomes possible again',
     ],
     answerIndex: 0,
-    explanation: 'If sitting is too difficult, a person should pray lying on their back (preferred) or on their side.',
+    explanation:
+      'If sitting is too difficult, a person should pray lying on their back (preferred) or on their side.',
   },
   {
     id: 'FQH-MRD-Q08',
     sourceIds: ['FQH-MRD-08'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: A person praying lying down should face the qiblah rather than the sky, and keep the knees bent where possible rather than stretching the legs toward the qiblah.',
+    prompt:
+      'True or False: A person praying lying down should face the qiblah rather than the sky, and keep the knees bent where possible rather than stretching the legs toward the qiblah.',
     answer: true,
     explanation: 'Correct — this is the recommended position for a person praying lying down.',
   },
@@ -104,7 +113,8 @@ export const prayerOfTheSickQuestions = [
     sourceIds: ['FQH-MRD-09'],
     topic: 'MRD',
     type: 'mcq',
-    prompt: 'If a person cannot even gesture with their head, what should they do instead — gesture with their eyes, eyebrows, or heart?',
+    prompt:
+      'If a person cannot even gesture with their head, what should they do instead — gesture with their eyes, eyebrows, or heart?',
     options: [
       'No — the Ṣalāh is delayed instead, since rukūʿ/sujūd are not fulfilled by such gestures',
       'Yes, gesturing with the eyes is an acceptable substitute',
@@ -112,23 +122,27 @@ export const prayerOfTheSickQuestions = [
       'Yes, intending it in the heart alone is sufficient',
     ],
     answerIndex: 0,
-    explanation: 'If head gestures are impossible, the Ṣalāh is delayed — gesturing with the eyes, eyebrows, or heart does not fulfil the obligation of rukūʿ and sujūd.',
+    explanation:
+      'If head gestures are impossible, the Ṣalāh is delayed — gesturing with the eyes, eyebrows, or heart does not fulfil the obligation of rukūʿ and sujūd.',
   },
   {
     id: 'FQH-MRD-Q10',
     sourceIds: ['FQH-MRD-10'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: If the inability to pray lasts one day and night or less, the person must make up only those missed prayers upon recovery.',
+    prompt:
+      'True or False: If the inability to pray lasts one day and night or less, the person must make up only those missed prayers upon recovery.',
     answer: true,
-    explanation: 'Correct — a short inability (one day and night or less) requires making up only the missed prayers.',
+    explanation:
+      'Correct — a short inability (one day and night or less) requires making up only the missed prayers.',
   },
   {
     id: 'FQH-MRD-Q11',
     sourceIds: ['FQH-MRD-11'],
     topic: 'MRD',
     type: 'mcq',
-    prompt: 'If the inability to pray lasts long enough to miss more than five prayers, what happens to the obligation of making them up?',
+    prompt:
+      'If the inability to pray lasts long enough to miss more than five prayers, what happens to the obligation of making them up?',
     options: [
       'It is waived entirely, to remove undue hardship',
       'It still must be fully made up, no matter how long',
@@ -136,28 +150,33 @@ export const prayerOfTheSickQuestions = [
       'A fidyah must be paid instead, with no exceptions',
     ],
     answerIndex: 0,
-    explanation: 'If the inability lasts long enough to miss more than five prayers, the obligation to make them up is waived entirely.',
+    explanation:
+      'If the inability lasts long enough to miss more than five prayers, the obligation to make them up is waived entirely.',
   },
   {
     id: 'FQH-MRD-Q12',
     sourceIds: ['FQH-MRD-10', 'FQH-MRD-11'],
     topic: 'MRD',
     type: 'mcq',
-    prompt: 'What is the threshold that determines whether missed prayers due to illness must be made up, or are waived?',
+    prompt:
+      'What is the threshold that determines whether missed prayers due to illness must be made up, or are waived?',
     options: [
       'Whether more than five prayers were missed (waived) versus one day/night or less (made up)',
       'Whether the person was hospitalized',
       'Whether the illness was contagious',
-      'Whether the person had insurance'],
+      'Whether the person had insurance',
+    ],
     answerIndex: 0,
-    explanation: 'One day and night or less (roughly five prayers) requires making up the missed prayers; missing more than five waives the obligation entirely.',
+    explanation:
+      'One day and night or less (roughly five prayers) requires making up the missed prayers; missing more than five waives the obligation entirely.',
   },
   {
     id: 'FQH-MRD-Q13',
     sourceIds: ['FQH-MRD-12'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: No fidyah is required if a sick person dies before recovering sufficiently to make up missed prayers or fasts.',
+    prompt:
+      'True or False: No fidyah is required if a sick person dies before recovering sufficiently to make up missed prayers or fasts.',
     answer: true,
     explanation: 'Correct — dying before sufficient recovery means no fidyah is owed.',
   },
@@ -174,15 +193,18 @@ export const prayerOfTheSickQuestions = [
       'Fidyah is never required under any circumstance',
     ],
     answerIndex: 0,
-    explanation: 'Fidyah is required if the person recovered (or the traveller returned and resided 15+ days) yet died before making up the missed prayers/fasts — a bequest from up to one-third of the estate is then made.',
+    explanation:
+      'Fidyah is required if the person recovered (or the traveller returned and resided 15+ days) yet died before making up the missed prayers/fasts — a bequest from up to one-third of the estate is then made.',
   },
   {
     id: 'FQH-MRD-Q15',
     sourceIds: ['FQH-MRD-14'],
     topic: 'MRD',
     type: 'tf',
-    prompt: 'True or False: The fidyah amount for each missed prayer or fast is half a ṣāʿ (~2.2kg) of wheat, or one ṣāʿ (~4.4kg) of barley, or their cash equivalent.',
+    prompt:
+      'True or False: The fidyah amount for each missed prayer or fast is half a ṣāʿ (~2.2kg) of wheat, or one ṣāʿ (~4.4kg) of barley, or their cash equivalent.',
     answer: true,
-    explanation: 'Correct — this is the fidyah amount for each missed prayer (including witr) and each missed fast.',
+    explanation:
+      'Correct — this is the fidyah amount for each missed prayer (including witr) and each missed fast.',
   },
 ];

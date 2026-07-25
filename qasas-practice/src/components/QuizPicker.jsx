@@ -95,10 +95,7 @@ export default function QuizPicker({ onSelectMode, onBack }) {
                 {mode.format} &middot; {mode.timer}
               </span>
             </div>
-            <button
-              className="quiz-start-btn"
-              onClick={() => onSelectMode(mode.id)}
-            >
+            <button className="quiz-start-btn" onClick={() => onSelectMode(mode.id)}>
               Start
             </button>
           </div>

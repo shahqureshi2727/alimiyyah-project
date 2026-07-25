@@ -27,14 +27,16 @@ export const wudhuQuestions = [
     prompt: 'Wuḍūʾ is farḍ (obligatory) before which of the following?',
     options: ['Performing Ṣalāh', 'Eating a meal', 'Sleeping', 'Reading a non-Quranic book'],
     answerIndex: 0,
-    explanation: 'Wuḍūʾ is farḍ before performing Ṣalāh — one of four occasions covered in this list.',
+    explanation:
+      'Wuḍūʾ is farḍ before performing Ṣalāh — one of four occasions covered in this list.',
   },
   {
     id: 'FQH-WUD-Q02',
     sourceIds: ['FQH-WUD-02'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Wuḍūʾ is farḍ before touching the Muṣḥaf (the physical copy of the Qurʾān).',
+    prompt:
+      'True or False: Wuḍūʾ is farḍ before touching the Muṣḥaf (the physical copy of the Qurʾān).',
     answer: true,
     explanation: 'Correct — touching the Muṣḥaf is one of the four occasions where wuḍūʾ is farḍ.',
   },
@@ -43,10 +45,12 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-03'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'Wuḍūʾ is farḍ before performing which prayer specifically named among the four farḍ-wuḍūʾ occasions?',
+    prompt:
+      'Wuḍūʾ is farḍ before performing which prayer specifically named among the four farḍ-wuḍūʾ occasions?',
     options: ['Ṣalāt al-Janāzah', 'Ṣalāt al-Ḍuḥā', 'Ṣalāt al-Tarāwīḥ', 'Ṣalāt al-Istikhārah'],
     answerIndex: 0,
-    explanation: 'Ṣalāt al-Janāzah (the funeral prayer) is one of the four occasions where wuḍūʾ is farḍ.',
+    explanation:
+      'Ṣalāt al-Janāzah (the funeral prayer) is one of the four occasions where wuḍūʾ is farḍ.',
   },
   {
     id: 'FQH-WUD-Q04',
@@ -55,7 +59,8 @@ export const wudhuQuestions = [
     type: 'tf',
     prompt: 'True or False: Wuḍūʾ is farḍ before performing Sajdah al-Tilāwah.',
     answer: true,
-    explanation: 'Correct — the prostration of recitation is one of the four occasions where wuḍūʾ is farḍ.',
+    explanation:
+      'Correct — the prostration of recitation is one of the four occasions where wuḍūʾ is farḍ.',
   },
   {
     id: 'FQH-WUD-Q05',
@@ -63,9 +68,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the occasions where wuḍūʾ is farḍ?',
-    options: ['Touching the Muṣḥaf', 'Performing Ṣalāt al-Janāzah', 'Reciting Qurʾān from memory without touching it', 'Performing Sajdah al-Tilāwah'],
+    options: [
+      'Touching the Muṣḥaf',
+      'Performing Ṣalāt al-Janāzah',
+      'Reciting Qurʾān from memory without touching it',
+      'Performing Sajdah al-Tilāwah',
+    ],
     answerIndex: 2,
-    explanation: 'Reciting the Qurʾān from memory (without touching the Muṣḥaf) does not itself require wuḍūʾ — the other three are farḍ occasions.',
+    explanation:
+      'Reciting the Qurʾān from memory (without touching the Muṣḥaf) does not itself require wuḍūʾ — the other three are farḍ occasions.',
   },
   {
     id: 'FQH-WUD-Q06',
@@ -82,9 +93,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'It is mustaḥabb to perform wuḍūʾ at which of these times?',
-    options: ['Upon waking from sleep', 'Only before Jumuʿah', 'Only in Ramaḍān', 'Never — only farḍ occasions require it'],
+    options: [
+      'Upon waking from sleep',
+      'Only before Jumuʿah',
+      'Only in Ramaḍān',
+      'Never — only farḍ occasions require it',
+    ],
     answerIndex: 0,
-    explanation: 'Performing wuḍūʾ upon waking from sleep is mustaḥabb — one of several recommended occasions.',
+    explanation:
+      'Performing wuḍūʾ upon waking from sleep is mustaḥabb — one of several recommended occasions.',
   },
   {
     id: 'FQH-WUD-Q08',
@@ -101,7 +118,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'It is mustaḥabb to renew wuḍūʾ after which of the following?',
-    options: ['Backbiting, slander, lying, or any sin', 'Drinking water', 'Reading a novel', 'Walking outside'],
+    options: [
+      'Backbiting, slander, lying, or any sin',
+      'Drinking water',
+      'Reading a novel',
+      'Walking outside',
+    ],
     answerIndex: 0,
     explanation: 'Renewing wuḍūʾ after backbiting, slander, lying, or any sin is mustaḥabb.',
   },
@@ -110,7 +132,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-09'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: It is mustaḥabb to be in wuḍūʾ at the time of every prayer, even outside the farḍ occasions.',
+    prompt:
+      'True or False: It is mustaḥabb to be in wuḍūʾ at the time of every prayer, even outside the farḍ occasions.',
     answer: true,
     explanation: 'Correct — being in wuḍūʾ at every prayer time is mustaḥabb.',
   },
@@ -120,7 +143,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'It is mustaḥabb to be in wuḍūʾ when doing which of the following?',
-    options: ['Reciting the Qurʾān verbally', 'Watching television', 'Cooking a meal', 'Doing physical exercise'],
+    options: [
+      'Reciting the Qurʾān verbally',
+      'Watching television',
+      'Cooking a meal',
+      'Doing physical exercise',
+    ],
     answerIndex: 0,
     explanation: 'Being in wuḍūʾ while reciting the Qurʾān verbally is mustaḥabb.',
   },
@@ -139,19 +167,40 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'It is mustaḥabb to be in wuḍūʾ in which of these situations?',
-    options: ['Studying Islamic knowledge', 'Doing arithmetic homework', 'Painting a wall', 'Playing a sport'],
+    options: [
+      'Studying Islamic knowledge',
+      'Doing arithmetic homework',
+      'Painting a wall',
+      'Playing a sport',
+    ],
     answerIndex: 0,
     explanation: 'Being in wuḍūʾ while studying Islamic knowledge is mustaḥabb.',
   },
   {
     id: 'FQH-WUD-Q14',
-    sourceIds: ['FQH-WUD-05', 'FQH-WUD-06', 'FQH-WUD-07', 'FQH-WUD-08', 'FQH-WUD-09', 'FQH-WUD-10', 'FQH-WUD-11', 'FQH-WUD-12'],
+    sourceIds: [
+      'FQH-WUD-05',
+      'FQH-WUD-06',
+      'FQH-WUD-07',
+      'FQH-WUD-08',
+      'FQH-WUD-09',
+      'FQH-WUD-10',
+      'FQH-WUD-11',
+      'FQH-WUD-12',
+    ],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'Which of the following is NOT listed among the mustaḥabb occasions for being in wuḍūʾ?',
-    options: ['Studying Islamic knowledge', 'Reciting the Qurʾān verbally', 'Eating a meal', 'Reading or narrating Ḥadīth'],
+    prompt:
+      'Which of the following is NOT listed among the mustaḥabb occasions for being in wuḍūʾ?',
+    options: [
+      'Studying Islamic knowledge',
+      'Reciting the Qurʾān verbally',
+      'Eating a meal',
+      'Reading or narrating Ḥadīth',
+    ],
     answerIndex: 2,
-    explanation: 'Eating a meal is not one of the mustaḥabb wuḍūʾ occasions in this list; the other three are.',
+    explanation:
+      'Eating a meal is not one of the mustaḥabb wuḍūʾ occasions in this list; the other three are.',
   },
 
   // --- Fiqh-04: Makruh/Haram wudhu, Shurut al-Wujub, Shurut as-Sihhah (FQH-WUD-13..28) ---
@@ -161,28 +210,34 @@ export const wudhuQuestions = [
     topic: 'WUD',
     madhhab: 'Hanafi',
     type: 'mcq',
-    prompt: 'In the Ḥanafī view, wuḍūʾ before Ṭawāf carries which classification, distinct from the four occasions where it is farḍ?',
+    prompt:
+      'In the Ḥanafī view, wuḍūʾ before Ṭawāf carries which classification, distinct from the four occasions where it is farḍ?',
     options: ['Wājib', 'Mubāḥ', 'Makrūh', 'Sunnah'],
     answerIndex: 0,
-    explanation: 'In the Ḥanafī madhhab, wuḍūʾ for Ṭawāf is wājib rather than farḍ — a distinct level of obligation from Ṣalāh, touching the Muṣḥaf, Janāzah, and Sajdah al-Tilāwah.',
+    explanation:
+      'In the Ḥanafī madhhab, wuḍūʾ for Ṭawāf is wājib rather than farḍ — a distinct level of obligation from Ṣalāh, touching the Muṣḥaf, Janāzah, and Sajdah al-Tilāwah.',
   },
   {
     id: 'FQH-WUD-Q16',
     sourceIds: ['FQH-WUD-14'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Renewing wuḍūʾ unnecessarily while already in a state of wuḍūʾ is makrūh if done before changing one\'s place within the same sitting.',
+    prompt:
+      "True or False: Renewing wuḍūʾ unnecessarily while already in a state of wuḍūʾ is makrūh if done before changing one's place within the same sitting.",
     answer: true,
-    explanation: 'Correct — this is one of two circumstances where an unnecessary renewal of wuḍūʾ is makrūh.',
+    explanation:
+      'Correct — this is one of two circumstances where an unnecessary renewal of wuḍūʾ is makrūh.',
   },
   {
     id: 'FQH-WUD-Q17',
     sourceIds: ['FQH-WUD-15'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Renewing wuḍūʾ unnecessarily is makrūh if done before using the existing wuḍūʾ for an act of worship that requires it.',
+    prompt:
+      'True or False: Renewing wuḍūʾ unnecessarily is makrūh if done before using the existing wuḍūʾ for an act of worship that requires it.',
     answer: true,
-    explanation: 'Correct — this is the second circumstance where an unnecessary renewal of wuḍūʾ is makrūh.',
+    explanation:
+      'Correct — this is the second circumstance where an unnecessary renewal of wuḍūʾ is makrūh.',
   },
   {
     id: 'FQH-WUD-Q18',
@@ -192,16 +247,16 @@ export const wudhuQuestions = [
     prompt: 'What is the ruling on performing wuḍūʾ with stolen or usurped water?',
     options: ['Ḥarām', 'Makrūh only', 'Mustaḥabb', 'Permissible without restriction'],
     answerIndex: 0,
-    explanation: 'Using water taken without the owner\'s permission for wuḍūʾ is ḥarām.',
+    explanation: "Using water taken without the owner's permission for wuḍūʾ is ḥarām.",
   },
   {
     id: 'FQH-WUD-Q19',
     sourceIds: ['FQH-WUD-17'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Performing wuḍūʾ using an orphan\'s water without permission is ḥarām.',
+    prompt: "True or False: Performing wuḍūʾ using an orphan's water without permission is ḥarām.",
     answer: true,
-    explanation: 'Correct — using an orphan\'s property unjustly for wuḍūʾ is ḥarām.',
+    explanation: "Correct — using an orphan's property unjustly for wuḍūʾ is ḥarām.",
   },
   {
     id: 'FQH-WUD-Q20',
@@ -209,9 +264,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What do the shurūṭ al-wujūb (conditions of obligation) of wuḍūʾ determine?',
-    options: ['Whether wuḍūʾ becomes required of a person at all', 'Whether a performed wuḍūʾ counts as valid', 'The sunnah order of wuḍūʾ', 'The permissible materials for tayammum'],
+    options: [
+      'Whether wuḍūʾ becomes required of a person at all',
+      'Whether a performed wuḍūʾ counts as valid',
+      'The sunnah order of wuḍūʾ',
+      'The permissible materials for tayammum',
+    ],
     answerIndex: 0,
-    explanation: 'Shurūṭ al-wujūb are the conditions that must be present for wuḍūʾ to become required of a person; if absent, the person is not yet responsible for it.',
+    explanation:
+      'Shurūṭ al-wujūb are the conditions that must be present for wuḍūʾ to become required of a person; if absent, the person is not yet responsible for it.',
   },
   {
     id: 'FQH-WUD-Q21',
@@ -220,7 +281,8 @@ export const wudhuQuestions = [
     type: 'tf',
     prompt: 'True or False: ʿAql (sound mind) is one of the conditions of obligation for wuḍūʾ.',
     answer: true,
-    explanation: 'Correct — ʿAql forms the basis of legal responsibility and is a condition of obligation.',
+    explanation:
+      'Correct — ʿAql forms the basis of legal responsibility and is a condition of obligation.',
   },
   {
     id: 'FQH-WUD-Q22',
@@ -248,16 +310,23 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Access to what is a condition of obligation for wuḍūʾ?',
-    options: ['Sufficient pure water to wash all required limbs once', 'A private bathroom', 'A prayer mat', 'Warm water specifically'],
+    options: [
+      'Sufficient pure water to wash all required limbs once',
+      'A private bathroom',
+      'A prayer mat',
+      'Warm water specifically',
+    ],
     answerIndex: 0,
-    explanation: 'Having enough pure water to wash all the required limbs once is a condition of obligation.',
+    explanation:
+      'Having enough pure water to wash all the required limbs once is a condition of obligation.',
   },
   {
     id: 'FQH-WUD-Q25',
     sourceIds: ['FQH-WUD-23'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: The termination of menstruation, postnatal bleeding, or a state of ritual impurity is a condition of obligation for wuḍūʾ.',
+    prompt:
+      'True or False: The termination of menstruation, postnatal bleeding, or a state of ritual impurity is a condition of obligation for wuḍūʾ.',
     answer: true,
     explanation: 'Correct — this is one of the conditions of obligation (shurūṭ al-wujūb).',
   },
@@ -267,19 +336,40 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'When does wuḍūʾ become obligatory due to the timing of prayer?',
-    options: ['When the time for prayer is nearly ending', 'Only exactly at sunrise', 'Only on Fridays', 'It is never time-dependent'],
+    options: [
+      'When the time for prayer is nearly ending',
+      'Only exactly at sunrise',
+      'Only on Fridays',
+      'It is never time-dependent',
+    ],
     answerIndex: 0,
-    explanation: 'When the time for prayer is nearly ending, wuḍūʾ becomes obligatory as a condition of obligation.',
+    explanation:
+      'When the time for prayer is nearly ending, wuḍūʾ becomes obligatory as a condition of obligation.',
   },
   {
     id: 'FQH-WUD-Q27',
-    sourceIds: ['FQH-WUD-18', 'FQH-WUD-19', 'FQH-WUD-20', 'FQH-WUD-21', 'FQH-WUD-22', 'FQH-WUD-23', 'FQH-WUD-24'],
+    sourceIds: [
+      'FQH-WUD-18',
+      'FQH-WUD-19',
+      'FQH-WUD-20',
+      'FQH-WUD-21',
+      'FQH-WUD-22',
+      'FQH-WUD-23',
+      'FQH-WUD-24',
+    ],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'Which of the following is NOT one of the shurūṭ al-wujūb (conditions of obligation) for wuḍūʾ?',
-    options: ['ʿAql (sound mind)', 'Bulūgh (puberty)', 'Wearing white clothing', 'Access to sufficient pure water'],
+    prompt:
+      'Which of the following is NOT one of the shurūṭ al-wujūb (conditions of obligation) for wuḍūʾ?',
+    options: [
+      'ʿAql (sound mind)',
+      'Bulūgh (puberty)',
+      'Wearing white clothing',
+      'Access to sufficient pure water',
+    ],
     answerIndex: 2,
-    explanation: 'Wearing white clothing is not a condition of obligation for wuḍūʾ; the other three are.',
+    explanation:
+      'Wearing white clothing is not a condition of obligation for wuḍūʾ; the other three are.',
   },
   {
     id: 'FQH-WUD-Q28',
@@ -287,9 +377,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What do the shurūṭ al-ṣiḥḥah (conditions of validity) of wuḍūʾ determine?',
-    options: ['Whether a wuḍūʾ already performed counts as valid', 'Whether wuḍūʾ becomes required of a person', 'The sunnah timing of wuḍūʾ', 'Which water is pure'],
+    options: [
+      'Whether a wuḍūʾ already performed counts as valid',
+      'Whether wuḍūʾ becomes required of a person',
+      'The sunnah timing of wuḍūʾ',
+      'Which water is pure',
+    ],
     answerIndex: 0,
-    explanation: 'Shurūṭ al-ṣiḥḥah determine whether a performed wuḍūʾ is valid; if any is broken, the wuḍūʾ is invalid even if attempted.',
+    explanation:
+      'Shurūṭ al-ṣiḥḥah determine whether a performed wuḍūʾ is valid; if any is broken, the wuḍūʾ is invalid even if attempted.',
   },
   {
     id: 'FQH-WUD-Q29',
@@ -298,7 +394,8 @@ export const wudhuQuestions = [
     type: 'tf',
     prompt: 'True or False: Even a tiny dry spot left on a required area invalidates wuḍūʾ.',
     answer: true,
-    explanation: 'Correct — complete washing of the skin is a condition of validity; even a tiny dry spot invalidates it.',
+    explanation:
+      'Correct — complete washing of the skin is a condition of validity; even a tiny dry spot invalidates it.',
   },
   {
     id: 'FQH-WUD-Q30',
@@ -306,18 +403,26 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What must happen before starting wuḍūʾ, as a condition of its validity?',
-    options: ['The ḥadath (e.g. blood, urine, ḥayḍ, nifās) must have fully ended', 'The sun must have risen', 'A full ghusl must precede it', 'One must be fasting'],
+    options: [
+      'The ḥadath (e.g. blood, urine, ḥayḍ, nifās) must have fully ended',
+      'The sun must have risen',
+      'A full ghusl must precede it',
+      'One must be fasting',
+    ],
     answerIndex: 0,
-    explanation: 'The ḥadath that breaks wuḍūʾ must have fully ended before starting it, as a condition of validity.',
+    explanation:
+      'The ḥadath that breaks wuḍūʾ must have fully ended before starting it, as a condition of validity.',
   },
   {
     id: 'FQH-WUD-Q31',
     sourceIds: ['FQH-WUD-28'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Removing barriers preventing water from reaching the skin (e.g. wax, glue, thick cream) is a condition of validity for wuḍūʾ.',
+    prompt:
+      'True or False: Removing barriers preventing water from reaching the skin (e.g. wax, glue, thick cream) is a condition of validity for wuḍūʾ.',
     answer: true,
-    explanation: 'Correct — any barrier preventing water from reaching the skin must be removed for wuḍūʾ to be valid.',
+    explanation:
+      'Correct — any barrier preventing water from reaching the skin must be removed for wuḍūʾ to be valid.',
   },
 
   // --- Fiqh-05: Faraidh of Wudhu, Misc Rulings (FQH-WUD-29..43) ---
@@ -327,18 +432,26 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Farḍ 1 of wuḍūʾ — washing the face — covers which boundary?',
-    options: ['Hairline of the forehead to the bottom of the chin, ear to ear', 'Only the forehead', 'Only the cheeks', 'The entire head including hair'],
+    options: [
+      'Hairline of the forehead to the bottom of the chin, ear to ear',
+      'Only the forehead',
+      'Only the cheeks',
+      'The entire head including hair',
+    ],
     answerIndex: 0,
-    explanation: 'The face for wuḍūʾ purposes is defined as hairline-to-chin (length) and ear-to-ear (width), including the eyelids and pierced areas.',
+    explanation:
+      'The face for wuḍūʾ purposes is defined as hairline-to-chin (length) and ear-to-ear (width), including the eyelids and pierced areas.',
   },
   {
     id: 'FQH-WUD-Q33',
     sourceIds: ['FQH-WUD-30'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Partial washing of the face is sufficient — the entire defined area does not need to be washed completely.',
+    prompt:
+      'True or False: Partial washing of the face is sufficient — the entire defined area does not need to be washed completely.',
     answer: false,
-    explanation: 'False — partial washing of the face invalidates this farḍ; the entire defined area must be washed completely.',
+    explanation:
+      'False — partial washing of the face invalidates this farḍ; the entire defined area must be washed completely.',
   },
   {
     id: 'FQH-WUD-Q34',
@@ -346,7 +459,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Farḍ 2 of wuḍūʾ — washing the arms — extends to where?',
-    options: ['Up to and including the elbows', 'Up to the wrist only', 'Up to the shoulder', 'Just the fingertips'],
+    options: [
+      'Up to and including the elbows',
+      'Up to the wrist only',
+      'Up to the shoulder',
+      'Just the fingertips',
+    ],
     answerIndex: 0,
     explanation: 'Farḍ 2 is washing the hands and arms up to and including the elbows.',
   },
@@ -358,7 +476,8 @@ export const wudhuQuestions = [
     prompt: 'Farḍ 3 of wuḍūʾ — wiping (masḥ) the head — requires wiping how much of the head?',
     options: ['A quarter of the head', 'The entire head', 'Half of the head', 'Only the ears'],
     answerIndex: 0,
-    explanation: 'Farḍ 3 is wiping a quarter of the head, which may be on the forelock, back, or either side.',
+    explanation:
+      'Farḍ 3 is wiping a quarter of the head, which may be on the forelock, back, or either side.',
   },
   {
     id: 'FQH-WUD-Q36',
@@ -367,7 +486,8 @@ export const wudhuQuestions = [
     type: 'tf',
     prompt: 'True or False: Farḍ 4 of wuḍūʾ is washing the feet up to and including the ankles.',
     answer: true,
-    explanation: 'Correct — the feet must be washed up to and including the ankles, with water reaching between the toes.',
+    explanation:
+      'Correct — the feet must be washed up to and including the ankles, with water reaching between the toes.',
   },
   {
     id: 'FQH-WUD-Q37',
@@ -375,9 +495,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the four farāʾiḍ (obligatory acts) of wuḍūʾ?',
-    options: ['Washing the face', 'Washing the arms to the elbows', 'Rinsing the mouth three times', 'Wiping a quarter of the head'],
+    options: [
+      'Washing the face',
+      'Washing the arms to the elbows',
+      'Rinsing the mouth three times',
+      'Wiping a quarter of the head',
+    ],
     answerIndex: 2,
-    explanation: 'Rinsing the mouth three times is a sunnah of wuḍūʾ, not one of the four farḍ acts — the other three are farḍ.',
+    explanation:
+      'Rinsing the mouth three times is a sunnah of wuḍūʾ, not one of the four farḍ acts — the other three are farḍ.',
   },
   {
     id: 'FQH-WUD-Q38',
@@ -385,18 +511,26 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'For a thick beard during wuḍūʾ, what must be washed?',
-    options: ['Only the outer part', 'The skin beneath it must be reached', 'Nothing — it is exempt', 'It must be removed first'],
+    options: [
+      'Only the outer part',
+      'The skin beneath it must be reached',
+      'Nothing — it is exempt',
+      'It must be removed first',
+    ],
     answerIndex: 0,
-    explanation: 'For a thick beard, only the outer part must be washed; for a thin beard, water should reach the skin beneath.',
+    explanation:
+      'For a thick beard, only the outer part must be washed; for a thin beard, water should reach the skin beneath.',
   },
   {
     id: 'FQH-WUD-Q39',
     sourceIds: ['FQH-WUD-35'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Beard hair extending beyond the boundary of the face must be washed during wuḍūʾ.',
+    prompt:
+      'True or False: Beard hair extending beyond the boundary of the face must be washed during wuḍūʾ.',
     answer: false,
-    explanation: 'False — hair extending beyond the face boundary does not need to be washed, since it is not considered part of the face.',
+    explanation:
+      'False — hair extending beyond the face boundary does not need to be washed, since it is not considered part of the face.',
   },
   {
     id: 'FQH-WUD-Q40',
@@ -404,37 +538,54 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Regarding the lips during wuḍūʾ, which part must be washed?',
-    options: ['Only the visible part when closed', 'The entire inner mouth', 'Neither part', 'Only the hidden part'],
+    options: [
+      'Only the visible part when closed',
+      'The entire inner mouth',
+      'Neither part',
+      'Only the hidden part',
+    ],
     answerIndex: 0,
-    explanation: 'The hidden part of closed lips does not need washing; the visible part is considered part of the face and must be washed.',
+    explanation:
+      'The hidden part of closed lips does not need washing; the visible part is considered part of the face and must be washed.',
   },
   {
     id: 'FQH-WUD-Q41',
     sourceIds: ['FQH-WUD-37'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: The inner eyes must be washed during wuḍūʾ, and even during a full ghusl.',
+    prompt:
+      'True or False: The inner eyes must be washed during wuḍūʾ, and even during a full ghusl.',
     answer: false,
-    explanation: 'False — the inner eyes do not need to be washed during wuḍūʾ, even during a full ghusl.',
+    explanation:
+      'False — the inner eyes do not need to be washed during wuḍūʾ, even during a full ghusl.',
   },
   {
     id: 'FQH-WUD-Q42',
     sourceIds: ['FQH-WUD-38'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'What must be done about substances like eyeliner, wax, or kohl blocking the eyelashes/outer eye during wuḍūʾ?',
-    options: ['They must be removed and the area washed beneath', 'They can be left as-is', 'Only the eyelashes need washing, not underneath', 'Ghusl is required instead'],
+    prompt:
+      'What must be done about substances like eyeliner, wax, or kohl blocking the eyelashes/outer eye during wuḍūʾ?',
+    options: [
+      'They must be removed and the area washed beneath',
+      'They can be left as-is',
+      'Only the eyelashes need washing, not underneath',
+      'Ghusl is required instead',
+    ],
     answerIndex: 0,
-    explanation: 'Substances blocking the eyelashes or outer eye must be removed, and the area washed beneath, for wuḍūʾ to be valid.',
+    explanation:
+      'Substances blocking the eyelashes or outer eye must be removed, and the area washed beneath, for wuḍūʾ to be valid.',
   },
   {
     id: 'FQH-WUD-Q43',
     sourceIds: ['FQH-WUD-39'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: If the fingers are tightly closed, they must be separated during wuḍūʾ so water reaches between them.',
+    prompt:
+      'True or False: If the fingers are tightly closed, they must be separated during wuḍūʾ so water reaches between them.',
     answer: true,
-    explanation: 'Correct — tightly closed fingers must be separated for water to reach between them.',
+    explanation:
+      'Correct — tightly closed fingers must be separated for water to reach between them.',
   },
   {
     id: 'FQH-WUD-Q44',
@@ -442,16 +593,23 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which is true about long nails and dirt underneath them during wuḍūʾ?',
-    options: ['Water must reach under long nails, but dirt under nails does not prevent validity', 'Both long nails and dirt invalidate wuḍūʾ', 'Neither matters at all', 'Nails must be trimmed before wuḍūʾ'],
+    options: [
+      'Water must reach under long nails, but dirt under nails does not prevent validity',
+      'Both long nails and dirt invalidate wuḍūʾ',
+      'Neither matters at all',
+      'Nails must be trimmed before wuḍūʾ',
+    ],
     answerIndex: 0,
-    explanation: 'Long nails covering the fingertips require water to reach underneath; dirt under the nails or similar minor obstacles do not prevent wuḍūʾ from being valid.',
+    explanation:
+      'Long nails covering the fingertips require water to reach underneath; dirt under the nails or similar minor obstacles do not prevent wuḍūʾ from being valid.',
   },
   {
     id: 'FQH-WUD-Q45',
     sourceIds: ['FQH-WUD-41'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Tight rings must be moved during wuḍūʾ to allow water to reach beneath them.',
+    prompt:
+      'True or False: Tight rings must be moved during wuḍūʾ to allow water to reach beneath them.',
     answer: true,
     explanation: 'Correct — tight rings must be moved so water can reach the skin beneath.',
   },
@@ -461,16 +619,23 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'When must earrings be moved during wuḍūʾ?',
-    options: ['If they prevent water from reaching the pierced hole', 'Always, regardless of fit', 'Never — earrings are always exempt', 'Only if made of gold'],
+    options: [
+      'If they prevent water from reaching the pierced hole',
+      'Always, regardless of fit',
+      'Never — earrings are always exempt',
+      'Only if made of gold',
+    ],
     answerIndex: 0,
-    explanation: 'Earrings must be moved during wuḍūʾ if they prevent water from reaching the pierced hole.',
+    explanation:
+      'Earrings must be moved during wuḍūʾ if they prevent water from reaching the pierced hole.',
   },
   {
     id: 'FQH-WUD-Q47',
     sourceIds: ['FQH-WUD-43'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Water may be passed over medicine applied to a wound or foot crack during wuḍūʾ, when removing it would be necessary or harmful.',
+    prompt:
+      'True or False: Water may be passed over medicine applied to a wound or foot crack during wuḍūʾ, when removing it would be necessary or harmful.',
     answer: true,
     explanation: 'Correct — this is a concession (rukhṣah) for wounds and medicine.',
   },
@@ -482,18 +647,26 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'In the context of wuḍūʾ, what is a "sunnah" action?',
-    options: ['An action the Prophet ﷺ regularly practiced, though occasionally left', 'An action never performed by the Prophet ﷺ', 'An action that is farḍ', 'An action that invalidates wuḍūʾ'],
+    options: [
+      'An action the Prophet ﷺ regularly practiced, though occasionally left',
+      'An action never performed by the Prophet ﷺ',
+      'An action that is farḍ',
+      'An action that invalidates wuḍūʾ',
+    ],
     answerIndex: 0,
-    explanation: 'A sunnah is an action the Prophet ﷺ regularly practiced, though he occasionally left it.',
+    explanation:
+      'A sunnah is an action the Prophet ﷺ regularly practiced, though he occasionally left it.',
   },
   {
     id: 'FQH-WUD-Q49',
     sourceIds: ['FQH-WUD-45'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: A mustaḥabb/adab action, in the context of wuḍūʾ, was not consistently practiced by the Prophet ﷺ, but is recommended.',
+    prompt:
+      'True or False: A mustaḥabb/adab action, in the context of wuḍūʾ, was not consistently practiced by the Prophet ﷺ, but is recommended.',
     answer: true,
-    explanation: 'Correct — mustaḥabb/adab actions are recommended but not consistently practiced, unlike sunnah acts.',
+    explanation:
+      'Correct — mustaḥabb/adab actions are recommended but not consistently practiced, unlike sunnah acts.',
   },
   {
     id: 'FQH-WUD-Q50',
@@ -519,7 +692,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-48'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Mentioning the name of Allah (tasmiyah) at the start of wuḍūʾ is a sunnah.',
+    prompt:
+      'True or False: Mentioning the name of Allah (tasmiyah) at the start of wuḍūʾ is a sunnah.',
     answer: true,
     explanation: 'Correct — tasmiyah at the start is one of the 17 sunan.',
   },
@@ -538,7 +712,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-50'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Maintaining tartīb (the order of actions, beginning with what Allah mentioned first) is a sunnah of wuḍūʾ.',
+    prompt:
+      'True or False: Maintaining tartīb (the order of actions, beginning with what Allah mentioned first) is a sunnah of wuḍūʾ.',
     answer: true,
     explanation: 'Correct — tartīb is one of the 17 sunan.',
   },
@@ -548,9 +723,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What is muwālāt, one of the 17 sunan of wuḍūʾ?',
-    options: ['Continuity — not engaging in an unrelated action between its acts', 'Washing each limb once only', 'Facing away from the qiblah', 'Reciting loudly'],
+    options: [
+      'Continuity — not engaging in an unrelated action between its acts',
+      'Washing each limb once only',
+      'Facing away from the qiblah',
+      'Reciting loudly',
+    ],
     answerIndex: 0,
-    explanation: 'Muwālāt (continuity) means not engaging in an unrelated action between the acts of wuḍūʾ.',
+    explanation:
+      'Muwālāt (continuity) means not engaging in an unrelated action between the acts of wuḍūʾ.',
   },
   {
     id: 'FQH-WUD-Q56',
@@ -576,7 +757,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-54'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Sniffing water into the nose and blowing it out (istinshāq/istinthār) is a sunnah of wuḍūʾ.',
+    prompt:
+      'True or False: Sniffing water into the nose and blowing it out (istinshāq/istinthār) is a sunnah of wuḍūʾ.',
     answer: true,
     explanation: 'Correct — this is one of the 17 sunan.',
   },
@@ -585,17 +767,20 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-55'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'Running wet fingers through which part of the body is a sunnah of wuḍūʾ (takhlīl al-liḥyah)?',
+    prompt:
+      'Running wet fingers through which part of the body is a sunnah of wuḍūʾ (takhlīl al-liḥyah)?',
     options: ['The beard', 'The eyebrows', 'The scalp', 'The chest'],
     answerIndex: 0,
-    explanation: 'Takhlīl al-liḥyah — running wet fingers through the beard — is one of the 17 sunan.',
+    explanation:
+      'Takhlīl al-liḥyah — running wet fingers through the beard — is one of the 17 sunan.',
   },
   {
     id: 'FQH-WUD-Q60',
     sourceIds: ['FQH-WUD-56'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Running wet fingers through the fingers and toes (takhlīl al-aṣābiʿ) is a sunnah of wuḍūʾ.',
+    prompt:
+      'True or False: Running wet fingers through the fingers and toes (takhlīl al-aṣābiʿ) is a sunnah of wuḍūʾ.',
     answer: true,
     explanation: 'Correct — this is one of the 17 sunan.',
   },
@@ -605,9 +790,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What is the sunnah method for wiping the head and ears?',
-    options: ['Wiping the entire head once, and the ears with the same water', 'Wiping the head three times', 'Wiping only the ears, not the head', 'Wiping the head with fresh water for the ears'],
+    options: [
+      'Wiping the entire head once, and the ears with the same water',
+      'Wiping the head three times',
+      'Wiping only the ears, not the head',
+      'Wiping the head with fresh water for the ears',
+    ],
     answerIndex: 0,
-    explanation: 'Wiping the entire head once, and the ears with the same water, is one of the 17 sunan.',
+    explanation:
+      'Wiping the entire head once, and the ears with the same water, is one of the 17 sunan.',
   },
   {
     id: 'FQH-WUD-Q62',
@@ -624,7 +815,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which limb should be started with, as a sunnah of wuḍūʾ?',
-    options: ['The right limb before the left', 'The left limb before the right', 'Either limb, no preference', 'Both limbs simultaneously'],
+    options: [
+      'The right limb before the left',
+      'The left limb before the right',
+      'Either limb, no preference',
+      'Both limbs simultaneously',
+    ],
     answerIndex: 0,
     explanation: 'Starting with the right limb before the left is one of the 17 sunan.',
   },
@@ -633,7 +829,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-60'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Starting with the fingers and toes when washing the hands and feet is a sunnah of wuḍūʾ.',
+    prompt:
+      'True or False: Starting with the fingers and toes when washing the hands and feet is a sunnah of wuḍūʾ.',
     answer: true,
     explanation: 'Correct — this is one of the 17 sunan.',
   },
@@ -662,9 +859,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the 17 sunan of wuḍūʾ?',
-    options: ['Making the intention (niyyah)', 'Using the siwāk', 'Reciting an entire sūrah before starting', 'Rinsing the mouth three times'],
+    options: [
+      'Making the intention (niyyah)',
+      'Using the siwāk',
+      'Reciting an entire sūrah before starting',
+      'Rinsing the mouth three times',
+    ],
     answerIndex: 2,
-    explanation: 'Reciting an entire sūrah before starting is not among the 17 sunan of wuḍūʾ; the other three are.',
+    explanation:
+      'Reciting an entire sūrah before starting is not among the 17 sunan of wuḍūʾ; the other three are.',
   },
   {
     id: 'FQH-WUD-Q68',
@@ -681,16 +884,23 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following is a mustaḥabb adab regarding water use during wuḍūʾ?',
-    options: ['Avoiding contact with the water already used in one\'s own wuḍūʾ', 'Reusing all splashback water intentionally', 'Using only cold water', 'Using only warm water'],
+    options: [
+      "Avoiding contact with the water already used in one's own wuḍūʾ",
+      'Reusing all splashback water intentionally',
+      'Using only cold water',
+      'Using only warm water',
+    ],
     answerIndex: 0,
-    explanation: 'Avoiding contact with the water that has already dripped off during one\'s own wuḍūʾ is a mustaḥabb adab.',
+    explanation:
+      "Avoiding contact with the water that has already dripped off during one's own wuḍūʾ is a mustaḥabb adab.",
   },
   {
     id: 'FQH-WUD-Q70',
     sourceIds: ['FQH-WUD-65'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Mentioning Allah\'s name while washing each limb (not only at the start) is a mustaḥabb adab.',
+    prompt:
+      "True or False: Mentioning Allah's name while washing each limb (not only at the start) is a mustaḥabb adab.",
     answer: true,
     explanation: 'Correct — this is one of the 8 adab of wuḍūʾ.',
   },
@@ -700,7 +910,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of these is a mustaḥabb adab of wuḍūʾ?',
-    options: ['Not seeking assistance from others while performing it oneself', 'Asking someone else to perform each step', 'Performing it in complete darkness', 'Performing it while lying down'],
+    options: [
+      'Not seeking assistance from others while performing it oneself',
+      'Asking someone else to perform each step',
+      'Performing it in complete darkness',
+      'Performing it while lying down',
+    ],
     answerIndex: 0,
     explanation: 'Performing wuḍūʾ oneself without help is a mustaḥabb adab.',
   },
@@ -709,7 +924,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-67'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Performing wuḍūʾ before the time of prayer begins, for one who is not excused, is a mustaḥabb adab.',
+    prompt:
+      'True or False: Performing wuḍūʾ before the time of prayer begins, for one who is not excused, is a mustaḥabb adab.',
     answer: true,
     explanation: 'Correct — this is one of the 8 adab of wuḍūʾ.',
   },
@@ -719,7 +935,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What is a mustaḥabb adab to recite after completing wuḍūʾ?',
-    options: ['The Shahādatayn (the two testimonies of faith)', 'Sūrat al-Fātiḥah', 'The adhan', 'The iqāmah'],
+    options: [
+      'The Shahādatayn (the two testimonies of faith)',
+      'Sūrat al-Fātiḥah',
+      'The adhan',
+      'The iqāmah',
+    ],
     answerIndex: 0,
     explanation: 'Reciting the Shahādatayn after wuḍūʾ is a mustaḥabb adab.',
   },
@@ -728,7 +949,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-69'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Standing and drinking from the leftover water of one\'s wuḍūʾ is a mustaḥabb adab.',
+    prompt:
+      "True or False: Standing and drinking from the leftover water of one's wuḍūʾ is a mustaḥabb adab.",
     answer: true,
     explanation: 'Correct — this is one of the 8 adab of wuḍūʾ.',
   },
@@ -738,7 +960,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'What is a mustaḥabb adab to do during or after wuḍūʾ, beyond the fixed narrated duas?',
-    options: ['Making a personal duʿāʾ with the narrated prayers', 'Remaining completely silent', 'Reciting the Qurʾān aloud continuously', 'Reciting poetry'],
+    options: [
+      'Making a personal duʿāʾ with the narrated prayers',
+      'Remaining completely silent',
+      'Reciting the Qurʾān aloud continuously',
+      'Reciting poetry',
+    ],
     answerIndex: 0,
     explanation: 'Making duʿāʾ with the narrated prayers during wuḍūʾ is a mustaḥabb adab.',
   },
@@ -748,26 +975,35 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the 8 adab/mustaḥabb of wuḍūʾ?',
-    options: ['Facing the qiblah', 'Not seeking assistance from others', 'Reciting the Shahādatayn after wuḍūʾ', 'Performing wuḍūʾ twice in a row for extra reward'],
+    options: [
+      'Facing the qiblah',
+      'Not seeking assistance from others',
+      'Reciting the Shahādatayn after wuḍūʾ',
+      'Performing wuḍūʾ twice in a row for extra reward',
+    ],
     answerIndex: 3,
-    explanation: 'Performing wuḍūʾ twice in a row is not one of the 8 adab (in fact unnecessary repetition is makrūh per FQH-WUD-14/15) — the other three are genuine adab.',
+    explanation:
+      'Performing wuḍūʾ twice in a row is not one of the 8 adab (in fact unnecessary repetition is makrūh per FQH-WUD-14/15) — the other three are genuine adab.',
   },
   {
     id: 'FQH-WUD-Q77',
     sourceIds: ['FQH-WUD-71'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'During which action of wuḍūʾ is it mustaḥabb to recite a duʿāʾ asking Allah for help in reciting the Qurʾān, remembrance, and worship?',
+    prompt:
+      'During which action of wuḍūʾ is it mustaḥabb to recite a duʿāʾ asking Allah for help in reciting the Qurʾān, remembrance, and worship?',
     options: ['Rinsing the mouth', 'Rinsing the nose', 'Wiping the head', 'Washing the feet'],
     answerIndex: 0,
-    explanation: 'While rinsing the mouth, it is mustaḥabb to recite a duʿāʾ asking Allah\'s help in reciting the Qurʾān, remembering Him, thanking Him, and perfecting worship of Him.',
+    explanation:
+      "While rinsing the mouth, it is mustaḥabb to recite a duʿāʾ asking Allah's help in reciting the Qurʾān, remembering Him, thanking Him, and perfecting worship of Him.",
   },
   {
     id: 'FQH-WUD-Q78',
     sourceIds: ['FQH-WUD-72'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'The duʿāʾ asking Allah to let one smell the fragrance of Paradise (and not the stench of Hellfire) is recited during which action?',
+    prompt:
+      'The duʿāʾ asking Allah to let one smell the fragrance of Paradise (and not the stench of Hellfire) is recited during which action?',
     options: ['Rinsing the nose', 'Washing the face', 'Wiping the ears', 'Washing the right arm'],
     answerIndex: 0,
     explanation: 'This duʿāʾ is recited while rinsing the nose during wuḍūʾ.',
@@ -777,7 +1013,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-73'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: The duʿāʾ asking Allah to "illuminate my face on the Day when some faces will be illuminated and others darkened" is recited while washing the face.',
+    prompt:
+      'True or False: The duʿāʾ asking Allah to "illuminate my face on the Day when some faces will be illuminated and others darkened" is recited while washing the face.',
     answer: true,
     explanation: 'Correct — this duʿāʾ is recited while washing the face.',
   },
@@ -786,7 +1023,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-74'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'The duʿāʾ asking Allah to "give me my record in my right hand and make my reckoning easy" is recited while washing which limb?',
+    prompt:
+      'The duʿāʾ asking Allah to "give me my record in my right hand and make my reckoning easy" is recited while washing which limb?',
     options: ['The right arm', 'The left arm', 'The face', 'The right foot'],
     answerIndex: 0,
     explanation: 'This duʿāʾ is recited while washing the right arm.',
@@ -796,7 +1034,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-75'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: The duʿāʾ asking Allah not to give one\'s record in the left hand, nor from behind the back, is recited while washing the left arm.',
+    prompt:
+      "True or False: The duʿāʾ asking Allah not to give one's record in the left hand, nor from behind the back, is recited while washing the left arm.",
     answer: true,
     explanation: 'Correct — this duʿāʾ is recited while washing the left arm.',
   },
@@ -805,7 +1044,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-76'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'The duʿāʾ asking Allah to "shade me under the shade of Your Throne" is recited during which action?',
+    prompt:
+      'The duʿāʾ asking Allah to "shade me under the shade of Your Throne" is recited during which action?',
     options: ['Wiping the head', 'Washing the feet', 'Rinsing the mouth', 'Washing the arms'],
     answerIndex: 0,
     explanation: 'This duʿāʾ is recited while wiping the head.',
@@ -815,7 +1055,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-77'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: The duʿāʾ asking Allah to make one "among those who listen to speech and follow the best of it" is recited while wiping the ears.',
+    prompt:
+      'True or False: The duʿāʾ asking Allah to make one "among those who listen to speech and follow the best of it" is recited while wiping the ears.',
     answer: true,
     explanation: 'Correct — this duʿāʾ is recited while wiping the ears.',
   },
@@ -834,7 +1075,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-79'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: The duʿāʾ asking Allah to "make my foot firm upon the Ṣirāṭ on the Day when feet will slip" is recited while washing the right foot.',
+    prompt:
+      'True or False: The duʿāʾ asking Allah to "make my foot firm upon the Ṣirāṭ on the Day when feet will slip" is recited while washing the right foot.',
     answer: true,
     explanation: 'Correct — this duʿāʾ is recited while washing the right foot.',
   },
@@ -843,7 +1085,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-80'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'The duʿāʾ asking Allah to "forgive my sins, accept my efforts, and make my trade never fail" is recited while washing which limb?',
+    prompt:
+      'The duʿāʾ asking Allah to "forgive my sins, accept my efforts, and make my trade never fail" is recited while washing which limb?',
     options: ['The left foot', 'The right foot', 'The left arm', 'The face'],
     answerIndex: 0,
     explanation: 'This duʿāʾ is recited while washing the left foot, the final limb of wuḍūʾ.',
@@ -855,7 +1098,8 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-81'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Anything exiting from the two openings (front or rear private parts) — such as urine, stool, wind, madhy, or blood — nullifies wuḍūʾ.',
+    prompt:
+      'True or False: Anything exiting from the two openings (front or rear private parts) — such as urine, stool, wind, madhy, or blood — nullifies wuḍūʾ.',
     answer: true,
     explanation: 'Correct — this is one of the main categories of wuḍūʾ nullifiers.',
   },
@@ -864,10 +1108,17 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-82'],
     topic: 'WUD',
     type: 'mcq',
-    prompt: 'Blood or pus flowing from elsewhere on the body (not the two openings) nullifies wuḍūʾ under which condition?',
-    options: ['If it flows beyond its source', 'Only if it is from a wound on the face', 'Never — it only applies to the two openings', 'Only if it is more than a cupful'],
+    prompt:
+      'Blood or pus flowing from elsewhere on the body (not the two openings) nullifies wuḍūʾ under which condition?',
+    options: [
+      'If it flows beyond its source',
+      'Only if it is from a wound on the face',
+      'Never — it only applies to the two openings',
+      'Only if it is more than a cupful',
+    ],
     answerIndex: 0,
-    explanation: 'Blood or pus from elsewhere on the body nullifies wuḍūʾ if it flows beyond its source.',
+    explanation:
+      'Blood or pus from elsewhere on the body nullifies wuḍūʾ if it flows beyond its source.',
   },
   {
     id: 'FQH-WUD-Q89',
@@ -884,16 +1135,23 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Blood coming out from the mouth nullifies wuḍūʾ under which condition?',
-    options: ['If it predominates over, or equals, the saliva', 'Only if it is a large visible amount', 'Never', 'Only if swallowed'],
+    options: [
+      'If it predominates over, or equals, the saliva',
+      'Only if it is a large visible amount',
+      'Never',
+      'Only if swallowed',
+    ],
     answerIndex: 0,
-    explanation: 'If blood from the mouth predominates over or equals the saliva, wuḍūʾ is nullified.',
+    explanation:
+      'If blood from the mouth predominates over or equals the saliva, wuḍūʾ is nullified.',
   },
   {
     id: 'FQH-WUD-Q91',
     sourceIds: ['FQH-WUD-85'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Sleeping in a position where the buttocks are not firmly planted on the ground nullifies wuḍūʾ.',
+    prompt:
+      'True or False: Sleeping in a position where the buttocks are not firmly planted on the ground nullifies wuḍūʾ.',
     answer: true,
     explanation: 'Correct — this is one of the "loss of awareness" nullifiers.',
   },
@@ -922,7 +1180,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following nullifies wuḍūʾ, alongside fainting and insanity?',
-    options: ['Intoxication or drunkenness', 'Feeling sleepy but awake', 'Deep concentration', 'Closing one\'s eyes briefly'],
+    options: [
+      'Intoxication or drunkenness',
+      'Feeling sleepy but awake',
+      'Deep concentration',
+      "Closing one's eyes briefly",
+    ],
     answerIndex: 0,
     explanation: 'Intoxication or drunkenness is one of the loss-of-awareness nullifiers of wuḍūʾ.',
   },
@@ -931,9 +1194,11 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-89'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Loud laughter by an adult during Ṣalāh nullifies wuḍūʾ — a unique nullifier specific to being in prayer.',
+    prompt:
+      'True or False: Loud laughter by an adult during Ṣalāh nullifies wuḍūʾ — a unique nullifier specific to being in prayer.',
     answer: true,
-    explanation: 'Correct — laughing loudly during Ṣalāh is a unique nullifier that only applies while praying.',
+    explanation:
+      'Correct — laughing loudly during Ṣalāh is a unique nullifier that only applies while praying.',
   },
   {
     id: 'FQH-WUD-Q96',
@@ -942,7 +1207,8 @@ export const wudhuQuestions = [
     type: 'tf',
     prompt: 'True or False: Blood that appears on the skin without flowing nullifies wuḍūʾ.',
     answer: false,
-    explanation: 'False — blood that appears without flowing does not nullify wuḍūʾ; it must flow to nullify.',
+    explanation:
+      'False — blood that appears without flowing does not nullify wuḍūʾ; it must flow to nullify.',
   },
   {
     id: 'FQH-WUD-Q97',
@@ -950,9 +1216,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following does NOT nullify wuḍūʾ?',
-    options: ['Flesh falling off the body without blood flowing', 'Fainting', 'Loud laughter during Ṣalāh', 'Insanity'],
+    options: [
+      'Flesh falling off the body without blood flowing',
+      'Fainting',
+      'Loud laughter during Ṣalāh',
+      'Insanity',
+    ],
     answerIndex: 0,
-    explanation: 'Flesh falling off without blood flowing does not nullify wuḍūʾ; the other three do.',
+    explanation:
+      'Flesh falling off without blood flowing does not nullify wuḍūʾ; the other three do.',
   },
   {
     id: 'FQH-WUD-Q98',
@@ -961,7 +1233,8 @@ export const wudhuQuestions = [
     type: 'tf',
     prompt: 'True or False: Vomiting less than a mouthful nullifies wuḍūʾ.',
     answer: false,
-    explanation: 'False — vomiting less than a mouthful does not nullify wuḍūʾ; a mouthful or more is required.',
+    explanation:
+      'False — vomiting less than a mouthful does not nullify wuḍūʾ; a mouthful or more is required.',
   },
   {
     id: 'FQH-WUD-Q99',
@@ -969,7 +1242,12 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Vomiting phlegm, whether little or much, has what effect on wuḍūʾ?',
-    options: ['Does not nullify it', 'Always nullifies it', 'Only nullifies it if a large amount', 'Requires ghusl'],
+    options: [
+      'Does not nullify it',
+      'Always nullifies it',
+      'Only nullifies it if a large amount',
+      'Requires ghusl',
+    ],
     answerIndex: 0,
     explanation: 'Vomiting phlegm, whether little or much, does not nullify wuḍūʾ.',
   },
@@ -978,9 +1256,11 @@ export const wudhuQuestions = [
     sourceIds: ['FQH-WUD-94'],
     topic: 'WUD',
     type: 'tf',
-    prompt: 'True or False: Sleeping during prayer while maintaining the correct (sunnah) prayer posture nullifies wuḍūʾ.',
+    prompt:
+      'True or False: Sleeping during prayer while maintaining the correct (sunnah) prayer posture nullifies wuḍūʾ.',
     answer: false,
-    explanation: 'False — sleeping during prayer while maintaining the sunnah posture does not nullify wuḍūʾ.',
+    explanation:
+      'False — sleeping during prayer while maintaining the sunnah posture does not nullify wuḍūʾ.',
   },
   {
     id: 'FQH-WUD-Q101',
@@ -988,9 +1268,15 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Sleeping while sitting firmly on the ground has what effect on wuḍūʾ?',
-    options: ['Does not nullify it', 'Always nullifies it', 'Nullifies it only at night', 'Requires renewing wuḍūʾ regardless'],
+    options: [
+      'Does not nullify it',
+      'Always nullifies it',
+      'Nullifies it only at night',
+      'Requires renewing wuḍūʾ regardless',
+    ],
     answerIndex: 0,
-    explanation: 'Sleeping while sitting firmly on the ground does not nullify wuḍūʾ — only sleeping without the buttocks firmly planted does.',
+    explanation:
+      'Sleeping while sitting firmly on the ground does not nullify wuḍūʾ — only sleeping without the buttocks firmly planted does.',
   },
   {
     id: 'FQH-WUD-Q102',
@@ -998,9 +1284,10 @@ export const wudhuQuestions = [
     topic: 'WUD',
     madhhab: 'Hanafi',
     type: 'tf',
-    prompt: 'True or False: In the Ḥanafī view, touching one\'s own private part nullifies wuḍūʾ.',
+    prompt: "True or False: In the Ḥanafī view, touching one's own private part nullifies wuḍūʾ.",
     answer: false,
-    explanation: 'False — in the Ḥanafī view, touching one\'s own private part does not nullify wuḍūʾ.',
+    explanation:
+      "False — in the Ḥanafī view, touching one's own private part does not nullify wuḍūʾ.",
   },
   {
     id: 'FQH-WUD-Q103',
@@ -1009,7 +1296,12 @@ export const wudhuQuestions = [
     madhhab: 'Hanafi',
     type: 'mcq',
     prompt: 'In the Ḥanafī view, what is the ruling on touching a woman with regard to wuḍūʾ?',
-    options: ['It does not nullify wuḍūʾ', 'It always nullifies wuḍūʾ', 'It nullifies wuḍūʾ only if intentional', 'It requires ghusl'],
+    options: [
+      'It does not nullify wuḍūʾ',
+      'It always nullifies wuḍūʾ',
+      'It nullifies wuḍūʾ only if intentional',
+      'It requires ghusl',
+    ],
     answerIndex: 0,
     explanation: 'In the Ḥanafī view, touching a woman does not nullify wuḍūʾ.',
   },
@@ -1019,8 +1311,14 @@ export const wudhuQuestions = [
     topic: 'WUD',
     type: 'mcq',
     prompt: 'Which of the following DOES nullify wuḍūʾ, unlike the others listed?',
-    options: ['Vomiting a full mouthful', 'Vomiting less than a mouthful', 'Vomiting phlegm', 'Blood appearing without flowing'],
+    options: [
+      'Vomiting a full mouthful',
+      'Vomiting less than a mouthful',
+      'Vomiting phlegm',
+      'Blood appearing without flowing',
+    ],
     answerIndex: 0,
-    explanation: 'Vomiting a full mouthful nullifies wuḍūʾ; the other three, taken from the "does not nullify" list, do not.',
+    explanation:
+      'Vomiting a full mouthful nullifies wuḍūʾ; the other three, taken from the "does not nullify" list, do not.',
   },
 ];

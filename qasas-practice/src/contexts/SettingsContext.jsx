@@ -31,15 +31,10 @@ export function SettingsProvider({ children }) {
     () => ({
       settings,
       setTheme: (theme) => setSettings((prev) => ({ ...prev, theme })),
-      setArabicScript: (arabicScript) =>
-        setSettings((prev) => ({ ...prev, arabicScript })),
+      setArabicScript: (arabicScript) => setSettings((prev) => ({ ...prev, arabicScript })),
     }),
     [settings]
   );
 
-  return (
-    <SettingsContext.Provider value={value}>
-      {children}
-    </SettingsContext.Provider>
-  );
+  return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 }

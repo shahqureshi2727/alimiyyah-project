@@ -85,11 +85,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   }, [user]);
 
   const renderCard = (mode, className = 'mode-card') => (
-    <button
-      key={mode.id}
-      className={className}
-      onClick={() => onSelectMode(mode.id)}
-    >
+    <button key={mode.id} className={className} onClick={() => onSelectMode(mode.id)}>
       <span className="mode-title-ar">{mode.titleAr}</span>
       <span className="mode-title-en">{mode.titleEn}</span>
       <span className="mode-desc">{mode.description}</span>
@@ -136,9 +132,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
 
       <section className="home-section detail-section">
         <h3 className="section-title">Extra Review</h3>
-        <div className="mode-grid">
-          {modes.map((mode) => renderCard(mode))}
-        </div>
+        <div className="mode-grid">{modes.map((mode) => renderCard(mode))}</div>
       </section>
     </>
   );
@@ -325,9 +319,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
             </div>
             <div className="quiz-entry-content">
               <span className="quiz-entry-title">Strength Map</span>
-              <span className="quiz-entry-desc">
-                See weak, developing, and strong topics
-              </span>
+              <span className="quiz-entry-desc">See weak, developing, and strong topics</span>
             </div>
             <div className="quiz-entry-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -361,13 +353,14 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
               {recentResults.map((result) => (
                 <div key={result.id} className="result-row">
                   <span className="result-mode">{MODE_LABELS[result.mode]}</span>
-                  <span className="result-score">{result.score}/10</span>
+                  <span className="result-score">
+                    {result.score}/{result.total}
+                  </span>
                   <span className="result-time">
-                    {Math.floor(result.durationSeconds / 60)}:{String(Math.round(result.durationSeconds % 60)).padStart(2, '0')}
+                    {Math.floor(result.durationSeconds / 60)}:
+                    {String(Math.round(result.durationSeconds % 60)).padStart(2, '0')}
                   </span>
-                  <span className="result-date">
-                    {formatRelativeTime(result.completedAt)}
-                  </span>
+                  <span className="result-date">{formatRelativeTime(result.completedAt)}</span>
                 </div>
               ))}
             </div>

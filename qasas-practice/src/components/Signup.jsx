@@ -49,7 +49,7 @@ export default function Signup() {
 
       if (recoveryEmail && !recoveryEmailLinked) {
         setWarning(
-          'Your account was created, but the recovery email couldn\'t be linked. You can add it later.'
+          "Your account was created, but the recovery email couldn't be linked. You can add it later."
         );
         // Still navigate after a brief delay to show the warning
         setTimeout(() => navigate('/'), 2000);
@@ -127,9 +127,8 @@ export default function Signup() {
             disabled={loading}
           />
           <p className="auth-helper">
-            If you forget your password, we can email you a reset link. Leave blank
-            if you don't want to provide one — but then your teacher will need to
-            reset it for you manually.
+            If you forget your password, we can email you a reset link. Leave blank if you don't
+            want to provide one — but then your teacher will need to reset it for you manually.
           </p>
         </div>
 

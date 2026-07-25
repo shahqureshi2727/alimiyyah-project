@@ -1,7 +1,8 @@
 /* Root color palette - Islamic manuscript inspired */
 @font-face {
   font-family: 'Indopak Nastaleeq';
-  src: url('https://static-cdn.tarteel.ai/qul/fonts/nastaleeq/Hanafi/normal-v4.2.2/with-waqf-lazmi/font.ttf') format('truetype');
+  src: url('https://static-cdn.tarteel.ai/qul/fonts/nastaleeq/Hanafi/normal-v4.2.2/with-waqf-lazmi/font.ttf')
+    format('truetype');
   font-display: swap;
 }
 
@@ -53,7 +54,7 @@
   color-scheme: light;
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --parchment: #181713;
   --cream: #242118;
   --ink: #f3eadb;
@@ -92,7 +93,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root[data-theme="system"] {
+  :root[data-theme='system'] {
     --parchment: #181713;
     --cream: #242118;
     --ink: #f3eadb;
@@ -131,8 +132,10 @@
   }
 }
 
-:root[data-arabic-script="indopak"] {
-  --arabic-font: 'Indopak Nastaleeq', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Noto Naskh Arabic', 'Amiri', serif;
+:root[data-arabic-script='indopak'] {
+  --arabic-font:
+    'Indopak Nastaleeq', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Noto Naskh Arabic',
+    'Amiri', serif;
 }
 
 /* Reset & base styles */
@@ -164,7 +167,7 @@ button {
 }
 
 /* Ensure Arabic text has proper rendering */
-[dir="rtl"] {
+[dir='rtl'] {
   font-family: var(--arabic-font);
 }
 

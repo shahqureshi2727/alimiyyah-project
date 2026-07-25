@@ -45,9 +45,7 @@ function ProtectedRoute({ children, hideHeader = false }) {
   return (
     <>
       <AuthHeader hidden={hideHeader} />
-      <div className={`app-content ${hideHeader ? 'no-header' : ''}`}>
-        {children}
-      </div>
+      <div className={`app-content ${hideHeader ? 'no-header' : ''}`}>{children}</div>
     </>
   );
 }
@@ -202,10 +200,7 @@ function MainApp() {
   if (showQuizPicker) {
     return (
       <ProtectedRoute>
-        <QuizPicker
-          onSelectMode={handleSelectQuizMode}
-          onBack={handleBack}
-        />
+        <QuizPicker onSelectMode={handleSelectQuizMode} onBack={handleBack} />
       </ProtectedRoute>
     );
   }
@@ -216,35 +211,19 @@ function MainApp() {
       switch (currentMode) {
         case 'irab':
           return (
-            <IrabMode
-              onBack={handleBack}
-              score={scores.irab}
-              setScore={setModeScore('irab')}
-            />
+            <IrabMode onBack={handleBack} score={scores.irab} setScore={setModeScore('irab')} />
           );
         case 'noun':
           return (
-            <NounMode
-              onBack={handleBack}
-              score={scores.noun}
-              setScore={setModeScore('noun')}
-            />
+            <NounMode onBack={handleBack} score={scores.noun} setScore={setModeScore('noun')} />
           );
         case 'role':
           return (
-            <RoleMode
-              onBack={handleBack}
-              score={scores.role}
-              setScore={setModeScore('role')}
-            />
+            <RoleMode onBack={handleBack} score={scores.role} setScore={setModeScore('role')} />
           );
         case 'vocab':
           return (
-            <VocabMode
-              onBack={handleBack}
-              score={scores.vocab}
-              setScore={setModeScore('vocab')}
-            />
+            <VocabMode onBack={handleBack} score={scores.vocab} setScore={setModeScore('vocab')} />
           );
         case 'morphology':
           return (
@@ -284,12 +263,7 @@ function MainApp() {
             />
           );
         default:
-          return (
-            <HomeScreen
-              onSelectMode={handleSelectMode}
-              onSelectQuiz={handleSelectQuiz}
-            />
-          );
+          return <HomeScreen onSelectMode={handleSelectMode} onSelectQuiz={handleSelectQuiz} />;
       }
     })();
 
@@ -298,10 +272,7 @@ function MainApp() {
 
   return (
     <ProtectedRoute>
-      <HomeScreen
-        onSelectMode={handleSelectMode}
-        onSelectQuiz={handleSelectQuiz}
-      />
+      <HomeScreen onSelectMode={handleSelectMode} onSelectQuiz={handleSelectQuiz} />
     </ProtectedRoute>
   );
 }

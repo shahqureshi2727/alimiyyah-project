@@ -36,7 +36,9 @@ export default function FiqhPracticeMode({ topic, onBack, score, setScore }) {
     return (
       <div className="mode-container">
         <header className="mode-header">
-          <button className="back-btn" onClick={onBack}>Back</button>
+          <button className="back-btn" onClick={onBack}>
+            Back
+          </button>
         </header>
         <div className="mode-content">
           <p>No questions available for this topic yet.</p>

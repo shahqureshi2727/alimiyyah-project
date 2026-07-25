@@ -8,7 +8,8 @@ export const adhanQuestions = [
     sourceIds: ['FQH-ADH-01'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: The Adhan and Iqāmah are emphasized sunnahs (sunnah muʾakkadah) for the five daily prayers and Jumuʿah.',
+    prompt:
+      'True or False: The Adhan and Iqāmah are emphasized sunnahs (sunnah muʾakkadah) for the five daily prayers and Jumuʿah.',
     answer: true,
     explanation: 'Correct — both are sunnah muʾakkadah for the five daily prayers and Jumuʿah.',
   },
@@ -18,16 +19,23 @@ export const adhanQuestions = [
     topic: 'ADH',
     type: 'mcq',
     prompt: 'In the standard 15-phrase Adhan, how many times is "Allāhu Akbar" said in total?',
-    options: ['Six times (four at the start, two near the end)', 'Two times', 'Four times only', 'Eight times'],
+    options: [
+      'Six times (four at the start, two near the end)',
+      'Two times',
+      'Four times only',
+      'Eight times',
+    ],
     answerIndex: 0,
-    explanation: 'The 15-phrase Adhan has four opening takbīrs plus two more later — six "Allāhu Akbar" in total.',
+    explanation:
+      'The 15-phrase Adhan has four opening takbīrs plus two more later — six "Allāhu Akbar" in total.',
   },
   {
     id: 'FQH-ADH-Q03',
     sourceIds: ['FQH-ADH-02'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: The standard 15-phrase Adhan ends with "Lā ilāha illa Allāh" said once.',
+    prompt:
+      'True or False: The standard 15-phrase Adhan ends with "Lā ilāha illa Allāh" said once.',
     answer: true,
     explanation: 'Correct — the Adhan closes with a single "Lā ilāha illa Allāh".',
   },
@@ -44,16 +52,19 @@ export const adhanQuestions = [
       'It is recited only during Ramaḍān',
     ],
     answerIndex: 0,
-    explanation: 'The 17-phrase variant starts with two takbīrs (not four) and adds a quiet recitation of the shahādatayn before the aloud recitation.',
+    explanation:
+      'The 17-phrase variant starts with two takbīrs (not four) and adds a quiet recitation of the shahādatayn before the aloud recitation.',
   },
   {
     id: 'FQH-ADH-Q05',
     sourceIds: ['FQH-ADH-04'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: The 19-phrase Adhan variant keeps the standard four opening takbīrs while also adding a quiet recitation of the shahādatayn before the aloud one.',
+    prompt:
+      'True or False: The 19-phrase Adhan variant keeps the standard four opening takbīrs while also adding a quiet recitation of the shahādatayn before the aloud one.',
     answer: true,
-    explanation: 'Correct — the 19-phrase variant keeps all four opening takbīrs and adds the extra quiet shahādatayn.',
+    explanation:
+      'Correct — the 19-phrase variant keeps all four opening takbīrs and adds the extra quiet shahādatayn.',
   },
   {
     id: 'FQH-ADH-Q06',
@@ -68,7 +79,8 @@ export const adhanQuestions = [
       'The phrase count refers to the number of muʾadhins required',
     ],
     answerIndex: 0,
-    explanation: 'All three variants share the same core phrases; they differ in the number of opening takbīrs and whether the shahādatayn is repeated quietly before being said aloud.',
+    explanation:
+      'All three variants share the same core phrases; they differ in the number of opening takbīrs and whether the shahādatayn is repeated quietly before being said aloud.',
   },
   {
     id: 'FQH-ADH-Q07',
@@ -77,7 +89,8 @@ export const adhanQuestions = [
     type: 'tf',
     prompt: 'True or False: The muʾadhin must be truthful and know the prayer timings.',
     answer: true,
-    explanation: 'Correct — truthfulness and knowledge of prayer timings are requirements for the muʾadhin.',
+    explanation:
+      'Correct — truthfulness and knowledge of prayer timings are requirements for the muʾadhin.',
   },
   {
     id: 'FQH-ADH-Q08',
@@ -85,7 +98,12 @@ export const adhanQuestions = [
     topic: 'ADH',
     type: 'mcq',
     prompt: 'What must the muʾadhin have before calling the adhan?',
-    options: ['Wuḍūʾ, and he must face the qiblah', 'A microphone', 'Written permission from the imam', 'A specific type of clothing'],
+    options: [
+      'Wuḍūʾ, and he must face the qiblah',
+      'A microphone',
+      'Written permission from the imam',
+      'A specific type of clothing',
+    ],
     answerIndex: 0,
     explanation: 'The muʾadhin must have wuḍūʾ and face the qiblah while calling the adhan.',
   },
@@ -94,7 +112,8 @@ export const adhanQuestions = [
     sourceIds: ['FQH-ADH-07'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: The muʾadhin places his index fingers in his ears, or his hands over his ears, while calling the adhan.',
+    prompt:
+      'True or False: The muʾadhin places his index fingers in his ears, or his hands over his ears, while calling the adhan.',
     answer: true,
     explanation: 'Correct — this is part of the sunnah manner of calling the adhan.',
   },
@@ -111,14 +130,16 @@ export const adhanQuestions = [
       'He never turns his head during the adhan',
     ],
     answerIndex: 0,
-    explanation: 'The muʾadhin turns right for "Ḥayya ʿalā al-Ṣalāh" and left for "Ḥayya ʿalā al-Falāḥ".',
+    explanation:
+      'The muʾadhin turns right for "Ḥayya ʿalā al-Ṣalāh" and left for "Ḥayya ʿalā al-Falāḥ".',
   },
   {
     id: 'FQH-ADH-Q11',
     sourceIds: ['FQH-ADH-09'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: The adhan is recited slowly with pauses, while the iqāmah is recited quickly.',
+    prompt:
+      'True or False: The adhan is recited slowly with pauses, while the iqāmah is recited quickly.',
     answer: true,
     explanation: 'Correct — this is the distinguishing pacing between adhan and iqāmah.',
   },
@@ -127,15 +148,17 @@ export const adhanQuestions = [
     sourceIds: ['FQH-ADH-10'],
     topic: 'ADH',
     type: 'mcq',
-    prompt: 'During cold weather or rainy nights, what is it sunnah for the muʾadhin to add after the two "Ḥayya ʿalā" phrases?',
+    prompt:
+      'During cold weather or rainy nights, what is it sunnah for the muʾadhin to add after the two "Ḥayya ʿalā" phrases?',
     options: [
       '"Ṣallū fī riḥālikum" / "Ṣallū fī buyūtikum" ("Pray in your dwellings/homes")',
       'An extra takbīr',
       'The Shahādatayn a second time',
-      'A personal duʿāʾ of the muʾadhin\'s choosing',
+      "A personal duʿāʾ of the muʾadhin's choosing",
     ],
     answerIndex: 0,
-    explanation: 'In cold or rainy weather, it is sunnah to add "Pray in your dwellings" or "Pray in your homes" after the two "Ḥayya ʿalā" phrases.',
+    explanation:
+      'In cold or rainy weather, it is sunnah to add "Pray in your dwellings" or "Pray in your homes" after the two "Ḥayya ʿalā" phrases.',
   },
   {
     id: 'FQH-ADH-Q13',
@@ -166,7 +189,8 @@ export const adhanQuestions = [
     sourceIds: ['FQH-ADH-13'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: After the adhan, the listener should send ṣalawāt upon the Prophet ﷺ, make the narrated sunnah duʿāʾ, and make a personal duʿāʾ.',
+    prompt:
+      'True or False: After the adhan, the listener should send ṣalawāt upon the Prophet ﷺ, make the narrated sunnah duʿāʾ, and make a personal duʿāʾ.',
     answer: true,
     explanation: 'Correct — these three acts follow the adhan for the listener.',
   },
@@ -185,7 +209,8 @@ export const adhanQuestions = [
     sourceIds: ['FQH-ADH-15'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: The 11-phrase Iqāmah is identical to the 10-phrase Iqāmah except that "Qad qāmat al-Ṣalāh" is said twice instead of once.',
+    prompt:
+      'True or False: The 11-phrase Iqāmah is identical to the 10-phrase Iqāmah except that "Qad qāmat al-Ṣalāh" is said twice instead of once.',
     answer: true,
     explanation: 'Correct — the only difference is the repetition of "Qad qāmat al-Ṣalāh".',
   },
@@ -202,14 +227,16 @@ export const adhanQuestions = [
       'It is only used for Jumuʿah',
     ],
     answerIndex: 0,
-    explanation: 'The 17-word Iqāmah doubles every phrase (as in the adhan), unlike the 10/11-phrase versions which say most phrases once.',
+    explanation:
+      'The 17-word Iqāmah doubles every phrase (as in the adhan), unlike the 10/11-phrase versions which say most phrases once.',
   },
   {
     id: 'FQH-ADH-Q19',
     sourceIds: ['FQH-ADH-14', 'FQH-ADH-15', 'FQH-ADH-16'],
     topic: 'ADH',
     type: 'mcq',
-    prompt: 'What is the key variable that distinguishes the 10-, 11-, and 17-phrase Iqāmah versions from each other?',
+    prompt:
+      'What is the key variable that distinguishes the 10-, 11-, and 17-phrase Iqāmah versions from each other?',
     options: [
       'How many times "Qad qāmat al-Ṣalāh" and the other phrases are repeated',
       'The language used for each version',
@@ -217,7 +244,8 @@ export const adhanQuestions = [
       'The time of day each version is used',
     ],
     answerIndex: 0,
-    explanation: 'The three Iqāmah variants differ in phrase repetition — 10-phrase says most things once, 11-phrase repeats "Qad qāmat al-Ṣalāh" twice, and 17-phrase doubles everything.',
+    explanation:
+      'The three Iqāmah variants differ in phrase repetition — 10-phrase says most things once, 11-phrase repeats "Qad qāmat al-Ṣalāh" twice, and 17-phrase doubles everything.',
   },
   {
     id: 'FQH-ADH-Q20',
@@ -234,9 +262,15 @@ export const adhanQuestions = [
     topic: 'ADH',
     type: 'mcq',
     prompt: 'The adhan is recommended to be called during which of the following situations?',
-    options: ['During a fire', 'During a wedding celebration', 'During a business meeting', 'During a sports match'],
+    options: [
+      'During a fire',
+      'During a wedding celebration',
+      'During a business meeting',
+      'During a sports match',
+    ],
     answerIndex: 0,
-    explanation: 'It is recommended to call the adhan during a fire, among other emergency/distress situations.',
+    explanation:
+      'It is recommended to call the adhan during a fire, among other emergency/distress situations.',
   },
   {
     id: 'FQH-ADH-Q22',
@@ -253,7 +287,12 @@ export const adhanQuestions = [
     topic: 'ADH',
     type: 'mcq',
     prompt: 'The adhan is recommended when which of the following occurs?',
-    options: ['When jinn cause mischief', 'When a guest arrives', 'When traveling by car', 'When starting a meal'],
+    options: [
+      'When jinn cause mischief',
+      'When a guest arrives',
+      'When traveling by car',
+      'When starting a meal',
+    ],
     answerIndex: 0,
     explanation: 'It is recommended to call the adhan when jinn cause mischief.',
   },
@@ -262,7 +301,8 @@ export const adhanQuestions = [
     sourceIds: ['FQH-ADH-21'],
     topic: 'ADH',
     type: 'tf',
-    prompt: 'True or False: It is recommended to call the adhan for someone who is possessed or afflicted.',
+    prompt:
+      'True or False: It is recommended to call the adhan for someone who is possessed or afflicted.',
     answer: true,
     explanation: 'Correct — this is one of the recommended occasions for the adhan.',
   },
@@ -287,10 +327,19 @@ export const adhanQuestions = [
   },
   {
     id: 'FQH-ADH-Q27',
-    sourceIds: ['FQH-ADH-17', 'FQH-ADH-18', 'FQH-ADH-19', 'FQH-ADH-20', 'FQH-ADH-21', 'FQH-ADH-22', 'FQH-ADH-23'],
+    sourceIds: [
+      'FQH-ADH-17',
+      'FQH-ADH-18',
+      'FQH-ADH-19',
+      'FQH-ADH-20',
+      'FQH-ADH-21',
+      'FQH-ADH-22',
+      'FQH-ADH-23',
+    ],
     topic: 'ADH',
     type: 'mcq',
-    prompt: 'Which of the following is NOT one of the recommended non-prayer occasions for calling the adhan?',
+    prompt:
+      'Which of the following is NOT one of the recommended non-prayer occasions for calling the adhan?',
     options: [
       'At the start of a business transaction',
       'At the birth of a newborn',
@@ -298,6 +347,7 @@ export const adhanQuestions = [
       'For someone who is angry',
     ],
     answerIndex: 0,
-    explanation: 'Starting a business transaction is not one of the recommended occasions; the other three are.',
+    explanation:
+      'Starting a business transaction is not one of the recommended occasions; the other three are.',
   },
 ];

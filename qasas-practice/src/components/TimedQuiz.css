@@ -86,7 +86,9 @@
 }
 
 .timer-ring-progress {
-  transition: stroke-dashoffset 0.2s linear, stroke 0.3s;
+  transition:
+    stroke-dashoffset 0.2s linear,
+    stroke 0.3s;
 }
 
 .timer-ring-progress.timer-green {
@@ -644,8 +646,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes dialogSlideIn {

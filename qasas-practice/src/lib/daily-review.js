@@ -82,13 +82,21 @@ function uniqueUnseen(candidates, seenIds) {
   return candidates.filter((question) => question?.id && !seenIds.has(question.id));
 }
 
-function takeRankedCandidates({ candidates, rankedStats, count, seenIds, missedQuestionIds, shuffle }) {
+function takeRankedCandidates({
+  candidates,
+  rankedStats,
+  count,
+  seenIds,
+  missedQuestionIds,
+  shuffle,
+}) {
   if (count <= 0) return [];
 
   const rank = byTopicRank(rankedStats);
   const missed = missedSetFrom(missedQuestionIds);
   const ordered = shuffle(uniqueUnseen(candidates, seenIds)).sort((a, b) => {
-    const rankDiff = (rank.get(questionKey(a)) ?? Number.MAX_SAFE_INTEGER) -
+    const rankDiff =
+      (rank.get(questionKey(a)) ?? Number.MAX_SAFE_INTEGER) -
       (rank.get(questionKey(b)) ?? Number.MAX_SAFE_INTEGER);
     if (rankDiff !== 0) return rankDiff;
 
@@ -153,12 +161,11 @@ export function selectDailyReviewQuestions({
   const seenIds = new Set();
   const nowMillis = toMillis(now);
 
-  const weakStats = [...stats]
-    .sort((a, b) => {
-      const scoreDiff = (a.ewmaScore ?? 1) - (b.ewmaScore ?? 1);
-      if (scoreDiff !== 0) return scoreDiff;
-      return toMillis(a.lastAttempted) - toMillis(b.lastAttempted);
-    });
+  const weakStats = [...stats].sort((a, b) => {
+    const scoreDiff = (a.ewmaScore ?? 1) - (b.ewmaScore ?? 1);
+    if (scoreDiff !== 0) return scoreDiff;
+    return toMillis(a.lastAttempted) - toMillis(b.lastAttempted);
+  });
 
   const weakKeys = new Set(weakStats.map(statKey));
   appendSelected(

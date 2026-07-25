@@ -18,7 +18,8 @@ function rulesForSelector(content, selector) {
     const selectors = rule[1].split(',').map((part) => part.trim());
     if (
       selectors.some(
-        (part) => part === selector || part.endsWith(`\n${selector}`) || part.endsWith(` ${selector}`)
+        (part) =>
+          part === selector || part.endsWith(`\n${selector}`) || part.endsWith(` ${selector}`)
       )
     ) {
       matches.push(rule[2]);
@@ -108,7 +109,12 @@ describe('theme CSS', () => {
         '.settings-option',
       ],
       'components/QuizPicker.css': ['.back-btn', '.quiz-start-btn'],
-      'components/AdminPage.css': ['.back-to-home-btn', '.admin-tab', '.section-header', '.student-select'],
+      'components/AdminPage.css': [
+        '.back-to-home-btn',
+        '.admin-tab',
+        '.section-header',
+        '.student-select',
+      ],
       'components/Auth.css': ['.auth-btn'],
       'components/Leaderboard.css': ['.back-btn', '.mode-tab', '.time-btn'],
       'components/LeaderboardPreview.css': ['.preview-mode-tab', '.preview-view-full'],
@@ -128,8 +134,8 @@ describe('theme CSS', () => {
   });
 
   test('Hadith Arabic text uses the shared script font variable', () => {
-    expect(rulesForSelector(css('components/HadithQuestionCard.css'), '.hadith-arabic-text')).toMatch(
-      /font-family:\s*var\(--arabic-font\)/
-    );
+    expect(
+      rulesForSelector(css('components/HadithQuestionCard.css'), '.hadith-arabic-text')
+    ).toMatch(/font-family:\s*var\(--arabic-font\)/);
   });
 });

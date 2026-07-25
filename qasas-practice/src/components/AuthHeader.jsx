@@ -84,9 +84,7 @@ export default function AuthHeader({ hidden = false }) {
     const menuItems = menuRef.current?.querySelectorAll('[role="menuitem"]');
     if (!menuItems?.length) return;
 
-    const currentIndex = Array.from(menuItems).findIndex(
-      (item) => item === document.activeElement
-    );
+    const currentIndex = Array.from(menuItems).findIndex((item) => item === document.activeElement);
 
     switch (event.key) {
       case 'ArrowDown':
@@ -126,9 +124,7 @@ export default function AuthHeader({ hidden = false }) {
   return (
     <header className="auth-header">
       <div className="auth-header-content">
-        <div className="auth-header-left">
-          {/* Empty for now - logo could go here */}
-        </div>
+        <div className="auth-header-left">{/* Empty for now - logo could go here */}</div>
         <div className="auth-header-right">
           <div className="user-menu-container">
             <button
@@ -151,33 +147,17 @@ export default function AuthHeader({ hidden = false }) {
                 onKeyDown={handleKeyDown}
               >
                 {isAdmin && (
-                  <button
-                    className="user-menu-item"
-                    role="menuitem"
-                    onClick={handleAdmin}
-                  >
+                  <button className="user-menu-item" role="menuitem" onClick={handleAdmin}>
                     Admin
                   </button>
                 )}
-                <button
-                  className="user-menu-item"
-                  role="menuitem"
-                  onClick={handleWeakness}
-                >
+                <button className="user-menu-item" role="menuitem" onClick={handleWeakness}>
                   Strength map
                 </button>
-                <button
-                  className="user-menu-item"
-                  role="menuitem"
-                  onClick={handleSettings}
-                >
+                <button className="user-menu-item" role="menuitem" onClick={handleSettings}>
                   Settings
                 </button>
-                <button
-                  className="user-menu-item"
-                  role="menuitem"
-                  onClick={handleSignOut}
-                >
+                <button className="user-menu-item" role="menuitem" onClick={handleSignOut}>
                   Sign out
                 </button>
               </div>
@@ -187,7 +167,12 @@ export default function AuthHeader({ hidden = false }) {
       </div>
       {settingsOpen && (
         <div className="settings-overlay" role="presentation">
-          <div className="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+          <div
+            className="settings-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="settings-title"
+          >
             <div className="settings-panel-header">
               <h2 id="settings-title">Settings</h2>
               <button
