@@ -18,6 +18,12 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+    rules: {
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      eqeqeq: 'error',
+      'no-console': 'warn',
+      'react-hooks/exhaustive-deps': 'error',
+    },
   },
   eslintConfigPrettier,
 ]);
