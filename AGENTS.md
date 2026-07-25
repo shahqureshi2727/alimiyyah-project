@@ -139,33 +139,19 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 7:10pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-25 7:16pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (25,092t read) | 3,033,513t work | 99% savings
+Stats: 50 obs (22,605t read) | 2,851,002t work | 99% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
-740 6:03p 🔵 pdftoppm PNG Rendering Timed Out on Large Canva Surah PDFs
-741 " 🔵 Surah Text Extraction Succeeded: English Notes Readable, Arabic Verse Text Absent
-742 6:04p 🟣 All 6 Surah Text Files Successfully Extracted to tmp/pdfs/tafsir-raw/
-743 " 🔵 Tafsir Integration Points and Arabic Unicode Quality Constraint
-744 " ⚖️ TDD Approach Chosen for Tafsir Data Module
-745 6:05p 🟣 Tafsir Test Suite Written and Confirmed Failing (TDD Red Phase)
-746 " ⚖️ quran.com API v4 Chosen for Clean Arabic Ayah Text in Both Scripts
-747 6:06p 🔵 Surah Slide-to-Ayah Mapping Confirmed: Non-1:1 Ratio Requires Manual Slide Assignment
-748 " 🟣 Tafsir Phase 3 Data Module — All Tests Green, Build Passing
-749 6:14p 🔴 App Architecture Context for Tafsir UI Integration
-751 " ⚖️ Tafsir UI Design Approved — Implementation Phase Begins
-750 6:19p 🔴 Full Tafsir Integration Surface — All Files Requiring Changes
-752 6:37p 🔵 Git Working Tree Clean — Tafsir Implementation Not Yet Started
-753 " 🔵 Design Spec Format Used in This Project — Morphology Spec as Template
 754 6:38p 🟣 Tafsir Section Design Spec Written and Saved
 755 " 🔵 Tafsir Spec Verified Clean — No TODOs or Placeholders
 757 " ⚖️ Implementation Plan Phase Begins — writing-plans, TDD, and frontend-design Skills Loaded
@@ -203,6 +189,20 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 787 " 🔴 Step 4 Complete: ESLint Tightened — 0 Errors, 15 Warnings (All no-console); No Missing Hook Deps Found
 788 " 🔴 Step 5 Complete: CI Workflow, .env.example, .gitignore Fixes, HTML Metadata, Duplicate Spec File Deleted
 789 " 🔵 Architecture Map: BANKS Object in TimedQuiz is the Complete Mode-to-Data Binding; getAllQuizResults() Confirmed Unbounded
+790 7:10p 🔴 Fixed Hardcoded "/10" Score Displays to Use result.total
+791 " 🟣 Added Tests for Dynamic Score Total Rendering
+792 " ✅ Removed Tracked .DS_Store Files from Repository
+793 " 🔵 Code Audit Confirmed Exactly Three Hardcoded "/10" Display Sites
+794 " 🔵 .DS_Store Files Exist on Disk But Are Not Git-Tracked
+795 " 🔵 LeaderboardTable Is the Single Rendering Leaf for All Score Displays
+796 7:11p 🔵 LeaderboardTable Tests Require Mocking ../lib/quiz to Avoid Firebase Init Crash
+797 7:12p 🔴 TDD RED Confirmed: Test Caught Hardcoded "/10" Bug in LeaderboardTable
+798 " 🔴 Applied result.total Fixes to HomeScreen and LeaderboardTable
+799 " ✅ Deleted src/.DS_Store and src/data/.DS_Store from Disk
+800 " 🔴 TDD GREEN: LeaderboardTable Test Passed — Fix Confirmed Complete
+801 " 🔵 Post-Fix Audit Confirmed No Remaining Hardcoded "/10" Score Display Bugs
+802 7:13p 🔴 Full Test Suite, Lint, and Build All Pass After Score Total Fix
+803 " ✅ Final Verification Confirmed Complete Change Surface Before Commit
 
-Access 3034k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 2851k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

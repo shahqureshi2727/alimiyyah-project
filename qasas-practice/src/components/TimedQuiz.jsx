@@ -17,6 +17,8 @@ import { QUIZ_MODES } from '../config/subjects';
 import { db } from '../lib/firebase';
 import { questionResultFromAnswer } from '../lib/question-results';
 import { shuffleArray } from '../lib/shuffle';
+import { error as logError, warn as logWarn } from '../lib/logger';
+import ErrorBoundary from './ErrorBoundary';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import HadithQuestionCard from './HadithQuestionCard';
 import TafsirQuestionCard from './TafsirQuestionCard';
@@ -76,7 +78,7 @@ function getQuestionTarget(mode, question) {
 function selectQuestions(bank, length = STANDARD_QUIZ_LENGTH) {
   if (bank.length === 0) return [];
   if (bank.length < length) {
-    console.warn(`Bank has only ${bank.length} items, less than ${length}. Allowing repeats.`);
+    logWarn(`Bank has only ${bank.length} items, less than ${length}. Allowing repeats.`);
     const shuffled = shuffleArray(bank);
     const questions = [];
     for (let i = 0; i < length; i++) {
@@ -85,6 +87,19 @@ function selectQuestions(bank, length = STANDARD_QUIZ_LENGTH) {
     return questions;
   }
   return shuffleArray(bank).slice(0, length);
+}
+
+function QuestionRenderFallback({ errorReferenceId, onSkip }) {
+  return (
+    <section className="quiz-render-error" role="alert">
+      <p className="quiz-render-error-ref">Reference {errorReferenceId}</p>
+      <h2>This question could not be shown.</h2>
+      <p>Skip this question and keep going. The attempt will stay open.</p>
+      <button type="button" className="quiz-check-btn" onClick={onSkip}>
+        Skip this question
+      </button>
+    </section>
+  );
 }
 
 function shuffleMorphologyOptions(question) {
@@ -258,6 +273,9 @@ function XIcon() {
 export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComplete }) {
   const { user, username } = useAuth();
   const [questions, setQuestions] = useState([]);
+  const [questionsLoading, setQuestionsLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
+  const [loadRetryKey, setLoadRetryKey] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(QUIZ_MODES[mode].timerSeconds);
   const [isTimerPaused, setIsTimerPaused] = useState(false);
@@ -289,6 +307,8 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     let cancelled = false;
 
     async function loadQuestions() {
+      setQuestionsLoading(true);
+      setLoadError(null);
       const bank = getBank(mode, topic);
       let selected;
 
@@ -321,26 +341,45 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       if (!cancelled) {
         setQuestions(prepared);
         setQuestionStartTime(currentTime());
+        setQuestionsLoading(false);
       }
     }
 
     loadQuestions().catch((err) => {
-      console.error('Error loading quiz questions:', err);
+      logError('Could not load quiz questions.', err, { mode, topic, uid: user?.uid });
       if (!cancelled) {
-        const fallbackBank = getBank(mode, topic);
-        const fallback =
-          mode === 'review'
-            ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
-            : selectQuestions(fallbackBank);
-        setQuestions(fallback);
-        setQuestionStartTime(currentTime());
+        try {
+          const fallbackBank = getBank(mode, topic);
+          const fallback =
+            mode === 'review'
+              ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
+              : selectQuestions(fallbackBank);
+          const prepared = fallback.map((question) =>
+            (question.reviewMode || mode) === 'morphology'
+              ? shuffleMorphologyOptions(question)
+              : question
+          );
+          setQuestions(prepared);
+          setLoadError(
+            mode === 'review'
+              ? "Couldn't load daily review data. Using a regular review set."
+              : "Couldn't load quiz data. Retry."
+          );
+        } catch (fallbackErr) {
+          logError('Could not load fallback quiz questions.', fallbackErr, { mode, topic });
+          setQuestions([]);
+          setLoadError("Couldn't load quiz questions. Retry.");
+        } finally {
+          setQuestionStartTime(currentTime());
+          setQuestionsLoading(false);
+        }
       }
     });
 
     return () => {
       cancelled = true;
     };
-  }, [mode, topic, user]);
+  }, [mode, topic, user, loadRetryKey]);
 
   // Vocab auto-flip after 4 seconds
   useEffect(() => {
@@ -441,6 +480,41 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     showFeedback,
     mode,
   ]);
+
+  const handleSkipQuestion = useCallback(() => {
+    if (quizComplete) return;
+
+    const questionTime = (currentTime() - questionStartTime) / 1000;
+    const current = questions[currentIndex];
+    const currentMode = current?.reviewMode || mode;
+    let targetDisplay = `Question ${currentIndex + 1}`;
+
+    try {
+      targetDisplay = getQuestionTarget(currentMode, current) || targetDisplay;
+    } catch (err) {
+      logError('Could not read skipped question target.', err, { mode: currentMode });
+    }
+
+    setResults((prev) => [
+      ...prev,
+      {
+        question: current,
+        correct: false,
+        timeTaken: questionTime,
+        target: targetDisplay,
+        answerEvent: current
+          ? questionResultFromAnswer({
+              question: current,
+              correct: false,
+              mode: currentMode,
+              index: currentIndex,
+            })
+          : null,
+      },
+    ]);
+
+    advanceQuestion();
+  }, [advanceQuestion, currentIndex, mode, questionStartTime, questions, quizComplete]);
 
   // Timer effect
   useEffect(() => {
@@ -553,7 +627,12 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
         });
         setSaveStatus('saved');
       } catch (err) {
-        console.error('Error saving quiz result:', err);
+        logError('Could not save quiz result.', err, {
+          mode,
+          uid: user?.uid,
+          score,
+          total: questions.length,
+        });
         setSaveStatus('error');
       }
     };
@@ -571,10 +650,27 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     questions.length,
   ]);
 
-  if (questions.length === 0) {
+  if (questionsLoading) {
     return (
       <div className="quiz-loading">
         <p>Loading quiz...</p>
+      </div>
+    );
+  }
+
+  if (questions.length === 0) {
+    return (
+      <div className="quiz-loading quiz-loading-error">
+        <p>{loadError || 'No quiz questions are available for this selection.'}</p>
+        {loadError ? (
+          <button className="quiz-check-btn" onClick={() => setLoadRetryKey((key) => key + 1)}>
+            Retry
+          </button>
+        ) : (
+          <button className="quiz-check-btn" onClick={onBack}>
+            Back
+          </button>
+        )}
       </div>
     );
   }
@@ -604,7 +700,14 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
           <div className="save-status">
             {saveStatus === 'saving' && <span className="saving">Saving...</span>}
             {saveStatus === 'saved' && <span className="saved">Saved</span>}
-            {saveStatus === 'error' && <span className="error">Could not save (offline?)</span>}
+            {saveStatus === 'error' && (
+              <span className="error">
+                Couldn't save quiz results.
+                <button type="button" onClick={() => setSaveStatus(null)}>
+                  Retry
+                </button>
+              </span>
+            )}
           </div>
         </div>
 
@@ -982,7 +1085,25 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
         </div>
       </header>
 
-      <div className="quiz-content">{renderQuestion()}</div>
+      {loadError && <p className="quiz-load-warning">{loadError}</p>}
+
+      <div className="quiz-content">
+        <ErrorBoundary
+          name="Timed quiz question"
+          resetKey={`${currentIndex}:${current?.id || current?.topic || currentMode}`}
+          fallback={({ errorReferenceId, reset }) => (
+            <QuestionRenderFallback
+              errorReferenceId={errorReferenceId}
+              onSkip={() => {
+                reset();
+                handleSkipQuestion();
+              }}
+            />
+          )}
+        >
+          {renderQuestion()}
+        </ErrorBoundary>
+      </div>
 
       {/* Exit confirmation dialog */}
       {showExitDialog && <ExitDialog onCancel={handleExitCancel} onConfirm={handleExitConfirm} />}

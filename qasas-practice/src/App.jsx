@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import HomeScreen from './components/HomeScreen';
 import IrabMode from './components/IrabMode';
@@ -19,6 +19,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
 import AuthHeader from './components/AuthHeader';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 // Loading spinner while checking auth state
@@ -33,6 +34,7 @@ function LoadingScreen() {
 // Protected route wrapper - redirects to login if not authenticated
 function ProtectedRoute({ children, hideHeader = false }) {
   const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return <LoadingScreen />;
@@ -45,7 +47,17 @@ function ProtectedRoute({ children, hideHeader = false }) {
   return (
     <>
       <AuthHeader hidden={hideHeader} />
-      <div className={`app-content ${hideHeader ? 'no-header' : ''}`}>{children}</div>
+      <div className={`app-content ${hideHeader ? 'no-header' : ''}`}>
+        <ErrorBoundary
+          key={location.pathname}
+          name="Route"
+          resetKey={location.key}
+          title="This screen stopped working."
+          message="Go back or reload the page. If it happens again, send the reference ID to your teacher."
+        >
+          {children}
+        </ErrorBoundary>
+      </div>
     </>
   );
 }

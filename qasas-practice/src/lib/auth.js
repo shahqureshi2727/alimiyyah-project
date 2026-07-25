@@ -13,6 +13,8 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from './firebase';
+import { firebaseAuthErrorMessage, safeFirebaseAuthErrorMessage } from './auth-errors';
+import { warn as logWarn } from './logger';
 
 // Synthesize a fake email from username for Firebase Auth
 export const usernameToAuthEmail = (username) => `${username.toLowerCase().trim()}@qasas.local`;
@@ -91,7 +93,7 @@ export async function signUp({ username, password, recoveryEmail }) {
     } catch (err) {
       // Recovery email couldn't be linked (e.g., already in use)
       recoveryEmailLinked = false;
-      console.warn('Could not link recovery email:', err.message);
+      logWarn('Could not link recovery email.', { code: err.code, message: err.message });
     }
   }
 
@@ -115,7 +117,7 @@ export async function signIn(username, password) {
     return userCredential.user;
   } catch (err) {
     // Don't distinguish between "no such user" and "wrong password"
-    throw new Error('Incorrect username or password.', { cause: err });
+    throw new Error(firebaseAuthErrorMessage(err), { cause: err });
   }
 }
 
@@ -169,6 +171,6 @@ export async function resetPassword(username) {
         message: 'If this account exists and has a recovery email, a reset link has been sent.',
       };
     }
-    throw err;
+    throw new Error(safeFirebaseAuthErrorMessage(err), { cause: err });
   }
 }

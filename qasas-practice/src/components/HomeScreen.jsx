@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
 import { FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
 import { getTafsirSurahOptions } from '../data/tafsir';
+import { error as logError } from '../lib/logger';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
@@ -63,26 +64,31 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   const navigate = useNavigate();
   const [recentResults, setRecentResults] = useState([]);
   const [loadingResults, setLoadingResults] = useState(true);
+  const [recentResultsError, setRecentResultsError] = useState(null);
   const [subject, setSubject] = useState(null);
   const [selectedTafsirSurah, setSelectedTafsirSurah] = useState('');
   const tafsirSurahOptions = getTafsirSurahOptions();
 
-  useEffect(() => {
-    async function fetchRecentResults() {
-      if (!user) return;
+  const fetchRecentResults = useCallback(async () => {
+    if (!user) return;
 
-      try {
-        const results = await getUserRecentResults(user.uid, 5);
-        setRecentResults(results);
-      } catch (err) {
-        console.error('Error fetching recent results:', err);
-      } finally {
-        setLoadingResults(false);
-      }
+    setLoadingResults(true);
+    setRecentResultsError(null);
+
+    try {
+      const results = await getUserRecentResults(user.uid, 5);
+      setRecentResults(results);
+    } catch (err) {
+      logError('Could not load recent quiz results.', err, { uid: user.uid });
+      setRecentResultsError("Couldn't load recent results. Retry.");
+    } finally {
+      setLoadingResults(false);
     }
-
-    fetchRecentResults();
   }, [user]);
+
+  useEffect(() => {
+    Promise.resolve().then(fetchRecentResults);
+  }, [fetchRecentResults]);
 
   const renderCard = (mode, className = 'mode-card') => (
     <button key={mode.id} className={className} onClick={() => onSelectMode(mode.id)}>
@@ -341,6 +347,13 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <div className="recent-results">
           {loadingResults ? (
             <p className="results-loading">Loading...</p>
+          ) : recentResultsError ? (
+            <div className="no-results error-state">
+              <p>{recentResultsError}</p>
+              <button className="try-quiz-link" onClick={fetchRecentResults}>
+                Retry
+              </button>
+            </div>
           ) : recentResults.length === 0 ? (
             <div className="no-results">
               <p>No quizzes yet.</p>

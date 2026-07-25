@@ -4,7 +4,7 @@
 // find their document, and change role from "student" to "admin". This is the
 // only way, by design.
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getUserDoc } from '../lib/auth';
@@ -23,6 +23,7 @@ import {
   QUIZ_MODES,
 } from '../config/subjects';
 import { WeaknessHeatmap } from './WeaknessDashboard';
+import { error as logError } from '../lib/logger';
 import './AdminPage.css';
 
 function NotFoundPage() {
@@ -409,21 +410,23 @@ function ClassStats() {
   const [sortBy, setSortBy] = useState('avgScoreWeek');
   const [sortDirection, setSortDirection] = useState('asc');
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const results = await getAllQuizResults();
-        setAllResults(results);
-      } catch (err) {
-        console.error('Error fetching quiz results:', err);
-        setError('Failed to load quiz results.');
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const results = await getAllQuizResults();
+      setAllResults(results);
+    } catch (err) {
+      logError('Could not load admin quiz results.', err);
+      setError("Couldn't load class statistics. Retry.");
+    } finally {
+      setLoading(false);
     }
-
-    fetchData();
   }, []);
+
+  useEffect(() => {
+    Promise.resolve().then(fetchData);
+  }, [fetchData]);
 
   // Compute statistics
   const stats = useMemo(() => {
@@ -581,7 +584,14 @@ function ClassStats() {
   }
 
   if (error) {
-    return <div className="stats-error">{error}</div>;
+    return (
+      <div className="stats-error">
+        <p>{error}</p>
+        <button className="try-quiz-link" onClick={fetchData}>
+          Retry
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -680,22 +690,24 @@ function AdminWeaknessView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchProfiles() {
-      try {
-        const rows = await getAllTopicStatsProfiles();
-        setProfiles(rows);
-        setSelectedUserId(rows[0]?.userId || rows[0]?.id || null);
-      } catch (err) {
-        console.error('Error loading weakness profiles:', err);
-        setError('Failed to load weakness profiles.');
-      } finally {
-        setLoading(false);
-      }
+  const fetchProfiles = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const rows = await getAllTopicStatsProfiles();
+      setProfiles(rows);
+      setSelectedUserId(rows[0]?.userId || rows[0]?.id || null);
+    } catch (err) {
+      logError('Could not load admin weakness profiles.', err);
+      setError("Couldn't load class weakness data. Retry.");
+    } finally {
+      setLoading(false);
     }
-
-    fetchProfiles();
   }, []);
+
+  useEffect(() => {
+    Promise.resolve().then(fetchProfiles);
+  }, [fetchProfiles]);
 
   const topicMeta = useMemo(
     () => [...FIQH_TOPICS, ...HADITH_TOPICS, ...TAFSIR_TOPICS, ...ARABIC_TOPICS],
@@ -744,7 +756,16 @@ function AdminWeaknessView() {
   );
 
   if (loading) return <div className="stats-loading">Loading weakness data...</div>;
-  if (error) return <div className="stats-error">{error}</div>;
+  if (error) {
+    return (
+      <div className="stats-error">
+        <p>{error}</p>
+        <button className="try-quiz-link" onClick={fetchProfiles}>
+          Retry
+        </button>
+      </div>
+    );
+  }
   if (profiles.length === 0) return <p className="no-students">No weakness profiles yet.</p>;
 
   return (
@@ -796,34 +817,49 @@ export default function AdminPage() {
   const { user } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [adminError, setAdminError] = useState(null);
   const [activeTab, setActiveTab] = useState('bank');
 
-  useEffect(() => {
-    async function checkAdminStatus() {
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        // Always fetch fresh from Firestore - don't trust cached values
-        const userDoc = await getUserDoc(user.uid);
-        setIsAdmin(userDoc?.role === 'admin');
-      } catch (err) {
-        console.error('Error checking admin status:', err);
-        setIsAdmin(false);
-      } finally {
-        setLoading(false);
-      }
+  const checkAdminStatus = useCallback(async () => {
+    if (!user) {
+      setLoading(false);
+      return;
     }
 
-    checkAdminStatus();
+    setLoading(true);
+    setAdminError(null);
+    try {
+      // Always fetch fresh from Firestore - don't trust cached values
+      const userDoc = await getUserDoc(user.uid);
+      setIsAdmin(userDoc?.role === 'admin');
+    } catch (err) {
+      logError('Could not check admin status.', err, { uid: user.uid });
+      setIsAdmin(false);
+      setAdminError("Couldn't check admin access. Retry.");
+    } finally {
+      setLoading(false);
+    }
   }, [user]);
+
+  useEffect(() => {
+    Promise.resolve().then(checkAdminStatus);
+  }, [checkAdminStatus]);
 
   if (loading) {
     return (
       <div className="admin-loading">
         <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (adminError) {
+    return (
+      <div className="admin-loading">
+        <p>{adminError}</p>
+        <button className="try-quiz-link" onClick={checkAdminStatus}>
+          Retry
+        </button>
       </div>
     );
   }

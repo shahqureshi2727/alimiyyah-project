@@ -3,6 +3,7 @@ import { QUIZ_MODES } from '../config/subjects';
 import { useAuth } from '../contexts/AuthContext';
 import { submitAnswerEvents } from '../lib/quiz';
 import { questionResultFromAnswer } from '../lib/question-results';
+import { error as logError } from '../lib/logger';
 
 export function useWeaknessTracking() {
   const { user, username } = useAuth();
@@ -28,7 +29,7 @@ export function useWeaknessTracking() {
           quizResultId: null,
         });
       } catch (err) {
-        console.error('Error tracking weakness answer:', err);
+        logError('Could not track weakness answer.', err, { mode, questionId: question?.id });
       }
     },
     [user, username]

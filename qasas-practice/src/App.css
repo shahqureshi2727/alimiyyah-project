@@ -200,3 +200,101 @@ button {
 .app-content {
   padding-top: 50px;
 }
+
+.primary-btn,
+.secondary-btn,
+.try-quiz-link {
+  min-height: 40px;
+  border-radius: 6px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.primary-btn,
+.try-quiz-link {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--parchment);
+}
+
+.primary-btn:hover,
+.try-quiz-link:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.secondary-btn {
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--text-primary);
+}
+
+.secondary-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.error-fallback {
+  min-height: min(520px, 100vh);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.error-fallback-content {
+  width: min(100%, 560px);
+  border: 1px solid var(--error);
+  background: var(--error-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: var(--text-primary);
+}
+
+.error-fallback-kicker {
+  margin-bottom: 0.5rem;
+  color: var(--error);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.error-fallback-content h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.error-fallback-content p {
+  color: var(--text-secondary);
+}
+
+.error-fallback-detail {
+  margin-top: 0.85rem;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+}
+
+.error-fallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.error-state {
+  border: 1px solid var(--error);
+  background: var(--error-bg);
+  color: var(--text-primary);
+}

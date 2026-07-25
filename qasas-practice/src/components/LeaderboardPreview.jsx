@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getLeaderboard, getUserBestResult } from '../lib/quiz';
 import { QUIZ_MODES } from '../config/subjects';
+import { error as logError } from '../lib/logger';
 import LeaderboardTable from './LeaderboardTable';
 import './LeaderboardPreview.css';
 
@@ -23,51 +24,52 @@ export default function LeaderboardPreview() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch leaderboard data
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      setError(null);
+  const fetchData = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    setError(null);
 
-      try {
-        // Fetch top 5 for this week
-        const data = await getLeaderboard({
+    try {
+      // Fetch top 5 for this week
+      const data = await getLeaderboard({
+        mode: activeMode,
+        allTime: false,
+        bankSource: QUIZ_MODES[activeMode].bankSource,
+        maxResults: 5,
+      });
+
+      setLeaderboardData(data);
+
+      // Check if user is in top 5
+      const userInTop5 = data.some((r) => r.userId === user.uid);
+
+      if (!userInTop5) {
+        // Fetch user's best result for this mode this week
+        const userBest = await getUserBestResult({
+          userId: user.uid,
           mode: activeMode,
           allTime: false,
           bankSource: QUIZ_MODES[activeMode].bankSource,
-          maxResults: 5,
         });
 
-        setLeaderboardData(data);
-
-        // Check if user is in top 5
-        const userInTop5 = data.some((r) => r.userId === user.uid);
-
-        if (!userInTop5) {
-          // Fetch user's best result for this mode this week
-          const userBest = await getUserBestResult({
-            userId: user.uid,
-            mode: activeMode,
-            allTime: false,
-            bankSource: QUIZ_MODES[activeMode].bankSource,
-          });
-
-          setUserResult(userBest);
-        } else {
-          setUserResult(null);
-        }
-      } catch (err) {
-        console.error('Error fetching leaderboard preview:', err);
-        setError('Could not load leaderboard.');
-      } finally {
-        setLoading(false);
+        setUserResult(userBest);
+      } else {
+        setUserResult(null);
       }
-    }
-
-    if (user) {
-      fetchData();
+    } catch (err) {
+      logError('Could not load leaderboard preview.', err, { activeMode });
+      setError("Couldn't load the leaderboard preview. Retry.");
+    } finally {
+      setLoading(false);
     }
   }, [activeMode, user]);
+
+  // Fetch leaderboard data
+  useEffect(() => {
+    if (user) {
+      Promise.resolve().then(fetchData);
+    }
+  }, [fetchData, user]);
 
   const isUserInTop5 = leaderboardData.some((r) => r.userId === user?.uid);
   const hasNoResult = !isUserInTop5 && !userResult;
@@ -99,7 +101,12 @@ export default function LeaderboardPreview() {
         {loading ? (
           <div className="preview-loading">Loading...</div>
         ) : error ? (
-          <div className="preview-error">{error}</div>
+          <div className="preview-error">
+            <p>{error}</p>
+            <button className="try-quiz-link" onClick={fetchData}>
+              Retry
+            </button>
+          </div>
         ) : (
           <>
             {hasNoResult && (
