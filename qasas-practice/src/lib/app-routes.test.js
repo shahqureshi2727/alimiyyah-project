@@ -46,6 +46,10 @@ describe('app route helpers', () => {
       path: '/quiz/hadith/ARB40',
       leaderboardMode: 'hadith',
     });
+    expect(quizPath({ mode: 'tafsir', topic: 'ASR' })).toEqual({
+      path: '/quiz/tafsir/ASR',
+      leaderboardMode: 'tafsir',
+    });
   });
 
   it('validates practice params from configured topics', () => {

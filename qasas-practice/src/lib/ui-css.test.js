@@ -149,7 +149,7 @@ describe('theme CSS', () => {
         '.tafsir-surah-select',
         '.result-row',
       ],
-      'styles/components.css': ['.try-quiz-link', '.primary-btn', '.secondary-btn'],
+      'styles/components.css': ['.try-quiz-link', '.primary-btn', '.secondary-btn', '.back-btn'],
       'components/TimedQuiz.css': [
         '.exit-quiz-btn',
         '.quiz-choice-btn',
@@ -177,7 +177,7 @@ describe('theme CSS', () => {
         '.settings-close',
         '.settings-option',
       ],
-      'components/QuizPicker.css': ['.back-btn', '.quiz-start-btn'],
+      'components/QuizPicker.css': ['.quiz-group-tab'],
       'components/AdminPage.css': [
         '.back-to-home-btn',
         '.admin-tab',
