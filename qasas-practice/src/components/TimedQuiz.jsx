@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
-import { useBlocker } from 'react-router-dom';
+import { useBlocker, useNavigate } from 'react-router-dom';
 import { QUIZ_MODES } from '../config/subjects';
 import { useAuth } from '../contexts/AuthContext';
 import { useCountdown } from '../hooks/useCountdown';
 import { useQuizEngine } from '../hooks/useQuizEngine';
+import { practicePath, resolveQuizRoute } from '../lib/app-routes';
 import { STANDARD_QUIZ_LENGTH } from '../lib/quiz-banks';
+import { practiceTargetForTopic } from '../lib/topic-route-targets';
+import AppState from './AppState';
 import ErrorBoundary from './ErrorBoundary';
 import ExitDialog from './quiz/ExitDialog';
 import QuestionRenderFallback from './quiz/QuestionRenderFallback';
@@ -15,6 +18,7 @@ import './TimedQuiz.css';
 
 export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComplete }) {
   const { user, username } = useAuth();
+  const navigate = useNavigate();
   const engine = useQuizEngine({ mode, topic, user, username, onQuizComplete });
   const [showExitDialog, setShowExitDialog] = useState(false);
   const allowNavigationRef = useRef(false);
@@ -34,6 +38,8 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     !engine.questionsLoading &&
     engine.questions.length > 0;
   const timerSeconds = QUIZ_MODES[mode].timerSeconds;
+  const quizRoute = resolveQuizRoute({ mode, topic });
+  const quizLabel = quizRoute.status === 'ok' ? quizRoute.label : QUIZ_MODES[mode].label;
   const { timeLeft } = useCountdown({
     totalSeconds: timerSeconds,
     running: timerRunning,
@@ -64,22 +70,35 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     onBack();
   };
 
-  if (engine.questionsLoading) return <div className="quiz-loading"><p>Loading quiz...</p></div>;
+  const missedPracticeTarget = engine.results
+    .map((result) => result.answerEvent?.topic)
+    .filter(Boolean)
+    .find((topicCode, index, topics) => topics.indexOf(topicCode) === index && practiceTargetForTopic(topicCode));
+
+  const handlePracticeMissed = missedPracticeTarget
+    ? () => navigate(practicePath(practiceTargetForTopic(missedPracticeTarget)))
+    : null;
+
+  if (engine.questionsLoading)
+    return (
+      <AppState
+        className="quiz-loading"
+        tone="loading"
+        title="Loading quiz"
+        message={`Preparing ${quizLabel}.`}
+      />
+    );
 
   if (engine.questions.length === 0) {
     return (
-      <div className="quiz-loading quiz-loading-error">
-        <p>{engine.loadError || 'No quiz questions are available for this selection.'}</p>
-        {engine.loadError ? (
-          <button className="quiz-check-btn" onClick={engine.retryLoad}>
-            Retry
-          </button>
-        ) : (
-          <button className="quiz-check-btn" onClick={onBack}>
-            Back
-          </button>
-        )}
-      </div>
+      <AppState
+        className="quiz-loading"
+        tone={engine.loadError ? 'error' : 'empty'}
+        title={engine.loadError ? 'Quiz unavailable' : 'No questions yet'}
+        message={engine.loadError || 'No quiz questions are available for this selection.'}
+        actionLabel={engine.loadError ? 'Retry' : 'Back to home'}
+        onAction={engine.loadError ? engine.retryLoad : onBack}
+      />
     );
   }
 
@@ -91,6 +110,8 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       saveStatus={engine.saveStatus}
       onRetrySave={engine.retrySave}
       results={engine.results}
+      quizLabel={quizLabel}
+      onPracticeMissed={handlePracticeMissed}
       onPlayAgain={onPlayAgain}
       onBack={onBack}
     />
@@ -98,11 +119,10 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
   return (
     <div className="timed-quiz">
-      <button className="exit-quiz-btn" onClick={handleExitClick}>
-        Exit quiz
-      </button>
-
       <header className="quiz-header">
+        <button className="exit-quiz-btn" onClick={handleExitClick}>
+          Exit quiz
+        </button>
         <div className="quiz-progress">
           <span>Question {engine.currentIndex + 1} of {engine.questions.length}</span>
         </div>

@@ -1,23 +1,5 @@
 import { formatDuration } from '../../lib/quiz';
 
-function Confetti() {
-  return (
-    <div className="confetti-container">
-      {[...Array(30)].map((_, i) => (
-        <div
-          key={i}
-          className="confetti-piece"
-          style={{
-            left: `${(i * 37) % 100}%`,
-            animationDelay: `${((i * 11) % 10) / 20}s`,
-            backgroundColor: ['#1a6b6d', '#22863a', '#ea580c', '#7c3aed', '#db2777'][i % 5],
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default function QuizResults({
   score,
   totalQuestions,
@@ -25,19 +7,22 @@ export default function QuizResults({
   saveStatus,
   onRetrySave,
   results,
+  quizLabel,
+  onPracticeMissed,
   onPlayAgain,
   onBack,
 }) {
   const scoreRate = totalQuestions > 0 ? score / totalQuestions : 0;
   const isHighScore = scoreRate >= 0.9;
   const isGoodScore = scoreRate >= 0.6;
+  const hasMissedTopics = results.some((result) => !result.correct);
 
   return (
     <div className="quiz-results">
-      {isHighScore && <Confetti />}
       <div
         className={`results-header ${isHighScore ? 'high-score' : isGoodScore ? 'good-score' : 'low-score'}`}
       >
+        <p className="results-context">You completed {quizLabel}</p>
         <h1 className="results-score">
           {score} / {totalQuestions}
         </h1>
@@ -63,7 +48,7 @@ export default function QuizResults({
       </div>
 
       <div className="results-breakdown">
-        <h2>Question Breakdown</h2>
+        <h2>Question review</h2>
         <div className="breakdown-list">
           {results.map((result, idx) => (
             <div key={idx} className={`breakdown-row ${result.correct ? 'correct' : 'incorrect'}`}>
@@ -90,8 +75,13 @@ export default function QuizResults({
       </div>
 
       <div className="results-actions">
+        {hasMissedTopics && onPracticeMissed && (
+          <button className="play-again-btn" onClick={onPracticeMissed}>
+            Practice missed topic
+          </button>
+        )}
         <button className="play-again-btn" onClick={onPlayAgain}>
-          Play Again
+          Play {quizLabel} again
         </button>
         <button className="home-btn" onClick={onBack}>
           Home
