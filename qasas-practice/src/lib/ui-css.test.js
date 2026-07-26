@@ -146,9 +146,10 @@ describe('theme CSS', () => {
       'components/HomeScreen.css': [
         '.subject-card',
         '.mode-card',
-        '.quiz-entry-card',
-        '.try-quiz-link',
+        '.tafsir-surah-select',
+        '.result-row',
       ],
+      'styles/components.css': ['.try-quiz-link', '.primary-btn', '.secondary-btn'],
       'components/TimedQuiz.css': [
         '.exit-quiz-btn',
         '.quiz-choice-btn',

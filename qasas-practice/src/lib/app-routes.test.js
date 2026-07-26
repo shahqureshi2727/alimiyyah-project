@@ -8,6 +8,11 @@ import {
   resolveQuizRoute,
   routeTitle,
 } from './app-routes';
+import {
+  practiceTargetForTopic,
+  quizTargetForTopic,
+  topicMetaForCode,
+} from './topic-route-targets';
 
 const appRoutesSource = readFileSync(fileURLToPath(import.meta.resolve('./app-routes.js')), 'utf8');
 
@@ -83,5 +88,23 @@ describe('app route helpers', () => {
     );
     expect(routeTitle('quiz', { label: 'Fiqh' })).toBe('Quiz: Fiqh | Alimiyyah Practice');
     expect(routeTitle('notFound')).toBe('Page Not Found | Alimiyyah Practice');
+  });
+
+  it('maps weakness topic codes to safe practice and quiz targets', () => {
+    expect(topicMetaForCode('WUD')).toMatchObject({ label: 'Wudhu', subject: 'fiqh' });
+    expect(practiceTargetForTopic('WUD')).toEqual({ mode: 'fiqh', topic: 'WUD' });
+    expect(quizTargetForTopic('WUD')).toEqual({ mode: 'fiqh', topic: 'WUD' });
+
+    expect(practiceTargetForTopic('ASR')).toEqual({ mode: 'tafsir', topic: 'ASR' });
+    expect(quizTargetForTopic('ASR')).toEqual({ mode: 'tafsir', topic: 'ASR' });
+
+    expect(practiceTargetForTopic('MOR_CMD_AMR')).toEqual({
+      mode: 'morphology',
+      topic: 'amrNahi',
+    });
+    expect(quizTargetForTopic('MOR_CMD_AMR')).toEqual({ mode: 'morphology' });
+
+    expect(practiceTargetForTopic('NOPE')).toBe(null);
+    expect(quizTargetForTopic('NOPE')).toBe(null);
   });
 });
