@@ -185,7 +185,7 @@ describe('theme CSS', () => {
         '.student-select',
       ],
       'components/Auth.css': ['.auth-btn'],
-      'components/Leaderboard.css': ['.back-btn', '.mode-tab', '.time-btn'],
+      'components/Leaderboard.css': ['.mode-tab', '.mode-subtab', '.time-btn'],
       'components/LeaderboardPreview.css': ['.preview-mode-tab', '.preview-view-full'],
       'components/FiqhQuestionCard.css': ['.fiqh-choice-btn'],
       'components/HadithQuestionCard.css': ['.hadith-choice-btn'],

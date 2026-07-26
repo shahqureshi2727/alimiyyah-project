@@ -5,6 +5,7 @@ import { getLeaderboard, getUserBestResult } from '../lib/quiz';
 import { QUIZ_MODES } from '../config/subjects';
 import { getLastQuizMode } from '../lib/last-quiz-mode';
 import { error as logError } from '../lib/logger';
+import AppState from './AppState';
 import LeaderboardTable from './LeaderboardTable';
 import './LeaderboardPreview.css';
 
@@ -97,14 +98,15 @@ export default function LeaderboardPreview() {
       {/* Content */}
       <div className="preview-content">
         {loading ? (
-          <div className="preview-loading">Loading...</div>
+          <AppState tone="loading" title="Loading leaderboard" message="Checking this week's scores." />
         ) : error ? (
-          <div className="preview-error">
-            <p>{error}</p>
-            <button className="try-quiz-link" onClick={fetchData}>
-              Retry
-            </button>
-          </div>
+          <AppState
+            tone="error"
+            title="Preview unavailable"
+            message={error}
+            actionLabel="Retry"
+            onAction={fetchData}
+          />
         ) : (
           <>
             {hasNoResult && (
@@ -114,7 +116,7 @@ export default function LeaderboardPreview() {
             )}
 
             {leaderboardData.length === 0 ? (
-              <div className="preview-empty">No results yet this week. Be the first!</div>
+              <AppState title="No results yet" message="Be the first on this week's board." />
             ) : (
               <LeaderboardTable
                 data={leaderboardData}
