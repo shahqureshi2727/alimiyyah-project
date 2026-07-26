@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { signIn } from '../lib/auth';
 import './Auth.css';
 
 export default function Login() {
@@ -17,6 +16,7 @@ export default function Login() {
     setLoading(true);
 
     try {
+      const { signIn } = await import('../lib/auth');
       await signIn(username, password);
       const from = location.state?.from;
       const target = from ? `${from.pathname || '/'}${from.search || ''}${from.hash || ''}` : '/';

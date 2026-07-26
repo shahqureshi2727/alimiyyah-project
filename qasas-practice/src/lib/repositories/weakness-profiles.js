@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs, limit, orderBy, query } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../firestore';
 import { cacheKey, cachedQuery } from './cache';
 import { requirePositiveLimit } from './query-helpers';
 

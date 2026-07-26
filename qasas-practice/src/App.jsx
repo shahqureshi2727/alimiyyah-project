@@ -1,39 +1,38 @@
-import { useCallback, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import {
   Link,
-  Navigate,
-  Outlet,
   Route,
   Routes,
-  useLocation,
   useNavigate,
   useOutletContext,
   useParams,
   useSearchParams,
 } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
-import HomeScreen from './components/HomeScreen';
-import IrabMode from './components/IrabMode';
-import NounMode from './components/NounMode';
-import RoleMode from './components/RoleMode';
-import VocabMode from './components/VocabMode';
-import MorphologyMode from './components/MorphologyMode';
-import FiqhPracticeMode from './components/FiqhPracticeMode';
-import HadithPracticeMode from './components/HadithPracticeMode';
-import TafsirPracticeMode from './components/TafsirPracticeMode';
-import QuizPicker from './components/QuizPicker';
-import TimedQuiz from './components/TimedQuiz';
-import Leaderboard from './components/Leaderboard';
-import AdminPage from './components/AdminPage';
-import WeaknessDashboard from './components/WeaknessDashboard';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import ForgotPassword from './components/ForgotPassword';
-import AuthHeader from './components/AuthHeader';
-import ErrorBoundary from './components/ErrorBoundary';
 import { practicePath, resolvePracticeRoute, resolveQuizRoute, routeTitle } from './lib/app-routes';
 import { setLastQuizMode } from './lib/last-quiz-mode';
 import './App.css';
+
+const HomeScreen = lazy(() => import('./components/HomeScreen'));
+const IrabMode = lazy(() => import('./components/IrabMode'));
+const NounMode = lazy(() => import('./components/NounMode'));
+const RoleMode = lazy(() => import('./components/RoleMode'));
+const VocabMode = lazy(() => import('./components/VocabMode'));
+const MorphologyMode = lazy(() => import('./components/MorphologyMode'));
+const FiqhPracticeMode = lazy(() => import('./components/FiqhPracticeMode'));
+const HadithPracticeMode = lazy(() => import('./components/HadithPracticeMode'));
+const TafsirPracticeMode = lazy(() => import('./components/TafsirPracticeMode'));
+const QuizPicker = lazy(() => import('./components/QuizPicker'));
+const TimedQuiz = lazy(() => import('./components/TimedQuiz'));
+const Leaderboard = lazy(() => import('./components/Leaderboard'));
+const AdminPage = lazy(() => import('./components/AdminPage'));
+const WeaknessDashboard = lazy(() => import('./components/WeaknessDashboard'));
+const Login = lazy(() => import('./components/Login'));
+const Signup = lazy(() => import('./components/Signup'));
+const ForgotPassword = lazy(() => import('./components/ForgotPassword'));
+const ProtectedLayout = lazy(() => import('./components/ProtectedLayout'));
+const AdminRoute = lazy(() =>
+  import('./components/ProtectedLayout').then((module) => ({ default: module.AdminRoute }))
+);
 
 function LoadingScreen() {
   return (
@@ -51,91 +50,8 @@ function useDocumentTitle(title) {
   }, [title]);
 }
 
-function redirectTarget(location) {
-  const from = location.state?.from;
-  if (!from) return '/';
-  return `${from.pathname || '/'}${from.search || ''}${from.hash || ''}`;
-}
-
-function isQuizAttemptPath(pathname) {
-  return /^\/quiz\/[^/]+/.test(pathname);
-}
-
-function ProtectedLayout() {
-  const { isAuthenticated, loading } = useAuth();
-  const location = useLocation();
-  const [headerOverride, setHeaderOverride] = useState(null);
-  const headerHidden =
-    headerOverride?.pathname === location.pathname
-      ? headerOverride.hidden
-      : isQuizAttemptPath(location.pathname);
-  const setHeaderHidden = useCallback(
-    (hidden) => setHeaderOverride({ pathname: location.pathname, hidden }),
-    [location.pathname]
-  );
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location }} />;
-  }
-
-  return (
-    <>
-      <AuthHeader hidden={headerHidden} />
-      <div className={`app-content ${headerHidden ? 'no-header' : ''}`}>
-        <ErrorBoundary
-          key={location.pathname}
-          name="Route"
-          resetKey={location.key}
-          title="This screen stopped working."
-          message="Go back or reload the page. If it happens again, send the reference ID to your teacher."
-        >
-          <Outlet context={{ setHeaderHidden }} />
-        </ErrorBoundary>
-      </div>
-    </>
-  );
-}
-
 function PublicRoute({ children }) {
-  const { isAuthenticated, loading } = useAuth();
-  const location = useLocation();
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  if (isAuthenticated) {
-    return <Navigate to={redirectTarget(location)} replace />;
-  }
-
   return children;
-}
-
-function AdminRoute({ children }) {
-  const { isAdmin } = useAuth();
-  useDocumentTitle(routeTitle('admin'));
-
-  if (!isAdmin) {
-    return <AdminDenied />;
-  }
-
-  return children;
-}
-
-function AdminDenied() {
-  return (
-    <main className="route-message" data-screen="admin-denied">
-      <h1>Admin access required</h1>
-      <p>This area is only available to teachers and admins.</p>
-      <Link className="route-message-link" to="/">
-        Go home
-      </Link>
-    </main>
-  );
 }
 
 function InvalidRoute({ message }) {
@@ -327,29 +243,31 @@ function ForgotPasswordRoute() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginRoute />} />
-      <Route path="/signup" element={<SignupRoute />} />
-      <Route path="/forgot-password" element={<ForgotPasswordRoute />} />
-      <Route element={<ProtectedLayout />}>
-        <Route index element={<HomeRoute />} />
-        <Route path="/practice/:mode" element={<PracticeRoute />} />
-        <Route path="/practice/:mode/:topic" element={<PracticeRoute />} />
-        <Route path="/quiz" element={<QuizPickerRoute />} />
-        <Route path="/quiz/:mode" element={<QuizRoute />} />
-        <Route path="/quiz/:mode/:topic" element={<QuizRoute />} />
-        <Route path="/leaderboard" element={<LeaderboardRoute />} />
-        <Route path="/weakness" element={<WeaknessRoute />} />
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <AdminPage />
-            </AdminRoute>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<LoadingScreen />}>
+      <Routes>
+        <Route path="/login" element={<LoginRoute />} />
+        <Route path="/signup" element={<SignupRoute />} />
+        <Route path="/forgot-password" element={<ForgotPasswordRoute />} />
+        <Route element={<ProtectedLayout />}>
+          <Route index element={<HomeRoute />} />
+          <Route path="/practice/:mode" element={<PracticeRoute />} />
+          <Route path="/practice/:mode/:topic" element={<PracticeRoute />} />
+          <Route path="/quiz" element={<QuizPickerRoute />} />
+          <Route path="/quiz/:mode" element={<QuizRoute />} />
+          <Route path="/quiz/:mode/:topic" element={<QuizRoute />} />
+          <Route path="/leaderboard" element={<LeaderboardRoute />} />
+          <Route path="/weakness" element={<WeaknessRoute />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminPage />
+              </AdminRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

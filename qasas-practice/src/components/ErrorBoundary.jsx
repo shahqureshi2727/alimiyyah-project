@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { error as logError } from '../lib/logger';
 import { createErrorReferenceId } from '../lib/error-reference';
 
 function DefaultFallback({
@@ -64,9 +63,11 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(err, info) {
-    logError(`${this.props.name || 'React'} boundary caught a render error.`, err, {
-      componentStack: info.componentStack,
-      errorReferenceId: this.state.errorReferenceId,
+    import('../lib/logger').then(({ error: logError }) => {
+      logError(`${this.props.name || 'React'} boundary caught a render error.`, err, {
+        componentStack: info.componentStack,
+        errorReferenceId: this.state.errorReferenceId,
+      });
     });
   }
 

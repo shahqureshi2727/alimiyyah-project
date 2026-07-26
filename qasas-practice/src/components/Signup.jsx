@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp, validateUsername, validatePassword } from '../lib/auth';
 import { safeFirebaseAuthErrorMessage } from '../lib/auth-errors';
 import './Auth.css';
 
@@ -19,6 +18,8 @@ export default function Signup() {
     setError('');
     setWarning('');
     setLoading(true);
+
+    const { signUp, validateUsername, validatePassword } = await import('../lib/auth');
 
     // Client-side validation
     const usernameValidation = validateUsername(username);

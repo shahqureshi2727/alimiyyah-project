@@ -21,7 +21,7 @@ vi.mock('firebase/firestore', () => ({
   writeBatch: vi.fn(),
 }));
 
-vi.mock('./firebase', () => ({
+vi.mock('./firestore', () => ({
   db: { app: 'test-db' },
 }));
 
