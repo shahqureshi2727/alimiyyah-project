@@ -8,7 +8,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary
       name="Root"
-      title="Qasas Practice stopped working."
+      title="Alimiyyah Practice stopped working."
       message="Reload the app. If it happens again, send the reference ID to your teacher."
       showErrorMessage={true}
     >

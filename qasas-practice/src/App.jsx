@@ -10,7 +10,9 @@ import {
 } from 'react-router-dom';
 import { practicePath, resolvePracticeRoute, resolveQuizRoute, routeTitle } from './lib/app-routes';
 import { setLastQuizMode } from './lib/last-quiz-mode';
+import AppState from './components/AppState';
 import './App.css';
+import './styles/components.css';
 
 const HomeScreen = lazy(() => import('./components/HomeScreen'));
 const IrabMode = lazy(() => import('./components/IrabMode'));
@@ -36,9 +38,12 @@ const AdminRoute = lazy(() =>
 
 function LoadingScreen() {
   return (
-    <div className="loading-screen">
-      <p>Loading...</p>
-    </div>
+    <AppState
+      className="loading-screen"
+      tone="loading"
+      title="Preparing your study desk"
+      message="Loading the next screen."
+    />
   );
 }
 
@@ -74,7 +79,7 @@ function NotFound() {
   return (
     <main className="route-message" data-screen="not-found">
       <h1>Page not found</h1>
-      <p>This link does not match a Qasas Practice screen.</p>
+      <p>This link does not match an Alimiyyah Practice screen.</p>
       <Link className="route-message-link" to="/">
         Go home
       </Link>

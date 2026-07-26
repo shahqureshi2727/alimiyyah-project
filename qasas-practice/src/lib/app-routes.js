@@ -8,7 +8,7 @@ import {
   UNTITLED_PRACTICE_MODES,
 } from '../config/subjects';
 
-const APP_NAME = 'Qasas Practice';
+const APP_NAME = 'Alimiyyah Practice';
 const VALID_TAFSIR_VARIANTS = new Set(['mcq', 'verse']);
 
 function encodeSegment(segment) {

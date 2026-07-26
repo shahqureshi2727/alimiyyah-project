@@ -77,9 +77,11 @@ describe('app route helpers', () => {
   });
 
   it('returns legible titles for route metadata', () => {
-    expect(routeTitle('home')).toBe('Qasas Practice');
-    expect(routeTitle('practice', { label: 'Wudhu' })).toBe('Practice: Wudhu | Qasas Practice');
-    expect(routeTitle('quiz', { label: 'Fiqh' })).toBe('Quiz: Fiqh | Qasas Practice');
-    expect(routeTitle('notFound')).toBe('Page Not Found | Qasas Practice');
+    expect(routeTitle('home')).toBe('Alimiyyah Practice');
+    expect(routeTitle('practice', { label: 'Wudhu' })).toBe(
+      'Practice: Wudhu | Alimiyyah Practice'
+    );
+    expect(routeTitle('quiz', { label: 'Fiqh' })).toBe('Quiz: Fiqh | Alimiyyah Practice');
+    expect(routeTitle('notFound')).toBe('Page Not Found | Alimiyyah Practice');
   });
 });
