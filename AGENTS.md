@@ -139,41 +139,22 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 7:16pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-25 7:53pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (22,605t read) | 2,851,002t work | 99% savings
+Stats: 50 obs (24,386t read) | 3,159,254t work | 99% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
-754 6:38p 🟣 Tafsir Section Design Spec Written and Saved
-755 " 🔵 Tafsir Spec Verified Clean — No TODOs or Placeholders
-757 " ⚖️ Implementation Plan Phase Begins — writing-plans, TDD, and frontend-design Skills Loaded
-756 6:39p ✅ Tafsir Design Spec Committed to Git
-758 " 🔵 Complete Tafsir Data Layer File Inventory Confirmed
-759 " 🔵 All 19 Tafsir Data Files Confirmed Committed to Git
-761 " 🟣 Tafsir Implementation Plan Written — 5 Tasks, 19 Files
-760 6:40p 🔵 Clean Test Baseline — 30/30 Tests Passing Before Tafsir UI Implementation
-762 6:41p 🔴 Implementation Plan Committed — Task 1 Now In Progress
-763 6:43p 🔴 Tasks 1 and 2 Complete — 38 Tests Passing, Task 3 Now In Progress
-764 6:44p 🔴 Task 3 RED Phase Confirmed — Component Smoke Tests Written and Failing
-765 " 🟣 TafsirQuestionCard.jsx Implemented
-766 " 🟣 TafsirVerseCard, TafsirPracticeMode, and TafsirQuestionCard.css All Implemented
-767 6:46p 🟣 Phase 4 Firestore Rules Deployed to Production
 ### Jul 25, 2026
-768 6:55p 🔵 qasas-practice App Architecture & Constraints Established
-769 6:56p ⚖️ Phase 1 Scope: Audit-Only + Tooling Baseline Before Any Refactoring
-770 " 🔵 Pre-Audit Repo State: Key Gaps Confirmed
-771 6:57p 🔵 Baseline Build: 1.19 MB JS Bundle Exceeds Vite 500 kB Threshold
-772 " 🔵 Firestore Unbounded Queries: Three Critical P0/P1 Findings
+772 6:57p 🔵 Firestore Unbounded Queries: Three Critical P0/P1 Findings
 773 " 🔵 App.jsx Uses In-Memory State for Navigation — No URL Per Practice Mode
-774 " 🔵 Source Map: 21k Lines, Data Layer is 60% of Bundle
 775 6:58p 🔵 TimedQuiz.jsx: Multiple Correctness Risks Identified in Timer and Save Logic
 776 " 🔵 Firestore: Missing answerEvents Index + weaknessProfiles Over-Permissive Write Rule
 777 " 🔵 Auth System: Fake Email Pattern with Non-Functional Password Reset for Users Without Recovery Email
@@ -203,6 +184,25 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 801 " 🔵 Post-Fix Audit Confirmed No Remaining Hardcoded "/10" Score Display Bugs
 802 7:13p 🔴 Full Test Suite, Lint, and Build All Pass After Score Total Fix
 803 " ✅ Final Verification Confirmed Complete Change Surface Before Commit
+804 7:16p 🔵 qasas-practice App: Error Handling Audit Findings
+805 " ⚖️ Error Resilience Hardening Plan: Six-Phase Approach
+806 " 🔵 Console Call Audit: 15 Calls Confirmed Across 15 Files
+807 7:17p 🔵 weaknessProfiles Confirmed Dead Code — Safe to Delete
+808 " 🔵 Firestore Rules Gap: answerEvents Writes group and quizResultId Not in Rules
+809 " 🔵 App Entry Points Confirmed: No Error Boundaries in main.jsx or App.jsx
+810 " 🔵 Baseline Verified: 52 Tests Pass, 15 Lint Warnings, Build Succeeds
+811 " 🔵 User-Facing Error State Audit: HomeScreen Silently Swallows Fetch Error
+812 " 🔵 JSX Bug in TimedQuiz: Duplicate Closing Button Tag in ExitDialog
+813 7:19p 🔵 New Dependencies Installed: @sentry/react, @sentry/vite-plugin, @firebase/rules-unit-testing, firebase-tools
+814 7:20p 🔵 TDD Red Phase: 5 New Test Files Written, 4 Fail on Missing Modules, 1 Skips on No Emulator
+815 " 🔵 answerEvents Rules Gap: quizResultId Can Be null (Weakness Tracking Path)
+816 " 🔵 Step 3 Core Modules Written: firebase-env.js, auth-errors.js, logger.js, ErrorBoundary.jsx
+817 7:21p 🔵 Step 3 Wiring Complete: 6 Existing Files Updated to Use New Modules
+818 " 🔵 Step 3 UI Wiring: Route ErrorBoundary + Retry Controls Added to 5 Components
+819 7:23p 🔵 Step 3 Remaining Console Calls Replaced + Retry Controls Added: 4 More Files Updated
+820 " 🔵 TimedQuiz.jsx: Final Console Calls Replaced + Quiz-Specific Error Boundary + Skip Question Handler
+821 7:24p 🔵 Cleanup Pass: HomeScreen, Leaderboard, LeaderboardPreview Fetch Functions Wrapped in useCallback
+822 7:25p 🔵 Step 3 Cleanup + Rules Test Infrastructure: All Writes Confirmed
 
-Access 2851k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 3159k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
