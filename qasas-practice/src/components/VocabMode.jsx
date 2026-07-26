@@ -1,17 +1,16 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { vocab } from '../data/arabic';
-import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
-import { shuffleArray } from '../lib/shuffle';
-import './ModeCommon.css';
+import { usePracticeSession } from '../hooks/usePracticeSession';
+import PracticeShell from './practice/PracticeShell';
 
-export default function VocabMode({ onBack, score, setScore }) {
-  const trackWeaknessAnswer = useWeaknessTracking();
-  const cards = useMemo(() => shuffleArray(vocab), []);
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function VocabMode({ onBack }) {
+  const session = usePracticeSession({
+    bank: vocab,
+    mode: 'vocab',
+    checkAnswer: ({ answer }) => answer,
+  });
+  const { current, score, sessionTotal, answer, next } = session;
   const [flipped, setFlipped] = useState(false);
-  const [sessionTotal, setSessionTotal] = useState(0);
-
-  const current = cards[currentIndex];
 
   const handleFlip = () => {
     if (!flipped) {
@@ -20,54 +19,39 @@ export default function VocabMode({ onBack, score, setScore }) {
   };
 
   const handleGrade = (knew) => {
-    setSessionTotal((prev) => prev + 1);
-    void trackWeaknessAnswer({
-      question: current,
-      correct: knew,
-      mode: 'vocab',
-      index: currentIndex,
-    });
-    if (knew) {
-      setScore((prev) => prev + 1);
-    }
+    answer(knew);
     setFlipped(false);
-    setCurrentIndex((prev) => (prev + 1) % cards.length);
+    next();
   };
 
   return (
-    <div className="mode-container">
-      <header className="mode-header">
-        <button className="back-btn" onClick={onBack}>
-          Back
-        </button>
-        <span className="score">
-          {score} / {sessionTotal}
-        </span>
-      </header>
+    <PracticeShell
+      onBack={onBack}
+      score={score}
+      sessionTotal={sessionTotal}
+      contentClassName="vocab-content"
+    >
+      <h2 className="mode-title">Tap to reveal meaning</h2>
 
-      <div className="mode-content vocab-content">
-        <h2 className="mode-title">Tap to reveal meaning</h2>
-
-        <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
-          <div className="flashcard-inner">
-            <div className="flashcard-front" dir="rtl">
-              {current.ar}
-            </div>
-            <div className="flashcard-back">{current.en}</div>
+      <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
+        <div className="flashcard-inner">
+          <div className="flashcard-front" dir="rtl">
+            {current.ar}
           </div>
+          <div className="flashcard-back">{current.en}</div>
         </div>
-
-        {flipped && (
-          <div className="grade-buttons">
-            <button className="grade-btn knew" onClick={() => handleGrade(true)}>
-              Knew it
-            </button>
-            <button className="grade-btn didnt" onClick={() => handleGrade(false)}>
-              Didn't know
-            </button>
-          </div>
-        )}
       </div>
-    </div>
+
+      {flipped && (
+        <div className="grade-buttons">
+          <button className="grade-btn knew" onClick={() => handleGrade(true)}>
+            Knew it
+          </button>
+          <button className="grade-btn didnt" onClick={() => handleGrade(false)}>
+            Didn't know
+          </button>
+        </div>
+      )}
+    </PracticeShell>
   );
 }

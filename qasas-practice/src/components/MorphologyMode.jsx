@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
 import { MORPHOLOGY_SCOPE_LABELS, getMorphologyQuestions } from '../data/bank';
-import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
+import { usePracticeSession } from '../hooks/usePracticeSession';
 import { useShuffledOptions } from '../hooks/useShuffledOptions';
-import { shuffleArray } from '../lib/shuffle';
-import './ModeCommon.css';
+import PracticeShell from './practice/PracticeShell';
 
 const scopeCards = [
   { id: 'mixed', description: 'All verb forms together' },
@@ -33,22 +32,23 @@ export default function MorphologyMode({
   initialScope = null,
   onBack,
   onSelectScope,
-  score,
-  setScore,
 }) {
-  const trackWeaknessAnswer = useWeaknessTracking();
   const [scope, setScope] = useState(initialScope);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [answered, setAnswered] = useState(false);
-  const [sessionTotal, setSessionTotal] = useState(0);
-
-  const questions = useMemo(
-    () => (scope ? shuffleArray(getMorphologyQuestions(scope)) : []),
-    [scope]
-  );
-
-  const current = questions[currentIndex];
+  const bank = useMemo(() => (scope ? getMorphologyQuestions(scope) : []), [scope]);
+  const session = usePracticeSession({
+    bank,
+    mode: 'morphology',
+    checkAnswer: ({ question, answer }) => answer === question.answer,
+  });
+  const {
+    current,
+    selected,
+    answered,
+    score,
+    sessionTotal,
+    answer,
+    next,
+  } = session;
   const shuffledOptions = useShuffledOptions(current?.options, current?.id);
 
   const handleScopeSelect = (nextScope) => {
@@ -57,40 +57,11 @@ export default function MorphologyMode({
       return;
     }
     setScope(nextScope);
-    setCurrentIndex(0);
-    setSelected(null);
-    setAnswered(false);
-  };
-
-  const handleChoice = (option) => {
-    if (answered) return;
-    setSelected(option);
-    setAnswered(true);
-    setSessionTotal((prev) => prev + 1);
-    const correct = option === current.answer;
-    void trackWeaknessAnswer({
-      question: current,
-      correct,
-      mode: 'morphology',
-      index: currentIndex,
-    });
-    if (correct) {
-      setScore((prev) => prev + 1);
-    }
-  };
-
-  const handleNext = () => {
-    setSelected(null);
-    setAnswered(false);
-    setCurrentIndex((prev) => (prev + 1) % questions.length);
   };
 
   const handleBack = () => {
     if (scope && !initialScope) {
       setScope(null);
-      setCurrentIndex(0);
-      setSelected(null);
-      setAnswered(false);
       return;
     }
     onBack();
@@ -98,17 +69,7 @@ export default function MorphologyMode({
 
   if (!scope) {
     return (
-      <div className="mode-container">
-        <header className="mode-header">
-          <button className="back-btn" onClick={onBack}>
-            Back
-          </button>
-          <span className="score">
-            {score} / {sessionTotal}
-          </span>
-        </header>
-
-        <div className="mode-content">
+      <PracticeShell onBack={onBack} score={score} sessionTotal={sessionTotal}>
           <h2 className="mode-title">Choose a morphology practice</h2>
           <div className="morphology-scope-grid">
             {scopeCards.map((card) => {
@@ -128,25 +89,14 @@ export default function MorphologyMode({
               );
             })}
           </div>
-        </div>
-      </div>
+      </PracticeShell>
     );
   }
 
   const isCorrect = selected === current.answer;
 
   return (
-    <div className="mode-container">
-      <header className="mode-header">
-        <button className="back-btn" onClick={handleBack}>
-          Back
-        </button>
-        <span className="score">
-          {score} / {sessionTotal}
-        </span>
-      </header>
-
-      <div className="mode-content">
+    <PracticeShell onBack={handleBack} score={score} sessionTotal={sessionTotal}>
         <h2 className="mode-title">{MORPHOLOGY_SCOPE_LABELS[scope].en}</h2>
 
         <div className="morphology-card">
@@ -179,7 +129,7 @@ export default function MorphologyMode({
               <button
                 key={option}
                 className={className}
-                onClick={() => handleChoice(option)}
+                onClick={() => answer(option)}
                 disabled={answered}
               >
                 <span className="choice-en">{option}</span>
@@ -195,12 +145,11 @@ export default function MorphologyMode({
               Correct: {current.answer}.<br />
               {current.explanation}
             </p>
-            <button className="next-btn" onClick={handleNext}>
+            <button className="next-btn" onClick={next}>
               Next
             </button>
           </div>
         )}
-      </div>
-    </div>
+    </PracticeShell>
   );
 }

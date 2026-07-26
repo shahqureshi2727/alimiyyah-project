@@ -198,20 +198,19 @@ function PracticeRoute() {
 }
 
 function PracticeSession({ route, navigate }) {
-  const [score, setScore] = useState(0);
   const goHome = () => navigate('/');
   const selectMorphologyScope = (scope) =>
     navigate(practicePath({ mode: 'morphology', topic: scope }));
 
   switch (route.mode) {
     case 'irab':
-      return <IrabMode onBack={goHome} score={score} setScore={setScore} />;
+      return <IrabMode onBack={goHome} />;
     case 'noun':
-      return <NounMode onBack={goHome} score={score} setScore={setScore} />;
+      return <NounMode onBack={goHome} />;
     case 'role':
-      return <RoleMode onBack={goHome} score={score} setScore={setScore} />;
+      return <RoleMode onBack={goHome} />;
     case 'vocab':
-      return <VocabMode onBack={goHome} score={score} setScore={setScore} />;
+      return <VocabMode onBack={goHome} />;
     case 'morphology':
       return (
         <MorphologyMode
@@ -219,26 +218,18 @@ function PracticeSession({ route, navigate }) {
           initialScope={route.topic}
           onBack={goHome}
           onSelectScope={selectMorphologyScope}
-          score={score}
-          setScore={setScore}
         />
       );
     case 'fiqh':
-      return (
-        <FiqhPracticeMode topic={route.topic} onBack={goHome} score={score} setScore={setScore} />
-      );
+      return <FiqhPracticeMode topic={route.topic} onBack={goHome} />;
     case 'hadith':
-      return (
-        <HadithPracticeMode topic={route.topic} onBack={goHome} score={score} setScore={setScore} />
-      );
+      return <HadithPracticeMode topic={route.topic} onBack={goHome} />;
     case 'tafsir':
       return (
         <TafsirPracticeMode
           variant={route.variant}
           topic={route.topic}
           onBack={goHome}
-          score={score}
-          setScore={setScore}
         />
       );
     default:

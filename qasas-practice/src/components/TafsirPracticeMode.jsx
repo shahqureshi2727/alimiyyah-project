@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
 import { getTafsirQuestions, getTafsirVerseRecords } from '../data/tafsir';
+import { usePracticeSession } from '../hooks/usePracticeSession';
 import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import { scoreTafsirAnswer } from '../lib/tafsir-scoring';
-import { shuffleArray } from '../lib/shuffle';
 import TafsirQuestionCard from './TafsirQuestionCard';
 import TafsirVerseCard from './TafsirVerseCard';
+import PracticeShell from './practice/PracticeShell';
 import './ModeCommon.css';
 import './TafsirQuestionCard.css';
 import './TafsirVerseCard.css';
@@ -15,43 +16,31 @@ function averageScore(results) {
   return Math.round((total / results.length) * 100);
 }
 
-export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack, score, setScore }) {
+export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack }) {
   const trackWeaknessAnswer = useWeaknessTracking();
   const isVerseMode = variant === 'verse';
-  const questions = useMemo(
-    () =>
-      isVerseMode
-        ? getTafsirVerseRecords(topic || 'all')
-        : shuffleArray(getTafsirQuestions(topic || 'all')),
+  const mcqBank = useMemo(
+    () => (isVerseMode ? [] : getTafsirQuestions(topic || 'all')),
     [isVerseMode, topic]
   );
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentAnswer, setCurrentAnswer] = useState(null);
-  const [answered, setAnswered] = useState(false);
-  const [sessionTotal, setSessionTotal] = useState(0);
+  const verseQuestions = useMemo(
+    () => (isVerseMode ? getTafsirVerseRecords(topic || 'all') : []),
+    [isVerseMode, topic]
+  );
+  const mcqSession = usePracticeSession({
+    bank: mcqBank,
+    mode: 'tafsir',
+    checkAnswer: ({ answer }) => answer.correct,
+  });
+  const [verseIndex, setVerseIndex] = useState(0);
+  const [verseScore, setVerseScore] = useState(0);
+  const [verseSessionTotal, setVerseSessionTotal] = useState(0);
   const [verseAnswer, setVerseAnswer] = useState('');
   const [verseFeedback, setVerseFeedback] = useState(null);
   const [verseResults, setVerseResults] = useState([]);
   const [complete, setComplete] = useState(false);
 
-  const current = questions[currentIndex];
-
-  const handleMcqAnswer = (correct, answer) => {
-    if (answered) return;
-    setCurrentAnswer(answer);
-    setAnswered(true);
-    setSessionTotal((prev) => prev + 1);
-    void trackWeaknessAnswer({ question: current, correct, mode: 'tafsir', index: currentIndex });
-    if (correct) {
-      setScore((prev) => prev + 1);
-    }
-  };
-
-  const handleMcqNext = () => {
-    setCurrentAnswer(null);
-    setAnswered(false);
-    setCurrentIndex((prev) => (prev + 1) % questions.length);
-  };
+  const current = isVerseMode ? verseQuestions[verseIndex] : mcqSession.current;
 
   const handleVerseSubmit = (event) => {
     event.preventDefault();
@@ -70,37 +59,38 @@ export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack, sco
     };
 
     setVerseFeedback(feedback);
-    setSessionTotal((prev) => prev + 1);
+    setVerseSessionTotal((prev) => prev + 1);
     setVerseResults((prev) => [...prev, { verse: current, ...feedback }]);
     void trackWeaknessAnswer({
       question: trackedQuestion,
       correct,
       mode: 'tafsir',
-      index: currentIndex,
+      index: verseIndex,
     });
 
     if (correct) {
-      setScore((prev) => prev + 1);
+      setVerseScore((prev) => prev + 1);
     }
   };
 
   const handleVerseNext = () => {
-    if (currentIndex >= questions.length - 1) {
+    if (verseIndex >= verseQuestions.length - 1) {
       setComplete(true);
       return;
     }
 
-    setCurrentIndex((prev) => prev + 1);
+    setVerseIndex((prev) => prev + 1);
     setVerseAnswer('');
     setVerseFeedback(null);
   };
 
   const handleReviewAgain = () => {
-    setCurrentIndex(0);
+    setVerseIndex(0);
+    setVerseScore(0);
     setVerseAnswer('');
     setVerseFeedback(null);
     setVerseResults([]);
-    setSessionTotal(0);
+    setVerseSessionTotal(0);
     setComplete(false);
   };
 
@@ -134,7 +124,7 @@ export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack, sco
         <div className="mode-content">
           <div className="tafsir-summary">
             <span className="tafsir-summary-kicker">Surah complete</span>
-            <h2>{questions[0]?.surahName || 'Tafsir'}</h2>
+            <h2>{verseQuestions[0]?.surahName || 'Tafsir'}</h2>
             <p>{averageScore(verseResults)}% average recall</p>
             <div className="tafsir-summary-list">
               {verseResults.map((result) => (
@@ -159,44 +149,33 @@ export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack, sco
   }
 
   return (
-    <div className="mode-container">
-      <header className="mode-header">
-        <button className="back-btn" onClick={onBack}>
-          Back
-        </button>
-        <span className="score">
-          {score} / {sessionTotal}
-        </span>
-      </header>
-
-      <div className="mode-content">
-        {isVerseMode ? (
-          <TafsirVerseCard
-            verse={current}
-            answer={verseAnswer}
-            setAnswer={setVerseAnswer}
-            feedback={verseFeedback}
-            onSubmit={handleVerseSubmit}
-            onNext={handleVerseNext}
-            isLastVerse={currentIndex >= questions.length - 1}
-          />
-        ) : (
-          <>
-            <TafsirQuestionCard
-              question={current}
-              showFeedback={answered}
-              currentAnswer={currentAnswer}
-              onAnswer={handleMcqAnswer}
-            />
-
-            {answered && (
-              <button className="next-btn" onClick={handleMcqNext}>
-                Next
-              </button>
-            )}
-          </>
-        )}
-      </div>
-    </div>
+    <PracticeShell
+      onBack={onBack}
+      score={isVerseMode ? verseScore : mcqSession.score}
+      sessionTotal={isVerseMode ? verseSessionTotal : mcqSession.sessionTotal}
+      nextVisible={!isVerseMode && mcqSession.answered}
+      onNext={mcqSession.next}
+    >
+      {isVerseMode ? (
+        <TafsirVerseCard
+          verse={current}
+          answer={verseAnswer}
+          setAnswer={setVerseAnswer}
+          feedback={verseFeedback}
+          onSubmit={handleVerseSubmit}
+          onNext={handleVerseNext}
+          isLastVerse={verseIndex >= verseQuestions.length - 1}
+        />
+      ) : (
+        <TafsirQuestionCard
+          question={current}
+          showFeedback={mcqSession.answered}
+          currentAnswer={mcqSession.selected?.answer || null}
+          onAnswer={(correct, currentAnswer) =>
+            mcqSession.answer({ correct, answer: currentAnswer })
+          }
+        />
+      )}
+    </PracticeShell>
   );
 }
