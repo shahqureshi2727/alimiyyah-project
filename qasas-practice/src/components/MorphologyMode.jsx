@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { MORPHOLOGY_SCOPE_LABELS, getMorphologyQuestions } from '../data/bank';
+import { MORPHOLOGY_SCOPE_LABELS, getMorphologyQuestions } from '../data/morphology';
 import { usePracticeSession } from '../hooks/usePracticeSession';
 import { useShuffledOptions } from '../hooks/useShuffledOptions';
 import PracticeShell from './practice/PracticeShell';

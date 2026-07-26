@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
-import { getTafsirQuestions, getTafsirVerseRecords } from '../data/tafsir';
+import { useCallback, useState } from 'react';
+import { useAsyncQuestionBank } from '../hooks/useAsyncQuestionBank';
 import { usePracticeSession } from '../hooks/usePracticeSession';
 import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
 import { scoreTafsirAnswer } from '../lib/tafsir-scoring';
+import { loadTafsirVerseBank } from '../lib/quiz-banks';
 import TafsirQuestionCard from './TafsirQuestionCard';
 import TafsirVerseCard from './TafsirVerseCard';
 import PracticeShell from './practice/PracticeShell';
@@ -19,14 +20,29 @@ function averageScore(results) {
 export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack }) {
   const trackWeaknessAnswer = useWeaknessTracking();
   const isVerseMode = variant === 'verse';
-  const mcqBank = useMemo(
-    () => (isVerseMode ? [] : getTafsirQuestions(topic || 'all')),
-    [isVerseMode, topic]
+  const loadVerseBank = useCallback(
+    (_mode, nextTopic) => loadTafsirVerseBank(nextTopic),
+    []
   );
-  const verseQuestions = useMemo(
-    () => (isVerseMode ? getTafsirVerseRecords(topic || 'all') : []),
-    [isVerseMode, topic]
-  );
+  const {
+    bank: mcqBank,
+    loading: mcqLoading,
+    loadError: mcqLoadError,
+    retryLoad: retryMcqLoad,
+  } = useAsyncQuestionBank({
+    mode: isVerseMode ? null : 'tafsir',
+    topic: topic || 'all',
+  });
+  const {
+    bank: verseQuestions,
+    loading: verseLoading,
+    loadError: verseLoadError,
+    retryLoad: retryVerseLoad,
+  } = useAsyncQuestionBank({
+    mode: isVerseMode ? 'tafsirVerse' : null,
+    topic: topic || 'all',
+    loader: loadVerseBank,
+  });
   const mcqSession = usePracticeSession({
     bank: mcqBank,
     mode: 'tafsir',
@@ -39,6 +55,9 @@ export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack }) {
   const [verseFeedback, setVerseFeedback] = useState(null);
   const [verseResults, setVerseResults] = useState([]);
   const [complete, setComplete] = useState(false);
+  const loading = isVerseMode ? verseLoading : mcqLoading;
+  const loadError = isVerseMode ? verseLoadError : mcqLoadError;
+  const retryLoad = isVerseMode ? retryVerseLoad : retryMcqLoad;
 
   const current = isVerseMode ? verseQuestions[verseIndex] : mcqSession.current;
 
@@ -94,6 +113,21 @@ export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack }) {
     setComplete(false);
   };
 
+  if (loading) {
+    return (
+      <div className="mode-container">
+        <header className="mode-header">
+          <button className="back-btn" onClick={onBack}>
+            Back
+          </button>
+        </header>
+        <div className="mode-content">
+          <p>Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!current && !complete) {
     return (
       <div className="mode-container">
@@ -103,7 +137,12 @@ export default function TafsirPracticeMode({ variant = 'mcq', topic, onBack }) {
           </button>
         </header>
         <div className="mode-content">
-          <p>No Tafsir questions available for this selection yet.</p>
+          <p>{loadError || 'No Tafsir questions available for this selection yet.'}</p>
+          {loadError && (
+            <button className="next-btn" onClick={retryLoad}>
+              Retry
+            </button>
+          )}
         </div>
       </div>
     );

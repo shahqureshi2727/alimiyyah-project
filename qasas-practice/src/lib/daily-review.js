@@ -1,23 +1,7 @@
-import { irab, nounFeatures, roles, vocab } from '../data/arabic';
-import { morphology } from '../data/morphology';
-import { getFiqhQuestions } from '../data/fiqh';
-import { getHadithQuestions } from '../data/hadith';
-import { getTafsirQuestions } from '../data/tafsir';
 import { shuffleArray } from './shuffle';
 
 export const DAILY_REVIEW_LENGTH = 15;
 export const DAILY_REVIEW_COMPOSITION = { weak: 6, due: 5, general: 4 };
-
-const REVIEW_SOURCES = [
-  { reviewCategory: 'arabic', reviewMode: 'irab', questions: irab },
-  { reviewCategory: 'arabic', reviewMode: 'nounFeatures', questions: nounFeatures },
-  { reviewCategory: 'arabic', reviewMode: 'roles', questions: roles },
-  { reviewCategory: 'arabic', reviewMode: 'vocab', questions: vocab },
-  { reviewCategory: 'arabic', reviewMode: 'morphology', questions: morphology },
-  { reviewCategory: 'fiqh', reviewMode: 'fiqh', questions: getFiqhQuestions('all') },
-  { reviewCategory: 'hadith', reviewMode: 'hadith', questions: getHadithQuestions('all') },
-  { reviewCategory: 'tafsir', reviewMode: 'tafsir', questions: getTafsirQuestions('all') },
-];
 
 export function toMillis(value) {
   if (!value) return 0;
@@ -34,8 +18,8 @@ export function toMillis(value) {
   return 0;
 }
 
-export function buildDailyReviewBank() {
-  return REVIEW_SOURCES.flatMap(({ reviewCategory, reviewMode, questions }) =>
+export function buildDailyReviewBank(reviewSources = []) {
+  return reviewSources.flatMap(({ reviewCategory, reviewMode, questions }) =>
     questions.map((question) => ({
       ...question,
       reviewCategory,

@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import {
   practicePath,
   quizPath,
@@ -7,7 +9,13 @@ import {
   routeTitle,
 } from './app-routes';
 
+const appRoutesSource = readFileSync(fileURLToPath(import.meta.resolve('./app-routes.js')), 'utf8');
+
 describe('app route helpers', () => {
+  it('does not import question data while resolving URLs', () => {
+    expect(appRoutesSource).not.toContain('../data/');
+  });
+
   it('maps structured practice targets to URL params without encoded mode prefixes', () => {
     expect(practicePath({ mode: 'irab' })).toBe('/practice/irab');
     expect(practicePath({ mode: 'fiqh', topic: 'WUD' })).toBe('/practice/fiqh/WUD');
@@ -35,7 +43,7 @@ describe('app route helpers', () => {
     });
   });
 
-  it('validates practice params from configured topics with real question banks', () => {
+  it('validates practice params from configured topics', () => {
     expect(resolvePracticeRoute({ mode: 'fiqh', topic: 'WUD' })).toMatchObject({
       status: 'ok',
       mode: 'fiqh',

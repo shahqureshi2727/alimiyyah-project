@@ -37,7 +37,7 @@ describe('tafsir app integration', () => {
     expect(source('components/quiz/renderers/TafsirQuizRenderer.jsx')).toContain(
       'TafsirQuestionCard'
     );
-    expect(source('components/AdminPage.jsx')).toContain('getTafsirQuestions');
+    expect(source('components/AdminPage.jsx')).toContain("loadBank('tafsir'");
     expect(source('components/WeaknessDashboard.jsx')).toContain('TAFSIR_TOPICS');
   });
 });

@@ -4,7 +4,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { practicePath } from '../lib/app-routes';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
 import { FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
-import { getTafsirSurahOptions } from '../data/tafsir';
 import { error as logError } from '../lib/logger';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
@@ -68,7 +67,10 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   const [recentResultsError, setRecentResultsError] = useState(null);
   const [subject, setSubject] = useState(null);
   const [selectedTafsirSurah, setSelectedTafsirSurah] = useState('');
-  const tafsirSurahOptions = getTafsirSurahOptions();
+  const [tafsirSurahOptions, setTafsirSurahOptions] = useState([]);
+  const [tafsirOptionsLoading, setTafsirOptionsLoading] = useState(false);
+  const [tafsirOptionsError, setTafsirOptionsError] = useState(null);
+  const [tafsirOptionsRetryKey, setTafsirOptionsRetryKey] = useState(0);
 
   const fetchRecentResults = useCallback(async () => {
     if (!user) return;
@@ -90,6 +92,40 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   useEffect(() => {
     Promise.resolve().then(fetchRecentResults);
   }, [fetchRecentResults]);
+
+  useEffect(() => {
+    if (subject !== 'tafsir' || tafsirSurahOptions.length > 0) return undefined;
+
+    let cancelled = false;
+    Promise.resolve()
+      .then(() => {
+        if (cancelled) return null;
+        setTafsirOptionsLoading(true);
+        setTafsirOptionsError(null);
+        return import('../data/tafsir');
+      })
+      .then((module) => {
+        if (!cancelled && module) setTafsirSurahOptions(module.getTafsirSurahOptions());
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        logError('Could not load Tafsir surah options.', err);
+        setTafsirOptionsError("Couldn't load surah options. Retry.");
+      })
+      .finally(() => {
+        if (!cancelled) setTafsirOptionsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [subject, tafsirOptionsRetryKey, tafsirSurahOptions.length]);
+
+  const retryTafsirOptions = () => {
+    setTafsirSurahOptions([]);
+    setTafsirOptionsError(null);
+    setTafsirOptionsRetryKey((key) => key + 1);
+  };
 
   const openPractice = (target) => {
     if (onSelectMode) {
@@ -280,17 +316,25 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
             className="tafsir-surah-select"
             value={selectedTafsirSurah}
             onChange={(event) => setSelectedTafsirSurah(event.target.value)}
+            disabled={tafsirOptionsLoading || Boolean(tafsirOptionsError)}
           >
-            <option value="">Select a surah...</option>
+            <option value="">
+              {tafsirOptionsLoading ? 'Loading surahs...' : 'Select a surah...'}
+            </option>
             {tafsirSurahOptions.map((surah) => (
               <option key={surah.code} value={surah.code}>
                 {surah.label} ({surah.ayahCount} ayat)
               </option>
             ))}
           </select>
+          {tafsirOptionsError && (
+            <button className="tafsir-start-btn" onClick={retryTafsirOptions}>
+              Retry
+            </button>
+          )}
           <button
             className="tafsir-start-btn"
-            disabled={!selectedTafsirSurah}
+            disabled={!selectedTafsirSurah || tafsirOptionsLoading || Boolean(tafsirOptionsError)}
             onClick={() =>
               openPractice({ mode: 'tafsir', topic: selectedTafsirSurah, variant: 'verse' })
             }

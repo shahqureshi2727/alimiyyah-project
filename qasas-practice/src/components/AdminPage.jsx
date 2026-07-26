@@ -8,10 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getAdminUserDoc } from '../lib/admin-queries';
-import { irab, nounFeatures, roles, vocab } from '../data/arabic';
-import { getFiqhQuestions } from '../data/fiqh';
-import { getHadithQuestions } from '../data/hadith';
-import { getTafsirQuestions } from '../data/tafsir';
+import { loadBank } from '../lib/quiz-banks';
 import { FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS } from '../config/subjects';
 import { error as logError } from '../lib/logger';
 import ClassStats from './admin/ClassStats';
@@ -29,6 +26,17 @@ function NotFoundPage() {
 
 function BankViewer() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [banks, setBanks] = useState({
+    irab: [],
+    nounFeatures: [],
+    roles: [],
+    vocab: [],
+    fiqh: [],
+    hadith: [],
+    tafsir: [],
+  });
+  const [banksLoading, setBanksLoading] = useState(true);
+  const [banksError, setBanksError] = useState(null);
   const [expandedSections, setExpandedSections] = useState({
     irab: false,
     noun: false,
@@ -38,6 +46,33 @@ function BankViewer() {
     hadith: false,
     tafsir: false,
   });
+
+  const loadBanks = useCallback(async () => {
+    setBanksLoading(true);
+    setBanksError(null);
+
+    try {
+      const [irab, nounFeatures, roles, vocab, fiqh, hadith, tafsir] = await Promise.all([
+        loadBank('irab'),
+        loadBank('nounFeatures'),
+        loadBank('roles'),
+        loadBank('vocab'),
+        loadBank('fiqh', 'all'),
+        loadBank('hadith', 'all'),
+        loadBank('tafsir', 'all'),
+      ]);
+      setBanks({ irab, nounFeatures, roles, vocab, fiqh, hadith, tafsir });
+    } catch (err) {
+      logError('Could not load admin question banks.', err);
+      setBanksError("Couldn't load question banks. Retry.");
+    } finally {
+      setBanksLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    Promise.resolve().then(loadBanks);
+  }, [loadBanks]);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -94,15 +129,15 @@ function BankViewer() {
     );
   };
 
-  const filteredIrab = irab.filter(filterIrab);
-  const filteredNoun = nounFeatures.filter(filterNoun);
-  const filteredRole = roles.filter(filterRole);
-  const filteredVocab = vocab.filter(filterVocab);
-  const allFiqhQuestions = getFiqhQuestions('all');
+  const filteredIrab = banks.irab.filter(filterIrab);
+  const filteredNoun = banks.nounFeatures.filter(filterNoun);
+  const filteredRole = banks.roles.filter(filterRole);
+  const filteredVocab = banks.vocab.filter(filterVocab);
+  const allFiqhQuestions = banks.fiqh;
   const filteredFiqh = allFiqhQuestions.filter(filterFiqh);
-  const allHadithQuestions = getHadithQuestions('all');
+  const allHadithQuestions = banks.hadith;
   const filteredHadith = allHadithQuestions.filter(filterHadith);
-  const allTafsirQuestions = getTafsirQuestions('all');
+  const allTafsirQuestions = banks.tafsir;
   const filteredTafsir = allTafsirQuestions.filter(filterTafsir);
 
   const caseColors = {
@@ -133,12 +168,32 @@ function BankViewer() {
     plural: 'Plural',
   };
 
+  if (banksLoading) {
+    return (
+      <div className="bank-viewer">
+        <div className="bank-summary">Loading question banks...</div>
+      </div>
+    );
+  }
+
+  if (banksError) {
+    return (
+      <div className="bank-viewer">
+        <div className="bank-summary">{banksError}</div>
+        <button className="try-quiz-link" onClick={loadBanks}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="bank-viewer">
       <div className="bank-summary">
-        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles:{' '}
-        {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length}{' '}
-        &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir: {allTafsirQuestions.length}
+        I'rab: {banks.irab.length} &middot; Noun features: {banks.nounFeatures.length} &middot;
+        Roles: {banks.roles.length} &middot; Vocab: {banks.vocab.length} &middot; Fiqh:{' '}
+        {allFiqhQuestions.length} &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir:{' '}
+        {allTafsirQuestions.length}
       </div>
 
       <div className="bank-search">

@@ -6,7 +6,7 @@ import {
 } from '../lib/daily-review';
 import { questionResultFromAnswer } from '../lib/question-results';
 import { submitAnswerEvents, submitQuizResult } from '../lib/quiz';
-import { getBank, getQuestionTarget, selectQuestions } from '../lib/quiz-banks';
+import { getQuestionTarget, loadBank, selectQuestions } from '../lib/quiz-banks';
 import { shuffleArray } from '../lib/shuffle';
 import { getUserTopicStats } from '../lib/topic-stats-firestore';
 import { error as logError } from '../lib/logger';
@@ -75,21 +75,33 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
       setSaveStatus(null);
       startTimeRef.current = currentTime();
 
-      const bank = getBank(mode, topic);
+      const bank = await loadBank(mode, topic);
       let selected;
 
       if (mode === 'review' && user) {
-        const topicStats = await getUserTopicStats(user.uid);
-        const missedIds = await listMissedQuestionIds({
-          userId: user.uid,
-          maxEvents: MISSED_QUESTIONS_LIMIT,
-        });
-        selected = selectDailyReviewQuestions({
-          bank,
-          topicStats,
-          missedQuestionIds: missedIds,
-          length: DAILY_REVIEW_LENGTH,
-        });
+        try {
+          const topicStats = await getUserTopicStats(user.uid);
+          const missedIds = await listMissedQuestionIds({
+            userId: user.uid,
+            maxEvents: MISSED_QUESTIONS_LIMIT,
+          });
+          selected = selectDailyReviewQuestions({
+            bank,
+            topicStats,
+            missedQuestionIds: missedIds,
+            length: DAILY_REVIEW_LENGTH,
+          });
+        } catch (err) {
+          logError('Could not load daily review personalization.', err, {
+            mode,
+            topic,
+            uid: user.uid,
+          });
+          selected = selectDailyReviewQuestions({ bank, length: DAILY_REVIEW_LENGTH });
+          if (!cancelled) {
+            setLoadError("Couldn't load daily review data. Using a regular review set.");
+          }
+        }
       } else {
         selected = selectQuestions(bank).questions;
       }
@@ -105,26 +117,10 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
       logError('Could not load quiz questions.', err, { mode, topic, uid: user?.uid });
       if (cancelled) return;
 
-      try {
-        const fallbackBank = getBank(mode, topic);
-        const fallback =
-          mode === 'review'
-            ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
-            : selectQuestions(fallbackBank).questions;
-        setQuestions(prepareQuestions(fallback, mode));
-        setLoadError(
-          mode === 'review'
-            ? "Couldn't load daily review data. Using a regular review set."
-            : "Couldn't load quiz data. Retry."
-        );
-      } catch (fallbackErr) {
-        logError('Could not load fallback quiz questions.', fallbackErr, { mode, topic });
-        setQuestions([]);
-        setLoadError("Couldn't load quiz questions. Retry.");
-      } finally {
-        questionStartTimeRef.current = currentTime();
-        setQuestionsLoading(false);
-      }
+      setQuestions([]);
+      setLoadError("Couldn't load quiz questions. Retry.");
+      questionStartTimeRef.current = currentTime();
+      setQuestionsLoading(false);
     });
 
     return () => {

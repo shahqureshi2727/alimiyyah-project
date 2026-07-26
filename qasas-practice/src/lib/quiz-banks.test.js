@@ -1,7 +1,25 @@
 import { describe, expect, it, vi } from 'vitest';
-import { getQuestionTarget, selectQuestions } from './quiz-banks';
+import { getQuestionTarget, loadBank, selectQuestions } from './quiz-banks';
 
 describe('quiz bank selection', () => {
+  it('loads a selected fiqh topic without broadening to unrelated topics', async () => {
+    const bank = await loadBank('fiqh', 'WUD');
+
+    expect(bank.length).toBeGreaterThan(0);
+    expect(new Set(bank.map((question) => question.topic))).toEqual(new Set(['WUD']));
+  });
+
+  it('loads the daily review bank with all review categories on demand', async () => {
+    const bank = await loadBank('review');
+    const categories = new Set(bank.map((question) => question.reviewCategory));
+    const modes = new Set(bank.map((question) => question.reviewMode));
+
+    expect(categories).toEqual(new Set(['arabic', 'fiqh', 'hadith', 'tafsir']));
+    expect(modes).toEqual(
+      new Set(['irab', 'nounFeatures', 'roles', 'vocab', 'morphology', 'fiqh', 'hadith', 'tafsir'])
+    );
+  });
+
   it('returns a repeat flag when the requested quiz is longer than the bank', () => {
     const bank = [{ id: 'q1' }, { id: 'q2' }];
 
