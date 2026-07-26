@@ -759,13 +759,24 @@
 
 @media (max-width: 480px) {
   .quiz-header {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+  }
+
+  .exit-quiz-btn,
+  .quiz-progress,
+  .quiz-score,
+  .timer-text {
+    font-size: var(--type-caption);
+  }
+
+  .exit-quiz-btn {
+    padding-inline: var(--space-2);
   }
 
   .quiz-score {
-    grid-column: 2 / 3;
-    grid-row: 2;
-    text-align: left;
+    text-align: right;
   }
 
   .quiz-content {
