@@ -139,13 +139,13 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 11:14pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-25 11:26pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (25,453t read) | 1,605,742t work | 98% savings
+Stats: 50 obs (25,752t read) | 1,594,630t work | 98% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
@@ -153,13 +153,6 @@ S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
 ### Jul 25, 2026
-820 7:23p 🔵 TimedQuiz.jsx: Final Console Calls Replaced + Quiz-Specific Error Boundary + Skip Question Handler
-821 7:24p 🔵 Cleanup Pass: HomeScreen, Leaderboard, LeaderboardPreview Fetch Functions Wrapped in useCallback
-822 7:25p 🔵 Step 3 Cleanup + Rules Test Infrastructure: All Writes Confirmed
-842 7:53p 🔵 App.jsx Split-Personality Navigation Architecture in qasas-practice
-843 " ⚖️ Full URL-Based Routing Plan for All App Screens
-844 " 🔵 App.jsx Full Source Confirms Split-Personality Navigation with Exact String-Prefix Parsing
-845 " 🔵 subjects.js is the Authoritative Topic Registry for All Subjects
 846 7:54p 🔵 AuthContext Already Exposes isAdmin Computed from Cached userDoc
 847 " 🔵 App Provider Tree: Bootstrap Dynamic Import → RootApp → BrowserRouter/AuthProvider → App
 848 " 🔵 localStorage lastQuizMode: 4 Write Sites in App.jsx, 2 Read Sites in Leaderboard Components
@@ -203,6 +196,13 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 905 " 🔵 FiqhPracticeMode and HadithPracticeMode Rewritten — New answer() Object Pattern for Card-Style Modes
 906 8:19p 🔵 MorphologyMode.jsx Refactored with *** Update File (Worked) — Key Gotchas: currentIndex Unused, Bank Re-Shuffled on Scope Change
 907 " 🔵 TafsirPracticeMode.jsx Refactored — Dual Architecture: MCQ Delegates to usePracticeSession, Verse Mode Remains Manual
+911 11:14p ⚖️ Firestore Repository Layer Refactor — Phase Specification Received
+912 11:15p ⚖️ TDD-First Implementation Plan Adopted for Firestore Repository Refactor
+913 " 🔵 Firestore Query Audit — Complete Picture of Direct SDK Usage
+914 " 🔵 Components Already Use Lib Layer — Direct Firestore Imports Confined to Hook and Lib Files
+915 11:16p 🔵 Admin Delegation Layer and Auth Architecture — Complete Audit Picture
+916 " 🔵 Firestore Security Rules — isAdmin() Billed Read Impact and Save Status UI Honesty
+917 " 🟣 Repository Layer TDD Tests Written — All 5 Fail Red for Correct Reason
 
-Access 1606k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1595k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
