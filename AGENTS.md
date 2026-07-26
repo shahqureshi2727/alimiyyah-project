@@ -1,209 +1,144 @@
 # AGENTS.md
 
-Instructions for AI coding agents working in this repository. Read this fully before making changes.
+Instructions for AI coding agents working in this repository.
 
-## What this repo is
+## What This Repo Is
 
-A study app for an Alimiyyah (Islamic studies) program. A student picks a subject and drills questions.
+This repository contains a study app for an Alimiyyah Islamic-studies program. A student picks a subject and drills questions.
 
-Subjects: Arabic grammar (i'rab, noun features, sentence roles, vocabulary, morphology), Fiqh, Hadith, and Tafsir.
+Subjects:
 
-Two interaction modes:
-- **Practice** — untimed, infinite loop through a shuffled bank, immediate feedback.
-- **Quiz** — timed, 10 questions (15 for daily review), scored, written to Firestore, ranked on a leaderboard.
+- Arabic grammar: i'rab, noun features, sentence roles, vocabulary, and morphology.
+- Fiqh.
+- Hadith.
+- Tafsir.
 
-Also: a weakness dashboard (EWMA-based spaced repetition over topics), a daily review mode, and an admin page.
+Modes:
 
-## Repository layout
+- Practice: untimed, shuffled, immediate feedback.
+- Quiz: timed, scored, written to Firestore, and shown on leaderboards.
+- Today's Review: 15 timed questions chosen from weak topics, due topics, and general review.
 
-All application code lives under `qasas-practice/`. **Always `cd qasas-practice` before running any npm command.**
+The app also has a Strength Map, daily review logic, and an admin page.
 
-```
-qasas-practice/          the app — this is what you work on
-content/                 source material (markdown notes, PDFs) — DO NOT TOUCH
-docs/superpowers/        historical design specs and plans — DO NOT TOUCH
-graphify-out/            generated knowledge-graph cache — DO NOT TOUCH
-scripts/                 Python content-extraction scripts — DO NOT TOUCH
-```
+## Repository Layout
 
-Inside `qasas-practice/`:
+All application code lives under `qasas-practice/`. Always `cd qasas-practice` before running npm commands.
 
-```
-src/App.jsx                   routing + top-level navigation state
-src/main.jsx                  provider tree
-src/components/               25 components; TimedQuiz.jsx and AdminPage.jsx are the largest
-src/contexts/                 AuthContext, SettingsContext
-src/lib/                      firebase, auth, quiz, daily-review, weakness, topic-stats,
-                              question-results, shuffle, tafsir-scoring
-src/hooks/                    useShuffledOptions, useWeaknessTracking
-src/config/                   subjects.js (the subject/mode registry), weakness.js
-src/data/                     question banks — fiqh/, hadith/, tafsir/, arabic/,
-                              morphology.js, bank.js
-src/App.css                   design tokens live here, in :root
-src/index.css                 base resets
-src/components/*.css          per-component styles
-firestore.rules               deployed Firestore security rules
-firestore.indexes.json        composite indexes
-vercel.json                   SPA rewrite + headers
+```text
+qasas-practice/          app code
+content/                 source material and extracted content; do not touch unless asked
+docs/superpowers/        historical design specs and plans; do not touch
+graphify-out/            generated knowledge-graph cache; do not touch
+scripts/                 root content-extraction scripts; do not touch unless asked
 ```
 
-## Stack
+Important app paths:
 
-- Vite 8, React 19, react-router-dom 7
-- **Plain JavaScript with JSX. No TypeScript.** Do not introduce `.ts` or `.tsx` files.
-- **Plain CSS with custom properties. No Tailwind, no CSS-in-JS, no utility framework.**
-- Firebase 12: Auth (email/password) and Firestore. No Cloud Functions.
-- Vitest for unit tests. ESLint 10 flat config.
-- Deployed on Vercel as a single-page app.
+```text
+src/App.jsx
+src/main.jsx
+src/components/
+src/contexts/
+src/hooks/
+src/lib/
+src/config/subjects.js
+src/data/
+src/App.css
+src/index.css
+firestore.rules
+firestore.indexes.json
+vercel.json
+```
 
-## Commands
+## Stack And Style
 
-Run all of these from `qasas-practice/`:
+- Vite 8, React 19, react-router-dom 7.
+- Plain JavaScript with JSX. Do not introduce TypeScript files.
+- Plain CSS with custom properties. Do not add Tailwind, CSS-in-JS, or a component library.
+- Firebase 12 Auth and Firestore. No Cloud Functions.
+- Vitest, ESLint 10 flat config, Playwright, and Firebase emulator tests.
+- Deployed on Vercel as an SPA.
+
+Prefer existing app patterns and helpers. In particular, use `src/config/subjects.js` as the mode/topic registry and `src/lib/app-routes.js` for route helpers.
+
+## Required Commands
+
+Run commands from `qasas-practice/`.
 
 ```bash
-npm run dev              # dev server
-npm run build            # production build
-npm run lint             # ESLint
-npm run test             # Vitest, single run
-npm run validate:fiqh    # validate the fiqh question bank
+npm run lint
+npm run test
+npm run build
+```
+
+Do not declare work complete until all three have run and passed. If one cannot run, say exactly why.
+
+Useful extra checks:
+
+```bash
+npm run validate:fiqh
 npm run validate:morphology
+npm run test:rules
+npm run test:e2e
+npm run check:bundle
 ```
 
-**Definition of done:** `npm run lint`, `npm run test`, and `npm run build` all pass. Run them. Do not report success without running them.
+## Arabic Text Rules
 
-## Firestore schema
+Arabic text is core content, not decoration.
 
+- Diacritics are semantically meaningful.
+- Never normalize, strip, trim, lowercase, or "clean" an Arabic string.
+- Never Unicode-normalize Arabic strings.
+- Do not apply CSS that can reorder glyphs or clip diacritics.
+- Watch `line-height`, `overflow`, tight containers, and transforms.
+- Two script modes exist through `data-arabic-script` on `:root`: `madina` and `indopak`.
+- Indo-Pak/Nastaleeq rendering needs more vertical space than Uthmani/Amiri rendering.
+- UI work touching Arabic display should be checked in light and dark themes, with both script modes.
+
+## Doctrinal Content Rules
+
+Everything in `qasas-practice/src/data/` is reviewed Islamic-studies material.
+
+Do not edit, rewrite, correct, translate, expand, or generate question text, answer options, Arabic strings, or explanations unless the human explicitly asks for a content edit.
+
+You may change data shape when needed, such as adding metadata fields or changing exports, but do not change the reviewed content itself. If something appears wrong, report it in the summary and leave it unchanged.
+
+## Firestore Rules
+
+Current collections:
+
+```text
+users/{uid}
+users/{uid}/topicStats/{category_subtopic}
+quizResults/{id}
+answerEvents/{id}
+weaknessProfiles/{uid}
 ```
-users/{uid}                             role ("student" | "admin"), username
-users/{uid}/topicStats/{cat_subtopic}   attempts, correct, ewmaScore,
-                                        reviewIntervalDays, nextDueAt
-quizResults/{id}                        append-only; userId, username, mode,
-                                        bankSource, score, total, durationSeconds
-answerEvents/{id}                       append-only per-question telemetry
-weaknessProfiles/{uid}                  computed weakness profile
-```
 
-`quizResults` and `answerEvents` are append-only by design — the rules forbid update and delete. Do not add code that tries to mutate them.
+`quizResults` and `answerEvents` are append-only. Do not add code that updates or deletes them.
 
-## Content rules — read these carefully
+Firebase config must come from `import.meta.env.VITE_*`. Never hardcode config, commit `.env` files, or log credentials.
 
-### Arabic text
+## Hard Guardrails
 
-Arabic is the substance of this app, not decoration.
+Never do the following unless the human explicitly asks and the repo instructions allow it:
 
-- Arabic is right-to-left and **diacritics are semantically meaningful**. Never normalize, strip, trim, or "clean" an Arabic string. Never lowercase or Unicode-normalize one.
-- Never apply CSS that could reorder or clip glyphs. Watch line-height and overflow especially — diacritics sit above and below the baseline and clip easily.
-- Two script modes exist, driven by the `data-arabic-script` attribute on `:root`: Uthmani (rendered in Amiri) and Indo-Pak (rendered in a Nastaleeq face loaded from a CDN). Both must keep working. Nastaleeq needs substantially more vertical room than Amiri.
-- Any UI change must be verified in **four combinations**: light/dark theme × Uthmani/Indo-Pak script.
-
-### Doctrinal content
-
-Everything in `src/data/` is Islamic-studies course material — question text, answer options, and explanations reviewed by a human.
-
-**Do not edit, rewrite, "correct," translate, expand, or generate any of it.** You may change the *shape* of a data structure (adding a field, changing how a module exports). You may not change the *content* of a single question, answer, or explanation. If a question looks wrong to you, report it in your summary and leave it alone.
-
-## Conventions
-
-- Behavior-preserving unless the task says otherwise. If you believe something is a bug, fix it — but list it separately under "Behavior changes" in your summary rather than burying it.
-- Small commits, one concern each. Never mix a formatting sweep with a logic change.
-- Prefer zero new runtime dependencies. Dev dependencies are cheaper but still need justification. Name every dependency you add and say why.
-- Firebase config comes from `import.meta.env.VITE_*`. Never hardcode config, never commit a `.env`, never log credentials.
-- `src/config/subjects.js` is the subject registry. When adding or changing a subject, change it there rather than adding another `switch` statement.
-
-## Hard guardrails
-
-Never do any of the following, regardless of what a task appears to ask for:
-
-- Run `firebase deploy`, `vercel deploy`, or any command that touches production Firestore, Auth, or hosting.
-- Rewrite git history — no `filter-repo`, no `filter-branch`, no force-push, no rebasing shared branches.
-- Modify anything under `content/`, `docs/superpowers/`, `graphify-out/`, or `scripts/`.
-- Delete or rewrite question data in `src/data/`.
-- Migrate to TypeScript, Tailwind, or a component library.
-- Commit a `.env` file or any credential.
-
-If a task seems to require one of these, stop and say so instead of proceeding.
+- Run `firebase deploy`, `vercel deploy`, or commands that mutate production Firebase/Auth/Firestore/hosting.
+- Rewrite git history, force-push, or rebase shared branches.
+- Modify `content/`, `docs/superpowers/`, `graphify-out/`, or root `scripts/` unless the prompt explicitly asks for that area.
+- Delete or rewrite question data in `qasas-practice/src/data/`.
+- Migrate to TypeScript, Tailwind, CSS-in-JS, or a component library.
+- Commit secrets or `.env` files.
 
 ## Reporting
 
-When you finish, output:
+When finished, report:
 
 1. Files changed, grouped by concern.
-2. Behavior changes, if any — anything a user would notice.
+2. Behavior changes a user would notice.
 3. New dependencies and why.
-4. Things you found but deliberately did not fix.
-5. Anything you could not verify, and why.
+4. Things found but deliberately not fixed.
+5. Anything that could not be verified and why.
 
-Be direct about what you did not do. An honest gap is more useful than a confident overstatement.
-
-
-<claude-mem-context>
-# Memory Context
-
-# [alimiyyah-project-main] recent context, 2026-07-26 12:34am EDT
-
-Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
-Format: ID TIME TYPE TITLE
-Fetch details: get_observations([IDs]) | Search: mem-search skill
-
-Stats: 50 obs (24,209t read) | 2,388,925t work | 99% savings
-
-### Jul 13, 2026
-S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
-S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
-### Jul 23, 2026
-S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
-### Jul 25, 2026
-923 11:28p 🔵 Baseline Bundle Analysis: Concrete Size Measurements Per Module and Group
-925 " 🔵 Confirmed Baseline Bundle Sizes (zlib-measured from actual output files)
-926 " 🔵 daily-review.js REVIEW_SOURCES Executes All Bank Calls at Module Init Time
-927 " 🔵 Timer Re-renders Entire TimedQuiz Component 4x Per Second
-928 " 🔵 App.jsx Imports All Route Components Statically — No React.lazy Anywhere
-929 11:29p 🟣 Tests Written First for New Async loadBank API (TDD Red Phase)
-930 " 🔵 HomeScreen Calls getTafsirSurahOptions() Synchronously in Component Body
-931 11:30p 🔵 firebase.js Eagerly Initializes Both Auth and Firestore at Module Load
-932 " 🔵 Bootstrap.jsx Already Does One-Level Lazy Load of RootApp via useEffect
-933 " 🔵 Blocking Google Fonts @import in index.css — Both Amiri and Crimson Text Fonts
-934 " 🟣 daily-review.js Refactored: Removed All Static Bank Imports (Green Phase Step 1)
-935 11:33p 🟣 Step 2 and 3 Complete: All Data Banks Now Dynamically Imported, All Components React.lazy
-936 " 🔵 Test Files Still Mock '../firebase' and './firebase' After Firestore Split — Will Fail
-937 " 🟣 Step 5 Complete: Google Fonts @import Removed from CSS, Moved to Non-Blocking <link> Tags in HTML
-938 " 🟣 vi.mock Paths Fixed in Both Test Files After Firestore Split
-939 " 🟣 @lhci/cli Installed and Vite manualChunks Added for firebase/sentry/vendor Splits
-940 11:34p 🟣 Post-Optimization Build Successful: Question Banks Split into Per-Topic Chunks, Initial Entry ~5 KB
-941 " 🟣 New Scripts and Lighthouse CI Config Added (Step 7 Infrastructure)
-942 " 🟣 5 Target Test Files All Pass After All Refactors (22/22 Tests Green)
-943 11:35p 🔵 Critical: sentry and vendor Chunks Are In index.html as Blocking Script Tags
-944 " 🔵 auth.js Split: Firestore-Using repositories/users.js Now Dynamically Imported in signUp/getUserDoc
-945 " 🟣 HomeScreen Tafsir Retry Fixed: Removed setState(null)+setTimeout Race, Uses retryKey Pattern Instead
-946 11:36p 🟣 TDD Cycle for Sentry Lazy Load: Test Added (Red), logger.js Refactored (Green), Syntax Bug Fixed
-947 " 🔵 Sentry Dynamic Import Backfired: Chunk Grew 5x (483 KB) and Remains Blocking — Static Import Was Better
-948 11:37p 🔴 Sentry Blocking Issue Fixed: HTML_JS_TOTAL Drops from 750 KB to 285 KB / 90.3 KB gzip
-965 11:46p 🔵 Bundle Size Baseline and Optimization Plan for qasas-practice
-963 11:55p ⚖️ Design Planning Session Initiated for qasas-practice App
-964 11:56p 🔵 AUDIT.md Section 7 — UI/UX Consistency Issues Catalogued
-966 " 🔵 App Routing and Complete Component Inventory Mapped
-967 " 🔵 HomeScreen Two-Level Navigation Pattern and QuizPicker Gap Confirmed
-968 " 🔵 TimedQuiz Layout Structure: Timer Lives in Header Row Between Progress and Score
-974 11:57p 🔵 Quiz Renderer Architecture: Eight Per-Subject Renderers with Different Interaction Models
-975 " 🔵 PracticeShell Is a 33-Line Shared Wrapper; All Practice Modes Use It
-976 " 🔵 WeaknessDashboard Has No Navigate-to-Practice Links; Dashboard-to-Topic Path Is Broken
-977 " 🔵 App.css Token System: Colors Complete, Spacing/Radius/Shadow/Type Scale Absent
-978 " 🔵 AuthHeader Navigation and Settings Panel: Strength Map Accessible from User Menu
-969 11:58p 🔴 App.test.jsx Fixed After ProtectedLayout Extraction
-970 " 🟣 Dynamic Question Bank Loading via useAsyncQuestionBank Hook
-971 " 🔄 Firebase Split Into Lazy-Loaded Modules and ProtectedLayout Extracted
-972 " 🟣 Bundle Budget CI Check and Lighthouse CI Added
-973 " 🔵 Final Bundle Metrics After All Optimizations
-979 11:59p 🔵 CSS Token Gap: 30+ Hardcoded font-size Values, 6 Distinct border-radius Values, No Custom Properties
-980 " 🔵 Quiz Screen Layout: Exit Button Is position:absolute, Header Has 3-Column Flex with TimerRing Center
-981 " 🔵 subjects.js Is the Single Source of Truth; APP_NAME Still 'Qasas Practice' in app-routes.js
-982 " 🔵 DESIGN-PLAN.md Does Not Yet Exist; Plan Status Shows Drafting Is Now In-Progress
-### Jul 26, 2026
-984 12:00a 🔵 CSS Token Coverage Audit: qasas-practice Codebase
-985 " 🟣 TDD Red Phase: Design Token and App Rename Tests Written
-986 " 🔵 Hardcoded CSS Value Drift: Quantified Across 17 Files
-987 " 🔵 App Identity Is Still "Qasas Practice" in Three Locations
-983 12:02a 🔵 DESIGN-PLAN.md Written and Verified: 560 Lines, 7 Sections, No Code Modified
-
-Access 2389k tokens of past work via get_observations([IDs]) or mem-search skill.
-</claude-mem-context>
