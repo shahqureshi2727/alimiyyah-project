@@ -1,596 +1,60 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRef, useState } from 'react';
 import { useBlocker } from 'react-router-dom';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { useAuth } from '../contexts/AuthContext';
-import { submitAnswerEvents, submitQuizResult, formatDuration } from '../lib/quiz';
-import { getUserTopicStats } from '../lib/topic-stats-firestore';
-import {
-  DAILY_REVIEW_LENGTH,
-  buildDailyReviewBank,
-  selectDailyReviewQuestions,
-} from '../lib/daily-review';
-import { irab, nounFeatures, roles, vocab } from '../data/arabic';
-import { morphology } from '../data/morphology';
-import { getFiqhQuestions } from '../data/fiqh';
-import { getHadithQuestions } from '../data/hadith';
-import { getTafsirQuestions } from '../data/tafsir';
 import { QUIZ_MODES } from '../config/subjects';
-import { db } from '../lib/firebase';
-import { questionResultFromAnswer } from '../lib/question-results';
-import { shuffleArray } from '../lib/shuffle';
-import { error as logError, warn as logWarn } from '../lib/logger';
+import { useAuth } from '../contexts/AuthContext';
+import { useCountdown } from '../hooks/useCountdown';
+import { useQuizEngine } from '../hooks/useQuizEngine';
+import { STANDARD_QUIZ_LENGTH } from '../lib/quiz-banks';
 import ErrorBoundary from './ErrorBoundary';
-import FiqhQuestionCard from './FiqhQuestionCard';
-import HadithQuestionCard from './HadithQuestionCard';
-import TafsirQuestionCard from './TafsirQuestionCard';
+import ExitDialog from './quiz/ExitDialog';
+import QuestionRenderFallback from './quiz/QuestionRenderFallback';
+import QuizQuestion from './quiz/QuizQuestion';
+import QuizResults from './quiz/QuizResults';
+import TimerRing from './quiz/TimerRing';
 import './TimedQuiz.css';
-
-const STANDARD_QUIZ_LENGTH = 10;
-
-const BANKS = {
-  irab,
-  nounFeatures,
-  morphology,
-  roles,
-  vocab,
-  // 'fiqh' is intentionally absent here — its bank depends on the selected
-  // topic, so it's resolved dynamically in getBank() below instead of a
-  // static import.
-  // 'hadith' follows the same topic-scoped pattern.
-  // 'tafsir' follows the same topic-scoped pattern.
-};
-
-function getBank(mode, topic) {
-  if (mode === 'fiqh') return getFiqhQuestions(topic || 'all');
-  if (mode === 'hadith') return getHadithQuestions(topic || 'all');
-  if (mode === 'tafsir') return getTafsirQuestions(topic || 'all');
-  if (mode === 'review') return buildDailyReviewBank();
-  return BANKS[mode];
-}
-
-function currentTime() {
-  return Date.now();
-}
-
-function getQuestionTarget(mode, question) {
-  switch (mode) {
-    case 'irab':
-      return question.target;
-    case 'nounFeatures':
-      return question.word;
-    case 'roles':
-      return question.words[question.answerIndex];
-    case 'morphology':
-      return question.verb;
-    case 'vocab':
-      return question.ar;
-    case 'fiqh':
-      return question.prompt;
-    case 'hadith':
-      return question.arabicText;
-    case 'tafsir':
-      return question.arabicText;
-    default:
-      return '';
-  }
-}
-
-// Select unique questions, with wraparound if a focused bank is too small.
-function selectQuestions(bank, length = STANDARD_QUIZ_LENGTH) {
-  if (bank.length === 0) return [];
-  if (bank.length < length) {
-    logWarn(`Bank has only ${bank.length} items, less than ${length}. Allowing repeats.`);
-    const shuffled = shuffleArray(bank);
-    const questions = [];
-    for (let i = 0; i < length; i++) {
-      questions.push(shuffled[i % shuffled.length]);
-    }
-    return questions;
-  }
-  return shuffleArray(bank).slice(0, length);
-}
-
-function QuestionRenderFallback({ errorReferenceId, onSkip }) {
-  return (
-    <section className="quiz-render-error" role="alert">
-      <p className="quiz-render-error-ref">Reference {errorReferenceId}</p>
-      <h2>This question could not be shown.</h2>
-      <p>Skip this question and keep going. The attempt will stay open.</p>
-      <button type="button" className="quiz-check-btn" onClick={onSkip}>
-        Skip this question
-      </button>
-    </section>
-  );
-}
-
-function shuffleMorphologyOptions(question) {
-  return {
-    ...question,
-    options: shuffleArray(question.options),
-  };
-}
-
-// I'rab question choices
-const irabChoices = [
-  { id: 'raf', ar: 'رَفْع', en: "raf'" },
-  { id: 'nasb', ar: 'نَصْب', en: 'nasb' },
-  { id: 'jarr', ar: 'جَرّ', en: 'jarr' },
-];
-
-// Noun feature options
-const defOptions = [
-  { id: 'marifa', ar: 'مَعْرِفَة', en: 'definite' },
-  { id: 'nakirah', ar: 'نَكِرَة', en: 'indefinite' },
-];
-
-const genderOptions = [
-  { id: 'm', ar: 'مُذَكَّر', en: 'masculine' },
-  { id: 'f', ar: 'مُؤَنَّث', en: 'feminine' },
-];
-
-const numberOptions = [
-  { id: 'sing', ar: 'مُفْرَد', en: 'singular' },
-  { id: 'dual', ar: 'مُثَنَّى', en: 'dual' },
-  { id: 'plural', ar: 'جَمْع', en: 'plural' },
-];
-
-function highlightTarget(sentence, target) {
-  const index = sentence.indexOf(target);
-  if (index === -1) return <span>{sentence}</span>;
-
-  const before = sentence.slice(0, index);
-  const after = sentence.slice(index + target.length);
-
-  return (
-    <>
-      {before}
-      <span className="highlight">{target}</span>
-      {after}
-    </>
-  );
-}
-
-// Timer ring component
-function TimerRing({ timeLeft, totalTime }) {
-  const progress = timeLeft / totalTime;
-  const circumference = 2 * Math.PI * 45;
-  const strokeDashoffset = circumference * (1 - progress);
-
-  let colorClass = 'timer-green';
-  if (progress <= 0.25) {
-    colorClass = 'timer-red';
-  } else if (progress <= 0.5) {
-    colorClass = 'timer-amber';
-  }
-
-  return (
-    <div className="timer-ring-container">
-      <svg className="timer-ring" viewBox="0 0 100 100">
-        <circle className="timer-ring-bg" cx="50" cy="50" r="45" fill="none" strokeWidth="8" />
-        <circle
-          className={`timer-ring-progress ${colorClass}`}
-          cx="50"
-          cy="50"
-          r="45"
-          fill="none"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          transform="rotate(-90 50 50)"
-        />
-      </svg>
-      <span className={`timer-text ${colorClass}`}>{timeLeft}</span>
-    </div>
-  );
-}
-
-// Confetti component for high scores
-function Confetti() {
-  return (
-    <div className="confetti-container">
-      {[...Array(30)].map((_, i) => (
-        <div
-          key={i}
-          className="confetti-piece"
-          style={{
-            left: `${(i * 37) % 100}%`,
-            animationDelay: `${((i * 11) % 10) / 20}s`,
-            backgroundColor: ['#1a6b6d', '#22863a', '#ea580c', '#7c3aed', '#db2777'][i % 5],
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Exit confirmation dialog
-function ExitDialog({ onCancel, onConfirm }) {
-  const cancelRef = useRef(null);
-
-  useEffect(() => {
-    // Focus cancel button by default (safer)
-    cancelRef.current?.focus();
-
-    // Handle Escape
-    function handleEscape(e) {
-      if (e.key === 'Escape') {
-        onCancel();
-      }
-    }
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onCancel]);
-
-  return (
-    <div className="exit-dialog-overlay">
-      <div className="exit-dialog" role="alertdialog" aria-modal="true">
-        <h2>Exit quiz?</h2>
-        <p>Your progress won't be saved.</p>
-        <div className="exit-dialog-buttons">
-          <button ref={cancelRef} className="exit-dialog-btn cancel" onClick={onCancel}>
-            Cancel
-          </button>
-          <button className="exit-dialog-btn confirm" onClick={onConfirm}>
-            Exit
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Inline check icon
-function CheckIcon() {
-  return (
-    <svg
-      className="inline-icon check"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-    >
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-
-// Inline X icon
-function XIcon() {
-  return (
-    <svg
-      className="inline-icon x"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-    >
-      <line x1="18" y1="6" x2="6" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
-  );
-}
 
 export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComplete }) {
   const { user, username } = useAuth();
-  const [questions, setQuestions] = useState([]);
-  const [questionsLoading, setQuestionsLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-  const [loadRetryKey, setLoadRetryKey] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(QUIZ_MODES[mode].timerSeconds);
-  const [isTimerPaused, setIsTimerPaused] = useState(false);
-  const [score, setScore] = useState(0);
-  const [results, setResults] = useState([]);
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [currentAnswer, setCurrentAnswer] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [quizComplete, setQuizComplete] = useState(false);
-  const [startTime] = useState(() => currentTime());
-  const [questionStartTime, setQuestionStartTime] = useState(() => currentTime());
-  const [totalDuration, setTotalDuration] = useState(0);
-  const [saveStatus, setSaveStatus] = useState(null); // null, 'saving', 'saved', 'error'
+  const engine = useQuizEngine({ mode, topic, user, username, onQuizComplete });
   const [showExitDialog, setShowExitDialog] = useState(false);
   const allowNavigationRef = useRef(false);
-  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return (
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>
       !allowNavigationRef.current &&
-      !quizComplete &&
+      !engine.quizComplete &&
       currentLocation.pathname !== nextLocation.pathname
-    );
-  });
+  );
   const navigationBlocked = blocker.state === 'blocked';
   const exitDialogVisible = showExitDialog || navigationBlocked;
-  const timerPaused = isTimerPaused || navigationBlocked;
-
-  // Noun feature specific state
-  const [selectedDef, setSelectedDef] = useState(null);
-  const [selectedGender, setSelectedGender] = useState(null);
-  const [selectedNumber, setSelectedNumber] = useState(null);
-
-  // Vocab specific state
-  const [flipped, setFlipped] = useState(false);
-  const [vocabChoice, setVocabChoice] = useState(null); // 'knew' or 'didnt'
-
-  const timerRef = useRef(null);
-
-  // Initialize questions on mount
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadQuestions() {
-      setQuestionsLoading(true);
-      setLoadError(null);
-      const bank = getBank(mode, topic);
-      let selected;
-
-      if (mode === 'review' && user) {
-        const topicStats = await getUserTopicStats(user.uid);
-        const wrongSnap = await getDocs(
-          query(
-            collection(db, 'answerEvents'),
-            where('userId', '==', user.uid),
-            where('correct', '==', false)
-          )
-        );
-        const missedIds = new Set(wrongSnap.docs.map((eventDoc) => eventDoc.data().questionId));
-        selected = selectDailyReviewQuestions({
-          bank,
-          topicStats,
-          missedQuestionIds: missedIds,
-          length: DAILY_REVIEW_LENGTH,
-        });
-      } else {
-        selected = selectQuestions(bank);
-      }
-
-      const prepared = selected.map((question) =>
-        (question.reviewMode || mode) === 'morphology'
-          ? shuffleMorphologyOptions(question)
-          : question
-      );
-
-      if (!cancelled) {
-        setQuestions(prepared);
-        setQuestionStartTime(currentTime());
-        setQuestionsLoading(false);
-      }
-    }
-
-    loadQuestions().catch((err) => {
-      logError('Could not load quiz questions.', err, { mode, topic, uid: user?.uid });
-      if (!cancelled) {
-        try {
-          const fallbackBank = getBank(mode, topic);
-          const fallback =
-            mode === 'review'
-              ? selectDailyReviewQuestions({ bank: fallbackBank, length: DAILY_REVIEW_LENGTH })
-              : selectQuestions(fallbackBank);
-          const prepared = fallback.map((question) =>
-            (question.reviewMode || mode) === 'morphology'
-              ? shuffleMorphologyOptions(question)
-              : question
-          );
-          setQuestions(prepared);
-          setLoadError(
-            mode === 'review'
-              ? "Couldn't load daily review data. Using a regular review set."
-              : "Couldn't load quiz data. Retry."
-          );
-        } catch (fallbackErr) {
-          logError('Could not load fallback quiz questions.', fallbackErr, { mode, topic });
-          setQuestions([]);
-          setLoadError("Couldn't load quiz questions. Retry.");
-        } finally {
-          setQuestionStartTime(currentTime());
-          setQuestionsLoading(false);
-        }
-      }
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [mode, topic, user, loadRetryKey]);
-
-  // Vocab auto-flip after 4 seconds
-  useEffect(() => {
-    const activeMode = questions[currentIndex]?.reviewMode || mode;
-    if (activeMode !== 'vocab' || quizComplete || showFeedback || flipped) return;
-
-    const timer = setTimeout(() => {
-      setFlipped(true);
-    }, 4000);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex, mode, questions, quizComplete, showFeedback, flipped]);
-
-  const advanceQuestion = useCallback(() => {
-    if (currentIndex >= questions.length - 1) {
-      // Quiz complete
-      const duration = (currentTime() - startTime) / 1000;
-      setTotalDuration(duration);
-      setQuizComplete(true);
-      onQuizComplete?.();
-      return;
-    }
-
-    setCurrentIndex((prev) => prev + 1);
-    setTimeLeft(QUIZ_MODES[mode].timerSeconds);
-    setShowFeedback(false);
-    setCurrentAnswer(null);
-    setIsCorrect(false);
-    setIsTimerPaused(false);
-    setQuestionStartTime(Date.now());
-
-    // Reset mode-specific state
-    setSelectedDef(null);
-    setSelectedGender(null);
-    setSelectedNumber(null);
-    setFlipped(false);
-    setVocabChoice(null);
-  }, [currentIndex, mode, onQuizComplete, questions.length, startTime]);
-
-  const handleTimeout = useCallback(() => {
-    if (quizComplete || showFeedback) return;
-
-    const questionTime = (currentTime() - questionStartTime) / 1000;
-    const current = questions[currentIndex];
-    const currentMode = current?.reviewMode || mode;
-
-    setIsCorrect(false);
-    setCurrentAnswer('timeout');
-    setShowFeedback(true);
-    setIsTimerPaused(true);
-
-    // Record result
-    const targetDisplay = getQuestionTarget(currentMode, current);
-    setResults((prev) => [
-      ...prev,
-      {
-        question: current,
-        correct: false,
-        timeTaken: questionTime,
-        target: targetDisplay,
-        answerEvent: questionResultFromAnswer({
-          question: current,
-          correct: false,
-          mode: currentMode,
-          index: currentIndex,
-        }),
-      },
-    ]);
-
-    setTimeout(() => advanceQuestion(), 1000);
-  }, [
-    advanceQuestion,
-    currentIndex,
-    questions,
-    questionStartTime,
-    quizComplete,
-    showFeedback,
-    mode,
-  ]);
-
-  const handleSkipQuestion = useCallback(() => {
-    if (quizComplete) return;
-
-    const questionTime = (currentTime() - questionStartTime) / 1000;
-    const current = questions[currentIndex];
-    const currentMode = current?.reviewMode || mode;
-    let targetDisplay = `Question ${currentIndex + 1}`;
-
-    try {
-      targetDisplay = getQuestionTarget(currentMode, current) || targetDisplay;
-    } catch (err) {
-      logError('Could not read skipped question target.', err, { mode: currentMode });
-    }
-
-    setResults((prev) => [
-      ...prev,
-      {
-        question: current,
-        correct: false,
-        timeTaken: questionTime,
-        target: targetDisplay,
-        answerEvent: current
-          ? questionResultFromAnswer({
-              question: current,
-              correct: false,
-              mode: currentMode,
-              index: currentIndex,
-            })
-          : null,
-      },
-    ]);
-
-    advanceQuestion();
-  }, [advanceQuestion, currentIndex, mode, questionStartTime, questions, quizComplete]);
-
-  // Timer effect
-  useEffect(() => {
-    if (quizComplete || timerPaused || questions.length === 0 || exitDialogVisible) return;
-
-    timerRef.current = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          handleTimeout();
-          return QUIZ_MODES[mode].timerSeconds;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [
-    currentIndex,
-    quizComplete,
-    timerPaused,
-    questions.length,
-    mode,
-    exitDialogVisible,
-    handleTimeout,
-  ]);
-
-  const handleAnswer = (correct, answer) => {
-    if (showFeedback || quizComplete) return;
-
-    const questionTime = (currentTime() - questionStartTime) / 1000;
-    const current = questions[currentIndex];
-    const currentMode = current?.reviewMode || mode;
-
-    setIsCorrect(correct);
-    setCurrentAnswer(answer);
-    setShowFeedback(true);
-    setIsTimerPaused(true);
-
-    if (correct) {
-      setScore((prev) => prev + 1);
-    }
-
-    // For vocab, track the choice
-    if (currentMode === 'vocab') {
-      setVocabChoice(answer);
-    }
-
-    // Record result
-    const targetDisplay = getQuestionTarget(currentMode, current);
-    setResults((prev) => [
-      ...prev,
-      {
-        question: current,
-        correct,
-        timeTaken: questionTime,
-        target: targetDisplay,
-        answerEvent: questionResultFromAnswer({
-          question: current,
-          correct,
-          mode: currentMode,
-          index: currentIndex,
-        }),
-      },
-    ]);
-
-    setTimeout(() => advanceQuestion(), 1000);
-  };
+  const timerRunning =
+    !engine.quizComplete &&
+    !engine.timerPaused &&
+    !navigationBlocked &&
+    !exitDialogVisible &&
+    !engine.questionsLoading &&
+    engine.questions.length > 0;
+  const timerSeconds = QUIZ_MODES[mode].timerSeconds;
+  const { timeLeft } = useCountdown({
+    totalSeconds: timerSeconds,
+    running: timerRunning,
+    resetKey: `${mode}:${engine.currentIndex}:${engine.current?.id || ''}`,
+    onTimeout: engine.handleTimeout,
+  });
 
   const handleExitClick = () => {
     setShowExitDialog(true);
-    setIsTimerPaused(true);
+    engine.setTimerPaused(true);
   };
 
   const handleExitCancel = () => {
     setShowExitDialog(false);
-    setIsTimerPaused(false);
+    engine.setTimerPaused(false);
     if (navigationBlocked) {
       blocker.reset();
     }
   };
 
   const handleExitConfirm = () => {
-    // Discard quiz without saving
     setShowExitDialog(false);
     allowNavigationRef.current = true;
     if (navigationBlocked) {
@@ -600,69 +64,14 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     onBack();
   };
 
-  // Submit quiz result when complete
-  useEffect(() => {
-    if (!quizComplete || saveStatus) return;
+  if (engine.questionsLoading) return <div className="quiz-loading"><p>Loading quiz...</p></div>;
 
-    const saveResult = async () => {
-      setSaveStatus('saving');
-      try {
-        const quizResultId = await submitQuizResult({
-          userId: user.uid,
-          username,
-          mode,
-          bankSource: QUIZ_MODES[mode].bankSource,
-          score,
-          total: questions.length,
-          durationSeconds: Math.round(totalDuration),
-        });
-        await submitAnswerEvents({
-          userId: user.uid,
-          username,
-          mode,
-          bankSource: QUIZ_MODES[mode].bankSource,
-          results: results.map((result) => result.answerEvent).filter(Boolean),
-          quizResultId,
-        });
-        setSaveStatus('saved');
-      } catch (err) {
-        logError('Could not save quiz result.', err, {
-          mode,
-          uid: user?.uid,
-          score,
-          total: questions.length,
-        });
-        setSaveStatus('error');
-      }
-    };
-
-    saveResult();
-  }, [
-    quizComplete,
-    user,
-    username,
-    mode,
-    score,
-    totalDuration,
-    saveStatus,
-    results,
-    questions.length,
-  ]);
-
-  if (questionsLoading) {
-    return (
-      <div className="quiz-loading">
-        <p>Loading quiz...</p>
-      </div>
-    );
-  }
-
-  if (questions.length === 0) {
+  if (engine.questions.length === 0) {
     return (
       <div className="quiz-loading quiz-loading-error">
-        <p>{loadError || 'No quiz questions are available for this selection.'}</p>
-        {loadError ? (
-          <button className="quiz-check-btn" onClick={() => setLoadRetryKey((key) => key + 1)}>
+        <p>{engine.loadError || 'No quiz questions are available for this selection.'}</p>
+        {engine.loadError ? (
+          <button className="quiz-check-btn" onClick={engine.retryLoad}>
             Retry
           </button>
         ) : (
@@ -674,437 +83,62 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     );
   }
 
-  // Results screen
-  if (quizComplete) {
-    const totalQuestions = questions.length || STANDARD_QUIZ_LENGTH;
-    const scoreRate = totalQuestions > 0 ? score / totalQuestions : 0;
-    const isHighScore = scoreRate >= 0.9;
-    const isGoodScore = scoreRate >= 0.6;
-
-    return (
-      <div className="quiz-results">
-        {isHighScore && <Confetti />}
-        <div
-          className={`results-header ${isHighScore ? 'high-score' : isGoodScore ? 'good-score' : 'low-score'}`}
-        >
-          <h1 className="results-score">
-            {score} / {totalQuestions}
-          </h1>
-          <p className="results-time">{formatDuration(Math.round(totalDuration))}</p>
-          {isHighScore && <p className="results-message">Excellent work!</p>}
-          {!isHighScore && isGoodScore && (
-            <p className="results-message">Good job! Keep practicing.</p>
-          )}
-          {!isGoodScore && <p className="results-message">Keep going! You'll improve.</p>}
-          <div className="save-status">
-            {saveStatus === 'saving' && <span className="saving">Saving...</span>}
-            {saveStatus === 'saved' && <span className="saved">Saved</span>}
-            {saveStatus === 'error' && (
-              <span className="error">
-                Couldn't save quiz results.
-                <button type="button" onClick={() => setSaveStatus(null)}>
-                  Retry
-                </button>
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="results-breakdown">
-          <h2>Question Breakdown</h2>
-          <div className="breakdown-list">
-            {results.map((result, idx) => (
-              <div
-                key={idx}
-                className={`breakdown-row ${result.correct ? 'correct' : 'incorrect'}`}
-              >
-                <span className="breakdown-num">Q{idx + 1}</span>
-                <span className="breakdown-target" dir="rtl">
-                  {result.target}
-                </span>
-                <span className="breakdown-status">
-                  {result.correct ? (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  )}
-                </span>
-                <span className="breakdown-time">{result.timeTaken.toFixed(1)}s</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="results-actions">
-          <button className="play-again-btn" onClick={onPlayAgain}>
-            Play Again
-          </button>
-          <button className="home-btn" onClick={onBack}>
-            Home
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const current = questions[currentIndex];
-  const currentMode = current?.reviewMode || mode;
-
-  // Render question based on mode
-  const renderQuestion = () => {
-    switch (currentMode) {
-      case 'irab':
-        return (
-          <>
-            <h2 className="quiz-question-text">What is the i'rab of the highlighted word?</h2>
-            <div className="quiz-sentence" dir="rtl">
-              {highlightTarget(current.sentence, current.target)}
-            </div>
-            <div className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}>
-              {irabChoices.map((choice) => {
-                const isTapped = choice.id === currentAnswer;
-                const isCorrectAnswer = choice.id === current.answer;
-                let className = 'quiz-choice-btn';
-
-                if (showFeedback) {
-                  if (isTapped && isCorrectAnswer) {
-                    className += ' correct-tapped';
-                  } else if (isTapped && !isCorrectAnswer) {
-                    className += ' incorrect-tapped';
-                  } else if (isCorrectAnswer) {
-                    className += ' correct-outline';
-                  } else {
-                    className += ' dimmed';
-                  }
-                }
-
-                return (
-                  <button
-                    key={choice.id}
-                    className={className}
-                    onClick={() => handleAnswer(choice.id === current.answer, choice.id)}
-                    disabled={showFeedback}
-                  >
-                    <span className="choice-ar">{choice.ar}</span>
-                    <span className="choice-en">({choice.en})</span>
-                    {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
-                    {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
-                  </button>
-                );
-              })}
-            </div>
-          </>
-        );
-
-      case 'nounFeatures': {
-        const allSelected = selectedDef && selectedGender && selectedNumber;
-        const checkAnswer = () => {
-          const correct =
-            selectedDef === current.def &&
-            selectedGender === current.gender &&
-            selectedNumber === current.number;
-          handleAnswer(correct, { selectedDef, selectedGender, selectedNumber });
-        };
-
-        const renderNounOptionGroup = (label, options, selected, setSelected, correctValue) => (
-          <div className="quiz-option-group">
-            <span className="quiz-option-label">{label}</span>
-            <div className={`quiz-option-buttons ${showFeedback ? 'feedback-shown' : ''}`}>
-              {options.map((opt) => {
-                const isTapped = opt.id === selected;
-                const isCorrectAnswer = opt.id === correctValue;
-                let className = 'quiz-option-btn';
-
-                if (showFeedback) {
-                  if (isTapped && isCorrectAnswer) {
-                    className += ' correct-tapped';
-                  } else if (isTapped && !isCorrectAnswer) {
-                    className += ' incorrect-tapped';
-                  } else if (isCorrectAnswer) {
-                    className += ' correct-outline';
-                  } else {
-                    className += ' dimmed';
-                  }
-                } else if (opt.id === selected) {
-                  className += ' selected';
-                }
-
-                return (
-                  <button
-                    key={opt.id}
-                    className={className}
-                    onClick={() => !showFeedback && setSelected(opt.id)}
-                    disabled={showFeedback}
-                  >
-                    <span className="opt-ar">{opt.ar}</span>
-                    <span className="opt-en">{opt.en}</span>
-                    {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
-                    {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        );
-
-        return (
-          <>
-            <h2 className="quiz-question-text">Tag the noun features</h2>
-            <div className="quiz-word" dir="rtl">
-              {current.word}
-            </div>
-            <div className="quiz-feature-groups">
-              {renderNounOptionGroup(
-                'Definiteness',
-                defOptions,
-                selectedDef,
-                setSelectedDef,
-                current.def
-              )}
-              {renderNounOptionGroup(
-                'Gender',
-                genderOptions,
-                selectedGender,
-                setSelectedGender,
-                current.gender
-              )}
-              {renderNounOptionGroup(
-                'Number',
-                numberOptions,
-                selectedNumber,
-                setSelectedNumber,
-                current.number
-              )}
-            </div>
-            {!showFeedback && (
-              <button className="quiz-check-btn" onClick={checkAnswer} disabled={!allSelected}>
-                Check
-              </button>
-            )}
-          </>
-        );
-      }
-
-      case 'roles':
-        return (
-          <>
-            <h2 className="quiz-question-text">
-              Tap the <span className="role-name">{current.role}</span>
-            </h2>
-            <div
-              className={`quiz-words-container ${showFeedback ? 'feedback-shown' : ''}`}
-              dir="rtl"
-            >
-              {current.words.map((word, index) => {
-                const isTapped = index === currentAnswer;
-                const isCorrectAnswer = index === current.answerIndex;
-                let className = 'quiz-tappable-word';
-
-                if (showFeedback) {
-                  if (isTapped && isCorrectAnswer) {
-                    className += ' correct-tapped';
-                  } else if (isTapped && !isCorrectAnswer) {
-                    className += ' incorrect-tapped';
-                  } else if (isCorrectAnswer) {
-                    className += ' correct-outline';
-                  } else {
-                    className += ' dimmed';
-                  }
-                }
-
-                return (
-                  <button
-                    key={index}
-                    className={className}
-                    onClick={() => handleAnswer(index === current.answerIndex, index)}
-                    disabled={showFeedback}
-                  >
-                    {word}
-                    {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
-                    {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
-                  </button>
-                );
-              })}
-            </div>
-          </>
-        );
-
-      case 'morphology':
-        return (
-          <>
-            <h2 className="quiz-question-text">Choose the correct verb meaning</h2>
-            <div className="quiz-morphology-card">
-              <div className="quiz-word" dir="rtl">
-                {current.verb}
-              </div>
-              <div className="quiz-morphology-base" dir="rtl">
-                <span>{current.baseVerb}</span>
-                <span dir="ltr">= {current.baseMeaning}</span>
-              </div>
-              <div className="quiz-morphology-label" dir="rtl">
-                {current.arabicLabel}
-              </div>
-            </div>
-            <div className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}>
-              {current.options.map((option) => {
-                const isTapped = option === currentAnswer;
-                const isCorrectAnswer = option === current.answer;
-                let className = 'quiz-choice-btn';
-
-                if (showFeedback) {
-                  if (isTapped && isCorrectAnswer) {
-                    className += ' correct-tapped';
-                  } else if (isTapped && !isCorrectAnswer) {
-                    className += ' incorrect-tapped';
-                  } else if (isCorrectAnswer) {
-                    className += ' correct-outline';
-                  } else {
-                    className += ' dimmed';
-                  }
-                }
-
-                return (
-                  <button
-                    key={option}
-                    className={className}
-                    onClick={() => handleAnswer(option === current.answer, option)}
-                    disabled={showFeedback}
-                  >
-                    <span className="choice-en">{option}</span>
-                    {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
-                    {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
-                  </button>
-                );
-              })}
-            </div>
-            {showFeedback && (
-              <p className={`quiz-inline-explanation ${isCorrect ? 'correct' : 'incorrect'}`}>
-                Correct: {current.answer}. {current.explanation}
-              </p>
-            )}
-          </>
-        );
-
-      case 'vocab':
-        return (
-          <>
-            <h2 className="quiz-question-text">
-              {!flipped ? 'Tap to reveal meaning' : 'Did you know it?'}
-            </h2>
-            <div
-              className={`quiz-flashcard ${flipped ? 'flipped' : ''}`}
-              onClick={() => !flipped && setFlipped(true)}
-            >
-              <div className="flashcard-inner">
-                <div className="flashcard-front" dir="rtl">
-                  {current.ar}
-                </div>
-                <div className="flashcard-back">{current.en}</div>
-              </div>
-            </div>
-            {flipped && (
-              <div className={`quiz-grade-buttons ${showFeedback ? 'feedback-shown' : ''}`}>
-                <button
-                  className={`grade-btn knew ${showFeedback && vocabChoice === 'knew' ? 'selected-knew' : ''} ${showFeedback && vocabChoice !== 'knew' ? 'dimmed' : ''}`}
-                  onClick={() => !showFeedback && handleAnswer(true, 'knew')}
-                  disabled={showFeedback}
-                >
-                  Knew it
-                </button>
-                <button
-                  className={`grade-btn didnt ${showFeedback && vocabChoice === 'didnt' ? 'selected-didnt' : ''} ${showFeedback && vocabChoice !== 'didnt' ? 'dimmed' : ''}`}
-                  onClick={() => !showFeedback && handleAnswer(false, 'didnt')}
-                  disabled={showFeedback}
-                >
-                  Didn't know
-                </button>
-              </div>
-            )}
-          </>
-        );
-
-      case 'fiqh':
-        return (
-          <FiqhQuestionCard
-            question={current}
-            showFeedback={showFeedback}
-            currentAnswer={currentAnswer}
-            onAnswer={handleAnswer}
-          />
-        );
-
-      case 'hadith':
-        return (
-          <HadithQuestionCard
-            question={current}
-            showFeedback={showFeedback}
-            currentAnswer={currentAnswer}
-            onAnswer={handleAnswer}
-          />
-        );
-
-      case 'tafsir':
-        return (
-          <TafsirQuestionCard
-            question={current}
-            showFeedback={showFeedback}
-            currentAnswer={currentAnswer}
-            onAnswer={handleAnswer}
-          />
-        );
-
-      default:
-        return null;
-    }
-  };
+  if (engine.quizComplete) return (
+    <QuizResults
+      score={engine.score}
+      totalQuestions={engine.questions.length || STANDARD_QUIZ_LENGTH}
+      totalDuration={engine.totalDuration}
+      saveStatus={engine.saveStatus}
+      onRetrySave={engine.retrySave}
+      results={engine.results}
+      onPlayAgain={onPlayAgain}
+      onBack={onBack}
+    />
+  );
 
   return (
     <div className="timed-quiz">
-      {/* Exit quiz button */}
       <button className="exit-quiz-btn" onClick={handleExitClick}>
         Exit quiz
       </button>
 
       <header className="quiz-header">
         <div className="quiz-progress">
-          <span>
-            Question {currentIndex + 1} of {questions.length}
-          </span>
+          <span>Question {engine.currentIndex + 1} of {engine.questions.length}</span>
         </div>
-        <TimerRing timeLeft={timeLeft} totalTime={QUIZ_MODES[mode].timerSeconds} />
+        <TimerRing timeLeft={timeLeft} totalTime={timerSeconds} />
         <div className="quiz-score">
-          <span>
-            {score} / {currentIndex + (showFeedback ? 1 : 0)}
-          </span>
+          <span>{engine.score} / {engine.currentIndex + (engine.showFeedback ? 1 : 0)}</span>
         </div>
       </header>
 
-      {loadError && <p className="quiz-load-warning">{loadError}</p>}
+      {engine.loadError && <p className="quiz-load-warning">{engine.loadError}</p>}
 
       <div className="quiz-content">
         <ErrorBoundary
           name="Timed quiz question"
-          resetKey={`${currentIndex}:${current?.id || current?.topic || currentMode}`}
+          resetKey={`${engine.currentIndex}:${engine.current?.id || engine.current?.topic || engine.currentMode}`}
           fallback={({ errorReferenceId, reset }) => (
             <QuestionRenderFallback
               errorReferenceId={errorReferenceId}
               onSkip={() => {
                 reset();
-                handleSkipQuestion();
+                engine.handleSkipQuestion();
               }}
             />
           )}
         >
-          {renderQuestion()}
+          <QuizQuestion
+            mode={engine.currentMode}
+            question={engine.current}
+            showFeedback={engine.showFeedback}
+            currentAnswer={engine.currentAnswer}
+            isCorrect={engine.isCorrect}
+            onAnswer={engine.handleAnswer}
+          />
         </ErrorBoundary>
       </div>
 
-      {/* Exit confirmation dialog */}
       {exitDialogVisible && <ExitDialog onCancel={handleExitCancel} onConfirm={handleExitConfirm} />}
     </div>
   );

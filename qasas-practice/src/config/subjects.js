@@ -17,6 +17,17 @@ export const QUIZ_MODES = {
   review: { label: "Today's Review", bankSource: 'mixed', timerSeconds: 20 },
 };
 
+export const QUIZ_QUESTION_TARGETS = {
+  irab: (question) => question.target,
+  nounFeatures: (question) => question.word,
+  roles: (question) => question.words[question.answerIndex],
+  morphology: (question) => question.verb,
+  vocab: (question) => question.ar,
+  fiqh: (question) => question.prompt,
+  hadith: (question) => question.arabicText,
+  tafsir: (question) => question.arabicText,
+};
+
 export const UNTITLED_PRACTICE_MODES = [
   { id: 'irab', label: "I'rab" },
   { id: 'noun', label: 'Noun Features' },
