@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useSettings } from '../contexts/settings';
+import { error as logError } from '../lib/logger';
 import './AuthHeader.css';
 
 export default function AuthHeader({ hidden = false }) {
@@ -18,7 +19,7 @@ export default function AuthHeader({ hidden = false }) {
     try {
       await signOut();
     } catch (err) {
-      console.error('Error signing out:', err);
+      logError('Could not sign out.', err);
     }
   };
 

@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import { getUserDoc, signOut as authSignOut } from '../lib/auth';
+import { error as logError, setLoggerUser } from '../lib/logger';
 
 const AuthContext = createContext(null);
 
@@ -24,15 +25,17 @@ export function AuthProvider({ children }) {
       setUser(firebaseUser);
 
       if (firebaseUser) {
+        setLoggerUser(firebaseUser.uid);
         // Fetch the user's Firestore document
         try {
           const doc = await getUserDoc(firebaseUser.uid);
           setUserDoc(doc);
         } catch (err) {
-          console.error('Error fetching user doc:', err);
+          logError('Could not load the signed-in user document.', err, { uid: firebaseUser.uid });
           setUserDoc(null);
         }
       } else {
+        setLoggerUser(null);
         setUserDoc(null);
       }
 

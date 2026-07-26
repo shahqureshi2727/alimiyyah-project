@@ -21,8 +21,20 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       eqeqeq: 'error',
-      'no-console': 'warn',
+      'no-console': 'error',
       'react-hooks/exhaustive-deps': 'error',
+    },
+  },
+  {
+    files: ['src/lib/logger.js'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
+  {
+    files: ['vite.config.js', 'vite.rules.config.js'],
+    languageOptions: {
+      globals: globals.node,
     },
   },
   eslintConfigPrettier,

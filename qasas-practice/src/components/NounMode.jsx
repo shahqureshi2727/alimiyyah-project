@@ -1,8 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { nounFeatures } from '../data/arabic';
-import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
-import { shuffleArray } from '../lib/shuffle';
-import './ModeCommon.css';
+import { usePracticeSession } from '../hooks/usePracticeSession';
+import PracticeShell from './practice/PracticeShell';
 
 const defOptions = [
   { id: 'marifa', ar: 'مَعْرِفَة', en: 'definite' },
@@ -20,18 +19,20 @@ const numberOptions = [
   { id: 'plural', ar: 'جَمْع', en: 'plural' },
 ];
 
-export default function NounMode({ onBack, score, setScore }) {
-  const trackWeaknessAnswer = useWeaknessTracking();
-  const questions = useMemo(() => shuffleArray(nounFeatures), []);
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function NounMode({ onBack }) {
+  const session = usePracticeSession({
+    bank: nounFeatures,
+    mode: 'nounFeatures',
+    checkAnswer: ({ question, answer }) =>
+      answer.selectedDef === question.def &&
+      answer.selectedGender === question.gender &&
+      answer.selectedNumber === question.number,
+  });
+  const { current, answered: checked, score, sessionTotal, answer, next } = session;
   const [selectedDef, setSelectedDef] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
-  const [checked, setChecked] = useState(false);
   const [results, setResults] = useState({ def: null, gender: null, number: null });
-  const [sessionTotal, setSessionTotal] = useState(0);
-
-  const current = questions[currentIndex];
 
   const canCheck = selectedDef && selectedGender && selectedNumber && !checked;
 
@@ -45,29 +46,15 @@ export default function NounMode({ onBack, score, setScore }) {
       gender: genderCorrect,
       number: numberCorrect,
     });
-    setChecked(true);
-    setSessionTotal((prev) => prev + 1);
-
-    const correct = defCorrect && genderCorrect && numberCorrect;
-    void trackWeaknessAnswer({
-      question: current,
-      correct,
-      mode: 'nounFeatures',
-      index: currentIndex,
-    });
-
-    if (correct) {
-      setScore((prev) => prev + 1);
-    }
+    answer({ selectedDef, selectedGender, selectedNumber });
   };
 
   const handleNext = () => {
     setSelectedDef(null);
     setSelectedGender(null);
     setSelectedNumber(null);
-    setChecked(false);
     setResults({ def: null, gender: null, number: null });
-    setCurrentIndex((prev) => (prev + 1) % questions.length);
+    next();
   };
 
   const renderOptionGroup = (label, options, selected, setSelected, resultKey) => {
@@ -120,39 +107,28 @@ export default function NounMode({ onBack, score, setScore }) {
   };
 
   return (
-    <div className="mode-container">
-      <header className="mode-header">
-        <button className="back-btn" onClick={onBack}>
-          Back
-        </button>
-        <span className="score">
-          {score} / {sessionTotal}
-        </span>
-      </header>
+    <PracticeShell onBack={onBack} score={score} sessionTotal={sessionTotal}>
+      <h2 className="mode-title">Tag the noun features</h2>
 
-      <div className="mode-content">
-        <h2 className="mode-title">Tag the noun features</h2>
-
-        <div className="word-display" dir="rtl">
-          {current.word}
-        </div>
-
-        <div className="feature-groups">
-          {renderOptionGroup('Definiteness', defOptions, selectedDef, setSelectedDef, 'def')}
-          {renderOptionGroup('Gender', genderOptions, selectedGender, setSelectedGender, 'gender')}
-          {renderOptionGroup('Number', numberOptions, selectedNumber, setSelectedNumber, 'number')}
-        </div>
-
-        {!checked ? (
-          <button className="check-btn" onClick={handleCheck} disabled={!canCheck}>
-            Check
-          </button>
-        ) : (
-          <button className="next-btn" onClick={handleNext}>
-            Next
-          </button>
-        )}
+      <div className="word-display" dir="rtl">
+        {current.word}
       </div>
-    </div>
+
+      <div className="feature-groups">
+        {renderOptionGroup('Definiteness', defOptions, selectedDef, setSelectedDef, 'def')}
+        {renderOptionGroup('Gender', genderOptions, selectedGender, setSelectedGender, 'gender')}
+        {renderOptionGroup('Number', numberOptions, selectedNumber, setSelectedNumber, 'number')}
+      </div>
+
+      {!checked ? (
+        <button className="check-btn" onClick={handleCheck} disabled={!canCheck}>
+          Check
+        </button>
+      ) : (
+        <button className="next-btn" onClick={handleNext}>
+          Next
+        </button>
+      )}
+    </PracticeShell>
   );
 }

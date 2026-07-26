@@ -1,80 +1,26 @@
+import { profileFromTopicStats } from './topic-stats';
 import {
-  collection,
-  collectionGroup,
-  doc,
-  getDocs,
-  runTransaction,
-  serverTimestamp,
-} from 'firebase/firestore';
-import { db } from './firebase';
-import {
-  categoryForTopic,
-  nextTopicStat,
-  profileFromTopicStats,
-  topicStatDocId,
-} from './topic-stats';
+  listAllTopicStats,
+  listUserTopicStats,
+  recordTopicAttempt,
+  recordTopicAttempts,
+} from './repositories/topic-stats';
+import { listUsers } from './repositories/users';
 
-const USERS_COLLECTION = 'users';
-const TOPIC_STATS_SUBCOLLECTION = 'topicStats';
+export const USER_TOPIC_STATS_LIMIT = 100;
+export const ADMIN_TOPIC_STATS_LIMIT = 5000;
+export const ADMIN_USERS_LIMIT = 500;
 
 export async function recordAttempt({ userId, mode, bankSource, topic, wasCorrect }) {
-  const category = categoryForTopic(topic, mode, bankSource);
-  const answeredAt = new Date();
-  const statRef = doc(
-    db,
-    USERS_COLLECTION,
-    userId,
-    TOPIC_STATS_SUBCOLLECTION,
-    topicStatDocId(category, topic)
-  );
-
-  return runTransaction(db, async (transaction) => {
-    const statSnap = await transaction.get(statRef);
-    const existing = statSnap.exists() ? statSnap.data() : null;
-    const next = nextTopicStat({
-      userId,
-      category,
-      subtopic: topic,
-      existing,
-      wasCorrect,
-      lastAttempted: serverTimestamp(),
-      answeredAt,
-    });
-
-    transaction.set(statRef, next, { merge: true });
-    return {
-      ...next,
-      lastAttempted: null,
-    };
-  });
+  return recordTopicAttempt({ userId, mode, bankSource, topic, wasCorrect });
 }
 
 export async function recordAttempts({ userId, mode, bankSource, results }) {
-  const validResults = (results || []).filter(
-    (result) => result?.topic && typeof result.correct === 'boolean'
-  );
-
-  return Promise.all(
-    validResults.map((result) =>
-      recordAttempt({
-        userId,
-        mode,
-        bankSource,
-        topic: result.topic,
-        wasCorrect: result.correct,
-      })
-    )
-  );
+  return recordTopicAttempts({ userId, mode, bankSource, results });
 }
 
 export async function getUserTopicStats(userId) {
-  const snapshot = await getDocs(
-    collection(db, USERS_COLLECTION, userId, TOPIC_STATS_SUBCOLLECTION)
-  );
-  return snapshot.docs.map((statDoc) => ({
-    id: statDoc.id,
-    ...statDoc.data(),
-  }));
+  return listUserTopicStats({ userId, maxStats: USER_TOPIC_STATS_LIMIT });
 }
 
 export async function getUserTopicProfile(userId) {
@@ -82,22 +28,18 @@ export async function getUserTopicProfile(userId) {
 }
 
 export async function getAllTopicStatsProfiles() {
-  const [statsSnapshot, usersSnapshot] = await Promise.all([
-    getDocs(collectionGroup(db, TOPIC_STATS_SUBCOLLECTION)),
-    getDocs(collection(db, USERS_COLLECTION)),
+  const [stats, users] = await Promise.all([
+    listAllTopicStats({ maxStats: ADMIN_TOPIC_STATS_LIMIT }),
+    listUsers({ maxUsers: ADMIN_USERS_LIMIT }),
   ]);
-  const usernames = new Map(
-    usersSnapshot.docs.map((userDoc) => [userDoc.id, userDoc.data().username])
-  );
+  const usernames = new Map(users.map((userDoc) => [userDoc.id, userDoc.username]));
   const statsByUser = new Map();
 
-  for (const statDoc of statsSnapshot.docs) {
-    const stat = statDoc.data();
-    const userId = stat.userId || statDoc.ref.parent.parent?.id;
+  for (const stat of stats) {
+    const userId = stat.userId;
     if (!userId) continue;
     if (!statsByUser.has(userId)) statsByUser.set(userId, []);
     statsByUser.get(userId).push({
-      id: statDoc.id,
       ...stat,
       userId,
     });

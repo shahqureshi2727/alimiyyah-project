@@ -1,5 +1,16 @@
-import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  Link,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useOutletContext,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import HomeScreen from './components/HomeScreen';
 import IrabMode from './components/IrabMode';
@@ -19,9 +30,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
 import AuthHeader from './components/AuthHeader';
+import ErrorBoundary from './components/ErrorBoundary';
+import { practicePath, resolvePracticeRoute, resolveQuizRoute, routeTitle } from './lib/app-routes';
+import { setLastQuizMode } from './lib/last-quiz-mode';
 import './App.css';
 
-// Loading spinner while checking auth state
 function LoadingScreen() {
   return (
     <div className="loading-screen">
@@ -30,306 +43,313 @@ function LoadingScreen() {
   );
 }
 
-// Protected route wrapper - redirects to login if not authenticated
-function ProtectedRoute({ children, hideHeader = false }) {
+function useDocumentTitle(title) {
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.title = title;
+    }
+  }, [title]);
+}
+
+function redirectTarget(location) {
+  const from = location.state?.from;
+  if (!from) return '/';
+  return `${from.pathname || '/'}${from.search || ''}${from.hash || ''}`;
+}
+
+function isQuizAttemptPath(pathname) {
+  return /^\/quiz\/[^/]+/.test(pathname);
+}
+
+function ProtectedLayout() {
   const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
+  const [headerOverride, setHeaderOverride] = useState(null);
+  const headerHidden =
+    headerOverride?.pathname === location.pathname
+      ? headerOverride.hidden
+      : isQuizAttemptPath(location.pathname);
+  const setHeaderHidden = useCallback(
+    (hidden) => setHeaderOverride({ pathname: location.pathname, hidden }),
+    [location.pathname]
+  );
 
   if (loading) {
     return <LoadingScreen />;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
   return (
     <>
-      <AuthHeader hidden={hideHeader} />
-      <div className={`app-content ${hideHeader ? 'no-header' : ''}`}>{children}</div>
+      <AuthHeader hidden={headerHidden} />
+      <div className={`app-content ${headerHidden ? 'no-header' : ''}`}>
+        <ErrorBoundary
+          key={location.pathname}
+          name="Route"
+          resetKey={location.key}
+          title="This screen stopped working."
+          message="Go back or reload the page. If it happens again, send the reference ID to your teacher."
+        >
+          <Outlet context={{ setHeaderHidden }} />
+        </ErrorBoundary>
+      </div>
     </>
   );
 }
 
-// Public route wrapper - redirects to home if already authenticated
 function PublicRoute({ children }) {
   const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return <LoadingScreen />;
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/" replace />;
+    return <Navigate to={redirectTarget(location)} replace />;
   }
 
   return children;
 }
 
-// Main app with practice mode navigation
-function MainApp() {
-  const [currentMode, setCurrentMode] = useState(null);
-  const [currentTopic, setCurrentTopic] = useState(null);
-  const [currentVariant, setCurrentVariant] = useState('mcq');
-  const [quizMode, setQuizMode] = useState(null);
-  const [quizTopic, setQuizTopic] = useState(null);
-  const [quizInProgress, setQuizInProgress] = useState(false);
-  const [showQuizPicker, setShowQuizPicker] = useState(false);
-  const [scores, setScores] = useState({
-    irab: 0,
-    noun: 0,
-    role: 0,
-    vocab: 0,
-    morphology: 0,
-    fiqh: 0,
-    hadith: 0,
-    tafsir: 0,
-  });
+function AdminRoute({ children }) {
+  const { isAdmin } = useAuth();
+  useDocumentTitle(routeTitle('admin'));
 
-  const handleSelectMode = (mode) => {
-    if (mode.startsWith('fiqh-')) {
-      setCurrentMode('fiqh');
-      setCurrentTopic(mode.slice('fiqh-'.length));
-      setCurrentVariant('mcq');
-    } else if (mode.startsWith('hadith-')) {
-      setCurrentMode('hadith');
-      setCurrentTopic(mode.slice('hadith-'.length));
-      setCurrentVariant('mcq');
-    } else if (mode.startsWith('tafsir-verse-')) {
-      setCurrentMode('tafsir');
-      setCurrentTopic(mode.slice('tafsir-verse-'.length));
-      setCurrentVariant('verse');
-    } else if (mode.startsWith('tafsir-')) {
-      setCurrentMode('tafsir');
-      setCurrentTopic(mode.slice('tafsir-'.length));
-      setCurrentVariant('mcq');
-    } else if (mode.startsWith('morphology-')) {
-      setCurrentMode('morphology');
-      setCurrentTopic(mode.slice('morphology-'.length));
-      setCurrentVariant('mcq');
-    } else {
-      setCurrentMode(mode);
-      setCurrentTopic(null);
-      setCurrentVariant('mcq');
-    }
-    setShowQuizPicker(false);
-    setQuizMode(null);
-    setQuizInProgress(false);
-  };
-
-  const handleBack = () => {
-    setCurrentMode(null);
-    setCurrentTopic(null);
-    setCurrentVariant('mcq');
-    setShowQuizPicker(false);
-    setQuizMode(null);
-    setQuizInProgress(false);
-  };
-
-  const handleSelectQuiz = () => {
-    setShowQuizPicker(true);
-    setCurrentMode(null);
-    setQuizMode(null);
-    setQuizInProgress(false);
-  };
-
-  const handleSelectQuizMode = (mode) => {
-    if (mode.startsWith('fiqh-')) {
-      const topic = mode.slice('fiqh-'.length);
-      // Store last played mode for leaderboard default
-      localStorage.setItem('lastQuizMode', 'fiqh');
-      setQuizMode('fiqh');
-      setQuizTopic(topic);
-    } else if (mode.startsWith('hadith-')) {
-      const topic = mode.slice('hadith-'.length);
-      localStorage.setItem('lastQuizMode', 'hadith');
-      setQuizMode('hadith');
-      setQuizTopic(topic);
-    } else if (mode === 'review') {
-      localStorage.setItem('lastQuizMode', 'review');
-      setQuizMode('review');
-      setQuizTopic(null);
-    } else {
-      localStorage.setItem('lastQuizMode', mode);
-      setQuizMode(mode);
-      setQuizTopic(null);
-    }
-    setQuizInProgress(true);
-    setShowQuizPicker(false);
-  };
-
-  const handleQuizBack = () => {
-    setQuizMode(null);
-    setQuizTopic(null);
-    setQuizInProgress(false);
-    setShowQuizPicker(false);
-    setCurrentMode(null);
-  };
-
-  const handlePlayAgain = () => {
-    // Restart the same quiz mode with fresh questions
-    const mode = quizMode;
-    setQuizMode(null);
-    setQuizInProgress(false);
-    // Small delay to force re-mount
-    setTimeout(() => {
-      setQuizMode(mode);
-      setQuizInProgress(true);
-    }, 10);
-  };
-
-  const setModeScore = (mode) => (newScore) => {
-    setScores((prev) => ({ ...prev, [mode]: newScore }));
-  };
-
-  // Show timed quiz (header is hidden during quiz, shown on results)
-  if (quizMode) {
-    return (
-      <ProtectedRoute hideHeader={quizInProgress}>
-        <TimedQuiz
-          mode={quizMode}
-          topic={quizTopic}
-          onBack={handleQuizBack}
-          onPlayAgain={handlePlayAgain}
-          onQuizComplete={() => setQuizInProgress(false)}
-        />
-      </ProtectedRoute>
-    );
+  if (!isAdmin) {
+    return <AdminDenied />;
   }
 
-  // Show quiz picker
-  if (showQuizPicker) {
-    return (
-      <ProtectedRoute>
-        <QuizPicker onSelectMode={handleSelectQuizMode} onBack={handleBack} />
-      </ProtectedRoute>
-    );
-  }
+  return children;
+}
 
-  // Show untimed practice modes
-  if (currentMode) {
-    const modeComponent = (() => {
-      switch (currentMode) {
-        case 'irab':
-          return (
-            <IrabMode onBack={handleBack} score={scores.irab} setScore={setModeScore('irab')} />
-          );
-        case 'noun':
-          return (
-            <NounMode onBack={handleBack} score={scores.noun} setScore={setModeScore('noun')} />
-          );
-        case 'role':
-          return (
-            <RoleMode onBack={handleBack} score={scores.role} setScore={setModeScore('role')} />
-          );
-        case 'vocab':
-          return (
-            <VocabMode onBack={handleBack} score={scores.vocab} setScore={setModeScore('vocab')} />
-          );
-        case 'morphology':
-          return (
-            <MorphologyMode
-              initialScope={currentTopic}
-              onBack={handleBack}
-              score={scores.morphology}
-              setScore={setModeScore('morphology')}
-            />
-          );
-        case 'fiqh':
-          return (
-            <FiqhPracticeMode
-              topic={currentTopic}
-              onBack={handleBack}
-              score={scores.fiqh}
-              setScore={setModeScore('fiqh')}
-            />
-          );
-        case 'hadith':
-          return (
-            <HadithPracticeMode
-              topic={currentTopic}
-              onBack={handleBack}
-              score={scores.hadith}
-              setScore={setModeScore('hadith')}
-            />
-          );
-        case 'tafsir':
-          return (
-            <TafsirPracticeMode
-              variant={currentVariant}
-              topic={currentTopic}
-              onBack={handleBack}
-              score={scores.tafsir}
-              setScore={setModeScore('tafsir')}
-            />
-          );
-        default:
-          return <HomeScreen onSelectMode={handleSelectMode} onSelectQuiz={handleSelectQuiz} />;
-      }
-    })();
+function AdminDenied() {
+  return (
+    <main className="route-message" data-screen="admin-denied">
+      <h1>Admin access required</h1>
+      <p>This area is only available to teachers and admins.</p>
+      <Link className="route-message-link" to="/">
+        Go home
+      </Link>
+    </main>
+  );
+}
 
-    return <ProtectedRoute>{modeComponent}</ProtectedRoute>;
+function InvalidRoute({ message }) {
+  useDocumentTitle(routeTitle('notFound'));
+
+  return (
+    <main className="route-message" data-screen="invalid-route">
+      <h1>That topic doesn't exist</h1>
+      <p>{message}</p>
+      <Link className="route-message-link" to="/">
+        Go home
+      </Link>
+    </main>
+  );
+}
+
+function NotFound() {
+  useDocumentTitle(routeTitle('notFound'));
+
+  return (
+    <main className="route-message" data-screen="not-found">
+      <h1>Page not found</h1>
+      <p>This link does not match a Qasas Practice screen.</p>
+      <Link className="route-message-link" to="/">
+        Go home
+      </Link>
+    </main>
+  );
+}
+
+function HomeRoute() {
+  useDocumentTitle(routeTitle('home'));
+  return <HomeScreen />;
+}
+
+function PracticeRoute() {
+  const navigate = useNavigate();
+  const { mode, topic = null } = useParams();
+  const [searchParams] = useSearchParams();
+  const variant = searchParams.get('variant') || 'mcq';
+  const route = resolvePracticeRoute({ mode, topic, variant });
+
+  useDocumentTitle(
+    route.status === 'ok'
+      ? routeTitle('practice', { label: route.label })
+      : routeTitle('notFound')
+  );
+
+  if (route.status !== 'ok') {
+    return <InvalidRoute message={route.message} />;
   }
 
   return (
-    <ProtectedRoute>
-      <HomeScreen onSelectMode={handleSelectMode} onSelectQuiz={handleSelectQuiz} />
-    </ProtectedRoute>
+    <PracticeSession
+      key={`${route.mode}:${route.topic || 'all'}:${route.variant}`}
+      route={route}
+      navigate={navigate}
+    />
+  );
+}
+
+function PracticeSession({ route, navigate }) {
+  const goHome = () => navigate('/');
+  const selectMorphologyScope = (scope) =>
+    navigate(practicePath({ mode: 'morphology', topic: scope }));
+
+  switch (route.mode) {
+    case 'irab':
+      return <IrabMode onBack={goHome} />;
+    case 'noun':
+      return <NounMode onBack={goHome} />;
+    case 'role':
+      return <RoleMode onBack={goHome} />;
+    case 'vocab':
+      return <VocabMode onBack={goHome} />;
+    case 'morphology':
+      return (
+        <MorphologyMode
+          key={route.topic || 'picker'}
+          initialScope={route.topic}
+          onBack={goHome}
+          onSelectScope={selectMorphologyScope}
+        />
+      );
+    case 'fiqh':
+      return <FiqhPracticeMode topic={route.topic} onBack={goHome} />;
+    case 'hadith':
+      return <HadithPracticeMode topic={route.topic} onBack={goHome} />;
+    case 'tafsir':
+      return (
+        <TafsirPracticeMode
+          variant={route.variant}
+          topic={route.topic}
+          onBack={goHome}
+        />
+      );
+    default:
+      return <InvalidRoute message="That practice mode doesn't exist." />;
+  }
+}
+
+function QuizPickerRoute() {
+  const navigate = useNavigate();
+  useDocumentTitle(routeTitle('quiz', { label: 'Choose a Quiz' }));
+
+  return <QuizPicker onBack={() => navigate('/')} />;
+}
+
+function QuizRoute() {
+  const navigate = useNavigate();
+  const { setHeaderHidden } = useOutletContext();
+  const { mode, topic = null } = useParams();
+  const route = resolveQuizRoute({ mode, topic });
+  const [quizKey, setQuizKey] = useState(0);
+
+  useEffect(() => {
+    if (route.status === 'ok') {
+      setHeaderHidden(true);
+      setLastQuizMode(route.mode);
+    } else {
+      setHeaderHidden(false);
+    }
+
+    return () => setHeaderHidden(false);
+  }, [route.mode, route.status, setHeaderHidden]);
+
+  useDocumentTitle(
+    route.status === 'ok' ? routeTitle('quiz', { label: route.label }) : routeTitle('notFound')
+  );
+
+  if (route.status !== 'ok') {
+    return <InvalidRoute message={route.message} />;
+  }
+
+  const goHome = () => navigate('/');
+  const playAgain = () => {
+    setHeaderHidden(true);
+    setQuizKey((current) => current + 1);
+  };
+
+  return (
+    <TimedQuiz
+      key={`${route.mode}:${route.topic || 'all'}:${quizKey}`}
+      mode={route.mode}
+      topic={route.topic}
+      onBack={goHome}
+      onPlayAgain={playAgain}
+      onQuizComplete={() => setHeaderHidden(false)}
+    />
+  );
+}
+
+function LeaderboardRoute() {
+  useDocumentTitle(routeTitle('leaderboard'));
+  return <Leaderboard />;
+}
+
+function WeaknessRoute() {
+  useDocumentTitle(routeTitle('weakness'));
+  return <WeaknessDashboard />;
+}
+
+function LoginRoute() {
+  useDocumentTitle(routeTitle('login'));
+  return (
+    <PublicRoute>
+      <Login />
+    </PublicRoute>
+  );
+}
+
+function SignupRoute() {
+  useDocumentTitle(routeTitle('signup'));
+  return (
+    <PublicRoute>
+      <Signup />
+    </PublicRoute>
+  );
+}
+
+function ForgotPasswordRoute() {
+  useDocumentTitle(routeTitle('forgotPassword'));
+  return (
+    <PublicRoute>
+      <ForgotPassword />
+    </PublicRoute>
   );
 }
 
 export default function App() {
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/signup"
-        element={
-          <PublicRoute>
-            <Signup />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/forgot-password"
-        element={
-          <PublicRoute>
-            <ForgotPassword />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute>
-            <AdminPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/leaderboard"
-        element={
-          <ProtectedRoute>
-            <Leaderboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/weakness"
-        element={
-          <ProtectedRoute>
-            <WeaknessDashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/" element={<MainApp />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/login" element={<LoginRoute />} />
+      <Route path="/signup" element={<SignupRoute />} />
+      <Route path="/forgot-password" element={<ForgotPasswordRoute />} />
+      <Route element={<ProtectedLayout />}>
+        <Route index element={<HomeRoute />} />
+        <Route path="/practice/:mode" element={<PracticeRoute />} />
+        <Route path="/practice/:mode/:topic" element={<PracticeRoute />} />
+        <Route path="/quiz" element={<QuizPickerRoute />} />
+        <Route path="/quiz/:mode" element={<QuizRoute />} />
+        <Route path="/quiz/:mode/:topic" element={<QuizRoute />} />
+        <Route path="/leaderboard" element={<LeaderboardRoute />} />
+        <Route path="/weakness" element={<WeaknessRoute />} />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminPage />
+            </AdminRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Route>
     </Routes>
   );
 }

@@ -10,19 +10,23 @@
     "format": "prettier \"src/**/*.{js,jsx,css}\" --write",
     "format:check": "prettier \"src/**/*.{js,jsx,css}\" --check",
     "test": "vitest run",
+    "test:rules": "npx --yes firebase-tools@14.22.0 emulators:exec --only firestore \"vitest run --config vite.rules.config.js\"",
     "preview": "vite preview",
     "validate:fiqh": "node scripts/validate-fiqh-bank.mjs",
     "validate:morphology": "node scripts/validate-morphology-bank.mjs",
     "migrate:topic-stats": "node scripts/migrate-topic-stats.mjs"
   },
   "dependencies": {
+    "@sentry/react": "^10.68.0",
     "firebase": "^12.15.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@firebase/rules-unit-testing": "^5.0.1",
+    "@sentry/vite-plugin": "^5.4.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -33,6 +37,7 @@
     "firebase-admin": "^14.2.0",
     "globals": "^17.6.0",
     "prettier": "^3.9.6",
+    "react-test-renderer": "19.2.6",
     "vite": "^8.0.12",
     "vitest": "^4.1.10"
   }

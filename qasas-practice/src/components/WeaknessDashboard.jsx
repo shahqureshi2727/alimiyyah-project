@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import {
   ARABIC_TOPICS,
@@ -8,6 +8,7 @@ import {
   TAFSIR_TOPICS,
 } from '../config/subjects';
 import { getUserTopicProfile } from '../lib/topic-stats-firestore';
+import { error as logError } from '../lib/logger';
 import './WeaknessDashboard.css';
 
 const STATUS_LABELS = {
@@ -92,28 +93,37 @@ export default function WeaknessDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchProfile() {
-      if (!user) return;
-      try {
-        setProfile(await getUserTopicProfile(user.uid));
-      } catch (err) {
-        console.error('Error loading weakness profile:', err);
-        setError('Could not load weakness data.');
-      } finally {
-        setLoading(false);
-      }
+  const fetchProfile = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    setError(null);
+    try {
+      setProfile(await getUserTopicProfile(user.uid));
+    } catch (err) {
+      logError('Could not load weakness profile.', err, { uid: user.uid });
+      setError("Couldn't load the strength map. Retry.");
+    } finally {
+      setLoading(false);
     }
-
-    fetchProfile();
   }, [user]);
+
+  useEffect(() => {
+    Promise.resolve().then(fetchProfile);
+  }, [fetchProfile]);
 
   if (loading) {
     return <div className="weakness-dashboard weakness-state">Loading weakness data...</div>;
   }
 
   if (error) {
-    return <div className="weakness-dashboard weakness-state error">{error}</div>;
+    return (
+      <div className="weakness-dashboard weakness-state error">
+        <p>{error}</p>
+        <button className="try-quiz-link" onClick={fetchProfile}>
+          Retry
+        </button>
+      </div>
+    );
   }
 
   return (

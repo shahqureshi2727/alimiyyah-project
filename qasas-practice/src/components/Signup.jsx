@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUp, validateUsername, validatePassword } from '../lib/auth';
+import { safeFirebaseAuthErrorMessage } from '../lib/auth-errors';
 import './Auth.css';
 
 export default function Signup() {
@@ -57,14 +58,7 @@ export default function Signup() {
         navigate('/');
       }
     } catch (err) {
-      // Translate Firebase errors to user-friendly messages
-      if (err.code === 'auth/email-already-in-use') {
-        setError('Username already taken.');
-      } else if (err.code === 'auth/weak-password') {
-        setError('Password is too weak. Please use at least 8 characters.');
-      } else {
-        setError(err.message);
-      }
+      setError(safeFirebaseAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }

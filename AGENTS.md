@@ -139,70 +139,70 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 7:10pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-25 11:14pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (25,092t read) | 3,033,513t work | 99% savings
+Stats: 50 obs (25,453t read) | 1,605,742t work | 98% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
 S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for PDF extraction chunks 01, 03, 04 to complete (Jul 13 at 9:46 PM)
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
-740 6:03p 🔵 pdftoppm PNG Rendering Timed Out on Large Canva Surah PDFs
-741 " 🔵 Surah Text Extraction Succeeded: English Notes Readable, Arabic Verse Text Absent
-742 6:04p 🟣 All 6 Surah Text Files Successfully Extracted to tmp/pdfs/tafsir-raw/
-743 " 🔵 Tafsir Integration Points and Arabic Unicode Quality Constraint
-744 " ⚖️ TDD Approach Chosen for Tafsir Data Module
-745 6:05p 🟣 Tafsir Test Suite Written and Confirmed Failing (TDD Red Phase)
-746 " ⚖️ quran.com API v4 Chosen for Clean Arabic Ayah Text in Both Scripts
-747 6:06p 🔵 Surah Slide-to-Ayah Mapping Confirmed: Non-1:1 Ratio Requires Manual Slide Assignment
-748 " 🟣 Tafsir Phase 3 Data Module — All Tests Green, Build Passing
-749 6:14p 🔴 App Architecture Context for Tafsir UI Integration
-751 " ⚖️ Tafsir UI Design Approved — Implementation Phase Begins
-750 6:19p 🔴 Full Tafsir Integration Surface — All Files Requiring Changes
-752 6:37p 🔵 Git Working Tree Clean — Tafsir Implementation Not Yet Started
-753 " 🔵 Design Spec Format Used in This Project — Morphology Spec as Template
-754 6:38p 🟣 Tafsir Section Design Spec Written and Saved
-755 " 🔵 Tafsir Spec Verified Clean — No TODOs or Placeholders
-757 " ⚖️ Implementation Plan Phase Begins — writing-plans, TDD, and frontend-design Skills Loaded
-756 6:39p ✅ Tafsir Design Spec Committed to Git
-758 " 🔵 Complete Tafsir Data Layer File Inventory Confirmed
-759 " 🔵 All 19 Tafsir Data Files Confirmed Committed to Git
-761 " 🟣 Tafsir Implementation Plan Written — 5 Tasks, 19 Files
-760 6:40p 🔵 Clean Test Baseline — 30/30 Tests Passing Before Tafsir UI Implementation
-762 6:41p 🔴 Implementation Plan Committed — Task 1 Now In Progress
-763 6:43p 🔴 Tasks 1 and 2 Complete — 38 Tests Passing, Task 3 Now In Progress
-764 6:44p 🔴 Task 3 RED Phase Confirmed — Component Smoke Tests Written and Failing
-765 " 🟣 TafsirQuestionCard.jsx Implemented
-766 " 🟣 TafsirVerseCard, TafsirPracticeMode, and TafsirQuestionCard.css All Implemented
-767 6:46p 🟣 Phase 4 Firestore Rules Deployed to Production
 ### Jul 25, 2026
-768 6:55p 🔵 qasas-practice App Architecture & Constraints Established
-769 6:56p ⚖️ Phase 1 Scope: Audit-Only + Tooling Baseline Before Any Refactoring
-770 " 🔵 Pre-Audit Repo State: Key Gaps Confirmed
-771 6:57p 🔵 Baseline Build: 1.19 MB JS Bundle Exceeds Vite 500 kB Threshold
-772 " 🔵 Firestore Unbounded Queries: Three Critical P0/P1 Findings
-773 " 🔵 App.jsx Uses In-Memory State for Navigation — No URL Per Practice Mode
-774 " 🔵 Source Map: 21k Lines, Data Layer is 60% of Bundle
-775 6:58p 🔵 TimedQuiz.jsx: Multiple Correctness Risks Identified in Timer and Save Logic
-776 " 🔵 Firestore: Missing answerEvents Index + weaknessProfiles Over-Permissive Write Rule
-777 " 🔵 Auth System: Fake Email Pattern with Non-Functional Password Reset for Users Without Recovery Email
-778 6:59p 🔵 Repo Hygiene: 158MB PDFs, graphify-out Cache, .pyc Files, and Duplicate Spec File All Tracked in Git
-779 " 🔵 CSS: Duplicate :root Definitions in App.css vs index.css; success Color Fails WCAG AA on Light Theme
-780 " 🔵 Test Coverage: 12 Test Files; Zero Tests for App Routing, TimedQuiz, HomeScreen, Auth Flow, or AdminPage
-781 " 🔵 Practice Mode Components: useWeaknessTracking Fires One Firestore Write Per Answer Across All 8 Self-Paced Modes
-782 " 🔵 Leaderboard: Double Firestore Read on Every Mode Tab Switch; HomeScreen Fires Leaderboard + Recent Results on Mount
-783 " 🔵 Build Config: Minimal vite.config.js with No Code Splitting; package.json Missing Prettier/format Scripts
-784 " 🔵 Accessibility: AuthHeader Has Full ARIA Menu Pattern; VocabMode Flashcard div is Keyboard-Inaccessible; No Error Boundaries Anywhere
-785 7:04p 🔴 Step 2 Complete: Prettier 3.9.6 + eslint-config-prettier 10.1.8 Installed; format/format:check Scripts Added
-786 " 🔴 Step 3 Complete: Prettier Reformatted 66 Files in src/ as Isolated Commit
-787 " 🔴 Step 4 Complete: ESLint Tightened — 0 Errors, 15 Warnings (All no-console); No Missing Hook Deps Found
-788 " 🔴 Step 5 Complete: CI Workflow, .env.example, .gitignore Fixes, HTML Metadata, Duplicate Spec File Deleted
-789 " 🔵 Architecture Map: BANKS Object in TimedQuiz is the Complete Mode-to-Data Binding; getAllQuizResults() Confirmed Unbounded
+820 7:23p 🔵 TimedQuiz.jsx: Final Console Calls Replaced + Quiz-Specific Error Boundary + Skip Question Handler
+821 7:24p 🔵 Cleanup Pass: HomeScreen, Leaderboard, LeaderboardPreview Fetch Functions Wrapped in useCallback
+822 7:25p 🔵 Step 3 Cleanup + Rules Test Infrastructure: All Writes Confirmed
+842 7:53p 🔵 App.jsx Split-Personality Navigation Architecture in qasas-practice
+843 " ⚖️ Full URL-Based Routing Plan for All App Screens
+844 " 🔵 App.jsx Full Source Confirms Split-Personality Navigation with Exact String-Prefix Parsing
+845 " 🔵 subjects.js is the Authoritative Topic Registry for All Subjects
+846 7:54p 🔵 AuthContext Already Exposes isAdmin Computed from Cached userDoc
+847 " 🔵 App Provider Tree: Bootstrap Dynamic Import → RootApp → BrowserRouter/AuthProvider → App
+848 " 🔵 localStorage lastQuizMode: 4 Write Sites in App.jsx, 2 Read Sites in Leaderboard Components
+849 " 🔵 TimedQuiz History-Push Mechanism: Lines 403/409 Push on Mount and Every popstate
+850 " 🔵 HomeScreen Uses Local subject State for Subject Navigation — Must Become URL Navigation
+851 " 🔵 Data Layer: getFiqhQuestions Supports 'all', Group Code, or Topic Code; Tafsir Has Dual Script Fields
+852 " 🔵 Test Suite Uses renderToStaticMarkup and react-test-renderer — No Testing Library
+853 7:56p 🔵 Login and Signup Navigate to '/' Hardcoded — Deep Link Redirect Not Yet Implemented
+854 " 🔵 MorphologyMode Has Internal Scope Picker — :topic Route Param Maps to Scope
+855 " ⚖️ Six-Step Implementation Plan Adopted for Routing Refactor
+856 " 🟣 Failing Route Tests Written for app-routes.js Helpers and App Route Integration
+857 " 🔵 Tests Are Red for the Correct Reasons — TDD RED Phase Confirmed
+858 " 🔵 bank.js is a Barrel File — irab, noun, role, vocab Banks Defined Inline; morphology Re-exported
+860 " 🟣 src/lib/app-routes.js Implemented — Route Helpers with Param Validation Against Live Question Banks
+861 " 🟣 subjects.js Extended with UNTITLED_PRACTICE_MODES and MORPHOLOGY_TOPICS Exports
+862 " 🟣 src/lib/last-quiz-mode.js Created — Centralized lastQuizMode localStorage Helper
+859 7:57p ⚖️ Route Helper API Revised to Accept Structured Objects Instead of Legacy Encoded Strings
+864 8:01p 🟣 App.jsx Completely Rewritten — Real URL Route Table Replaces Local State Machine
+865 " 🟣 HomeScreen.jsx Updated — Mode Cards Use Structured target Objects, openPractice/openQuizPicker Replace Direct Callbacks
+866 " 🟣 QuizPicker.jsx Completely Rewritten — Mode Array Uses Structured target Objects, startQuiz Navigates via quizPath()
+867 " 🟣 MorphologyMode.jsx Updated — onSelectScope Prop Added for URL-Based Topic Navigation
+868 " 🟣 Login.jsx Updated — Deep Link Redirect via location.state?.from
+870 8:03p 🟣 Leaderboard.jsx and LeaderboardPreview.jsx Updated — lastQuizMode Read Site Migrated to getLastQuizMode()
+871 " 🟣 TimedQuiz.jsx Updated — useBlocker Replaces window.history.pushState History Pollution
+872 " 🟣 App.css Updated — .route-message CSS Added for InvalidRoute, NotFound, AdminDenied Screens
+876 " 🟣 App.jsx Refactored to Fix 3 Lint Errors — headerOverride Pattern Replaces setHeaderHidden Effect; PracticeSession Split Replaces setScore Effect
+877 " 🟣 TimedQuiz.jsx Refactored to Fix Lint Error — useEffect(blocker.state) Removed; Derived Variables Replace It
+890 8:11p ⚖️ Large-Scale Refactoring Plan Defined for qasas-practice App
+891 " 🔵 Superpowers Plugin Cached at v6.2.0, Not v6.1.1
+892 8:12p 🔵 Baseline Line Counts Measured for All Refactor Target Files
+893 " 🔵 subjects.js Already Contains a Full Mode Registry — Natural Home for Renderer Registry
+894 " 🔵 Practice Mode State Machines Differ More Than Expected — Complicates usePracticeSession Extraction
+895 " 🔵 TimedQuiz.jsx Internal Structure: Pure Functions Already Isolated, Timer Uses setInterval with stale-closure Risk
+896 " 🔵 AdminPage.jsx Firestore Calls Already Delegated to lib — admin-queries.js Extraction is Smaller Than Expected
+897 8:14p 🔵 Pre-Refactor Baseline: 71 Tests Passing, Lint Clean, Branch is codex/bug-fixes
+898 " 🔵 score/setScore Props Owned by PracticeSession in App.jsx — Not Inside Individual Mode Components
+901 " 🔵 Step 3 Started: PracticeShell.jsx Created at src/components/practice/PracticeShell.jsx
+902 8:17p 🔴 CRITICAL: write_file apply_patch Returned success=true But Did NOT Modify IrabMode.jsx or NounMode.jsx
+903 8:18p 🔵 Working Pattern for Component Rewrites: *** Delete File + *** Add File on Same Path Atomically Replaces Content
+904 " 🔵 RoleMode.jsx and VocabMode.jsx Rewritten with Delete+Add Pattern — Both Patches Contained in a Single write_file Call
+905 " 🔵 FiqhPracticeMode and HadithPracticeMode Rewritten — New answer() Object Pattern for Card-Style Modes
+906 8:19p 🔵 MorphologyMode.jsx Refactored with *** Update File (Worked) — Key Gotchas: currentIndex Unused, Bank Re-Shuffled on Scope Change
+907 " 🔵 TafsirPracticeMode.jsx Refactored — Dual Architecture: MCQ Delegates to usePracticeSession, Verse Mode Remains Manual
 
-Access 3034k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1606k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

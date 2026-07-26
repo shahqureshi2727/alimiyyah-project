@@ -1,39 +1,41 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { practicePath } from '../lib/app-routes';
 import { getUserRecentResults, formatRelativeTime } from '../lib/quiz';
 import { FIQH_GROUPS, FIQH_TOPICS, HADITH_TOPICS } from '../config/subjects';
 import { getTafsirSurahOptions } from '../data/tafsir';
+import { error as logError } from '../lib/logger';
 import LeaderboardPreview from './LeaderboardPreview';
 import './HomeScreen.css';
 
 const modes = [
   {
-    id: 'irab',
+    target: { mode: 'irab' },
     titleAr: 'تَحْدِيدُ الإِعْرَاب',
     titleEn: "I'rab Identification",
     description: 'Identify the case of highlighted words',
   },
   {
-    id: 'noun',
+    target: { mode: 'noun' },
     titleAr: 'صِفَاتُ الاسْم',
     titleEn: 'Noun Features',
     description: 'Tag definiteness, gender, and number',
   },
   {
-    id: 'role',
+    target: { mode: 'role' },
     titleAr: 'الدَّوْرُ النَّحْوِي',
     titleEn: 'Grammatical Role',
     description: 'Tap the word that fills the role',
   },
   {
-    id: 'vocab',
+    target: { mode: 'vocab' },
     titleAr: 'المُفْرَدَات',
     titleEn: 'Vocabulary',
     description: 'Flashcard recall from Qasas',
   },
   {
-    id: 'morphology',
+    target: { mode: 'morphology' },
     titleAr: 'تَصْرِيفُ الأَفْعَال',
     titleEn: 'Morphology',
     description: 'Identify verb forms and meanings',
@@ -41,7 +43,7 @@ const modes = [
 ];
 
 const arabicReviewMode = {
-  id: 'morphology-mixed',
+  target: { mode: 'morphology', topic: 'mixed' },
   titleAr: 'مُرَاجَعَة',
   titleEn: 'Review',
   description: 'Mixed Arabic practice, starting with morphology review',
@@ -63,29 +65,54 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
   const navigate = useNavigate();
   const [recentResults, setRecentResults] = useState([]);
   const [loadingResults, setLoadingResults] = useState(true);
+  const [recentResultsError, setRecentResultsError] = useState(null);
   const [subject, setSubject] = useState(null);
   const [selectedTafsirSurah, setSelectedTafsirSurah] = useState('');
   const tafsirSurahOptions = getTafsirSurahOptions();
 
-  useEffect(() => {
-    async function fetchRecentResults() {
-      if (!user) return;
+  const fetchRecentResults = useCallback(async () => {
+    if (!user) return;
 
-      try {
-        const results = await getUserRecentResults(user.uid, 5);
-        setRecentResults(results);
-      } catch (err) {
-        console.error('Error fetching recent results:', err);
-      } finally {
-        setLoadingResults(false);
-      }
+    setLoadingResults(true);
+    setRecentResultsError(null);
+
+    try {
+      const results = await getUserRecentResults(user.uid, 5);
+      setRecentResults(results);
+    } catch (err) {
+      logError('Could not load recent quiz results.', err, { uid: user.uid });
+      setRecentResultsError("Couldn't load recent results. Retry.");
+    } finally {
+      setLoadingResults(false);
     }
-
-    fetchRecentResults();
   }, [user]);
 
+  useEffect(() => {
+    Promise.resolve().then(fetchRecentResults);
+  }, [fetchRecentResults]);
+
+  const openPractice = (target) => {
+    if (onSelectMode) {
+      onSelectMode(target);
+      return;
+    }
+    navigate(practicePath(target));
+  };
+
+  const openQuizPicker = () => {
+    if (onSelectQuiz) {
+      onSelectQuiz();
+      return;
+    }
+    navigate('/quiz');
+  };
+
   const renderCard = (mode, className = 'mode-card') => (
-    <button key={mode.id} className={className} onClick={() => onSelectMode(mode.id)}>
+    <button
+      key={`${mode.target.mode}:${mode.target.topic || 'all'}:${mode.target.variant || 'mcq'}`}
+      className={className}
+      onClick={() => openPractice(mode.target)}
+    >
       <span className="mode-title-ar">{mode.titleAr}</span>
       <span className="mode-title-en">{mode.titleEn}</span>
       <span className="mode-desc">{mode.description}</span>
@@ -146,7 +173,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <h3 className="section-title">Fiqh Questions</h3>
         {renderCard(
           {
-            id: 'fiqh-all',
+            target: { mode: 'fiqh', topic: 'all' },
             titleAr: 'مُرَاجَعَة',
             titleEn: 'Review',
             description: 'Mixed Tahara and Prayer review',
@@ -160,7 +187,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <div className="mode-grid">
           {FIQH_GROUPS.map((group) =>
             renderCard({
-              id: `fiqh-${group.code}`,
+              target: { mode: 'fiqh', topic: group.code },
               titleAr: group.titleAr,
               titleEn: group.label,
               description: group.description,
@@ -177,7 +204,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
             <div className="mode-grid compact-grid">
               {FIQH_TOPICS.filter((topic) => topic.group === group.code).map((topic) =>
                 renderCard({
-                  id: `fiqh-${topic.code}`,
+                  target: { mode: 'fiqh', topic: topic.code },
                   titleAr: group.titleAr,
                   titleEn: topic.label,
                   description: 'Focused review',
@@ -199,7 +226,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <h3 className="section-title">Hadith Questions</h3>
         {renderCard(
           {
-            id: 'hadith-all',
+            target: { mode: 'hadith', topic: 'all' },
             titleAr: 'مُرَاجَعَة',
             titleEn: 'Review',
             description: 'Mixed Hadith translation review',
@@ -213,7 +240,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <div className="mode-grid">
           {HADITH_TOPICS.map((topic) =>
             renderCard({
-              id: `hadith-${topic.code}`,
+              target: { mode: 'hadith', topic: topic.code },
               titleAr: topic.titleAr,
               titleEn: topic.label,
               description: topic.description,
@@ -233,7 +260,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <h3 className="section-title">Tafsir Questions</h3>
         {renderCard(
           {
-            id: 'tafsir-all',
+            target: { mode: 'tafsir', topic: 'all' },
             titleAr: 'مُرَاجَعَة',
             titleEn: 'Mixed Review',
             description: 'Arabic ayat with English translation choices',
@@ -264,7 +291,9 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
           <button
             className="tafsir-start-btn"
             disabled={!selectedTafsirSurah}
-            onClick={() => onSelectMode(`tafsir-verse-${selectedTafsirSurah}`)}
+            onClick={() =>
+              openPractice({ mode: 'tafsir', topic: selectedTafsirSurah, variant: 'verse' })
+            }
           >
             Start verse by verse
           </button>
@@ -290,7 +319,7 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
       <section className="home-section">
         <h3 className="section-title">Quizzes</h3>
         <div className="quiz-entry-list">
-          <button className="quiz-entry-card" onClick={onSelectQuiz}>
+          <button className="quiz-entry-card" onClick={openQuizPicker}>
             <div className="quiz-entry-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10" />
@@ -341,10 +370,17 @@ export default function HomeScreen({ onSelectMode, onSelectQuiz }) {
         <div className="recent-results">
           {loadingResults ? (
             <p className="results-loading">Loading...</p>
+          ) : recentResultsError ? (
+            <div className="no-results error-state">
+              <p>{recentResultsError}</p>
+              <button className="try-quiz-link" onClick={fetchRecentResults}>
+                Retry
+              </button>
+            </div>
           ) : recentResults.length === 0 ? (
             <div className="no-results">
               <p>No quizzes yet.</p>
-              <button className="try-quiz-link" onClick={onSelectQuiz}>
+              <button className="try-quiz-link" onClick={openQuizPicker}>
                 Try one!
               </button>
             </div>

@@ -33,8 +33,10 @@ describe('tafsir app integration', () => {
     expect(source('components/HomeScreen.jsx')).toContain('Surah Selection');
     expect(source('App.jsx')).toContain('TafsirPracticeMode');
     expect(source('components/QuizPicker.jsx')).toContain('tafsir');
-    expect(source('components/TimedQuiz.jsx')).toContain('getTafsirQuestions');
-    expect(source('components/TimedQuiz.jsx')).toContain('TafsirQuestionCard');
+    expect(source('lib/quiz-banks.js')).toContain('getTafsirQuestions');
+    expect(source('components/quiz/renderers/TafsirQuizRenderer.jsx')).toContain(
+      'TafsirQuestionCard'
+    );
     expect(source('components/AdminPage.jsx')).toContain('getTafsirQuestions');
     expect(source('components/WeaknessDashboard.jsx')).toContain('TAFSIR_TOPICS');
   });

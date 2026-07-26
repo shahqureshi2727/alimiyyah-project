@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../lib/auth';
+import { safeFirebaseAuthErrorMessage } from '../lib/auth-errors';
 import './Auth.css';
 
 export default function ForgotPassword() {
@@ -24,8 +25,8 @@ export default function ForgotPassword() {
     try {
       const result = await resetPassword(username);
       setMessage(result.message);
-    } catch {
-      setError('Something went wrong. Please try again.');
+    } catch (err) {
+      setError(safeFirebaseAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
