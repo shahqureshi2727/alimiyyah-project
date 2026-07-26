@@ -128,7 +128,7 @@
   font-family: 'Crimson Text', serif;
   font-size: 1.1rem;
   padding: 0.85rem;
-  background: var(--accent);
+  background: #1a6b6d;
   color: white;
   border: none;
   border-radius: 8px;
@@ -138,7 +138,7 @@
 }
 
 .auth-btn:hover:not(:disabled) {
-  background: var(--accent-dark);
+  background: #145456;
 }
 
 .auth-btn:disabled {
