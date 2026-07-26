@@ -2,6 +2,7 @@ import '../ModeCommon.css';
 
 export default function PracticeShell({
   onBack,
+  backLabel = 'Home',
   score,
   sessionTotal,
   children,
@@ -13,7 +14,7 @@ export default function PracticeShell({
     <div className="mode-container">
       <header className="mode-header">
         <button className="back-btn" onClick={onBack}>
-          Back
+          {backLabel}
         </button>
         <span className="score">
           {score} / {sessionTotal}

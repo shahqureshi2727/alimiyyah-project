@@ -69,7 +69,7 @@ export default function MorphologyMode({
 
   if (!scope) {
     return (
-      <PracticeShell onBack={onBack} score={score} sessionTotal={sessionTotal}>
+      <PracticeShell onBack={onBack} backLabel="Home" score={score} sessionTotal={sessionTotal}>
           <h2 className="mode-title">Choose a morphology practice</h2>
           <div className="morphology-scope-grid">
             {scopeCards.map((card) => {
@@ -96,7 +96,12 @@ export default function MorphologyMode({
   const isCorrect = selected === current.answer;
 
   return (
-    <PracticeShell onBack={handleBack} score={score} sessionTotal={sessionTotal}>
+    <PracticeShell
+      onBack={handleBack}
+      backLabel={initialScope ? 'Home' : 'Change morphology scope'}
+      score={score}
+      sessionTotal={sessionTotal}
+    >
         <h2 className="mode-title">{MORPHOLOGY_SCOPE_LABELS[scope].en}</h2>
 
         <div className="morphology-card">
