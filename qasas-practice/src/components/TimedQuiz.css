@@ -399,9 +399,17 @@
 .quiz-flashcard {
   width: min(100%, 19rem);
   height: 12.5rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
   perspective: 1000px;
   cursor: pointer;
   margin-bottom: var(--space-5);
+}
+
+.quiz-flashcard[aria-disabled='true'] {
+  cursor: default;
 }
 
 .flashcard-inner {

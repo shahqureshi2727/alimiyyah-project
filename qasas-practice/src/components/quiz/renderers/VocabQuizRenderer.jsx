@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function VocabQuizRenderer({ question, showFeedback, currentAnswer, onAnswer }) {
+export default function VocabQuizRenderer({ question, headingId, showFeedback, currentAnswer, onAnswer }) {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
@@ -15,20 +15,23 @@ export default function VocabQuizRenderer({ question, showFeedback, currentAnswe
 
   return (
     <>
-      <h2 className="quiz-question-text">
+      <h2 id={headingId} className="quiz-question-text">
         {!flipped ? 'Tap to reveal meaning' : 'Did you know it?'}
       </h2>
-      <div
+      <button
+        type="button"
         className={`quiz-flashcard ${flipped ? 'flipped' : ''}`}
         onClick={() => !flipped && setFlipped(true)}
+        aria-disabled={flipped}
+        aria-label={flipped ? 'Meaning revealed' : 'Reveal vocabulary meaning'}
       >
         <div className="flashcard-inner">
-          <div className="flashcard-front" dir="rtl">
+          <div className="flashcard-front" dir="rtl" lang="ar">
             {question.ar}
           </div>
           <div className="flashcard-back">{question.en}</div>
         </div>
-      </div>
+      </button>
       {flipped && (
         <div className={`quiz-grade-buttons ${showFeedback ? 'feedback-shown' : ''}`}>
           <button

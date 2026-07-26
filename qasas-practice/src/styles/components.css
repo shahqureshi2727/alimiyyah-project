@@ -145,6 +145,7 @@
   max-width: 32rem;
 }
 
+.app-state h1,
 .app-state h2 {
   margin: 0 0 var(--space-2);
   font-size: var(--type-title);

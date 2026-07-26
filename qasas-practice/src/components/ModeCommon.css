@@ -251,9 +251,17 @@
 .flashcard {
   width: min(100%, 20rem);
   height: 14rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
   perspective: 1000px;
   cursor: pointer;
   margin-bottom: var(--space-5);
+}
+
+.flashcard[aria-disabled='true'] {
+  cursor: default;
 }
 
 .flashcard-inner {

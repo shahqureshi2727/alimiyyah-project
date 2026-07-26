@@ -43,6 +43,7 @@ function LoadingScreen() {
       tone="loading"
       title="Preparing your study desk"
       message="Loading the next screen."
+      headingLevel={1}
     />
   );
 }

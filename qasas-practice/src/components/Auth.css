@@ -71,6 +71,11 @@
   border-color: var(--accent);
 }
 
+.auth-field input:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .auth-field input::placeholder {
   color: var(--ink-light);
   font-size: 0.9rem;

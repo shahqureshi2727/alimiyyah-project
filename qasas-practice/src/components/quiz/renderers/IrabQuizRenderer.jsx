@@ -22,14 +22,18 @@ function highlightTarget(sentence, target) {
   );
 }
 
-export default function IrabQuizRenderer({ question, showFeedback, currentAnswer, onAnswer }) {
+export default function IrabQuizRenderer({ question, headingId, showFeedback, currentAnswer, onAnswer }) {
   return (
     <>
-      <h2 className="quiz-question-text">What is the i'rab of the highlighted word?</h2>
-      <div className="quiz-sentence" dir="rtl">
+      <h2 id={headingId} className="quiz-question-text">What is the i'rab of the highlighted word?</h2>
+      <div className="quiz-sentence" dir="rtl" lang="ar">
         {highlightTarget(question.sentence, question.target)}
       </div>
-      <div className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}>
+      <div
+        className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}
+        role="group"
+        aria-labelledby={headingId}
+      >
         {irabChoices.map((choice) => {
           const isTapped = choice.id === currentAnswer;
           const isCorrectAnswer = choice.id === question.answer;
@@ -54,8 +58,8 @@ export default function IrabQuizRenderer({ question, showFeedback, currentAnswer
               onClick={() => onAnswer(choice.id === question.answer, choice.id)}
               disabled={showFeedback}
             >
-              <span className="choice-ar">{choice.ar}</span>
-              <span className="choice-en">({choice.en})</span>
+              <span className="choice-ar" dir="rtl" lang="ar">{choice.ar}</span>
+              <span className="choice-en" lang="en">({choice.en})</span>
               {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
               {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
             </button>

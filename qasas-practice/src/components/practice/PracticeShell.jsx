@@ -9,9 +9,13 @@ export default function PracticeShell({
   contentClassName = '',
   nextVisible = false,
   onNext,
+  title = 'Practice session',
 }) {
   return (
-    <div className="mode-container">
+    <main className="mode-container" aria-labelledby="practice-title">
+      <h1 id="practice-title" className="sr-only">
+        {title}
+      </h1>
       <header className="mode-header">
         <button className="back-btn" onClick={onBack}>
           {backLabel}
@@ -21,14 +25,14 @@ export default function PracticeShell({
         </span>
       </header>
 
-      <div className={`mode-content ${contentClassName}`.trim()}>
+      <section className={`mode-content ${contentClassName}`.trim()}>
         {children}
         {nextVisible && (
           <button className="next-btn" onClick={onNext}>
             Next
           </button>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

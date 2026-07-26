@@ -139,13 +139,13 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-26 12:00am EDT
+# [alimiyyah-project-main] recent context, 2026-07-26 12:22am EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (23,594t read) | 1,497,156t work | 98% savings
+Stats: 50 obs (24,209t read) | 2,388,925t work | 99% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
@@ -153,16 +153,7 @@ S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
 ### Jul 25, 2026
-915 11:16p 🔵 Admin Delegation Layer and Auth Architecture — Complete Audit Picture
-916 " 🔵 Firestore Security Rules — isAdmin() Billed Read Impact and Save Status UI Honesty
-917 " 🟣 Repository Layer TDD Tests Written — All 5 Fail Red for Correct Reason
-918 11:26p 🔵 Bundle Optimization Plan for qasas-practice App
-919 " 🔵 Working Branch and Repo State for Bundle Optimization Work
-920 11:27p 🔵 Full Static Import Map: Question Banks Pulled Eagerly from 10+ Files
-921 " 🔵 Baseline vite.config.js Has No manualChunks, No Bundle Analyzer, No Size Budget
-922 " ⚖️ Implementation Plan: 7-Step Bundle Optimization Sequence
 923 11:28p 🔵 Baseline Bundle Analysis: Concrete Size Measurements Per Module and Group
-924 " 🟣 Bundle Visualizer Added to Vite Config (ANALYZE_BUNDLE=1 Flag)
 925 " 🔵 Confirmed Baseline Bundle Sizes (zlib-measured from actual output files)
 926 " 🔵 daily-review.js REVIEW_SOURCES Executes All Bank Calls at Module Init Time
 927 " 🔵 Timer Re-renders Entire TimedQuiz Component 4x Per Second
@@ -203,6 +194,16 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 971 " 🔄 Firebase Split Into Lazy-Loaded Modules and ProtectedLayout Extracted
 972 " 🟣 Bundle Budget CI Check and Lighthouse CI Added
 973 " 🔵 Final Bundle Metrics After All Optimizations
+979 11:59p 🔵 CSS Token Gap: 30+ Hardcoded font-size Values, 6 Distinct border-radius Values, No Custom Properties
+980 " 🔵 Quiz Screen Layout: Exit Button Is position:absolute, Header Has 3-Column Flex with TimerRing Center
+981 " 🔵 subjects.js Is the Single Source of Truth; APP_NAME Still 'Qasas Practice' in app-routes.js
+982 " 🔵 DESIGN-PLAN.md Does Not Yet Exist; Plan Status Shows Drafting Is Now In-Progress
+### Jul 26, 2026
+984 12:00a 🔵 CSS Token Coverage Audit: qasas-practice Codebase
+985 " 🟣 TDD Red Phase: Design Token and App Rename Tests Written
+986 " 🔵 Hardcoded CSS Value Drift: Quantified Across 17 Files
+987 " 🔵 App Identity Is Still "Qasas Practice" in Three Locations
+983 12:02a 🔵 DESIGN-PLAN.md Written and Verified: 560 Lines, 7 Sections, No Code Modified
 
-Access 1497k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 2389k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

@@ -33,14 +33,20 @@ export default function VocabMode({ onBack }) {
     >
       <h2 className="mode-title">Tap to reveal meaning</h2>
 
-      <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
+      <button
+        type="button"
+        className={`flashcard ${flipped ? 'flipped' : ''}`}
+        onClick={handleFlip}
+        aria-disabled={flipped}
+        aria-label={flipped ? 'Meaning revealed' : 'Reveal vocabulary meaning'}
+      >
         <div className="flashcard-inner">
-          <div className="flashcard-front" dir="rtl">
+          <div className="flashcard-front" dir="rtl" lang="ar">
             {current.ar}
           </div>
           <div className="flashcard-back">{current.en}</div>
         </div>
-      </div>
+      </button>
 
       {flipped && (
         <div className="grade-buttons">

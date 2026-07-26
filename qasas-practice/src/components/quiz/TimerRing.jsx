@@ -11,8 +11,12 @@ export default function TimerRing({ timeLeft, totalTime }) {
   }
 
   return (
-    <div className="timer-ring-container">
-      <svg className="timer-ring" viewBox="0 0 100 100">
+    <div
+      className="timer-ring-container"
+      role="timer"
+      aria-label={`${timeLeft} seconds remaining`}
+    >
+      <svg className="timer-ring" viewBox="0 0 100 100" aria-hidden="true">
         <circle className="timer-ring-bg" cx="50" cy="50" r="45" fill="none" strokeWidth="8" />
         <circle
           className={`timer-ring-progress ${colorClass}`}

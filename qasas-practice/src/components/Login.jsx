@@ -29,7 +29,7 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
+    <main className="auth-container">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h1 className="auth-title">Sign In</h1>
         <p className="auth-subtitle">Welcome back to Qasas Practice</p>
@@ -43,6 +43,8 @@ export default function Login() {
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
             disabled={loading}
+            required
+            aria-describedby={error ? 'login-error' : undefined}
           />
         </div>
 
@@ -55,10 +57,16 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             disabled={loading}
+            required
+            aria-describedby={error ? 'login-error' : undefined}
           />
         </div>
 
-        {error && <p className="auth-error">{error}</p>}
+        {error && (
+          <p id="login-error" className="auth-error" role="alert">
+            {error}
+          </p>
+        )}
 
         <button type="submit" className="auth-btn" disabled={loading}>
           {loading ? 'Signing in...' : 'Sign in'}
@@ -74,6 +82,6 @@ export default function Login() {
           </Link>
         </div>
       </form>
-    </div>
+    </main>
   );
 }

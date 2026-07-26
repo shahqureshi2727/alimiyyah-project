@@ -6,6 +6,29 @@ import { error as logError } from '../../lib/logger';
 
 const MODE_LABELS = QUIZ_MODES;
 
+function SortHeader({ column, activeColumn, direction, className = '', onSort, children }) {
+  const isActive = activeColumn === column;
+  const ariaSort = isActive ? (direction === 'asc' ? 'ascending' : 'descending') : 'none';
+
+  return (
+    <th className={className} aria-sort={ariaSort} scope="col">
+      <button
+        type="button"
+        className="student-sort-btn"
+        onClick={() => onSort(column)}
+        aria-label={`Sort by ${children}`}
+      >
+        <span>{children}</span>
+        {isActive && (
+          <span className="sort-icon" aria-hidden="true">
+            {direction === 'asc' ? ' ▲' : ' ▼'}
+          </span>
+        )}
+      </button>
+    </th>
+  );
+}
+
 export default function ClassStats() {
   const [allResults, setAllResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -137,11 +160,6 @@ export default function ClassStats() {
     }
   };
 
-  const sortIcon = (column) => {
-    if (sortBy !== column) return null;
-    return <span className="sort-icon">{sortDirection === 'asc' ? ' \u25B2' : ' \u25BC'}</span>;
-  };
-
   if (loading) return <div className="stats-loading">Loading class statistics...</div>;
   if (error) {
     return (
@@ -181,7 +199,11 @@ export default function ClassStats() {
       <section className="stats-students">
         <h2>Per-Student Breakdown</h2>
         <div className="student-search">
+          <label className="sr-only" htmlFor="student-search">
+            Search by username
+          </label>
           <input
+            id="student-search"
             type="text"
             placeholder="Search by username..."
             value={searchQuery}
@@ -197,23 +219,42 @@ export default function ClassStats() {
             <table className="student-table">
               <thead>
                 <tr>
-                  <th className="sortable" onClick={() => handleSort('username')}>
+                  <SortHeader
+                    column="username"
+                    activeColumn={sortBy}
+                    direction={sortDirection}
+                    onSort={handleSort}
+                  >
                     Username
-                    {sortIcon('username')}
-                  </th>
-                  <th className="sortable col-num" onClick={() => handleSort('quizzesWeek')}>
+                  </SortHeader>
+                  <SortHeader
+                    column="quizzesWeek"
+                    activeColumn={sortBy}
+                    direction={sortDirection}
+                    className="col-num"
+                    onSort={handleSort}
+                  >
                     Quizzes (Week)
-                    {sortIcon('quizzesWeek')}
-                  </th>
-                  <th className="sortable col-num" onClick={() => handleSort('avgScoreWeek')}>
+                  </SortHeader>
+                  <SortHeader
+                    column="avgScoreWeek"
+                    activeColumn={sortBy}
+                    direction={sortDirection}
+                    className="col-num"
+                    onSort={handleSort}
+                  >
                     Avg Score (Week)
-                    {sortIcon('avgScoreWeek')}
-                  </th>
-                  <th className="col-mode">Weakest Mode</th>
-                  <th className="sortable col-date" onClick={() => handleSort('lastActive')}>
+                  </SortHeader>
+                  <th className="col-mode" scope="col">Weakest Mode</th>
+                  <SortHeader
+                    column="lastActive"
+                    activeColumn={sortBy}
+                    direction={sortDirection}
+                    className="col-date"
+                    onSort={handleSort}
+                  >
                     Last Active
-                    {sortIcon('lastActive')}
-                  </th>
+                  </SortHeader>
                 </tr>
               </thead>
               <tbody>

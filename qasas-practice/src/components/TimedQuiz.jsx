@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useBlocker, useNavigate } from 'react-router-dom';
 import { QUIZ_MODES } from '../config/subjects';
 import { useAuth } from '../contexts/AuthContext';
@@ -21,7 +21,12 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   const navigate = useNavigate();
   const engine = useQuizEngine({ mode, topic, user, username, onQuizComplete });
   const [showExitDialog, setShowExitDialog] = useState(false);
+  const [timerAnnouncement, setTimerAnnouncement] = useState('');
+  const [expiryAnnouncement, setExpiryAnnouncement] = useState('');
   const allowNavigationRef = useRef(false);
+  const exitButtonRef = useRef(null);
+  const questionRegionRef = useRef(null);
+  const announcedThresholdsRef = useRef(new Set());
   const blocker = useBlocker(
     ({ currentLocation, nextLocation }) =>
       !allowNavigationRef.current &&
@@ -46,6 +51,44 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     resetKey: `${mode}:${engine.currentIndex}:${engine.current?.id || ''}`,
     onTimeout: engine.handleTimeout,
   });
+  const questionsLoading = engine.questionsLoading;
+  const quizComplete = engine.quizComplete;
+  const currentQuestion = engine.current;
+  const currentIndex = engine.currentIndex;
+
+  useEffect(() => {
+    if (questionsLoading || quizComplete || !currentQuestion) return undefined;
+    announcedThresholdsRef.current = new Set();
+
+    const focusTimer = setTimeout(() => {
+      questionRegionRef.current?.focus();
+    }, 0);
+
+    return () => clearTimeout(focusTimer);
+  }, [currentQuestion, currentIndex, questionsLoading, quizComplete]);
+
+  useEffect(() => {
+    if (!timerRunning) return undefined;
+    const thresholds = [60, 30, 10];
+    if (thresholds.includes(timeLeft) && !announcedThresholdsRef.current.has(timeLeft)) {
+      announcedThresholdsRef.current.add(timeLeft);
+      const announceTimer = setTimeout(() => {
+        setTimerAnnouncement(`Question ${currentIndex + 1}: ${timeLeft} seconds remaining.`);
+      }, 0);
+      return () => clearTimeout(announceTimer);
+    }
+    return undefined;
+  }, [currentIndex, timeLeft, timerRunning]);
+
+  useEffect(() => {
+    if (timeLeft === 0 && !quizComplete) {
+      const announceTimer = setTimeout(() => {
+        setExpiryAnnouncement(`Question ${currentIndex + 1}: time expired. Moving to the next question.`);
+      }, 0);
+      return () => clearTimeout(announceTimer);
+    }
+    return undefined;
+  }, [currentIndex, quizComplete, timeLeft]);
 
   const handleExitClick = () => {
     setShowExitDialog(true);
@@ -117,24 +160,57 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     />
   );
 
+  const answeredCount = engine.currentIndex + (engine.showFeedback ? 1 : 0);
+  const feedbackMessage = engine.showFeedback
+    ? engine.currentAnswer === 'timeout'
+      ? `Time expired. Incorrect. Score ${engine.score} out of ${answeredCount}.`
+      : `${engine.isCorrect ? 'Correct' : 'Incorrect'}. Score ${engine.score} out of ${answeredCount}.`
+    : '';
+
   return (
-    <div className="timed-quiz">
+    <main className="timed-quiz" aria-labelledby="quiz-title">
+      <h1 id="quiz-title" className="sr-only">
+        {quizLabel}
+      </h1>
       <header className="quiz-header">
-        <button className="exit-quiz-btn" onClick={handleExitClick}>
+        <button ref={exitButtonRef} className="exit-quiz-btn" onClick={handleExitClick}>
           Exit quiz
         </button>
-        <div className="quiz-progress">
+        <div className="quiz-progress" aria-live="polite">
           <span>Question {engine.currentIndex + 1} of {engine.questions.length}</span>
         </div>
         <TimerRing timeLeft={timeLeft} totalTime={timerSeconds} />
-        <div className="quiz-score">
-          <span>{engine.score} / {engine.currentIndex + (engine.showFeedback ? 1 : 0)}</span>
+        <div className="quiz-score" aria-live="polite" aria-label={`Score ${engine.score} out of ${answeredCount}`}>
+          <span>{engine.score} / {answeredCount}</span>
         </div>
       </header>
 
-      {engine.loadError && <p className="quiz-load-warning">{engine.loadError}</p>}
+      <p className="sr-only" aria-live="polite">
+        {timerAnnouncement}
+      </p>
+      <p className="sr-only" aria-live="assertive">
+        {expiryAnnouncement}
+      </p>
+      <p className="sr-only" aria-live="polite">
+        {feedbackMessage}
+      </p>
 
-      <div className="quiz-content">
+      {engine.loadError && (
+        <p className="quiz-load-warning" role="status">
+          {engine.loadError}
+        </p>
+      )}
+
+      <section
+        ref={questionRegionRef}
+        className="quiz-content"
+        tabIndex="-1"
+        aria-labelledby="quiz-question-heading"
+        aria-describedby="quiz-progress-text"
+      >
+        <p id="quiz-progress-text" className="sr-only">
+          Question {engine.currentIndex + 1} of {engine.questions.length}
+        </p>
         <ErrorBoundary
           name="Timed quiz question"
           resetKey={`${engine.currentIndex}:${engine.current?.id || engine.current?.topic || engine.currentMode}`}
@@ -151,15 +227,22 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
           <QuizQuestion
             mode={engine.currentMode}
             question={engine.current}
+            headingId="quiz-question-heading"
             showFeedback={engine.showFeedback}
             currentAnswer={engine.currentAnswer}
             isCorrect={engine.isCorrect}
             onAnswer={engine.handleAnswer}
           />
         </ErrorBoundary>
-      </div>
+      </section>
 
-      {exitDialogVisible && <ExitDialog onCancel={handleExitCancel} onConfirm={handleExitConfirm} />}
-    </div>
+      {exitDialogVisible && (
+        <ExitDialog
+          onCancel={handleExitCancel}
+          onConfirm={handleExitConfirm}
+          restoreFocusTo={exitButtonRef}
+        />
+      )}
+    </main>
   );
 }

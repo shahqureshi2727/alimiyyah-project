@@ -9,6 +9,8 @@ function CheckIcon() {
       fill="none"
       stroke="currentColor"
       strokeWidth="3"
+      aria-hidden="true"
+      focusable="false"
     >
       <polyline points="20 6 9 17 4 12" />
     </svg>
@@ -23,6 +25,8 @@ function XIcon() {
       fill="none"
       stroke="currentColor"
       strokeWidth="3"
+      aria-hidden="true"
+      focusable="false"
     >
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
@@ -30,7 +34,13 @@ function XIcon() {
   );
 }
 
-export default function HadithQuestionCard({ question, showFeedback, currentAnswer, onAnswer }) {
+export default function HadithQuestionCard({
+  question,
+  headingId,
+  showFeedback,
+  currentAnswer,
+  onAnswer,
+}) {
   const shuffledOptions = useShuffledOptions(question.options, question.id);
   const correctAnswer = question.options[question.answerIndex];
 
@@ -40,11 +50,15 @@ export default function HadithQuestionCard({ question, showFeedback, currentAnsw
         <span className="hadith-source-badge">{question.collection}</span>
         <span className="hadith-number">Hadith {question.hadithNumber}</span>
       </div>
-      <h2 className="hadith-question-prompt">{question.prompt}</h2>
+      <h2 id={headingId} className="hadith-question-prompt">{question.prompt}</h2>
       <div className="hadith-arabic-text" dir="rtl" lang="ar">
         {question.arabicText}
       </div>
-      <div className={`hadith-mcq-choices ${showFeedback ? 'feedback-shown' : ''}`}>
+      <div
+        className={`hadith-mcq-choices ${showFeedback ? 'feedback-shown' : ''}`}
+        role="group"
+        aria-labelledby={headingId}
+      >
         {shuffledOptions.map((option) => {
           const isTapped = currentAnswer === option;
           const isCorrectAnswer = option === correctAnswer;

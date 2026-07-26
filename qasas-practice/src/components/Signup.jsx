@@ -66,7 +66,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="auth-container">
+    <main className="auth-container">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h1 className="auth-title">Create Account</h1>
         <p className="auth-subtitle">Join Qasas Practice</p>
@@ -81,6 +81,8 @@ export default function Signup() {
             autoComplete="username"
             disabled={loading}
             placeholder="3-20 characters, letters/numbers/underscore"
+            required
+            aria-describedby={error ? 'signup-error' : undefined}
           />
         </div>
 
@@ -94,6 +96,8 @@ export default function Signup() {
             autoComplete="new-password"
             disabled={loading}
             placeholder="At least 8 characters"
+            required
+            aria-describedby={error ? 'signup-error' : undefined}
           />
         </div>
 
@@ -106,6 +110,8 @@ export default function Signup() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             autoComplete="new-password"
             disabled={loading}
+            required
+            aria-describedby={error ? 'signup-error' : undefined}
           />
         </div>
 
@@ -120,15 +126,24 @@ export default function Signup() {
             onChange={(e) => setRecoveryEmail(e.target.value)}
             autoComplete="email"
             disabled={loading}
+            aria-describedby={`recovery-email-helper${error ? ' signup-error' : ''}`}
           />
-          <p className="auth-helper">
+          <p id="recovery-email-helper" className="auth-helper">
             If you forget your password, we can email you a reset link. Leave blank if you don't
             want to provide one — but then your teacher will need to reset it for you manually.
           </p>
         </div>
 
-        {error && <p className="auth-error">{error}</p>}
-        {warning && <p className="auth-warning">{warning}</p>}
+        {error && (
+          <p id="signup-error" className="auth-error" role="alert">
+            {error}
+          </p>
+        )}
+        {warning && (
+          <p className="auth-warning" role="status">
+            {warning}
+          </p>
+        )}
 
         <button type="submit" className="auth-btn" disabled={loading}>
           {loading ? 'Creating account...' : 'Create account'}
@@ -141,6 +156,6 @@ export default function Signup() {
           </Link>
         </div>
       </form>
-    </div>
+    </main>
   );
 }
