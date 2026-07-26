@@ -56,7 +56,7 @@ function useDocumentTitle(title) {
   }, [title]);
 }
 
-function PublicRoute({ children }) {
+export function PublicRoute({ children }) {
   return children;
 }
 

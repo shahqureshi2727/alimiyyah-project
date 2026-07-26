@@ -49,6 +49,7 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
   const [quizComplete, setQuizComplete] = useState(false);
   const [totalDuration, setTotalDuration] = useState(0);
   const [saveStatus, setSaveStatus] = useState(null);
+  const [saveAttemptKey, setSaveAttemptKey] = useState(0);
   const startTimeRef = useRef(currentTime());
   const questionStartTimeRef = useRef(currentTime());
   const advanceTimerRef = useRef(null);
@@ -257,7 +258,7 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
   }, [advanceQuestion, current, currentIndex, currentMode, quizComplete, recordResult]);
 
   useEffect(() => {
-    if (!quizComplete || saveStatus) return;
+    if (!quizComplete) return;
     let cancelled = false;
     let pendingTimer = null;
 
@@ -314,7 +315,7 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
     mode,
     score,
     totalDuration,
-    saveStatus,
+    saveAttemptKey,
     results,
     questions.length,
   ]);
@@ -335,7 +336,10 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
     quizComplete,
     totalDuration,
     saveStatus,
-    retrySave: () => setSaveStatus(null),
+    retrySave: () => {
+      setSaveStatus(null);
+      setSaveAttemptKey((key) => key + 1);
+    },
     timerPaused,
     setTimerPaused,
     handleAnswer,

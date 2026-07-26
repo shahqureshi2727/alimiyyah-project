@@ -122,6 +122,8 @@ vi.mock('./hooks/useQuizEngine', () => ({
 
 let root;
 let container;
+let consoleError;
+let consoleWarn;
 
 async function flushEffects() {
   for (let i = 0; i < 8; i += 1) {
@@ -169,13 +171,23 @@ describe('route accessibility', () => {
     };
     document.documentElement.setAttribute('data-theme', 'light');
     document.documentElement.setAttribute('data-arabic-script', 'madina');
+    consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    consoleWarn = vi.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
-  afterEach(() => {
-    root?.unmount();
+  afterEach(async () => {
+    if (root) {
+      await act(async () => {
+        root.unmount();
+      });
+    }
     container?.remove();
     root = null;
     container = null;
+    consoleError?.mockRestore();
+    consoleWarn?.mockRestore();
+    consoleError = null;
+    consoleWarn = null;
   });
 
   it.each([

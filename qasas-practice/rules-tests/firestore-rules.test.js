@@ -11,12 +11,14 @@ import {
   getDoc,
   serverTimestamp,
   setDoc,
+  Timestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { afterAll, beforeAll, beforeEach, describe, it } from 'vitest';
 
 const projectId = 'qasas-practice-rules-test';
 let testEnv;
+const futureReviewAt = Timestamp.fromDate(new Date('2099-01-01T00:00:00.000Z'));
 
 function authedDb(uid) {
   return testEnv.authenticatedContext(uid).firestore();
@@ -111,6 +113,11 @@ describe('firestore rules', () => {
     await assertFails(deleteDoc(doc(authedDb('alice'), 'quizResults/alice-result')));
   });
 
+  it('keeps answer events append-only', async () => {
+    await assertFails(updateDoc(doc(authedDb('bob'), 'answerEvents/bob-event'), { correct: false }));
+    await assertFails(deleteDoc(doc(authedDb('bob'), 'answerEvents/bob-event')));
+  });
+
   it('rejects extra fields on quiz results and answer events', async () => {
     await assertFails(
       setDoc(doc(authedDb('alice'), 'quizResults/extra'), quizResult({ injected: true }))
@@ -122,5 +129,37 @@ describe('firestore rules', () => {
 
   it('accepts the client answer event shape including group and quizResultId', async () => {
     await assertSucceeds(setDoc(doc(authedDb('alice'), 'answerEvents/good'), answerEvent()));
+  });
+
+  it('accepts a signed-in user writing their own bounded topic stats', async () => {
+    await assertSucceeds(
+      setDoc(doc(authedDb('alice'), 'users/alice/topicStats/fiqh_WUD'), {
+        userId: 'alice',
+        category: 'fiqh',
+        subtopic: 'WUD',
+        attempts: 1,
+        correct: 0,
+        ewmaScore: 0.7,
+        reviewIntervalDays: 1,
+        nextDueAt: futureReviewAt,
+        lastAttempted: serverTimestamp(),
+      })
+    );
+  });
+
+  it("prevents a user from writing another user's topic stats", async () => {
+    await assertFails(
+      setDoc(doc(authedDb('alice'), 'users/bob/topicStats/fiqh_WUD'), {
+        userId: 'bob',
+        category: 'fiqh',
+        subtopic: 'WUD',
+        attempts: 1,
+        correct: 0,
+        ewmaScore: 0.7,
+        reviewIntervalDays: 1,
+        nextDueAt: futureReviewAt,
+        lastAttempted: serverTimestamp(),
+      })
+    );
   });
 });

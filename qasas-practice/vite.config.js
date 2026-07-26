@@ -64,7 +64,39 @@ export default defineConfig({
     },
   },
   test: {
-    exclude: ['rules-tests/**', '**/node_modules/**', '**/dist/**'],
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.js'],
+    exclude: ['rules-tests/**', 'e2e/**', '**/node_modules/**', '**/dist/**'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      all: false,
+      include: [
+        'src/lib/{app-routes,auth-errors,daily-review,firebase-emulators,firebase-env,question-results,quiz-banks,shuffle,tafsir-scoring,topic-route-targets,topic-stats,weakness}.js',
+        'src/hooks/{useCountdown,usePracticeSession,useQuizEngine,useShuffledOptions,useWeaknessTracking}.js',
+        'src/components/{AppState,ErrorBoundary,ForgotPassword,FiqhQuestionCard,HadithQuestionCard,LeaderboardTable,Login,ProtectedLayout,Signup,TafsirQuestionCard,TafsirVerseCard}.jsx',
+        'src/components/quiz/QuizQuestion.jsx',
+        'src/components/quiz/renderers/{FiqhQuizRenderer,HadithQuizRenderer,IrabQuizRenderer,MorphologyQuizRenderer,NounFeaturesQuizRenderer,RolesQuizRenderer,TafsirQuizRenderer,VocabQuizRenderer}.jsx',
+      ],
+      exclude: [
+        'src/data/**',
+        'src/**/*.test.{js,jsx}',
+        'src/test/**',
+        'src/main.jsx',
+        'src/Bootstrap.jsx',
+      ],
+      thresholds: {
+        'src/lib/**/*.{js,jsx}': {
+          lines: 80,
+        },
+        'src/hooks/**/*.{js,jsx}': {
+          lines: 80,
+        },
+        'src/components/**/*.{js,jsx}': {
+          lines: 60,
+        },
+      },
+    },
   },
   plugins: [
     react(),
