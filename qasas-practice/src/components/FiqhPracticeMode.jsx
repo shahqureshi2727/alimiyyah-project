@@ -1,17 +1,34 @@
-import { useMemo } from 'react';
-import { getFiqhQuestions } from '../data/fiqh';
+import { useAsyncQuestionBank } from '../hooks/useAsyncQuestionBank';
 import { usePracticeSession } from '../hooks/usePracticeSession';
 import FiqhQuestionCard from './FiqhQuestionCard';
 import PracticeShell from './practice/PracticeShell';
 
 export default function FiqhPracticeMode({ topic, onBack }) {
-  const bank = useMemo(() => getFiqhQuestions(topic), [topic]);
+  const { bank, loading, loadError, retryLoad } = useAsyncQuestionBank({
+    mode: 'fiqh',
+    topic,
+  });
   const session = usePracticeSession({
     bank,
     mode: 'fiqh',
     checkAnswer: ({ answer }) => answer.correct,
   });
   const { current, selected, answered, score, sessionTotal, answer, next } = session;
+
+  if (loading) {
+    return (
+      <div className="mode-container">
+        <header className="mode-header">
+          <button className="back-btn" onClick={onBack}>
+            Back
+          </button>
+        </header>
+        <div className="mode-content">
+          <p>Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!current) {
     return (
@@ -22,7 +39,12 @@ export default function FiqhPracticeMode({ topic, onBack }) {
           </button>
         </header>
         <div className="mode-content">
-          <p>No questions available for this topic yet.</p>
+          <p>{loadError || 'No questions available for this topic yet.'}</p>
+          {loadError && (
+            <button className="next-btn" onClick={retryLoad}>
+              Retry
+            </button>
+          )}
         </div>
       </div>
     );

@@ -1,12 +1,18 @@
 import { CheckIcon, XIcon } from './icons';
 
-export default function RolesQuizRenderer({ question, showFeedback, currentAnswer, onAnswer }) {
+export default function RolesQuizRenderer({ question, headingId, showFeedback, currentAnswer, onAnswer }) {
   return (
     <>
-      <h2 className="quiz-question-text">
+      <h2 id={headingId} className="quiz-question-text">
         Tap the <span className="role-name">{question.role}</span>
       </h2>
-      <div className={`quiz-words-container ${showFeedback ? 'feedback-shown' : ''}`} dir="rtl">
+      <div
+        className={`quiz-words-container ${showFeedback ? 'feedback-shown' : ''}`}
+        dir="rtl"
+        lang="ar"
+        role="group"
+        aria-labelledby={headingId}
+      >
         {question.words.map((word, index) => {
           const isTapped = index === currentAnswer;
           const isCorrectAnswer = index === question.answerIndex;

@@ -14,7 +14,6 @@ import {
 import { auth } from './firebase';
 import { firebaseAuthErrorMessage, safeFirebaseAuthErrorMessage } from './auth-errors';
 import { warn as logWarn } from './logger';
-import { createUserDoc, getUserDocById } from './repositories/users';
 
 // Synthesize a fake email from username for Firebase Auth
 export const usernameToAuthEmail = (username) => `${username.toLowerCase().trim()}@qasas.local`;
@@ -99,6 +98,7 @@ export async function signUp({ username, password, recoveryEmail }) {
 
   // Create the Firestore user document
   // Every new signup is a student. NEVER write role: "admin" from the client.
+  const { createUserDoc } = await import('./repositories/users');
   await createUserDoc({
     uid: user.uid,
     username: username.trim(),
@@ -125,6 +125,7 @@ export async function signOut() {
 }
 
 export async function getUserDoc(uid) {
+  const { getUserDocById } = await import('./repositories/users');
   return getUserDocById({ uid });
 }
 

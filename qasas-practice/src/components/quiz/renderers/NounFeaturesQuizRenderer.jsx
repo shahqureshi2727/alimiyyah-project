@@ -17,7 +17,7 @@ const numberOptions = [
   { id: 'plural', ar: 'جَمْع', en: 'plural' },
 ];
 
-export default function NounFeaturesQuizRenderer({ question, showFeedback, onAnswer }) {
+export default function NounFeaturesQuizRenderer({ question, headingId, showFeedback, onAnswer }) {
   const [selectedDef, setSelectedDef] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
@@ -32,9 +32,13 @@ export default function NounFeaturesQuizRenderer({ question, showFeedback, onAns
   };
 
   const renderNounOptionGroup = (label, options, selected, setSelected, correctValue) => (
-    <div className="quiz-option-group">
-      <span className="quiz-option-label">{label}</span>
-      <div className={`quiz-option-buttons ${showFeedback ? 'feedback-shown' : ''}`}>
+      <div className="quiz-option-group">
+      <span id={`quiz-${label.toLowerCase()}-label`} className="quiz-option-label">{label}</span>
+      <div
+        className={`quiz-option-buttons ${showFeedback ? 'feedback-shown' : ''}`}
+        role="group"
+        aria-labelledby={`quiz-${label.toLowerCase()}-label`}
+      >
         {options.map((opt) => {
           const isTapped = opt.id === selected;
           const isCorrectAnswer = opt.id === correctValue;
@@ -61,7 +65,7 @@ export default function NounFeaturesQuizRenderer({ question, showFeedback, onAns
               onClick={() => !showFeedback && setSelected(opt.id)}
               disabled={showFeedback}
             >
-              <span className="opt-ar">{opt.ar}</span>
+              <span className="opt-ar" dir="rtl" lang="ar">{opt.ar}</span>
               <span className="opt-en">{opt.en}</span>
               {showFeedback && isTapped && isCorrectAnswer && <CheckIcon />}
               {showFeedback && isTapped && !isCorrectAnswer && <XIcon />}
@@ -74,8 +78,8 @@ export default function NounFeaturesQuizRenderer({ question, showFeedback, onAns
 
   return (
     <>
-      <h2 className="quiz-question-text">Tag the noun features</h2>
-      <div className="quiz-word" dir="rtl">
+      <h2 id={headingId} className="quiz-question-text">Tag the noun features</h2>
+      <div className="quiz-word" dir="rtl" lang="ar">
         {question.word}
       </div>
       <div className="quiz-feature-groups">

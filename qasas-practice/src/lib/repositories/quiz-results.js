@@ -9,7 +9,7 @@ import {
   Timestamp,
   where,
 } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../firestore';
 import { cacheKey, cachedQuery, invalidateRepositoryCache } from './cache';
 import { requirePositiveLimit, timestampToDate } from './query-helpers';
 

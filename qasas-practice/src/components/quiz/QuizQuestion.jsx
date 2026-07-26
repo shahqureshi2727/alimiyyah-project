@@ -21,6 +21,7 @@ const QUIZ_RENDERERS = {
 export default function QuizQuestion({
   mode,
   question,
+  headingId,
   showFeedback,
   currentAnswer,
   isCorrect,
@@ -33,6 +34,7 @@ export default function QuizQuestion({
     <Renderer
       key={`${mode}:${question?.id || question?.topic || ''}`}
       question={question}
+      headingId={headingId}
       showFeedback={showFeedback}
       currentAnswer={currentAnswer}
       isCorrect={isCorrect}

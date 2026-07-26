@@ -34,7 +34,7 @@ vi.mock('firebase/firestore', () => ({
   writeBatch: firestoreMocks.writeBatch,
 }));
 
-vi.mock('../firebase', () => ({
+vi.mock('../firestore', () => ({
   db: { app: 'test-db' },
 }));
 
@@ -219,5 +219,54 @@ describe('topic stats repository', () => {
     expect(firestoreMocks.orderBy).toHaveBeenCalledWith('category', 'asc');
     expect(firestoreMocks.orderBy).toHaveBeenCalledWith('subtopic', 'asc');
     expect(firestoreMocks.limit).toHaveBeenCalledWith(100);
+  });
+
+  it('writes the next topic stat in a user-scoped transaction', async () => {
+    const transaction = {
+      get: vi.fn(async () => ({
+        exists: () => false,
+        data: () => null,
+      })),
+      set: vi.fn(),
+    };
+    firestoreMocks.runTransaction.mockImplementation(async (_db, callback) => callback(transaction));
+    const { recordTopicAttempt } = await import('./topic-stats');
+
+    const next = await recordTopicAttempt({
+      userId: 'u1',
+      mode: 'fiqh',
+      bankSource: 'fiqh',
+      topic: 'WUD',
+      wasCorrect: false,
+    });
+
+    expect(firestoreMocks.doc).toHaveBeenCalledWith(
+      { app: 'test-db' },
+      'users',
+      'u1',
+      'topicStats',
+      'fiqh_WUD'
+    );
+    expect(transaction.set).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'doc' }),
+      expect.objectContaining({
+        userId: 'u1',
+        category: 'fiqh',
+        subtopic: 'WUD',
+        attempts: 1,
+        correct: 0,
+        ewmaScore: 0.7,
+        lastAttempted: 'SERVER_TIMESTAMP',
+      }),
+      { merge: true }
+    );
+    expect(next).toMatchObject({
+      userId: 'u1',
+      category: 'fiqh',
+      subtopic: 'WUD',
+      attempts: 1,
+      correct: 0,
+      lastAttempted: null,
+    });
   });
 });

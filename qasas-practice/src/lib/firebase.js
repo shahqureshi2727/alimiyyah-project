@@ -1,11 +1,15 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { validateFirebaseEnv } from './firebase-env';
-
-const firebaseConfig = validateFirebaseEnv(import.meta.env);
-
-const app = initializeApp(firebaseConfig);
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import { app } from './firebase-app';
+import { firebaseEmulatorSettings } from './firebase-emulators';
 
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+const settings = firebaseEmulatorSettings(import.meta.env);
+const authEmulatorKey = '__qasasPracticeAuthEmulatorConnected';
+
+if (settings && !globalThis[authEmulatorKey]) {
+  connectAuthEmulator(auth, `http://${settings.auth.host}:${settings.auth.port}`, {
+    disableWarnings: true,
+  });
+  globalThis[authEmulatorKey] = true;
+}

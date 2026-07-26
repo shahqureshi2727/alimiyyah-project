@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { resetPassword } from '../lib/auth';
 import { safeFirebaseAuthErrorMessage } from '../lib/auth-errors';
 import './Auth.css';
 
@@ -23,6 +22,7 @@ export default function ForgotPassword() {
     }
 
     try {
+      const { resetPassword } = await import('../lib/auth');
       const result = await resetPassword(username);
       setMessage(result.message);
     } catch (err) {
@@ -33,7 +33,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="auth-container">
+    <main className="auth-container">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h1 className="auth-title">Reset Password</h1>
         <p className="auth-subtitle">
@@ -49,11 +49,21 @@ export default function ForgotPassword() {
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
             disabled={loading}
+            required
+            aria-describedby={error ? 'reset-error' : message ? 'reset-message' : undefined}
           />
         </div>
 
-        {error && <p className="auth-error">{error}</p>}
-        {message && <p className="auth-success">{message}</p>}
+        {error && (
+          <p id="reset-error" className="auth-error" role="alert">
+            {error}
+          </p>
+        )}
+        {message && (
+          <p id="reset-message" className="auth-success" role="status">
+            {message}
+          </p>
+        )}
 
         <button type="submit" className="auth-btn" disabled={loading}>
           {loading ? 'Sending...' : 'Send reset link'}
@@ -70,6 +80,6 @@ export default function ForgotPassword() {
           your teacher to reset your password.
         </div>
       </form>
-    </div>
+    </main>
   );
 }

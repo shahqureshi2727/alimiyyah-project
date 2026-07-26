@@ -2,32 +2,37 @@ import '../ModeCommon.css';
 
 export default function PracticeShell({
   onBack,
+  backLabel = 'Home',
   score,
   sessionTotal,
   children,
   contentClassName = '',
   nextVisible = false,
   onNext,
+  title = 'Practice session',
 }) {
   return (
-    <div className="mode-container">
+    <main className="mode-container" aria-labelledby="practice-title">
+      <h1 id="practice-title" className="sr-only">
+        {title}
+      </h1>
       <header className="mode-header">
         <button className="back-btn" onClick={onBack}>
-          Back
+          {backLabel}
         </button>
         <span className="score">
           {score} / {sessionTotal}
         </span>
       </header>
 
-      <div className={`mode-content ${contentClassName}`.trim()}>
+      <section className={`mode-content ${contentClassName}`.trim()}>
         {children}
         {nextVisible && (
           <button className="next-btn" onClick={onNext}>
             Next
           </button>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

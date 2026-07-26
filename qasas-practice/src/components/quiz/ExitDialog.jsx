@@ -1,26 +1,32 @@
 import { useEffect, useRef } from 'react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
-export default function ExitDialog({ onCancel, onConfirm }) {
+export default function ExitDialog({ onCancel, onConfirm, restoreFocusTo }) {
+  const dialogRef = useRef(null);
   const cancelRef = useRef(null);
+
+  useFocusTrap(dialogRef, {
+    active: true,
+    onEscape: onCancel,
+    restoreFocusTo,
+  });
 
   useEffect(() => {
     cancelRef.current?.focus();
-
-    function handleEscape(event) {
-      if (event.key === 'Escape') {
-        onCancel();
-      }
-    }
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onCancel]);
+  }, []);
 
   return (
     <div className="exit-dialog-overlay">
-      <div className="exit-dialog" role="alertdialog" aria-modal="true">
-        <h2>Exit quiz?</h2>
-        <p>Your progress won't be saved.</p>
+      <div
+        ref={dialogRef}
+        className="exit-dialog"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="exit-dialog-title"
+        aria-describedby="exit-dialog-description"
+      >
+        <h2 id="exit-dialog-title">Exit quiz?</h2>
+        <p id="exit-dialog-description">Your progress won't be saved.</p>
         <div className="exit-dialog-buttons">
           <button ref={cancelRef} className="exit-dialog-btn cancel" onClick={onCancel}>
             Cancel

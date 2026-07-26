@@ -109,7 +109,11 @@ export default function AdminWeaknessView() {
 
       <section className="student-drilldown">
         <h2>Student Drill-Down</h2>
+        <label className="sr-only" htmlFor="student-drilldown-select">
+          Choose a student
+        </label>
         <select
+          id="student-drilldown-select"
           className="student-select"
           value={selectedUserId || ''}
           onChange={(event) => setSelectedUserId(event.target.value)}

@@ -1,7 +1,7 @@
 .tafsir-question-card {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-4);
   width: 100%;
 }
 
@@ -9,14 +9,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--space-3);
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: var(--type-caption);
 }
 
 .tafsir-source-badge {
-  padding: 0.2rem 0.65rem;
-  border-radius: 999px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
   background: var(--fiqh-badge-bg);
   color: var(--fiqh-badge-text);
   font-weight: 600;
@@ -27,22 +27,22 @@
 }
 
 .tafsir-question-prompt {
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: var(--type-lead);
+  line-height: var(--line-lead);
   margin: 0;
 }
 
 .tafsir-arabic-text {
   width: 100%;
-  padding: 1.15rem 1rem;
+  padding: var(--space-5);
   border-block: 2px solid var(--accent-light);
   border-inline: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--cream);
   color: var(--text-primary);
   font-family: var(--arabic-font);
-  font-size: 1.65rem;
-  line-height: 2.2;
+  font-size: var(--type-display);
+  line-height: var(--arabic-line-display);
   text-align: center;
   white-space: pre-line;
   text-wrap: balance;
@@ -51,27 +51,27 @@
 .tafsir-mcq-choices {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: var(--space-3);
 }
 
 .tafsir-choice-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-  min-height: 44px;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--border);
-  border-radius: 8px;
+  gap: var(--space-2);
+  min-height: var(--touch-target-min);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   background: var(--cream);
   color: var(--text-primary);
-  font-size: 1rem;
-  line-height: 1.35;
+  font-size: var(--type-body);
+  line-height: var(--line-body);
   text-align: left;
   cursor: pointer;
   transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease;
+    border-color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
 }
 
 .tafsir-choice-btn:disabled {
@@ -100,10 +100,10 @@
 
 .tafsir-explanation {
   margin: 0;
-  padding: 0.75rem 1rem;
+  padding: var(--space-3) var(--space-4);
   background: var(--fiqh-explanation-bg);
-  border-radius: 8px;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  border-radius: var(--radius-md);
+  font-size: var(--type-small);
+  line-height: var(--line-small);
   color: var(--fiqh-explanation-text);
 }

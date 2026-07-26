@@ -1,17 +1,34 @@
-import { useMemo } from 'react';
-import { getHadithQuestions } from '../data/hadith';
+import { useAsyncQuestionBank } from '../hooks/useAsyncQuestionBank';
 import { usePracticeSession } from '../hooks/usePracticeSession';
 import HadithQuestionCard from './HadithQuestionCard';
 import PracticeShell from './practice/PracticeShell';
 
 export default function HadithPracticeMode({ topic, onBack }) {
-  const bank = useMemo(() => getHadithQuestions(topic || 'all'), [topic]);
+  const { bank, loading, loadError, retryLoad } = useAsyncQuestionBank({
+    mode: 'hadith',
+    topic: topic || 'all',
+  });
   const session = usePracticeSession({
     bank,
     mode: 'hadith',
     checkAnswer: ({ answer }) => answer.correct,
   });
   const { current, selected, answered, score, sessionTotal, answer, next } = session;
+
+  if (loading) {
+    return (
+      <div className="mode-container">
+        <header className="mode-header">
+          <button className="back-btn" onClick={onBack}>
+            Back
+          </button>
+        </header>
+        <div className="mode-content">
+          <p>Loading questions...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!current) {
     return (
@@ -22,7 +39,12 @@ export default function HadithPracticeMode({ topic, onBack }) {
           </button>
         </header>
         <div className="mode-content">
-          <p>No Hadith questions available for this topic yet.</p>
+          <p>{loadError || 'No Hadith questions available for this topic yet.'}</p>
+          {loadError && (
+            <button className="next-btn" onClick={retryLoad}>
+              Retry
+            </button>
+          )}
         </div>
       </div>
     );

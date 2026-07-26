@@ -9,7 +9,7 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../firestore';
 import { cacheKey, cachedQuery, invalidateRepositoryCache } from './cache';
 import { requirePositiveLimit } from './query-helpers';
 

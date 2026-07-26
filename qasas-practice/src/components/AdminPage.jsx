@@ -8,10 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getAdminUserDoc } from '../lib/admin-queries';
-import { irab, nounFeatures, roles, vocab } from '../data/arabic';
-import { getFiqhQuestions } from '../data/fiqh';
-import { getHadithQuestions } from '../data/hadith';
-import { getTafsirQuestions } from '../data/tafsir';
+import { loadBank } from '../lib/quiz-banks';
 import { FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS } from '../config/subjects';
 import { error as logError } from '../lib/logger';
 import ClassStats from './admin/ClassStats';
@@ -29,6 +26,17 @@ function NotFoundPage() {
 
 function BankViewer() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [banks, setBanks] = useState({
+    irab: [],
+    nounFeatures: [],
+    roles: [],
+    vocab: [],
+    fiqh: [],
+    hadith: [],
+    tafsir: [],
+  });
+  const [banksLoading, setBanksLoading] = useState(true);
+  const [banksError, setBanksError] = useState(null);
   const [expandedSections, setExpandedSections] = useState({
     irab: false,
     noun: false,
@@ -38,6 +46,33 @@ function BankViewer() {
     hadith: false,
     tafsir: false,
   });
+
+  const loadBanks = useCallback(async () => {
+    setBanksLoading(true);
+    setBanksError(null);
+
+    try {
+      const [irab, nounFeatures, roles, vocab, fiqh, hadith, tafsir] = await Promise.all([
+        loadBank('irab'),
+        loadBank('nounFeatures'),
+        loadBank('roles'),
+        loadBank('vocab'),
+        loadBank('fiqh', 'all'),
+        loadBank('hadith', 'all'),
+        loadBank('tafsir', 'all'),
+      ]);
+      setBanks({ irab, nounFeatures, roles, vocab, fiqh, hadith, tafsir });
+    } catch (err) {
+      logError('Could not load admin question banks.', err);
+      setBanksError("Couldn't load question banks. Retry.");
+    } finally {
+      setBanksLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    Promise.resolve().then(loadBanks);
+  }, [loadBanks]);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -94,15 +129,15 @@ function BankViewer() {
     );
   };
 
-  const filteredIrab = irab.filter(filterIrab);
-  const filteredNoun = nounFeatures.filter(filterNoun);
-  const filteredRole = roles.filter(filterRole);
-  const filteredVocab = vocab.filter(filterVocab);
-  const allFiqhQuestions = getFiqhQuestions('all');
+  const filteredIrab = banks.irab.filter(filterIrab);
+  const filteredNoun = banks.nounFeatures.filter(filterNoun);
+  const filteredRole = banks.roles.filter(filterRole);
+  const filteredVocab = banks.vocab.filter(filterVocab);
+  const allFiqhQuestions = banks.fiqh;
   const filteredFiqh = allFiqhQuestions.filter(filterFiqh);
-  const allHadithQuestions = getHadithQuestions('all');
+  const allHadithQuestions = banks.hadith;
   const filteredHadith = allHadithQuestions.filter(filterHadith);
-  const allTafsirQuestions = getTafsirQuestions('all');
+  const allTafsirQuestions = banks.tafsir;
   const filteredTafsir = allTafsirQuestions.filter(filterTafsir);
 
   const caseColors = {
@@ -133,16 +168,40 @@ function BankViewer() {
     plural: 'Plural',
   };
 
+  if (banksLoading) {
+    return (
+      <div className="bank-viewer">
+        <div className="bank-summary">Loading question banks...</div>
+      </div>
+    );
+  }
+
+  if (banksError) {
+    return (
+      <div className="bank-viewer">
+        <div className="bank-summary">{banksError}</div>
+        <button className="try-quiz-link" onClick={loadBanks}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="bank-viewer">
       <div className="bank-summary">
-        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles:{' '}
-        {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length}{' '}
-        &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir: {allTafsirQuestions.length}
+        I'rab: {banks.irab.length} &middot; Noun features: {banks.nounFeatures.length} &middot;
+        Roles: {banks.roles.length} &middot; Vocab: {banks.vocab.length} &middot; Fiqh:{' '}
+        {allFiqhQuestions.length} &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir:{' '}
+        {allTafsirQuestions.length}
       </div>
 
       <div className="bank-search">
+        <label className="sr-only" htmlFor="bank-search">
+          Search Arabic text
+        </label>
         <input
+          id="bank-search"
           type="text"
           placeholder="Search Arabic text..."
           value={searchQuery}
@@ -155,10 +214,14 @@ function BankViewer() {
       <div className="bank-sections">
         {/* I'rab Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('irab')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('irab')}
+            aria-expanded={expandedSections.irab}
+          >
             <span className="section-title">I'rab</span>
             <span className="section-count">{filteredIrab.length}</span>
-            <span className={`section-arrow ${expandedSections.irab ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.irab ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -166,7 +229,7 @@ function BankViewer() {
             <div className="section-content">
               {filteredIrab.map((item, idx) => (
                 <div key={idx} className="irab-row">
-                  <div className="irab-sentence" dir="rtl">
+                  <div className="irab-sentence" dir="rtl" lang="ar">
                     {item.sentence.split(item.target).map((part, i, arr) => (
                       <span key={i}>
                         {part}
@@ -188,10 +251,14 @@ function BankViewer() {
 
         {/* Noun Features Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('noun')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('noun')}
+            aria-expanded={expandedSections.noun}
+          >
             <span className="section-title">Noun Features</span>
             <span className="section-count">{filteredNoun.length}</span>
-            <span className={`section-arrow ${expandedSections.noun ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.noun ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -199,7 +266,7 @@ function BankViewer() {
             <div className="section-content">
               {filteredNoun.map((item, idx) => (
                 <div key={idx} className="noun-row">
-                  <span className="noun-word" dir="rtl">
+                  <span className="noun-word" dir="rtl" lang="ar">
                     {item.word}
                   </span>
                   <div className="noun-tags">
@@ -215,10 +282,14 @@ function BankViewer() {
 
         {/* Roles Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('role')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('role')}
+            aria-expanded={expandedSections.role}
+          >
             <span className="section-title">Roles</span>
             <span className="section-count">{filteredRole.length}</span>
-            <span className={`section-arrow ${expandedSections.role ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.role ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -226,7 +297,7 @@ function BankViewer() {
             <div className="section-content">
               {filteredRole.map((item, idx) => (
                 <div key={idx} className="role-row">
-                  <div className="role-sentence" dir="rtl">
+                  <div className="role-sentence" dir="rtl" lang="ar">
                     {item.words.map((word, i) => (
                       <span key={i} className={i === item.answerIndex ? 'role-answer' : ''}>
                         {word}
@@ -246,10 +317,14 @@ function BankViewer() {
 
         {/* Vocab Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('vocab')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('vocab')}
+            aria-expanded={expandedSections.vocab}
+          >
             <span className="section-title">Vocab</span>
             <span className="section-count">{filteredVocab.length}</span>
-            <span className={`section-arrow ${expandedSections.vocab ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.vocab ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -257,7 +332,7 @@ function BankViewer() {
             <div className="section-content">
               {filteredVocab.map((item, idx) => (
                 <div key={idx} className="vocab-row">
-                  <span className="vocab-ar" dir="rtl">
+                  <span className="vocab-ar" dir="rtl" lang="ar">
                     {item.ar}
                   </span>
                   <span className="vocab-en">{item.en}</span>
@@ -269,10 +344,14 @@ function BankViewer() {
 
         {/* Fiqh Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('fiqh')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('fiqh')}
+            aria-expanded={expandedSections.fiqh}
+          >
             <span className="section-title">Fiqh</span>
             <span className="section-count">{filteredFiqh.length}</span>
-            <span className={`section-arrow ${expandedSections.fiqh ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.fiqh ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -314,10 +393,14 @@ function BankViewer() {
 
         {/* Hadith Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('hadith')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('hadith')}
+            aria-expanded={expandedSections.hadith}
+          >
             <span className="section-title">Hadith</span>
             <span className="section-count">{filteredHadith.length}</span>
-            <span className={`section-arrow ${expandedSections.hadith ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.hadith ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -333,7 +416,7 @@ function BankViewer() {
                     </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
-                        <div className="fiqh-row-prompt" dir="rtl">
+                        <div className="fiqh-row-prompt" dir="rtl" lang="ar">
                           {item.arabicText}
                         </div>
                         <div className="fiqh-row-details">
@@ -352,10 +435,14 @@ function BankViewer() {
 
         {/* Tafsir Section */}
         <section className="bank-section">
-          <button className="section-header" onClick={() => toggleSection('tafsir')}>
+          <button
+            className="section-header"
+            onClick={() => toggleSection('tafsir')}
+            aria-expanded={expandedSections.tafsir}
+          >
             <span className="section-title">Tafsir</span>
             <span className="section-count">{filteredTafsir.length}</span>
-            <span className={`section-arrow ${expandedSections.tafsir ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.tafsir ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -371,7 +458,7 @@ function BankViewer() {
                     </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
-                        <div className="fiqh-row-prompt" dir="rtl">
+                        <div className="fiqh-row-prompt" dir="rtl" lang="ar">
                           {item.arabicText}
                         </div>
                         <div className="fiqh-row-details">
@@ -449,7 +536,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="admin-page">
+    <main className="admin-page">
       <header className="admin-header">
         <h1 className="admin-title">Admin Dashboard</h1>
         <button className="back-to-home-btn" onClick={() => navigate('/')}>
@@ -457,7 +544,7 @@ export default function AdminPage() {
         </button>
       </header>
 
-      <div className="admin-tabs">
+      <nav className="admin-tabs" aria-label="Admin sections">
         <button
           className={`admin-tab ${activeTab === 'bank' ? 'active' : ''}`}
           onClick={() => setActiveTab('bank')}
@@ -476,13 +563,13 @@ export default function AdminPage() {
         >
           Weakness
         </button>
-      </div>
+      </nav>
 
-      <div className="admin-content">
+      <section className="admin-content">
         {activeTab === 'bank' && <BankViewer />}
         {activeTab === 'stats' && <ClassStats />}
         {activeTab === 'weakness' && <AdminWeaknessView />}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

@@ -1,9 +1,17 @@
-import * as Sentry from '@sentry/react';
-
 const EMAIL_PATTERN = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 const USERNAME_KEYS = new Set(['email', 'username', 'userName']);
 
 let sentryEnabled = false;
+let sentryReadyPromise = null;
+
+function loadSentry() {
+  return import('@sentry/react');
+}
+
+function withSentry(callback) {
+  if (!sentryEnabled || !sentryReadyPromise) return;
+  sentryReadyPromise.then(callback).catch(() => {});
+}
 
 function replaceSensitiveText(value) {
   return value.replace(EMAIL_PATTERN, '[email]');
@@ -44,20 +52,22 @@ export function initErrorTracking({ dsn, release, environment } = {}) {
   sentryEnabled = Boolean(dsn);
   if (!sentryEnabled) return false;
 
-  Sentry.init({
-    dsn,
-    release,
-    environment,
-    tracesSampleRate: 0.1,
-    beforeSend: sanitizeErrorEvent,
+  sentryReadyPromise = loadSentry().then((Sentry) => {
+    Sentry.init({
+      dsn,
+      release,
+      environment,
+      tracesSampleRate: 0.1,
+      beforeSend: sanitizeErrorEvent,
+    });
+    return Sentry;
   });
 
   return true;
 }
 
 export function setLoggerUser(uid) {
-  if (!sentryEnabled) return;
-  Sentry.setUser(uid ? { id: uid } : null);
+  withSentry((Sentry) => Sentry.setUser(uid ? { id: uid } : null));
 }
 
 function devConsole(level, args) {
@@ -71,19 +81,19 @@ export function debug(...args) {
 
 export function info(...args) {
   devConsole('info', args);
-  if (sentryEnabled) {
+  withSentry((Sentry) => {
     Sentry.addBreadcrumb({ level: 'info', message: String(args[0] || '') });
-  }
+  });
 }
 
 export function warn(message, details) {
   devConsole('warn', details === undefined ? [message] : [message, details]);
-  if (sentryEnabled) {
+  withSentry((Sentry) =>
     Sentry.captureMessage(String(message), {
       level: 'warning',
       extra: details && typeof details === 'object' ? sanitizeValue(details) : { details },
-    });
-  }
+    })
+  );
 }
 
 export function error(message, err, details) {
@@ -91,12 +101,14 @@ export function error(message, err, details) {
   if (!sentryEnabled) return;
 
   const extra = sanitizeValue(details || {});
-  if (err instanceof Error) {
-    Sentry.captureException(err, { extra: { message, ...extra } });
-  } else {
-    Sentry.captureMessage(String(message), {
-      level: 'error',
-      extra: sanitizeValue({ error: err, ...extra }),
-    });
-  }
+  withSentry((Sentry) => {
+    if (err instanceof Error) {
+      Sentry.captureException(err, { extra: { message, ...extra } });
+    } else {
+      Sentry.captureMessage(String(message), {
+        level: 'error',
+        extra: sanitizeValue({ error: err, ...extra }),
+      });
+    }
+  });
 }

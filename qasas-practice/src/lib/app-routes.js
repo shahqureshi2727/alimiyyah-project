@@ -7,20 +7,12 @@ import {
   TAFSIR_TOPICS,
   UNTITLED_PRACTICE_MODES,
 } from '../config/subjects';
-import { getFiqhQuestions } from '../data/fiqh';
-import { getHadithQuestions } from '../data/hadith';
-import { getTafsirQuestions, getTafsirVerseRecords } from '../data/tafsir';
-import { getMorphologyQuestions } from '../data/bank';
 
-const APP_NAME = 'Qasas Practice';
+const APP_NAME = 'Alimiyyah Practice';
 const VALID_TAFSIR_VARIANTS = new Set(['mcq', 'verse']);
 
 function encodeSegment(segment) {
   return encodeURIComponent(segment);
-}
-
-function hasQuestions(items) {
-  return Array.isArray(items) && items.length > 0;
 }
 
 function byId(items, id) {
@@ -107,7 +99,7 @@ export function resolvePracticeRoute({ mode, topic = null, variant = 'mcq' }) {
   if (mode === 'morphology') {
     if (!topic) return { status: 'ok', mode, topic: null, variant: 'mcq', label: 'Morphology' };
     const label = morphologyTopicLabel(topic);
-    if (!label || !hasQuestions(getMorphologyQuestions(topic))) {
+    if (!label) {
       return invalid("That morphology topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic, variant: 'mcq', label };
@@ -116,7 +108,7 @@ export function resolvePracticeRoute({ mode, topic = null, variant = 'mcq' }) {
   if (mode === 'fiqh') {
     const nextTopic = topic || 'all';
     const label = fiqhTopicLabel(nextTopic);
-    if (!label || !hasQuestions(getFiqhQuestions(nextTopic))) {
+    if (!label) {
       return invalid("That fiqh topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic: nextTopic, variant: 'mcq', label };
@@ -125,7 +117,7 @@ export function resolvePracticeRoute({ mode, topic = null, variant = 'mcq' }) {
   if (mode === 'hadith') {
     const nextTopic = topic || 'all';
     const label = hadithTopicLabel(nextTopic);
-    if (!label || !hasQuestions(getHadithQuestions(nextTopic))) {
+    if (!label) {
       return invalid("That hadith topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic: nextTopic, variant: 'mcq', label };
@@ -135,9 +127,7 @@ export function resolvePracticeRoute({ mode, topic = null, variant = 'mcq' }) {
     const nextTopic = topic || 'all';
     const nextVariant = VALID_TAFSIR_VARIANTS.has(variant) ? variant : 'mcq';
     const label = tafsirTopicLabel(nextTopic);
-    const questions =
-      nextVariant === 'verse' ? getTafsirVerseRecords(nextTopic) : getTafsirQuestions(nextTopic);
-    if (!label || !hasQuestions(questions)) {
+    if (!label) {
       return invalid("That tafsir topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic: nextTopic, variant: nextVariant, label };
@@ -156,7 +146,7 @@ export function resolveQuizRoute({ mode, topic = null }) {
   if (mode === 'fiqh') {
     const nextTopic = topic || 'all';
     const label = fiqhTopicLabel(nextTopic);
-    if (!label || !hasQuestions(getFiqhQuestions(nextTopic))) {
+    if (!label) {
       return invalid("That fiqh quiz topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic: nextTopic, label };
@@ -165,7 +155,7 @@ export function resolveQuizRoute({ mode, topic = null }) {
   if (mode === 'hadith') {
     const nextTopic = topic || 'all';
     const label = hadithTopicLabel(nextTopic);
-    if (!label || !hasQuestions(getHadithQuestions(nextTopic))) {
+    if (!label) {
       return invalid("That hadith quiz topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic: nextTopic, label };
@@ -174,7 +164,7 @@ export function resolveQuizRoute({ mode, topic = null }) {
   if (mode === 'tafsir') {
     const nextTopic = topic || 'all';
     const label = tafsirTopicLabel(nextTopic);
-    if (!label || !hasQuestions(getTafsirQuestions(nextTopic))) {
+    if (!label) {
       return invalid("That tafsir quiz topic doesn't exist yet.");
     }
     return { status: 'ok', mode, topic: nextTopic, label };

@@ -50,6 +50,11 @@ describe('weakness scoring', () => {
     expect(getWeakTopics(profile, 3)).toEqual(['B', 'C', 'A']);
   });
 
+  it('returns no weak topics while a profile is still loading', () => {
+    expect(getWeakTopics(null, 5)).toEqual([]);
+    expect(getWeakTopics(undefined, 5)).toEqual([]);
+  });
+
   it('builds review weights from weak and developing scores', () => {
     const profile = {
       topics: {

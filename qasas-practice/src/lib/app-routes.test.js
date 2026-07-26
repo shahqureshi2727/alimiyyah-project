@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import {
   practicePath,
   quizPath,
@@ -6,8 +8,19 @@ import {
   resolveQuizRoute,
   routeTitle,
 } from './app-routes';
+import {
+  practiceTargetForTopic,
+  quizTargetForTopic,
+  topicMetaForCode,
+} from './topic-route-targets';
+
+const appRoutesSource = readFileSync(fileURLToPath(import.meta.resolve('./app-routes.js')), 'utf8');
 
 describe('app route helpers', () => {
+  it('does not import question data while resolving URLs', () => {
+    expect(appRoutesSource).not.toContain('../data/');
+  });
+
   it('maps structured practice targets to URL params without encoded mode prefixes', () => {
     expect(practicePath({ mode: 'irab' })).toBe('/practice/irab');
     expect(practicePath({ mode: 'fiqh', topic: 'WUD' })).toBe('/practice/fiqh/WUD');
@@ -33,9 +46,13 @@ describe('app route helpers', () => {
       path: '/quiz/hadith/ARB40',
       leaderboardMode: 'hadith',
     });
+    expect(quizPath({ mode: 'tafsir', topic: 'ASR' })).toEqual({
+      path: '/quiz/tafsir/ASR',
+      leaderboardMode: 'tafsir',
+    });
   });
 
-  it('validates practice params from configured topics with real question banks', () => {
+  it('validates practice params from configured topics', () => {
     expect(resolvePracticeRoute({ mode: 'fiqh', topic: 'WUD' })).toMatchObject({
       status: 'ok',
       mode: 'fiqh',
@@ -69,9 +86,29 @@ describe('app route helpers', () => {
   });
 
   it('returns legible titles for route metadata', () => {
-    expect(routeTitle('home')).toBe('Qasas Practice');
-    expect(routeTitle('practice', { label: 'Wudhu' })).toBe('Practice: Wudhu | Qasas Practice');
-    expect(routeTitle('quiz', { label: 'Fiqh' })).toBe('Quiz: Fiqh | Qasas Practice');
-    expect(routeTitle('notFound')).toBe('Page Not Found | Qasas Practice');
+    expect(routeTitle('home')).toBe('Alimiyyah Practice');
+    expect(routeTitle('practice', { label: 'Wudhu' })).toBe(
+      'Practice: Wudhu | Alimiyyah Practice'
+    );
+    expect(routeTitle('quiz', { label: 'Fiqh' })).toBe('Quiz: Fiqh | Alimiyyah Practice');
+    expect(routeTitle('notFound')).toBe('Page Not Found | Alimiyyah Practice');
+  });
+
+  it('maps weakness topic codes to safe practice and quiz targets', () => {
+    expect(topicMetaForCode('WUD')).toMatchObject({ label: 'Wudhu', subject: 'fiqh' });
+    expect(practiceTargetForTopic('WUD')).toEqual({ mode: 'fiqh', topic: 'WUD' });
+    expect(quizTargetForTopic('WUD')).toEqual({ mode: 'fiqh', topic: 'WUD' });
+
+    expect(practiceTargetForTopic('ASR')).toEqual({ mode: 'tafsir', topic: 'ASR' });
+    expect(quizTargetForTopic('ASR')).toEqual({ mode: 'tafsir', topic: 'ASR' });
+
+    expect(practiceTargetForTopic('MOR_CMD_AMR')).toEqual({
+      mode: 'morphology',
+      topic: 'amrNahi',
+    });
+    expect(quizTargetForTopic('MOR_CMD_AMR')).toEqual({ mode: 'morphology' });
+
+    expect(practiceTargetForTopic('NOPE')).toBe(null);
+    expect(quizTargetForTopic('NOPE')).toBe(null);
   });
 });

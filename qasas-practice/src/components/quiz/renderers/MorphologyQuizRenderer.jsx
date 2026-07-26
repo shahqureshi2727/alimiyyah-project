@@ -2,6 +2,7 @@ import { CheckIcon, XIcon } from './icons';
 
 export default function MorphologyQuizRenderer({
   question,
+  headingId,
   showFeedback,
   currentAnswer,
   isCorrect,
@@ -9,20 +10,24 @@ export default function MorphologyQuizRenderer({
 }) {
   return (
     <>
-      <h2 className="quiz-question-text">Choose the correct verb meaning</h2>
+      <h2 id={headingId} className="quiz-question-text">Choose the correct verb meaning</h2>
       <div className="quiz-morphology-card">
-        <div className="quiz-word" dir="rtl">
+        <div className="quiz-word" dir="rtl" lang="ar">
           {question.verb}
         </div>
         <div className="quiz-morphology-base" dir="rtl">
-          <span>{question.baseVerb}</span>
+          <span lang="ar">{question.baseVerb}</span>
           <span dir="ltr">= {question.baseMeaning}</span>
         </div>
-        <div className="quiz-morphology-label" dir="rtl">
+        <div className="quiz-morphology-label" dir="rtl" lang="ar">
           {question.arabicLabel}
         </div>
       </div>
-      <div className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}>
+      <div
+        className={`quiz-choices ${showFeedback ? 'feedback-shown' : ''}`}
+        role="group"
+        aria-labelledby={headingId}
+      >
         {question.options.map((option) => {
           const isTapped = option === currentAnswer;
           const isCorrectAnswer = option === question.answer;

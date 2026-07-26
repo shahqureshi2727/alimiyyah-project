@@ -1,64 +1,154 @@
-# Qasas Practice
+# Alimiyyah Practice
 
-A practice app for students studying *Qasas un-Nabiyeen* (Book 1). The app provides four practice modes covering Arabic grammar and vocabulary from the textbook.
+Alimiyyah Practice is a React study app for an Islamic studies program. Students drill Arabic grammar and vocabulary, morphology, Fiqh, Hadith, and Tafsir through untimed practice loops and timed quizzes.
 
-## Practice Modes
+The app includes:
 
-- **I'rab Identification** - Identify the grammatical case (raf', nasb, jarr) of highlighted words
-- **Noun Features** - Tag definiteness, gender, and number of Arabic nouns
-- **Grammatical Role** - Identify the grammatical role (fa'il, maf'ul, etc.) in sentences
-- **Vocabulary** - Flashcard-based vocabulary practice
+- Practice mode: untimed, shuffled, immediate feedback.
+- Quiz mode: timed, 10 questions, saved to Firestore and ranked on leaderboards.
+- Today's Review: 15 timed questions selected from weak topics, due topics, and a broad mix.
+- Strength Map: per-topic EWMA scores for spaced review.
+- Admin: teacher-facing bank review, class stats, and weakness dashboards.
+
+## Stack
+
+- Vite 8, React 19, react-router-dom 7.
+- Plain JavaScript with JSX. No TypeScript.
+- Plain CSS with custom properties. No Tailwind or CSS-in-JS.
+- Firebase 12 Auth and Firestore. No Cloud Functions.
+- Vitest, ESLint 10 flat config, Playwright, and Firebase emulator tests.
+- Vercel SPA deployment with rewrites to `index.html`.
 
 ## Setup
 
-1. Install dependencies:
-   ```
-   npm install
-   ```
+Install dependencies from this directory:
 
-2. Create a `.env.local` file with your Firebase configuration (see Firebase Setup below).
+```bash
+cd qasas-practice
+npm install
+```
 
-3. Start the development server:
-   ```
-   npm run dev
-   ```
+Create a local env file:
 
-## Firebase Setup
+```bash
+cp .env.example .env.local
+```
 
-This app uses Firebase for authentication and user data. You'll need to:
+Fill in Firebase values from the Firebase console. Never commit `.env.local`.
 
-1. Create a Firebase project at https://console.firebase.google.com
-2. Enable Email/Password authentication
-3. Create a Firestore database in production mode
-4. Add your Firebase config to `.env.local`:
-   ```
-   VITE_FIREBASE_API_KEY=your_api_key
-   VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-   VITE_FIREBASE_PROJECT_ID=your_project_id
-   VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   VITE_FIREBASE_APP_ID=your_app_id
-   ```
+Start local development:
 
-## Making Someone an Admin
+```bash
+npm run dev
+```
 
-Admin access is intentionally restricted. There is no way to become an admin through the app itself — this is a security feature to prevent students from accessing answer keys.
+## Environment Variables
 
-To grant admin access:
+Required:
 
-1. Have the person sign up normally through the app.
-2. Open the Firebase Console → Firestore → `users` collection.
-3. Find their document (search by username).
-4. Edit the `role` field from `"student"` to `"admin"` and save.
+```text
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+```
 
-They will have admin access the next time they load the app. There is no way to do this from within the app itself, by design. To revoke, change it back to `"student"`.
+Optional:
 
-Admins can access the question bank viewer at `/admin` (type the URL directly — there is no link in the student UI).
+```text
+VITE_SENTRY_DSN=
+VITE_GIT_SHA=
+VITE_USE_FIREBASE_EMULATORS=true
+```
+
+`VITE_GIT_SHA` is injected by `vite.config.js` during builds when available. Sentry source-map upload is enabled only in Vercel when `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, and `SENTRY_PROJECT` are also present.
+
+## Scripts
+
+Run all commands from `qasas-practice/`.
+
+```bash
+npm run dev                  # Vite dev server
+npm run build                # Production build
+npm run build:analyze        # Production build plus bundle-stats JSON
+npm run check:bundle         # Check built JS budgets in dist/
+npm run lhci                 # Build, preview, and run Lighthouse CI
+npm run lint                 # ESLint
+npm run format               # Prettier over src JS/CSS files
+npm run format:check         # Prettier check over src JS/CSS files
+npm run test                 # Vitest single run
+npm run test:coverage        # Vitest with coverage
+npm run test:rules           # Firestore rules tests in the emulator
+npm run test:e2e             # Playwright against Auth and Firestore emulators
+npm run preview              # Preview the production build
+npm run validate:fiqh        # Validate Fiqh bank structure and coverage
+npm run validate:morphology  # Validate morphology bank structure
+npm run migrate:topic-stats  # Dry-run historical answerEvents -> topicStats migration
+```
+
+The normal definition of done is:
+
+```bash
+npm run lint
+npm run test
+npm run build
+```
+
+## Firebase Emulator
+
+The emulator config lives in `firebase.json`.
+
+One-shot rules tests:
+
+```bash
+npm run test:rules
+```
+
+One-shot E2E tests against Auth and Firestore emulators:
+
+```bash
+npm run test:e2e
+```
+
+Manual emulator session:
+
+```bash
+npx firebase-tools@14.22.0 emulators:start --only auth,firestore --project demo-qasas-practice
+```
+
+Then run the app with:
+
+```bash
+VITE_USE_FIREBASE_EMULATORS=true npm run dev
+```
 
 ## Deployment
 
-The app is deployed via Vercel. Push to the main branch to trigger a deployment.
+Vercel serves the app as a single-page application. Pushes to the configured production branch trigger the Vercel deployment.
 
-## License
+Do not deploy production services from agent sessions. In particular, do not run `firebase deploy`, `vercel deploy`, or commands that mutate production Auth, Firestore, or hosting unless a human explicitly asks for that operation outside the protected workflow.
 
-MIT
+## Admin Access
+
+Admin access is controlled by the Firestore user document:
+
+```text
+users/{uid}.role = "admin"
+```
+
+Users sign up normally through the app. A teacher/admin then changes the role in Firebase Console. The app intentionally has no self-service path to become an admin.
+
+## Security Headers
+
+`vercel.json` ships a `Content-Security-Policy-Report-Only` header first. Watch browser and hosting reports for missing Firebase, font, or Sentry sources before converting it to enforcing `Content-Security-Policy`.
+
+Manual Firebase console checklist:
+
+- Restrict the Firebase API key to authorized web domains.
+- Confirm the Firebase Auth authorized-domains list contains only expected app domains and localhost/dev domains.
+- Enable App Check if practical for the current hosting/runtime setup.
+- Set a Firestore budget alert.
+- Turn on daily Firestore backups.
+

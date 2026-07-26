@@ -30,6 +30,74 @@ function rulesForSelector(content, selector) {
 }
 
 describe('theme CSS', () => {
+  test('defines the approved design token system without changing color names', () => {
+    const appCss = css('App.css');
+    const requiredTokens = [
+      '--font-body',
+      '--font-arabic',
+      '--font-data',
+      '--type-caption',
+      '--type-small',
+      '--type-body',
+      '--type-lead',
+      '--type-title',
+      '--type-display',
+      '--arabic-line-compact',
+      '--arabic-line-reading',
+      '--arabic-line-display',
+      '--space-1',
+      '--space-2',
+      '--space-3',
+      '--space-4',
+      '--space-5',
+      '--space-6',
+      '--space-7',
+      '--space-8',
+      '--radius-sm',
+      '--radius-md',
+      '--radius-pill',
+      '--shadow-rest',
+      '--shadow-lift',
+      '--shadow-overlay',
+      '--duration-instant',
+      '--duration-fast',
+      '--duration-base',
+      '--duration-slow',
+      '--ease-standard',
+      '--ease-enter',
+      '--ease-exit',
+      '--z-base',
+      '--z-sticky',
+      '--z-header',
+      '--z-dropdown',
+      '--z-modal',
+      '--z-toast',
+      '--touch-target-min',
+    ];
+
+    for (const token of requiredTokens) {
+      expect(appCss, `App.css should define ${token}`).toContain(token);
+    }
+  });
+
+  test('dark theme shadow tokens include a light edge so elevation remains visible', () => {
+    const darkTheme = rulesForSelector(css('App.css'), ":root[data-theme='dark']");
+
+    expect(darkTheme).toMatch(/--shadow-rest:[^;]*rgba\(243,\s*234,\s*219,\s*0\.06\)/);
+    expect(darkTheme).toMatch(/--shadow-lift:[^;]*rgba\(243,\s*234,\s*219,\s*0\.08\)/);
+    expect(darkTheme).toMatch(/--shadow-overlay:[^;]*rgba\(243,\s*234,\s*219,\s*0\.1\)/);
+  });
+
+  test('Arabic script modes provide fallback fonts and script-aware line heights', () => {
+    const appCss = css('App.css');
+    const indopak = rulesForSelector(appCss, ":root[data-arabic-script='indopak']");
+
+    expect(indopak).toMatch(/--arabic-font:[^;]*Indopak Nastaleeq[^;]*Noto Nastaliq Urdu[^;]*Amiri/);
+    expect(indopak).toMatch(/--arabic-line-compact:\s*2\b/);
+    expect(indopak).toMatch(/--arabic-line-reading:\s*2\.45\b/);
+    expect(indopak).toMatch(/--arabic-line-display:\s*2\.75\b/);
+  });
+
   test('uses semantic text tokens instead of hardcoded dark text colors', () => {
     const files = [
       'index.css',
@@ -78,9 +146,10 @@ describe('theme CSS', () => {
       'components/HomeScreen.css': [
         '.subject-card',
         '.mode-card',
-        '.quiz-entry-card',
-        '.try-quiz-link',
+        '.tafsir-surah-select',
+        '.result-row',
       ],
+      'styles/components.css': ['.try-quiz-link', '.primary-btn', '.secondary-btn', '.back-btn'],
       'components/TimedQuiz.css': [
         '.exit-quiz-btn',
         '.quiz-choice-btn',
@@ -108,7 +177,7 @@ describe('theme CSS', () => {
         '.settings-close',
         '.settings-option',
       ],
-      'components/QuizPicker.css': ['.back-btn', '.quiz-start-btn'],
+      'components/QuizPicker.css': ['.quiz-group-tab'],
       'components/AdminPage.css': [
         '.back-to-home-btn',
         '.admin-tab',
@@ -116,7 +185,7 @@ describe('theme CSS', () => {
         '.student-select',
       ],
       'components/Auth.css': ['.auth-btn'],
-      'components/Leaderboard.css': ['.back-btn', '.mode-tab', '.time-btn'],
+      'components/Leaderboard.css': ['.mode-tab', '.mode-subtab', '.time-btn'],
       'components/LeaderboardPreview.css': ['.preview-mode-tab', '.preview-view-full'],
       'components/FiqhQuestionCard.css': ['.fiqh-choice-btn'],
       'components/HadithQuestionCard.css': ['.hadith-choice-btn'],
@@ -127,8 +196,8 @@ describe('theme CSS', () => {
       for (const selector of selectors) {
         expect(
           rulesForSelector(content, selector),
-          `${file} ${selector} should define min-height: 44px`
-        ).toMatch(/min-height:\s*44px/);
+          `${file} ${selector} should define the 44px touch target minimum`
+        ).toMatch(/min-height:\s*(44px|var\(--touch-target-min\))/);
       }
     }
   });

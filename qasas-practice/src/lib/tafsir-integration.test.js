@@ -29,15 +29,16 @@ describe('tafsir app integration', () => {
   });
 
   it('wires Tafsir into home navigation, timed quizzes, admin, and strength map', () => {
-    expect(source('components/HomeScreen.jsx')).toContain('getTafsirSurahOptions');
-    expect(source('components/HomeScreen.jsx')).toContain('Surah Selection');
+    expect(source('components/HomeScreen.jsx')).toContain('TAFSIR_TOPICS');
+    expect(source('components/HomeScreen.jsx')).toContain('Verse-by-verse practice');
     expect(source('App.jsx')).toContain('TafsirPracticeMode');
     expect(source('components/QuizPicker.jsx')).toContain('tafsir');
+    expect(source('components/QuizPicker.jsx')).toContain('TAFSIR_TOPICS');
     expect(source('lib/quiz-banks.js')).toContain('getTafsirQuestions');
     expect(source('components/quiz/renderers/TafsirQuizRenderer.jsx')).toContain(
       'TafsirQuestionCard'
     );
-    expect(source('components/AdminPage.jsx')).toContain('getTafsirQuestions');
+    expect(source('components/AdminPage.jsx')).toContain("loadBank('tafsir'");
     expect(source('components/WeaknessDashboard.jsx')).toContain('TAFSIR_TOPICS');
   });
 });
