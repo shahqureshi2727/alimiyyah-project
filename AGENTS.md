@@ -139,13 +139,13 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 11:26pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-26 12:00am EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (25,752t read) | 1,594,630t work | 98% savings
+Stats: 50 obs (23,594t read) | 1,497,156t work | 98% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
@@ -153,56 +153,56 @@ S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
 ### Jul 25, 2026
-846 7:54p 🔵 AuthContext Already Exposes isAdmin Computed from Cached userDoc
-847 " 🔵 App Provider Tree: Bootstrap Dynamic Import → RootApp → BrowserRouter/AuthProvider → App
-848 " 🔵 localStorage lastQuizMode: 4 Write Sites in App.jsx, 2 Read Sites in Leaderboard Components
-849 " 🔵 TimedQuiz History-Push Mechanism: Lines 403/409 Push on Mount and Every popstate
-850 " 🔵 HomeScreen Uses Local subject State for Subject Navigation — Must Become URL Navigation
-851 " 🔵 Data Layer: getFiqhQuestions Supports 'all', Group Code, or Topic Code; Tafsir Has Dual Script Fields
-852 " 🔵 Test Suite Uses renderToStaticMarkup and react-test-renderer — No Testing Library
-853 7:56p 🔵 Login and Signup Navigate to '/' Hardcoded — Deep Link Redirect Not Yet Implemented
-854 " 🔵 MorphologyMode Has Internal Scope Picker — :topic Route Param Maps to Scope
-855 " ⚖️ Six-Step Implementation Plan Adopted for Routing Refactor
-856 " 🟣 Failing Route Tests Written for app-routes.js Helpers and App Route Integration
-857 " 🔵 Tests Are Red for the Correct Reasons — TDD RED Phase Confirmed
-858 " 🔵 bank.js is a Barrel File — irab, noun, role, vocab Banks Defined Inline; morphology Re-exported
-860 " 🟣 src/lib/app-routes.js Implemented — Route Helpers with Param Validation Against Live Question Banks
-861 " 🟣 subjects.js Extended with UNTITLED_PRACTICE_MODES and MORPHOLOGY_TOPICS Exports
-862 " 🟣 src/lib/last-quiz-mode.js Created — Centralized lastQuizMode localStorage Helper
-859 7:57p ⚖️ Route Helper API Revised to Accept Structured Objects Instead of Legacy Encoded Strings
-864 8:01p 🟣 App.jsx Completely Rewritten — Real URL Route Table Replaces Local State Machine
-865 " 🟣 HomeScreen.jsx Updated — Mode Cards Use Structured target Objects, openPractice/openQuizPicker Replace Direct Callbacks
-866 " 🟣 QuizPicker.jsx Completely Rewritten — Mode Array Uses Structured target Objects, startQuiz Navigates via quizPath()
-867 " 🟣 MorphologyMode.jsx Updated — onSelectScope Prop Added for URL-Based Topic Navigation
-868 " 🟣 Login.jsx Updated — Deep Link Redirect via location.state?.from
-870 8:03p 🟣 Leaderboard.jsx and LeaderboardPreview.jsx Updated — lastQuizMode Read Site Migrated to getLastQuizMode()
-871 " 🟣 TimedQuiz.jsx Updated — useBlocker Replaces window.history.pushState History Pollution
-872 " 🟣 App.css Updated — .route-message CSS Added for InvalidRoute, NotFound, AdminDenied Screens
-876 " 🟣 App.jsx Refactored to Fix 3 Lint Errors — headerOverride Pattern Replaces setHeaderHidden Effect; PracticeSession Split Replaces setScore Effect
-877 " 🟣 TimedQuiz.jsx Refactored to Fix Lint Error — useEffect(blocker.state) Removed; Derived Variables Replace It
-890 8:11p ⚖️ Large-Scale Refactoring Plan Defined for qasas-practice App
-891 " 🔵 Superpowers Plugin Cached at v6.2.0, Not v6.1.1
-892 8:12p 🔵 Baseline Line Counts Measured for All Refactor Target Files
-893 " 🔵 subjects.js Already Contains a Full Mode Registry — Natural Home for Renderer Registry
-894 " 🔵 Practice Mode State Machines Differ More Than Expected — Complicates usePracticeSession Extraction
-895 " 🔵 TimedQuiz.jsx Internal Structure: Pure Functions Already Isolated, Timer Uses setInterval with stale-closure Risk
-896 " 🔵 AdminPage.jsx Firestore Calls Already Delegated to lib — admin-queries.js Extraction is Smaller Than Expected
-897 8:14p 🔵 Pre-Refactor Baseline: 71 Tests Passing, Lint Clean, Branch is codex/bug-fixes
-898 " 🔵 score/setScore Props Owned by PracticeSession in App.jsx — Not Inside Individual Mode Components
-901 " 🔵 Step 3 Started: PracticeShell.jsx Created at src/components/practice/PracticeShell.jsx
-902 8:17p 🔴 CRITICAL: write_file apply_patch Returned success=true But Did NOT Modify IrabMode.jsx or NounMode.jsx
-903 8:18p 🔵 Working Pattern for Component Rewrites: *** Delete File + *** Add File on Same Path Atomically Replaces Content
-904 " 🔵 RoleMode.jsx and VocabMode.jsx Rewritten with Delete+Add Pattern — Both Patches Contained in a Single write_file Call
-905 " 🔵 FiqhPracticeMode and HadithPracticeMode Rewritten — New answer() Object Pattern for Card-Style Modes
-906 8:19p 🔵 MorphologyMode.jsx Refactored with *** Update File (Worked) — Key Gotchas: currentIndex Unused, Bank Re-Shuffled on Scope Change
-907 " 🔵 TafsirPracticeMode.jsx Refactored — Dual Architecture: MCQ Delegates to usePracticeSession, Verse Mode Remains Manual
-911 11:14p ⚖️ Firestore Repository Layer Refactor — Phase Specification Received
-912 11:15p ⚖️ TDD-First Implementation Plan Adopted for Firestore Repository Refactor
-913 " 🔵 Firestore Query Audit — Complete Picture of Direct SDK Usage
-914 " 🔵 Components Already Use Lib Layer — Direct Firestore Imports Confined to Hook and Lib Files
 915 11:16p 🔵 Admin Delegation Layer and Auth Architecture — Complete Audit Picture
 916 " 🔵 Firestore Security Rules — isAdmin() Billed Read Impact and Save Status UI Honesty
 917 " 🟣 Repository Layer TDD Tests Written — All 5 Fail Red for Correct Reason
+918 11:26p 🔵 Bundle Optimization Plan for qasas-practice App
+919 " 🔵 Working Branch and Repo State for Bundle Optimization Work
+920 11:27p 🔵 Full Static Import Map: Question Banks Pulled Eagerly from 10+ Files
+921 " 🔵 Baseline vite.config.js Has No manualChunks, No Bundle Analyzer, No Size Budget
+922 " ⚖️ Implementation Plan: 7-Step Bundle Optimization Sequence
+923 11:28p 🔵 Baseline Bundle Analysis: Concrete Size Measurements Per Module and Group
+924 " 🟣 Bundle Visualizer Added to Vite Config (ANALYZE_BUNDLE=1 Flag)
+925 " 🔵 Confirmed Baseline Bundle Sizes (zlib-measured from actual output files)
+926 " 🔵 daily-review.js REVIEW_SOURCES Executes All Bank Calls at Module Init Time
+927 " 🔵 Timer Re-renders Entire TimedQuiz Component 4x Per Second
+928 " 🔵 App.jsx Imports All Route Components Statically — No React.lazy Anywhere
+929 11:29p 🟣 Tests Written First for New Async loadBank API (TDD Red Phase)
+930 " 🔵 HomeScreen Calls getTafsirSurahOptions() Synchronously in Component Body
+931 11:30p 🔵 firebase.js Eagerly Initializes Both Auth and Firestore at Module Load
+932 " 🔵 Bootstrap.jsx Already Does One-Level Lazy Load of RootApp via useEffect
+933 " 🔵 Blocking Google Fonts @import in index.css — Both Amiri and Crimson Text Fonts
+934 " 🟣 daily-review.js Refactored: Removed All Static Bank Imports (Green Phase Step 1)
+935 11:33p 🟣 Step 2 and 3 Complete: All Data Banks Now Dynamically Imported, All Components React.lazy
+936 " 🔵 Test Files Still Mock '../firebase' and './firebase' After Firestore Split — Will Fail
+937 " 🟣 Step 5 Complete: Google Fonts @import Removed from CSS, Moved to Non-Blocking <link> Tags in HTML
+938 " 🟣 vi.mock Paths Fixed in Both Test Files After Firestore Split
+939 " 🟣 @lhci/cli Installed and Vite manualChunks Added for firebase/sentry/vendor Splits
+940 11:34p 🟣 Post-Optimization Build Successful: Question Banks Split into Per-Topic Chunks, Initial Entry ~5 KB
+941 " 🟣 New Scripts and Lighthouse CI Config Added (Step 7 Infrastructure)
+942 " 🟣 5 Target Test Files All Pass After All Refactors (22/22 Tests Green)
+943 11:35p 🔵 Critical: sentry and vendor Chunks Are In index.html as Blocking Script Tags
+944 " 🔵 auth.js Split: Firestore-Using repositories/users.js Now Dynamically Imported in signUp/getUserDoc
+945 " 🟣 HomeScreen Tafsir Retry Fixed: Removed setState(null)+setTimeout Race, Uses retryKey Pattern Instead
+946 11:36p 🟣 TDD Cycle for Sentry Lazy Load: Test Added (Red), logger.js Refactored (Green), Syntax Bug Fixed
+947 " 🔵 Sentry Dynamic Import Backfired: Chunk Grew 5x (483 KB) and Remains Blocking — Static Import Was Better
+948 11:37p 🔴 Sentry Blocking Issue Fixed: HTML_JS_TOTAL Drops from 750 KB to 285 KB / 90.3 KB gzip
+965 11:46p 🔵 Bundle Size Baseline and Optimization Plan for qasas-practice
+963 11:55p ⚖️ Design Planning Session Initiated for qasas-practice App
+964 11:56p 🔵 AUDIT.md Section 7 — UI/UX Consistency Issues Catalogued
+966 " 🔵 App Routing and Complete Component Inventory Mapped
+967 " 🔵 HomeScreen Two-Level Navigation Pattern and QuizPicker Gap Confirmed
+968 " 🔵 TimedQuiz Layout Structure: Timer Lives in Header Row Between Progress and Score
+974 11:57p 🔵 Quiz Renderer Architecture: Eight Per-Subject Renderers with Different Interaction Models
+975 " 🔵 PracticeShell Is a 33-Line Shared Wrapper; All Practice Modes Use It
+976 " 🔵 WeaknessDashboard Has No Navigate-to-Practice Links; Dashboard-to-Topic Path Is Broken
+977 " 🔵 App.css Token System: Colors Complete, Spacing/Radius/Shadow/Type Scale Absent
+978 " 🔵 AuthHeader Navigation and Settings Panel: Strength Map Accessible from User Menu
+969 11:58p 🔴 App.test.jsx Fixed After ProtectedLayout Extraction
+970 " 🟣 Dynamic Question Bank Loading via useAsyncQuestionBank Hook
+971 " 🔄 Firebase Split Into Lazy-Loaded Modules and ProtectedLayout Extracted
+972 " 🟣 Bundle Budget CI Check and Lighthouse CI Added
+973 " 🔵 Final Bundle Metrics After All Optimizations
 
-Access 1595k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1497k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
