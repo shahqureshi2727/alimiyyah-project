@@ -139,13 +139,13 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 7:53pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-25 8:10pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (24,386t read) | 3,159,254t work | 99% savings
+Stats: 50 obs (23,292t read) | 1,779,513t work | 99% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
@@ -153,37 +153,6 @@ S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
 ### Jul 25, 2026
-772 6:57p 🔵 Firestore Unbounded Queries: Three Critical P0/P1 Findings
-773 " 🔵 App.jsx Uses In-Memory State for Navigation — No URL Per Practice Mode
-775 6:58p 🔵 TimedQuiz.jsx: Multiple Correctness Risks Identified in Timer and Save Logic
-776 " 🔵 Firestore: Missing answerEvents Index + weaknessProfiles Over-Permissive Write Rule
-777 " 🔵 Auth System: Fake Email Pattern with Non-Functional Password Reset for Users Without Recovery Email
-778 6:59p 🔵 Repo Hygiene: 158MB PDFs, graphify-out Cache, .pyc Files, and Duplicate Spec File All Tracked in Git
-779 " 🔵 CSS: Duplicate :root Definitions in App.css vs index.css; success Color Fails WCAG AA on Light Theme
-780 " 🔵 Test Coverage: 12 Test Files; Zero Tests for App Routing, TimedQuiz, HomeScreen, Auth Flow, or AdminPage
-781 " 🔵 Practice Mode Components: useWeaknessTracking Fires One Firestore Write Per Answer Across All 8 Self-Paced Modes
-782 " 🔵 Leaderboard: Double Firestore Read on Every Mode Tab Switch; HomeScreen Fires Leaderboard + Recent Results on Mount
-783 " 🔵 Build Config: Minimal vite.config.js with No Code Splitting; package.json Missing Prettier/format Scripts
-784 " 🔵 Accessibility: AuthHeader Has Full ARIA Menu Pattern; VocabMode Flashcard div is Keyboard-Inaccessible; No Error Boundaries Anywhere
-785 7:04p 🔴 Step 2 Complete: Prettier 3.9.6 + eslint-config-prettier 10.1.8 Installed; format/format:check Scripts Added
-786 " 🔴 Step 3 Complete: Prettier Reformatted 66 Files in src/ as Isolated Commit
-787 " 🔴 Step 4 Complete: ESLint Tightened — 0 Errors, 15 Warnings (All no-console); No Missing Hook Deps Found
-788 " 🔴 Step 5 Complete: CI Workflow, .env.example, .gitignore Fixes, HTML Metadata, Duplicate Spec File Deleted
-789 " 🔵 Architecture Map: BANKS Object in TimedQuiz is the Complete Mode-to-Data Binding; getAllQuizResults() Confirmed Unbounded
-790 7:10p 🔴 Fixed Hardcoded "/10" Score Displays to Use result.total
-791 " 🟣 Added Tests for Dynamic Score Total Rendering
-792 " ✅ Removed Tracked .DS_Store Files from Repository
-793 " 🔵 Code Audit Confirmed Exactly Three Hardcoded "/10" Display Sites
-794 " 🔵 .DS_Store Files Exist on Disk But Are Not Git-Tracked
-795 " 🔵 LeaderboardTable Is the Single Rendering Leaf for All Score Displays
-796 7:11p 🔵 LeaderboardTable Tests Require Mocking ../lib/quiz to Avoid Firebase Init Crash
-797 7:12p 🔴 TDD RED Confirmed: Test Caught Hardcoded "/10" Bug in LeaderboardTable
-798 " 🔴 Applied result.total Fixes to HomeScreen and LeaderboardTable
-799 " ✅ Deleted src/.DS_Store and src/data/.DS_Store from Disk
-800 " 🔴 TDD GREEN: LeaderboardTable Test Passed — Fix Confirmed Complete
-801 " 🔵 Post-Fix Audit Confirmed No Remaining Hardcoded "/10" Score Display Bugs
-802 7:13p 🔴 Full Test Suite, Lint, and Build All Pass After Score Total Fix
-803 " ✅ Final Verification Confirmed Complete Change Surface Before Commit
 804 7:16p 🔵 qasas-practice App: Error Handling Audit Findings
 805 " ⚖️ Error Resilience Hardening Plan: Six-Phase Approach
 806 " 🔵 Console Call Audit: 15 Calls Confirmed Across 15 Files
@@ -203,6 +172,37 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 820 " 🔵 TimedQuiz.jsx: Final Console Calls Replaced + Quiz-Specific Error Boundary + Skip Question Handler
 821 7:24p 🔵 Cleanup Pass: HomeScreen, Leaderboard, LeaderboardPreview Fetch Functions Wrapped in useCallback
 822 7:25p 🔵 Step 3 Cleanup + Rules Test Infrastructure: All Writes Confirmed
+842 7:53p 🔵 App.jsx Split-Personality Navigation Architecture in qasas-practice
+843 " ⚖️ Full URL-Based Routing Plan for All App Screens
+844 " 🔵 App.jsx Full Source Confirms Split-Personality Navigation with Exact String-Prefix Parsing
+845 " 🔵 subjects.js is the Authoritative Topic Registry for All Subjects
+846 7:54p 🔵 AuthContext Already Exposes isAdmin Computed from Cached userDoc
+847 " 🔵 App Provider Tree: Bootstrap Dynamic Import → RootApp → BrowserRouter/AuthProvider → App
+848 " 🔵 localStorage lastQuizMode: 4 Write Sites in App.jsx, 2 Read Sites in Leaderboard Components
+849 " 🔵 TimedQuiz History-Push Mechanism: Lines 403/409 Push on Mount and Every popstate
+850 " 🔵 HomeScreen Uses Local subject State for Subject Navigation — Must Become URL Navigation
+851 " 🔵 Data Layer: getFiqhQuestions Supports 'all', Group Code, or Topic Code; Tafsir Has Dual Script Fields
+852 " 🔵 Test Suite Uses renderToStaticMarkup and react-test-renderer — No Testing Library
+853 7:56p 🔵 Login and Signup Navigate to '/' Hardcoded — Deep Link Redirect Not Yet Implemented
+854 " 🔵 MorphologyMode Has Internal Scope Picker — :topic Route Param Maps to Scope
+855 " ⚖️ Six-Step Implementation Plan Adopted for Routing Refactor
+856 " 🟣 Failing Route Tests Written for app-routes.js Helpers and App Route Integration
+857 " 🔵 Tests Are Red for the Correct Reasons — TDD RED Phase Confirmed
+858 " 🔵 bank.js is a Barrel File — irab, noun, role, vocab Banks Defined Inline; morphology Re-exported
+860 " 🟣 src/lib/app-routes.js Implemented — Route Helpers with Param Validation Against Live Question Banks
+861 " 🟣 subjects.js Extended with UNTITLED_PRACTICE_MODES and MORPHOLOGY_TOPICS Exports
+862 " 🟣 src/lib/last-quiz-mode.js Created — Centralized lastQuizMode localStorage Helper
+859 7:57p ⚖️ Route Helper API Revised to Accept Structured Objects Instead of Legacy Encoded Strings
+864 8:01p 🟣 App.jsx Completely Rewritten — Real URL Route Table Replaces Local State Machine
+865 " 🟣 HomeScreen.jsx Updated — Mode Cards Use Structured target Objects, openPractice/openQuizPicker Replace Direct Callbacks
+866 " 🟣 QuizPicker.jsx Completely Rewritten — Mode Array Uses Structured target Objects, startQuiz Navigates via quizPath()
+867 " 🟣 MorphologyMode.jsx Updated — onSelectScope Prop Added for URL-Based Topic Navigation
+868 " 🟣 Login.jsx Updated — Deep Link Redirect via location.state?.from
+870 8:03p 🟣 Leaderboard.jsx and LeaderboardPreview.jsx Updated — lastQuizMode Read Site Migrated to getLastQuizMode()
+871 " 🟣 TimedQuiz.jsx Updated — useBlocker Replaces window.history.pushState History Pollution
+872 " 🟣 App.css Updated — .route-message CSS Added for InvalidRoute, NotFound, AdminDenied Screens
+876 " 🟣 App.jsx Refactored to Fix 3 Lint Errors — headerOverride Pattern Replaces setHeaderHidden Effect; PracticeSession Split Replaces setScore Effect
+877 " 🟣 TimedQuiz.jsx Refactored to Fix Lint Error — useEffect(blocker.state) Removed; Derived Variables Replace It
 
-Access 3159k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1780k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>
