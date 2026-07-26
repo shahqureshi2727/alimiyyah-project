@@ -1,97 +1,148 @@
 .weakness-dashboard {
   max-width: 980px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
-}
-
-.weakness-state {
-  color: var(--ink-light);
-  font-family: 'Crimson Text', serif;
-  text-align: center;
-}
-
-.weakness-state.error {
-  color: var(--status-weak);
+  padding: var(--space-5) var(--space-4) var(--space-8);
 }
 
 .weakness-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-5);
 }
 
 .weakness-header h1,
 .weakness-heatmap h2,
 .heatmap-section h3,
 .heatmap-group h4,
-.weakness-empty h2 {
-  font-family: 'Crimson Text', serif;
-  color: var(--ink);
+.due-topics h2,
+.due-topic-card h3 {
   margin: 0;
+  color: var(--text-primary);
 }
 
 .weakness-header h1 {
-  font-size: 2rem;
+  font-size: var(--type-display);
+  line-height: var(--line-display);
 }
 
 .weakness-header p,
-.weakness-empty p {
-  color: var(--ink-light);
-  margin: 0.35rem 0 0;
+.due-topic-card p {
+  margin: var(--space-2) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+  line-height: var(--line-small);
 }
 
-.weakness-empty {
-  border: 1px solid var(--border);
-  background: var(--parchment);
-  border-radius: 8px;
-  padding: 1.25rem;
+.due-topics {
+  margin-bottom: var(--space-6);
+}
+
+.due-topics-header {
+  margin-bottom: var(--space-3);
+}
+
+.due-topics h2,
+.weakness-heatmap h2 {
+  margin-top: var(--space-1);
+  font-size: var(--type-title);
+  line-height: var(--line-title);
+}
+
+.due-topic-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.due-topic-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4);
+}
+
+.due-topic-subject {
+  color: var(--accent);
+  font-size: var(--type-caption);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.due-topic-actions,
+.heatmap-cell-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: flex-end;
 }
 
 .weakness-heatmap {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--space-5);
 }
 
 .heatmap-section {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: var(--space-3);
+}
+
+.heatmap-section h3 {
+  color: var(--accent);
+  font-size: var(--type-lead);
+  line-height: var(--line-lead);
 }
 
 .heatmap-group {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: var(--space-2);
+}
+
+.heatmap-group h4 {
+  font-size: var(--type-body);
+  line-height: var(--line-body);
 }
 
 .heatmap-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: var(--space-3);
 }
 
 .heatmap-cell {
-  min-height: 96px;
-  border: 1px solid var(--border);
+  min-height: 8rem;
   border-left-width: 5px;
-  border-radius: 8px;
-  background: var(--cream);
-  padding: 0.8rem;
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: var(--space-3);
 }
 
 .heatmap-cell-title {
+  color: var(--text-primary);
   font-weight: 700;
-  color: var(--ink);
 }
 
 .heatmap-cell-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.65rem;
-  color: var(--ink-light);
-  font-size: 0.88rem;
+  gap: var(--space-1) var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--type-caption);
+  line-height: var(--line-caption);
+}
+
+.heatmap-cell-actions {
+  justify-content: flex-start;
+}
+
+.heatmap-cell-actions .primary-btn,
+.heatmap-cell-actions .secondary-btn {
+  min-height: calc(var(--touch-target-min) - var(--space-2));
+  padding-block: var(--space-1);
+  font-size: var(--type-caption);
 }
 
 .status-weak {
@@ -116,7 +167,19 @@
 
 @media (max-width: 640px) {
   .weakness-dashboard {
-    padding-inline: 0.75rem;
+    padding-inline: var(--space-3);
+  }
+
+  .due-topic-card {
+    grid-template-columns: 1fr;
+  }
+
+  .due-topic-actions {
+    justify-content: stretch;
+  }
+
+  .due-topic-actions > button {
+    flex: 1;
   }
 
   .heatmap-grid {
