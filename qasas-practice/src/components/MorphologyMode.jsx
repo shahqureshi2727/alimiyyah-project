@@ -29,7 +29,13 @@ function XIcon() {
   );
 }
 
-export default function MorphologyMode({ initialScope = null, onBack, score, setScore }) {
+export default function MorphologyMode({
+  initialScope = null,
+  onBack,
+  onSelectScope,
+  score,
+  setScore,
+}) {
   const trackWeaknessAnswer = useWeaknessTracking();
   const [scope, setScope] = useState(initialScope);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,6 +52,10 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
   const shuffledOptions = useShuffledOptions(current?.options, current?.id);
 
   const handleScopeSelect = (nextScope) => {
+    if (onSelectScope) {
+      onSelectScope(nextScope);
+      return;
+    }
     setScope(nextScope);
     setCurrentIndex(0);
     setSelected(null);

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getLeaderboard, getUserBestResult } from '../lib/quiz';
 import { QUIZ_MODES } from '../config/subjects';
+import { getLastQuizMode } from '../lib/last-quiz-mode';
 import { error as logError } from '../lib/logger';
 import LeaderboardTable from './LeaderboardTable';
 import './LeaderboardPreview.css';
@@ -15,10 +16,7 @@ const MODES = Object.entries(QUIZ_MODES).map(([id, config]) => ({
 export default function LeaderboardPreview() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [activeMode, setActiveMode] = useState(() => {
-    const lastMode = localStorage.getItem('lastQuizMode');
-    return lastMode && MODES.find((m) => m.id === lastMode) ? lastMode : 'irab';
-  });
+  const [activeMode, setActiveMode] = useState(() => getLastQuizMode());
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [userResult, setUserResult] = useState(null);
   const [loading, setLoading] = useState(true);

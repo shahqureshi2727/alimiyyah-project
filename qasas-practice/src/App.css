@@ -196,6 +196,42 @@ button {
   color: var(--ink-light);
 }
 
+.route-message {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.route-message h1 {
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+  font-size: 2rem;
+}
+
+.route-message p {
+  margin: 0 auto 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.route-message-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--parchment);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.route-message-link:hover {
+  background: var(--accent-dark);
+}
+
 /* App content wrapper - accounts for fixed header */
 .app-content {
   padding-top: 50px;

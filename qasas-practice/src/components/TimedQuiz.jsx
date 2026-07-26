@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useBlocker } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { submitAnswerEvents, submitQuizResult, formatDuration } from '../lib/quiz';
@@ -290,6 +291,17 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   const [totalDuration, setTotalDuration] = useState(0);
   const [saveStatus, setSaveStatus] = useState(null); // null, 'saving', 'saved', 'error'
   const [showExitDialog, setShowExitDialog] = useState(false);
+  const allowNavigationRef = useRef(false);
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return (
+      !allowNavigationRef.current &&
+      !quizComplete &&
+      currentLocation.pathname !== nextLocation.pathname
+    );
+  });
+  const navigationBlocked = blocker.state === 'blocked';
+  const exitDialogVisible = showExitDialog || navigationBlocked;
+  const timerPaused = isTimerPaused || navigationBlocked;
 
   // Noun feature specific state
   const [selectedDef, setSelectedDef] = useState(null);
@@ -392,27 +404,6 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
     return () => clearTimeout(timer);
   }, [currentIndex, mode, questions, quizComplete, showFeedback, flipped]);
-
-  // Handle browser back button
-  useEffect(() => {
-    if (quizComplete) return;
-
-    const handlePopState = (e) => {
-      e.preventDefault();
-      // Push state back to prevent navigation
-      window.history.pushState(null, '', window.location.pathname);
-      setShowExitDialog(true);
-      setIsTimerPaused(true);
-    };
-
-    // Push initial state
-    window.history.pushState(null, '', window.location.pathname);
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [quizComplete]);
 
   const advanceQuestion = useCallback(() => {
     if (currentIndex >= questions.length - 1) {
@@ -518,7 +509,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
 
   // Timer effect
   useEffect(() => {
-    if (quizComplete || isTimerPaused || questions.length === 0 || showExitDialog) return;
+    if (quizComplete || timerPaused || questions.length === 0 || exitDialogVisible) return;
 
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
@@ -536,10 +527,10 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   }, [
     currentIndex,
     quizComplete,
-    isTimerPaused,
+    timerPaused,
     questions.length,
     mode,
-    showExitDialog,
+    exitDialogVisible,
     handleTimeout,
   ]);
 
@@ -593,11 +584,19 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   const handleExitCancel = () => {
     setShowExitDialog(false);
     setIsTimerPaused(false);
+    if (navigationBlocked) {
+      blocker.reset();
+    }
   };
 
   const handleExitConfirm = () => {
     // Discard quiz without saving
     setShowExitDialog(false);
+    allowNavigationRef.current = true;
+    if (navigationBlocked) {
+      blocker.proceed();
+      return;
+    }
     onBack();
   };
 
@@ -1106,7 +1105,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
       </div>
 
       {/* Exit confirmation dialog */}
-      {showExitDialog && <ExitDialog onCancel={handleExitCancel} onConfirm={handleExitConfirm} />}
+      {exitDialogVisible && <ExitDialog onCancel={handleExitCancel} onConfirm={handleExitConfirm} />}
     </div>
   );
 }

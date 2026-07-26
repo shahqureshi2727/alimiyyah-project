@@ -17,6 +17,20 @@ export const QUIZ_MODES = {
   review: { label: "Today's Review", bankSource: 'mixed', timerSeconds: 20 },
 };
 
+export const UNTITLED_PRACTICE_MODES = [
+  { id: 'irab', label: "I'rab" },
+  { id: 'noun', label: 'Noun Features' },
+  { id: 'role', label: 'Grammatical Role' },
+  { id: 'vocab', label: 'Vocabulary' },
+];
+
+export const MORPHOLOGY_TOPICS = [
+  { code: 'mixed', label: 'Mixed Review' },
+  { code: 'past', label: 'Past Tense' },
+  { code: 'mudari', label: 'Present & Future' },
+  { code: 'amrNahi', label: 'Imperative & Prohibitive' },
+];
+
 // Arabic topics available for topic-first navigation. Add one entry here per
 // topic once its question bank exists in src/data/arabic/.
 export const ARABIC_TOPICS = [
