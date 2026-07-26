@@ -47,6 +47,9 @@ export default function QuizResults({
         {!isGoodScore && <p className="results-message">Keep going! You'll improve.</p>}
         <div className="save-status">
           {saveStatus === 'saving' && <span className="saving">Saving...</span>}
+          {saveStatus === 'pending' && (
+            <span className="saving">Sync pending. Keep this tab open.</span>
+          )}
           {saveStatus === 'saved' && <span className="saved">Saved</span>}
           {saveStatus === 'error' && (
             <span className="error">

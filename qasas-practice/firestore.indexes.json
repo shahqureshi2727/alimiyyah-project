@@ -7,7 +7,8 @@
         { "fieldPath": "mode", "order": "ASCENDING" },
         { "fieldPath": "bankSource", "order": "ASCENDING" },
         { "fieldPath": "score", "order": "DESCENDING" },
-        { "fieldPath": "durationSeconds", "order": "ASCENDING" }
+        { "fieldPath": "durationSeconds", "order": "ASCENDING" },
+        { "fieldPath": "completedAt", "order": "DESCENDING" }
       ]
     },
     {
@@ -37,7 +38,8 @@
         { "fieldPath": "mode", "order": "ASCENDING" },
         { "fieldPath": "bankSource", "order": "ASCENDING" },
         { "fieldPath": "score", "order": "DESCENDING" },
-        { "fieldPath": "durationSeconds", "order": "ASCENDING" }
+        { "fieldPath": "durationSeconds", "order": "ASCENDING" },
+        { "fieldPath": "completedAt", "order": "DESCENDING" }
       ]
     },
     {
@@ -50,6 +52,32 @@
         { "fieldPath": "completedAt", "order": "DESCENDING" },
         { "fieldPath": "score", "order": "DESCENDING" },
         { "fieldPath": "durationSeconds", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "answerEvents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "correct", "order": "ASCENDING" },
+        { "fieldPath": "answeredAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "topicStats",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "subtopic", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "topicStats",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "subtopic", "order": "ASCENDING" }
       ]
     }
   ],

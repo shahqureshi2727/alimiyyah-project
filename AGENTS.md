@@ -139,13 +139,13 @@ Be direct about what you did not do. An honest gap is more useful than a confide
 <claude-mem-context>
 # Memory Context
 
-# [alimiyyah-project-main] recent context, 2026-07-25 8:10pm EDT
+# [alimiyyah-project-main] recent context, 2026-07-25 11:14pm EDT
 
 Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 50 obs (23,292t read) | 1,779,513t work | 99% savings
+Stats: 50 obs (25,453t read) | 1,605,742t work | 98% savings
 
 ### Jul 13, 2026
 S61 graphify . on alimiyyah-project-main — parallel knowledge graph extraction in progress, 6 of 9 chunks now complete (Jul 13 at 9:46 PM)
@@ -153,23 +153,7 @@ S62 graphify . on alimiyyah-project-main — persistent polling loop waiting for
 ### Jul 23, 2026
 S68 Fix quiz bug where correct answer is always first option shown — shared-level Fisher-Yates shuffle + value-based correctness refactor across all quiz components (Jul 23 at 4:03 PM)
 ### Jul 25, 2026
-804 7:16p 🔵 qasas-practice App: Error Handling Audit Findings
-805 " ⚖️ Error Resilience Hardening Plan: Six-Phase Approach
-806 " 🔵 Console Call Audit: 15 Calls Confirmed Across 15 Files
-807 7:17p 🔵 weaknessProfiles Confirmed Dead Code — Safe to Delete
-808 " 🔵 Firestore Rules Gap: answerEvents Writes group and quizResultId Not in Rules
-809 " 🔵 App Entry Points Confirmed: No Error Boundaries in main.jsx or App.jsx
-810 " 🔵 Baseline Verified: 52 Tests Pass, 15 Lint Warnings, Build Succeeds
-811 " 🔵 User-Facing Error State Audit: HomeScreen Silently Swallows Fetch Error
-812 " 🔵 JSX Bug in TimedQuiz: Duplicate Closing Button Tag in ExitDialog
-813 7:19p 🔵 New Dependencies Installed: @sentry/react, @sentry/vite-plugin, @firebase/rules-unit-testing, firebase-tools
-814 7:20p 🔵 TDD Red Phase: 5 New Test Files Written, 4 Fail on Missing Modules, 1 Skips on No Emulator
-815 " 🔵 answerEvents Rules Gap: quizResultId Can Be null (Weakness Tracking Path)
-816 " 🔵 Step 3 Core Modules Written: firebase-env.js, auth-errors.js, logger.js, ErrorBoundary.jsx
-817 7:21p 🔵 Step 3 Wiring Complete: 6 Existing Files Updated to Use New Modules
-818 " 🔵 Step 3 UI Wiring: Route ErrorBoundary + Retry Controls Added to 5 Components
-819 7:23p 🔵 Step 3 Remaining Console Calls Replaced + Retry Controls Added: 4 More Files Updated
-820 " 🔵 TimedQuiz.jsx: Final Console Calls Replaced + Quiz-Specific Error Boundary + Skip Question Handler
+820 7:23p 🔵 TimedQuiz.jsx: Final Console Calls Replaced + Quiz-Specific Error Boundary + Skip Question Handler
 821 7:24p 🔵 Cleanup Pass: HomeScreen, Leaderboard, LeaderboardPreview Fetch Functions Wrapped in useCallback
 822 7:25p 🔵 Step 3 Cleanup + Rules Test Infrastructure: All Writes Confirmed
 842 7:53p 🔵 App.jsx Split-Personality Navigation Architecture in qasas-practice
@@ -203,6 +187,22 @@ S68 Fix quiz bug where correct answer is always first option shown — shared-le
 872 " 🟣 App.css Updated — .route-message CSS Added for InvalidRoute, NotFound, AdminDenied Screens
 876 " 🟣 App.jsx Refactored to Fix 3 Lint Errors — headerOverride Pattern Replaces setHeaderHidden Effect; PracticeSession Split Replaces setScore Effect
 877 " 🟣 TimedQuiz.jsx Refactored to Fix Lint Error — useEffect(blocker.state) Removed; Derived Variables Replace It
+890 8:11p ⚖️ Large-Scale Refactoring Plan Defined for qasas-practice App
+891 " 🔵 Superpowers Plugin Cached at v6.2.0, Not v6.1.1
+892 8:12p 🔵 Baseline Line Counts Measured for All Refactor Target Files
+893 " 🔵 subjects.js Already Contains a Full Mode Registry — Natural Home for Renderer Registry
+894 " 🔵 Practice Mode State Machines Differ More Than Expected — Complicates usePracticeSession Extraction
+895 " 🔵 TimedQuiz.jsx Internal Structure: Pure Functions Already Isolated, Timer Uses setInterval with stale-closure Risk
+896 " 🔵 AdminPage.jsx Firestore Calls Already Delegated to lib — admin-queries.js Extraction is Smaller Than Expected
+897 8:14p 🔵 Pre-Refactor Baseline: 71 Tests Passing, Lint Clean, Branch is codex/bug-fixes
+898 " 🔵 score/setScore Props Owned by PracticeSession in App.jsx — Not Inside Individual Mode Components
+901 " 🔵 Step 3 Started: PracticeShell.jsx Created at src/components/practice/PracticeShell.jsx
+902 8:17p 🔴 CRITICAL: write_file apply_patch Returned success=true But Did NOT Modify IrabMode.jsx or NounMode.jsx
+903 8:18p 🔵 Working Pattern for Component Rewrites: *** Delete File + *** Add File on Same Path Atomically Replaces Content
+904 " 🔵 RoleMode.jsx and VocabMode.jsx Rewritten with Delete+Add Pattern — Both Patches Contained in a Single write_file Call
+905 " 🔵 FiqhPracticeMode and HadithPracticeMode Rewritten — New answer() Object Pattern for Card-Style Modes
+906 8:19p 🔵 MorphologyMode.jsx Refactored with *** Update File (Worked) — Key Gotchas: currentIndex Unused, Bank Re-Shuffled on Scope Change
+907 " 🔵 TafsirPracticeMode.jsx Refactored — Dual Architecture: MCQ Delegates to usePracticeSession, Verse Mode Remains Manual
 
-Access 1780k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 1606k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

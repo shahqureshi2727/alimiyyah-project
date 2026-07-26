@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
 import { QUIZ_MODES } from '../config/subjects';
 import {
   DAILY_REVIEW_LENGTH,
   selectDailyReviewQuestions,
 } from '../lib/daily-review';
-import { db } from '../lib/firebase';
 import { questionResultFromAnswer } from '../lib/question-results';
 import { submitAnswerEvents, submitQuizResult } from '../lib/quiz';
 import { getBank, getQuestionTarget, selectQuestions } from '../lib/quiz-banks';
 import { shuffleArray } from '../lib/shuffle';
 import { getUserTopicStats } from '../lib/topic-stats-firestore';
 import { error as logError } from '../lib/logger';
+import { listMissedQuestionIds } from '../lib/repositories/answer-events';
+
+const MISSED_QUESTIONS_LIMIT = 200;
+const SAVE_PENDING_MS = 8000;
 
 function currentTime() {
   return Date.now();
@@ -78,14 +80,10 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
 
       if (mode === 'review' && user) {
         const topicStats = await getUserTopicStats(user.uid);
-        const wrongSnap = await getDocs(
-          query(
-            collection(db, 'answerEvents'),
-            where('userId', '==', user.uid),
-            where('correct', '==', false)
-          )
-        );
-        const missedIds = new Set(wrongSnap.docs.map((eventDoc) => eventDoc.data().questionId));
+        const missedIds = await listMissedQuestionIds({
+          userId: user.uid,
+          maxEvents: MISSED_QUESTIONS_LIMIT,
+        });
         selected = selectDailyReviewQuestions({
           bank,
           topicStats,
@@ -264,9 +262,15 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
 
   useEffect(() => {
     if (!quizComplete || saveStatus) return;
+    let cancelled = false;
+    let pendingTimer = null;
 
     const saveResult = async () => {
       setSaveStatus('saving');
+      pendingTimer = setTimeout(() => {
+        if (!cancelled) setSaveStatus('pending');
+      }, SAVE_PENDING_MS);
+
       try {
         const quizResultId = await submitQuizResult({
           userId: user.uid,
@@ -285,8 +289,12 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
           results: results.map((result) => result.answerEvent).filter(Boolean),
           quizResultId,
         });
+        if (cancelled) return;
+        clearTimeout(pendingTimer);
         setSaveStatus('saved');
       } catch (err) {
+        if (cancelled) return;
+        clearTimeout(pendingTimer);
         logError('Could not save quiz result.', err, {
           mode,
           uid: user?.uid,
@@ -298,6 +306,11 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
     };
 
     saveResult();
+
+    return () => {
+      cancelled = true;
+      if (pendingTimer) clearTimeout(pendingTimer);
+    };
   }, [
     quizComplete,
     user,

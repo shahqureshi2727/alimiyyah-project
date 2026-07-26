@@ -1,5 +1,5 @@
 import { getUserDoc } from './auth';
-import { getAllQuizResults } from './quiz';
+import { ADMIN_QUIZ_RESULTS_LIMIT, getAllQuizResults } from './quiz';
 import { getAllTopicStatsProfiles } from './topic-stats-firestore';
 
 export function getAdminUserDoc(uid) {
@@ -7,7 +7,7 @@ export function getAdminUserDoc(uid) {
 }
 
 export function getAdminQuizResults() {
-  return getAllQuizResults();
+  return getAllQuizResults(ADMIN_QUIZ_RESULTS_LIMIT);
 }
 
 export function getAdminTopicStatsProfiles() {

@@ -165,7 +165,7 @@ export default function ClassStats() {
           </div>
           <div className="overview-card">
             <span className="overview-value">{stats.totalQuizzesAllTime}</span>
-            <span className="overview-label">Quizzes all-time</span>
+            <span className="overview-label">Recent quizzes sampled</span>
           </div>
           <div className="overview-card">
             <span className="overview-value">{stats.uniqueStudentsWeek}</span>

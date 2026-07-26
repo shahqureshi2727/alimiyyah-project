@@ -11,10 +11,10 @@ import {
   sendPasswordResetEmail,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
-import { auth, db } from './firebase';
+import { auth } from './firebase';
 import { firebaseAuthErrorMessage, safeFirebaseAuthErrorMessage } from './auth-errors';
 import { warn as logWarn } from './logger';
+import { createUserDoc, getUserDocById } from './repositories/users';
 
 // Synthesize a fake email from username for Firebase Auth
 export const usernameToAuthEmail = (username) => `${username.toLowerCase().trim()}@qasas.local`;
@@ -99,10 +99,9 @@ export async function signUp({ username, password, recoveryEmail }) {
 
   // Create the Firestore user document
   // Every new signup is a student. NEVER write role: "admin" from the client.
-  await setDoc(doc(db, 'users', user.uid), {
+  await createUserDoc({
+    uid: user.uid,
     username: username.trim(),
-    role: 'student',
-    createdAt: serverTimestamp(),
     recoveryEmail: recoveryEmail?.trim() || null,
   });
 
@@ -126,14 +125,7 @@ export async function signOut() {
 }
 
 export async function getUserDoc(uid) {
-  const docRef = doc(db, 'users', uid);
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    return { id: docSnap.id, ...docSnap.data() };
-  }
-
-  return null;
+  return getUserDocById({ uid });
 }
 
 export async function resetPassword(username) {
