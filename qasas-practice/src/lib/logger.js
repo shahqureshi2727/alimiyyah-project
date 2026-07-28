@@ -97,7 +97,7 @@ export function warn(message, details) {
 }
 
 export function error(message, err, details) {
-  devConsole('error', [message, err, details].filter((value) => value !== undefined));
+  console.error(...[message, err, details].filter((value) => value !== undefined));
   if (!sentryEnabled) return;
 
   const extra = sanitizeValue(details || {});

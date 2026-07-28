@@ -1,9 +1,26 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { sanitizeErrorEvent } from './logger';
+import { error, sanitizeErrorEvent } from './logger';
 
 const loggerSource = readFileSync(fileURLToPath(import.meta.resolve('./logger.js')), 'utf8');
+
+describe('error', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('always logs to console.error, even when import.meta.env.DEV is false', () => {
+    vi.stubEnv('DEV', false);
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const err = new Error('boom');
+
+    error('Firestore query failed', err);
+
+    expect(consoleSpy).toHaveBeenCalledWith('Firestore query failed', err);
+    vi.unstubAllEnvs();
+  });
+});
 
 describe('sanitizeErrorEvent', () => {
   it('does not statically import Sentry into the startup bundle', () => {
