@@ -125,8 +125,10 @@
   outline: none;
 }
 
-.user-menu-item:focus {
+.user-menu-item:focus-visible {
   background: var(--accent-light);
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
 }
 
 .user-menu-item + .user-menu-item {
@@ -190,6 +192,11 @@
   outline: none;
 }
 
+.settings-close:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .settings-group {
   display: flex;
   flex-direction: column;
@@ -230,6 +237,11 @@
 .settings-option:focus {
   border-color: var(--accent);
   outline: none;
+}
+
+.settings-option:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .settings-option.active {

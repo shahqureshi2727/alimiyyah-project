@@ -11,17 +11,12 @@ import {
   sendPasswordResetEmail,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
-import {
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
-import { auth, db } from './firebase';
+import { auth } from './firebase';
+import { firebaseAuthErrorMessage, safeFirebaseAuthErrorMessage } from './auth-errors';
+import { warn as logWarn } from './logger';
 
 // Synthesize a fake email from username for Firebase Auth
-export const usernameToAuthEmail = (username) =>
-  `${username.toLowerCase().trim()}@qasas.local`;
+export const usernameToAuthEmail = (username) => `${username.toLowerCase().trim()}@qasas.local`;
 
 // Reserved usernames that cannot be used
 const RESERVED_USERNAMES = ['admin', 'administrator', 'root', 'teacher', 'moderator'];
@@ -47,7 +42,8 @@ export function validateUsername(username) {
   if (!USERNAME_REGEX.test(trimmed)) {
     return {
       valid: false,
-      error: 'Username must start with a letter and contain only letters, numbers, and underscores.'
+      error:
+        'Username must start with a letter and contain only letters, numbers, and underscores.',
     };
   }
 
@@ -96,16 +92,16 @@ export async function signUp({ username, password, recoveryEmail }) {
     } catch (err) {
       // Recovery email couldn't be linked (e.g., already in use)
       recoveryEmailLinked = false;
-      console.warn('Could not link recovery email:', err.message);
+      logWarn('Could not link recovery email.', { code: err.code, message: err.message });
     }
   }
 
   // Create the Firestore user document
   // Every new signup is a student. NEVER write role: "admin" from the client.
-  await setDoc(doc(db, 'users', user.uid), {
+  const { createUserDoc } = await import('./repositories/users');
+  await createUserDoc({
+    uid: user.uid,
     username: username.trim(),
-    role: 'student',
-    createdAt: serverTimestamp(),
     recoveryEmail: recoveryEmail?.trim() || null,
   });
 
@@ -120,7 +116,7 @@ export async function signIn(username, password) {
     return userCredential.user;
   } catch (err) {
     // Don't distinguish between "no such user" and "wrong password"
-    throw new Error('Incorrect username or password.', { cause: err });
+    throw new Error(firebaseAuthErrorMessage(err), { cause: err });
   }
 }
 
@@ -129,14 +125,8 @@ export async function signOut() {
 }
 
 export async function getUserDoc(uid) {
-  const docRef = doc(db, 'users', uid);
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    return { id: docSnap.id, ...docSnap.data() };
-  }
-
-  return null;
+  const { getUserDocById } = await import('./repositories/users');
+  return getUserDocById({ uid });
 }
 
 export async function resetPassword(username) {
@@ -164,16 +154,16 @@ export async function resetPassword(username) {
     await sendPasswordResetEmail(auth, authEmail);
     return {
       success: true,
-      message: 'If this account has a recovery email, a reset link has been sent.'
+      message: 'If this account has a recovery email, a reset link has been sent.',
     };
   } catch (err) {
     if (err.code === 'auth/user-not-found') {
       // Don't reveal if user exists
       return {
         success: true,
-        message: 'If this account exists and has a recovery email, a reset link has been sent.'
+        message: 'If this account exists and has a recovery email, a reset link has been sent.',
       };
     }
-    throw err;
+    throw new Error(safeFirebaseAuthErrorMessage(err), { cause: err });
   }
 }

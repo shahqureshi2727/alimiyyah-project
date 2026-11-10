@@ -58,30 +58,36 @@ describe('topic stats', () => {
   it('grows the spaced-review interval after correct answers and caps it at 30 days', () => {
     const answeredAt = new Date('2026-07-23T12:00:00.000Z');
 
-    expect(nextReviewSchedule({
-      existing: { reviewIntervalDays: 5 },
-      wasCorrect: true,
-      answeredAt,
-    })).toEqual({
+    expect(
+      nextReviewSchedule({
+        existing: { reviewIntervalDays: 5 },
+        wasCorrect: true,
+        answeredAt,
+      })
+    ).toEqual({
       reviewIntervalDays: 9,
       nextDueAt: new Date('2026-08-01T12:00:00.000Z'),
     });
 
-    expect(nextReviewSchedule({
-      existing: { reviewIntervalDays: 30 },
-      wasCorrect: true,
-      answeredAt,
-    }).reviewIntervalDays).toBe(30);
+    expect(
+      nextReviewSchedule({
+        existing: { reviewIntervalDays: 30 },
+        wasCorrect: true,
+        answeredAt,
+      }).reviewIntervalDays
+    ).toBe(30);
   });
 
   it('resets spaced review to tomorrow after incorrect answers', () => {
     const answeredAt = new Date('2026-07-23T12:00:00.000Z');
 
-    expect(nextReviewSchedule({
-      existing: { reviewIntervalDays: 12 },
-      wasCorrect: false,
-      answeredAt,
-    })).toEqual({
+    expect(
+      nextReviewSchedule({
+        existing: { reviewIntervalDays: 12 },
+        wasCorrect: false,
+        answeredAt,
+      })
+    ).toEqual({
       reviewIntervalDays: 1,
       nextDueAt: new Date('2026-07-24T12:00:00.000Z'),
     });
@@ -116,9 +122,9 @@ describe('topic stats', () => {
       score: 0.4,
       lastSeen: 'a',
       status: 'weak',
-      });
-      expect(profile.topics.IRB.status).toBe('strong');
     });
+    expect(profile.topics.IRB.status).toBe('strong');
+  });
 
   it('aggregates historical answer events in chronological order by user category and topic', () => {
     const stats = aggregateTopicStatsFromEvents([
@@ -146,4 +152,4 @@ describe('topic stats', () => {
       ewmaScore: 1,
     });
   });
-  });
+});

@@ -29,7 +29,8 @@ export const irabQuestions = [
     sentence: 'كَانَ فِي قَرْيَةٍ رَجُلٌ مَشْهُورٌ جِدًّا.',
     target: 'قَرْيَةٍ',
     answer: 'jarr',
-    reason: 'Object of the preposition fee — takes jarr, which overrides its role as part of the khabar.',
+    reason:
+      'Object of the preposition fee — takes jarr, which overrides its role as part of the khabar.',
   },
   {
     id: 'ARB-IRB-Q03',
@@ -201,7 +202,8 @@ export const irabQuestions = [
     sentence: 'مَنْ فَعَلَ هٰذَا بِآلِهَتِنَا؟',
     target: 'بِآلِهَتِنَا',
     answer: 'jarr',
-    reason: "Object of the preposition bi — jarr. (The final -naa is an attached pronoun / mudaf ilayh.)",
+    reason:
+      'Object of the preposition bi — jarr. (The final -naa is an attached pronoun / mudaf ilayh.)',
   },
   {
     id: 'ARB-IRB-Q22',
@@ -265,7 +267,8 @@ export const irabQuestions = [
     sentence: 'مَا عِقَابُ إِبْرَاهِيمَ؟',
     target: 'إِبْرَاهِيمَ',
     answer: 'jarr',
-    reason: "Mudaf ilayh of 'iqaabu — grammatically jarr, though Ibrahim is 'change-restricted' (ghayr munsarif) so it shows fathah instead of kasrah.",
+    reason:
+      "Mudaf ilayh of 'iqaabu — grammatically jarr, though Ibrahim is 'change-restricted' (ghayr munsarif) so it shows fathah instead of kasrah.",
   },
   {
     id: 'ARB-IRB-Q29',
@@ -283,7 +286,8 @@ export const irabQuestions = [
     sentence: 'أَوْقَدُوا نَارًا وَأَلْقَوْا فِيهَا إِبْرَاهِيمَ.',
     target: 'إِبْرَاهِيمَ',
     answer: 'nasb',
-    reason: "Maf'ul bihi (object) of alqaw. Nasb (shown as fathah since Ibrahim is ghayr munsarif).",
+    reason:
+      "Maf'ul bihi (object) of alqaw. Nasb (shown as fathah since Ibrahim is ghayr munsarif).",
   },
   {
     id: 'ARB-IRB-Q31',
@@ -301,7 +305,8 @@ export const irabQuestions = [
     sentence: 'يَا نَارُ كُونِي بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.',
     target: 'نَارُ',
     answer: 'raf',
-    reason: "Munaadaa (vocative). Naaru loses its tanween because it is being called, but keeps the dhammah — raf'.",
+    reason:
+      "Munaadaa (vocative). Naaru loses its tanween because it is being called, but keeps the dhammah — raf'.",
   },
   {
     id: 'ARB-IRB-Q33',
@@ -328,7 +333,7 @@ export const irabQuestions = [
     sentence: 'كَانَتِ النَّارُ بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.',
     target: 'بَرْدًا',
     answer: 'nasb',
-    reason: "Khabar of kaana. Nasb.",
+    reason: 'Khabar of kaana. Nasb.',
   },
   {
     id: 'ARB-IRB-Q36',

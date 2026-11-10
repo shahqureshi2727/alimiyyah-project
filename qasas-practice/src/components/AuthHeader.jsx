@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useSettings } from '../contexts/settings';
+import { useFocusTrap } from '../hooks/useFocusTrap';
+import { error as logError } from '../lib/logger';
 import './AuthHeader.css';
 
 export default function AuthHeader({ hidden = false }) {
@@ -12,13 +14,22 @@ export default function AuthHeader({ hidden = false }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const settingsDialogRef = useRef(null);
+
+  const closeSettings = () => setSettingsOpen(false);
+
+  useFocusTrap(settingsDialogRef, {
+    active: settingsOpen,
+    onEscape: closeSettings,
+    restoreFocusTo: buttonRef,
+  });
 
   const handleSignOut = async () => {
     setMenuOpen(false);
     try {
       await signOut();
     } catch (err) {
-      console.error('Error signing out:', err);
+      logError('Could not sign out.', err);
     }
   };
 
@@ -84,9 +95,7 @@ export default function AuthHeader({ hidden = false }) {
     const menuItems = menuRef.current?.querySelectorAll('[role="menuitem"]');
     if (!menuItems?.length) return;
 
-    const currentIndex = Array.from(menuItems).findIndex(
-      (item) => item === document.activeElement
-    );
+    const currentIndex = Array.from(menuItems).findIndex((item) => item === document.activeElement);
 
     switch (event.key) {
       case 'ArrowDown':
@@ -126,9 +135,7 @@ export default function AuthHeader({ hidden = false }) {
   return (
     <header className="auth-header">
       <div className="auth-header-content">
-        <div className="auth-header-left">
-          {/* Empty for now - logo could go here */}
-        </div>
+        <div className="auth-header-left">{/* Empty for now - logo could go here */}</div>
         <div className="auth-header-right">
           <div className="user-menu-container">
             <button
@@ -138,6 +145,7 @@ export default function AuthHeader({ hidden = false }) {
               onKeyDown={handleKeyDown}
               aria-haspopup="menu"
               aria-expanded={menuOpen}
+              aria-label={`Open user menu for ${username}`}
             >
               <span className="user-menu-name">{username}</span>
               <span className="user-menu-chevron">▾</span>
@@ -148,36 +156,21 @@ export default function AuthHeader({ hidden = false }) {
                 ref={menuRef}
                 className="user-menu-dropdown"
                 role="menu"
+                tabIndex="-1"
                 onKeyDown={handleKeyDown}
               >
                 {isAdmin && (
-                  <button
-                    className="user-menu-item"
-                    role="menuitem"
-                    onClick={handleAdmin}
-                  >
+                  <button className="user-menu-item" role="menuitem" onClick={handleAdmin}>
                     Admin
                   </button>
                 )}
-                <button
-                  className="user-menu-item"
-                  role="menuitem"
-                  onClick={handleWeakness}
-                >
+                <button className="user-menu-item" role="menuitem" onClick={handleWeakness}>
                   Strength map
                 </button>
-                <button
-                  className="user-menu-item"
-                  role="menuitem"
-                  onClick={handleSettings}
-                >
+                <button className="user-menu-item" role="menuitem" onClick={handleSettings}>
                   Settings
                 </button>
-                <button
-                  className="user-menu-item"
-                  role="menuitem"
-                  onClick={handleSignOut}
-                >
+                <button className="user-menu-item" role="menuitem" onClick={handleSignOut}>
                   Sign out
                 </button>
               </div>
@@ -187,12 +180,18 @@ export default function AuthHeader({ hidden = false }) {
       </div>
       {settingsOpen && (
         <div className="settings-overlay" role="presentation">
-          <div className="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+          <div
+            ref={settingsDialogRef}
+            className="settings-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="settings-title"
+          >
             <div className="settings-panel-header">
               <h2 id="settings-title">Settings</h2>
               <button
                 className="settings-close"
-                onClick={() => setSettingsOpen(false)}
+                onClick={closeSettings}
                 aria-label="Close settings"
               >
                 ×
@@ -201,7 +200,7 @@ export default function AuthHeader({ hidden = false }) {
 
             <div className="settings-group">
               <span className="settings-label">Theme</span>
-              <div className="settings-options">
+              <div className="settings-options" role="group" aria-label="Theme">
                 {[
                   ['light', 'Light'],
                   ['dark', 'Dark'],
@@ -211,6 +210,7 @@ export default function AuthHeader({ hidden = false }) {
                     key={value}
                     className={`settings-option ${settings.theme === value ? 'active' : ''}`}
                     onClick={() => setTheme(value)}
+                    aria-pressed={settings.theme === value}
                   >
                     {label}
                   </button>
@@ -220,7 +220,7 @@ export default function AuthHeader({ hidden = false }) {
 
             <div className="settings-group">
               <span className="settings-label">Arabic Script</span>
-              <div className="settings-options">
+              <div className="settings-options" role="group" aria-label="Arabic script">
                 {[
                   ['madina', 'Madina'],
                   ['indopak', 'Indo-Pak'],
@@ -229,6 +229,7 @@ export default function AuthHeader({ hidden = false }) {
                     key={value}
                     className={`settings-option ${settings.arabicScript === value ? 'active' : ''}`}
                     onClick={() => setArabicScript(value)}
+                    aria-pressed={settings.arabicScript === value}
                   >
                     {label}
                   </button>

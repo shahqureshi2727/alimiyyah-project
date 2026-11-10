@@ -8,9 +8,11 @@ export const vehiclesQuestions = [
     sourceIds: ['FQH-VEH-01'],
     topic: 'VEH',
     type: 'tf',
-    prompt: 'True or False: Farḍ and wājib prayers are invalid when performed on a riding animal or in a moving vehicle.',
+    prompt:
+      'True or False: Farḍ and wājib prayers are invalid when performed on a riding animal or in a moving vehicle.',
     answer: true,
-    explanation: 'Correct — farḍ and wājib prayers are invalid while riding an animal or moving vehicle.',
+    explanation:
+      'Correct — farḍ and wājib prayers are invalid while riding an animal or moving vehicle.',
   },
   {
     id: 'FQH-VEH-Q02',
@@ -25,23 +27,27 @@ export const vehiclesQuestions = [
       'The takbīrat al-iḥrām',
     ],
     answerIndex: 0,
-    explanation: 'The same ruling of invalidity while riding applies to Sajdah al-Tilāwah, if the verse requiring it was recited or heard before mounting.',
+    explanation:
+      'The same ruling of invalidity while riding applies to Sajdah al-Tilāwah, if the verse requiring it was recited or heard before mounting.',
   },
   {
     id: 'FQH-VEH-Q03',
     sourceIds: ['FQH-VEH-03'],
     topic: 'VEH',
     type: 'tf',
-    prompt: 'True or False: Praying farḍ/wājib prayers on a riding animal is excused out of necessity, such as muddy terrain or fear of a thief.',
+    prompt:
+      'True or False: Praying farḍ/wājib prayers on a riding animal is excused out of necessity, such as muddy terrain or fear of a thief.',
     answer: true,
-    explanation: 'Correct — necessity (muddy terrain, fear of danger, inability to remount) excuses praying farḍ/wājib prayers while riding.',
+    explanation:
+      'Correct — necessity (muddy terrain, fear of danger, inability to remount) excuses praying farḍ/wājib prayers while riding.',
   },
   {
     id: 'FQH-VEH-Q04',
     sourceIds: ['FQH-VEH-04'],
     topic: 'VEH',
     type: 'mcq',
-    prompt: 'If a carriage on a camel is made stationary and connected to the ground, what legal ruling does it take?',
+    prompt:
+      'If a carriage on a camel is made stationary and connected to the ground, what legal ruling does it take?',
     options: [
       'The ruling of being on the ground, so one may pray standing inside it',
       'It always remains invalid to pray in',
@@ -49,23 +55,27 @@ export const vehiclesQuestions = [
       'It requires a special exception granted by an imam',
     ],
     answerIndex: 0,
-    explanation: 'A stationary carriage connected to the ground takes the legal ruling of being on the ground.',
+    explanation:
+      'A stationary carriage connected to the ground takes the legal ruling of being on the ground.',
   },
   {
     id: 'FQH-VEH-Q05',
     sourceIds: ['FQH-VEH-05'],
     topic: 'VEH',
     type: 'tf',
-    prompt: 'True or False: Outside city limits, a traveller may pray voluntary (nafl) and emphasized sunnah prayers on an animal or vehicle, using head movements.',
+    prompt:
+      'True or False: Outside city limits, a traveller may pray voluntary (nafl) and emphasized sunnah prayers on an animal or vehicle, using head movements.',
     answer: true,
-    explanation: 'Correct — this concession applies to nafl and emphasized sunnah prayers outside city limits.',
+    explanation:
+      'Correct — this concession applies to nafl and emphasized sunnah prayers outside city limits.',
   },
   {
     id: 'FQH-VEH-Q06',
     sourceIds: ['FQH-VEH-06'],
     topic: 'VEH',
     type: 'mcq',
-    prompt: 'Under the travel concession for nafl/sunnah prayers on an animal or vehicle, what is NOT required?',
+    prompt:
+      'Under the travel concession for nafl/sunnah prayers on an animal or vehicle, what is NOT required?',
     options: [
       'Facing the qiblah throughout the prayer',
       'Performing the Ṣalāh through head movements',
@@ -73,14 +83,16 @@ export const vehiclesQuestions = [
       'Being an actual traveller',
     ],
     answerIndex: 0,
-    explanation: 'Facing the qiblah throughout is not required for a traveller praying nafl/sunnah prayers on an animal or vehicle.',
+    explanation:
+      'Facing the qiblah throughout is not required for a traveller praying nafl/sunnah prayers on an animal or vehicle.',
   },
   {
     id: 'FQH-VEH-Q07',
     sourceIds: ['FQH-VEH-07'],
     topic: 'VEH',
     type: 'tf',
-    prompt: 'True or False: Filth on the saddle or stirrups of a riding animal is excused for a traveller praying upon it.',
+    prompt:
+      'True or False: Filth on the saddle or stirrups of a riding animal is excused for a traveller praying upon it.',
     answer: true,
     explanation: 'Correct — such filth is excused under the travel concession.',
   },
@@ -97,7 +109,8 @@ export const vehiclesQuestions = [
       'It is valid only if walking slowly',
     ],
     answerIndex: 0,
-    explanation: 'Performing ritual prayer while walking is not valid; one must stop and establish the prayer in a valid manner.',
+    explanation:
+      'Performing ritual prayer while walking is not valid; one must stop and establish the prayer in a valid manner.',
   },
   {
     id: 'FQH-VEH-Q09',
@@ -121,14 +134,16 @@ export const vehiclesQuestions = [
       'It is never valid, even sitting',
     ],
     answerIndex: 0,
-    explanation: 'Prayer while sitting on a ship is valid, even without an excuse, provided the worshipper turns toward the qiblah whenever the ship changes direction.',
+    explanation:
+      'Prayer while sitting on a ship is valid, even without an excuse, provided the worshipper turns toward the qiblah whenever the ship changes direction.',
   },
   {
     id: 'FQH-VEH-Q11',
     sourceIds: ['FQH-VEH-01', 'FQH-VEH-04', 'FQH-VEH-10'],
     topic: 'VEH',
     type: 'mcq',
-    prompt: 'Which of the following situations makes a farḍ prayer INVALID unless excused by necessity?',
+    prompt:
+      'Which of the following situations makes a farḍ prayer INVALID unless excused by necessity?',
     options: [
       'Praying on a riding animal or in a moving vehicle',
       'Praying inside a stationary carriage connected to the ground',
@@ -136,6 +151,7 @@ export const vehiclesQuestions = [
       'Praying in a parked car with the engine off',
     ],
     answerIndex: 0,
-    explanation: 'Farḍ/wājib prayers are invalid on a riding animal or moving vehicle (unless excused by necessity); a stationary carriage and a ship (with qiblah-turning) are treated as valid ground for prayer.',
+    explanation:
+      'Farḍ/wājib prayers are invalid on a riding animal or moving vehicle (unless excused by necessity); a stationary carriage and a ship (with qiblah-turning) are treated as valid ground for prayer.',
   },
 ];

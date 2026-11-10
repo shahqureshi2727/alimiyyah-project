@@ -1,11 +1,12 @@
 import { ARABIC_TOPICS, FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS } from '../config/subjects';
+import { warn as logWarn } from './logger';
 
 const warnedMissingQuestionMeta = new Set();
 
 function warnMissingMetaOnce(key, message) {
   if (warnedMissingQuestionMeta.has(key)) return;
   warnedMissingQuestionMeta.add(key);
-  console.warn(message);
+  logWarn(message);
 }
 
 export function topicGroupFor(topicCode, mode) {

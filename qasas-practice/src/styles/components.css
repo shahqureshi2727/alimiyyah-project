@@ -1,0 +1,274 @@
+/* Shared components: buttons, cards, badges, states, and the Arabic folio. */
+
+.primary-btn,
+.secondary-btn,
+.try-quiz-link,
+.back-btn,
+.quiz-start-btn,
+.tafsir-start-btn,
+.exit-quiz-btn,
+.quiz-check-btn,
+.play-again-btn,
+.home-btn,
+.next-btn,
+.auth-btn,
+.admin-tab,
+.mode-tab,
+.time-btn,
+.preview-mode-tab,
+.preview-view-full {
+  min-height: var(--touch-target-min);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.primary-btn,
+.try-quiz-link,
+.quiz-start-btn,
+.tafsir-start-btn,
+.quiz-check-btn,
+.play-again-btn,
+.next-btn {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--parchment);
+  font-weight: 700;
+}
+
+.primary-btn:hover:not(:disabled),
+.try-quiz-link:hover:not(:disabled),
+.quiz-start-btn:hover:not(:disabled),
+.tafsir-start-btn:hover:not(:disabled),
+.quiz-check-btn:hover:not(:disabled),
+.play-again-btn:hover:not(:disabled),
+.next-btn:hover:not(:disabled) {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.secondary-btn,
+.back-btn,
+.home-btn {
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--text-primary);
+}
+
+.secondary-btn:hover:not(:disabled),
+.back-btn:hover:not(:disabled),
+.home-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.primary-btn:active:not(:disabled),
+.secondary-btn:active:not(:disabled),
+.try-quiz-link:active:not(:disabled),
+.back-btn:active:not(:disabled),
+.quiz-start-btn:active:not(:disabled),
+.tafsir-start-btn:active:not(:disabled),
+.exit-quiz-btn:active:not(:disabled),
+.quiz-check-btn:active:not(:disabled),
+.play-again-btn:active:not(:disabled),
+.home-btn:active:not(:disabled),
+.next-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.primary-btn:disabled,
+.secondary-btn:disabled,
+.try-quiz-link:disabled,
+.back-btn:disabled,
+.quiz-start-btn:disabled,
+.tafsir-start-btn:disabled,
+.exit-quiz-btn:disabled,
+.quiz-check-btn:disabled,
+.play-again-btn:disabled,
+.home-btn:disabled,
+.next-btn:disabled {
+  opacity: 0.55;
+}
+
+.surface-card,
+.subject-card,
+.mode-card,
+.quiz-mode-item,
+.leaderboard-preview,
+.leaderboard-content,
+.results-header,
+.results-breakdown,
+.heatmap-cell,
+.due-topic-card,
+.tafsir-select-panel,
+.auth-card,
+.admin-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  box-shadow: var(--shadow-rest);
+}
+
+.status-badge,
+.tafsir-source-badge,
+.hadith-source-badge,
+.fiqh-topic-badge,
+.fiqh-madhhab-badge,
+.save-status span,
+.heatmap-cell-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: calc(var(--touch-target-min) - var(--space-2));
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--type-caption);
+  line-height: var(--line-caption);
+  font-weight: 700;
+}
+
+.app-state {
+  width: 100%;
+  min-height: 12rem;
+  display: grid;
+  place-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.app-state .app-state-copy {
+  max-width: 32rem;
+}
+
+.app-state h1,
+.app-state h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--type-title);
+  line-height: var(--line-title);
+}
+
+.app-state p {
+  color: var(--text-secondary);
+}
+
+.app-state-mark {
+  width: var(--space-7);
+  height: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+.app-state-loading .app-state-mark {
+  overflow: hidden;
+  background: var(--border);
+}
+
+.app-state-loading .app-state-mark::after {
+  content: '';
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  animation: stateSweep var(--duration-slow) var(--ease-standard) infinite alternate;
+}
+
+.app-state-error .app-state-mark {
+  background: var(--error);
+}
+
+.app-state-action {
+  margin-top: var(--space-2);
+}
+
+.arabic-folio,
+.quiz-sentence,
+.sentence-box,
+.quiz-word,
+.word-display,
+.tafsir-arabic-text,
+.hadith-arabic-text,
+.quiz-morphology-card {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  border: 1px solid var(--border);
+  border-block-color: var(--accent);
+  border-block-width: 2px;
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  box-shadow: var(--shadow-rest);
+}
+
+.quiz-sentence,
+.sentence-box,
+.quiz-word,
+.word-display,
+.tafsir-arabic-text,
+.hadith-arabic-text {
+  font-family: var(--arabic-font);
+  line-height: var(--arabic-line-display);
+  text-align: center;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.highlight {
+  color: var(--accent);
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  border-bottom: 3px solid var(--accent);
+  padding: var(--space-1) var(--space-2);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.feedback,
+.quiz-inline-explanation,
+.tafsir-explanation,
+.hadith-explanation,
+.quiz-load-warning,
+.quiz-render-error {
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.choice-btn,
+.option-btn,
+.quiz-choice-btn,
+.quiz-option-btn,
+.quiz-tappable-word,
+.grade-btn,
+.fiqh-choice-btn,
+.hadith-choice-btn,
+.tafsir-choice-btn {
+  min-height: var(--touch-target-min);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+}
+
+@keyframes stateSweep {
+  from {
+    transform: translateX(-40%);
+  }
+
+  to {
+    transform: translateX(160%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-state-loading .app-state-mark::after {
+    animation: none;
+    width: 100%;
+  }
+}

@@ -1,19 +1,28 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider } from './contexts/AuthContext'
-import { SettingsProvider } from './contexts/SettingsContext'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import Bootstrap from './Bootstrap.jsx';
+import ErrorBoundary from './components/ErrorBoundary';
+import './index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <SettingsProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </BrowserRouter>
-    </SettingsProvider>
-  </StrictMode>,
-)
+    <ErrorBoundary
+      name="Root"
+      title="Alimiyyah Practice stopped working."
+      message="Reload the app. If it happens again, send the reference ID to your teacher."
+      showErrorMessage={true}
+    >
+      <Bootstrap />
+    </ErrorBoundary>
+  </StrictMode>
+);
+
+if (import.meta.env.VITE_SENTRY_DSN) {
+  import('./lib/logger').then(({ initErrorTracking }) => {
+    initErrorTracking({
+      dsn: import.meta.env.VITE_SENTRY_DSN,
+      release: import.meta.env.VITE_GIT_SHA,
+      environment: import.meta.env.MODE,
+    });
+  });
+}

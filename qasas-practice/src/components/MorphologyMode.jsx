@@ -1,12 +1,8 @@
 import { useMemo, useState } from 'react';
-import {
-  MORPHOLOGY_SCOPE_LABELS,
-  getMorphologyQuestions,
-} from '../data/bank';
-import { useWeaknessTracking } from '../hooks/useWeaknessTracking';
+import { MORPHOLOGY_SCOPE_LABELS, getMorphologyQuestions } from '../data/morphology';
+import { usePracticeSession } from '../hooks/usePracticeSession';
 import { useShuffledOptions } from '../hooks/useShuffledOptions';
-import { shuffleArray } from '../lib/shuffle';
-import './ModeCommon.css';
+import PracticeShell from './practice/PracticeShell';
 
 const scopeCards = [
   { id: 'mixed', description: 'All verb forms together' },
@@ -32,53 +28,40 @@ function XIcon() {
   );
 }
 
-export default function MorphologyMode({ initialScope = null, onBack, score, setScore }) {
-  const trackWeaknessAnswer = useWeaknessTracking();
+export default function MorphologyMode({
+  initialScope = null,
+  onBack,
+  onSelectScope,
+}) {
   const [scope, setScope] = useState(initialScope);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [answered, setAnswered] = useState(false);
-  const [sessionTotal, setSessionTotal] = useState(0);
-
-  const questions = useMemo(
-    () => (scope ? shuffleArray(getMorphologyQuestions(scope)) : []),
-    [scope]
-  );
-
-  const current = questions[currentIndex];
+  const bank = useMemo(() => (scope ? getMorphologyQuestions(scope) : []), [scope]);
+  const session = usePracticeSession({
+    bank,
+    mode: 'morphology',
+    checkAnswer: ({ question, answer }) => answer === question.answer,
+  });
+  const {
+    current,
+    selected,
+    answered,
+    score,
+    sessionTotal,
+    answer,
+    next,
+  } = session;
   const shuffledOptions = useShuffledOptions(current?.options, current?.id);
 
   const handleScopeSelect = (nextScope) => {
-    setScope(nextScope);
-    setCurrentIndex(0);
-    setSelected(null);
-    setAnswered(false);
-  };
-
-  const handleChoice = (option) => {
-    if (answered) return;
-    setSelected(option);
-    setAnswered(true);
-    setSessionTotal((prev) => prev + 1);
-    const correct = option === current.answer;
-    void trackWeaknessAnswer({ question: current, correct, mode: 'morphology', index: currentIndex });
-    if (correct) {
-      setScore((prev) => prev + 1);
+    if (onSelectScope) {
+      onSelectScope(nextScope);
+      return;
     }
-  };
-
-  const handleNext = () => {
-    setSelected(null);
-    setAnswered(false);
-    setCurrentIndex((prev) => (prev + 1) % questions.length);
+    setScope(nextScope);
   };
 
   const handleBack = () => {
     if (scope && !initialScope) {
       setScope(null);
-      setCurrentIndex(0);
-      setSelected(null);
-      setAnswered(false);
       return;
     }
     onBack();
@@ -86,15 +69,7 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
 
   if (!scope) {
     return (
-      <div className="mode-container">
-        <header className="mode-header">
-          <button className="back-btn" onClick={onBack}>
-            Back
-          </button>
-          <span className="score">{score} / {sessionTotal}</span>
-        </header>
-
-        <div className="mode-content">
+      <PracticeShell onBack={onBack} backLabel="Home" score={score} sessionTotal={sessionTotal}>
           <h2 className="mode-title">Choose a morphology practice</h2>
           <div className="morphology-scope-grid">
             {scopeCards.map((card) => {
@@ -105,41 +80,41 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
                   className="morphology-scope-card"
                   onClick={() => handleScopeSelect(card.id)}
                 >
-                  <span className="morphology-scope-ar" dir="rtl">{label.ar}</span>
+                  <span className="morphology-scope-ar" dir="rtl">
+                    {label.ar}
+                  </span>
                   <span className="morphology-scope-en">{label.en}</span>
                   <span className="morphology-scope-desc">{card.description}</span>
                 </button>
               );
             })}
           </div>
-        </div>
-      </div>
+      </PracticeShell>
     );
   }
 
   const isCorrect = selected === current.answer;
 
   return (
-    <div className="mode-container">
-      <header className="mode-header">
-        <button className="back-btn" onClick={handleBack}>
-          Back
-        </button>
-        <span className="score">
-          {score} / {sessionTotal}
-        </span>
-      </header>
-
-      <div className="mode-content">
+    <PracticeShell
+      onBack={handleBack}
+      backLabel={initialScope ? 'Home' : 'Change morphology scope'}
+      score={score}
+      sessionTotal={sessionTotal}
+    >
         <h2 className="mode-title">{MORPHOLOGY_SCOPE_LABELS[scope].en}</h2>
 
         <div className="morphology-card">
-          <div className="morphology-verb" dir="rtl">{current.verb}</div>
+          <div className="morphology-verb" dir="rtl">
+            {current.verb}
+          </div>
           <div className="morphology-base" dir="rtl">
             <span>{current.baseVerb}</span>
             <span dir="ltr">= {current.baseMeaning}</span>
           </div>
-          <div className="morphology-label" dir="rtl">{current.arabicLabel}</div>
+          <div className="morphology-label" dir="rtl">
+            {current.arabicLabel}
+          </div>
         </div>
 
         <div className="choices morphology-choices">
@@ -159,7 +134,7 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
               <button
                 key={option}
                 className={className}
-                onClick={() => handleChoice(option)}
+                onClick={() => answer(option)}
                 disabled={answered}
               >
                 <span className="choice-en">{option}</span>
@@ -170,19 +145,16 @@ export default function MorphologyMode({ initialScope = null, onBack, score, set
 
         {answered && (
           <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
-            <div className="feedback-icon">
-              {isCorrect ? <CheckIcon /> : <XIcon />}
-            </div>
+            <div className="feedback-icon">{isCorrect ? <CheckIcon /> : <XIcon />}</div>
             <p className="feedback-reason">
               Correct: {current.answer}.<br />
               {current.explanation}
             </p>
-            <button className="next-btn" onClick={handleNext}>
+            <button className="next-btn" onClick={next}>
               Next
             </button>
           </div>
         )}
-      </div>
-    </div>
+    </PracticeShell>
   );
 }

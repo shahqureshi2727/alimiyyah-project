@@ -16,14 +16,16 @@ export const tayammumQuestions = [
       'A substitute for the adhan when water is unavailable',
     ],
     answerIndex: 0,
-    explanation: 'Tayammum is wiping the face and arms with something pure from the top surface of the earth, performed with intention.',
+    explanation:
+      'Tayammum is wiping the face and arms with something pure from the top surface of the earth, performed with intention.',
   },
   {
     id: 'FQH-TYM-Q02',
     sourceIds: ['FQH-TYM-02'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: Tayammum is permissible when a person is approximately one sharʿī mile (~1.16 miles / 1.86 km) away from water.',
+    prompt:
+      'True or False: Tayammum is permissible when a person is approximately one sharʿī mile (~1.16 miles / 1.86 km) away from water.',
     answer: true,
     explanation: 'Correct — being one sharʿī mile from water permits tayammum.',
   },
@@ -52,7 +54,12 @@ export const tayammumQuestions = [
     topic: 'TYM',
     type: 'mcq',
     prompt: 'Tayammum is permissible when wounds cover how much of the body?',
-    options: ['Most of the body', 'Only a single finger', 'Only the face', 'Wounds never permit tayammum'],
+    options: [
+      'Most of the body',
+      'Only a single finger',
+      'Only the face',
+      'Wounds never permit tayammum',
+    ],
     answerIndex: 0,
     explanation: 'Tayammum is permissible when wounds cover most of the body.',
   },
@@ -71,7 +78,7 @@ export const tayammumQuestions = [
     topic: 'TYM',
     type: 'mcq',
     prompt: 'Tayammum is permissible out of fear of what, near the water source?',
-    options: ['An enemy or wild animal', 'Cold weather', 'Losing one\'s way home', 'Missing a meal'],
+    options: ['An enemy or wild animal', 'Cold weather', "Losing one's way home", 'Missing a meal'],
     answerIndex: 0,
     explanation: 'Fear of an enemy or wild animal near the water permits tayammum.',
   },
@@ -80,9 +87,11 @@ export const tayammumQuestions = [
     sourceIds: ['FQH-TYM-08'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: Tayammum is permissible when one lacks the means to draw water from a well.',
+    prompt:
+      'True or False: Tayammum is permissible when one lacks the means to draw water from a well.',
     answer: true,
-    explanation: 'Correct — lacking the means to draw water (e.g. no rope/bucket) permits tayammum.',
+    explanation:
+      'Correct — lacking the means to draw water (e.g. no rope/bucket) permits tayammum.',
   },
   {
     id: 'FQH-TYM-Q09',
@@ -109,16 +118,23 @@ export const tayammumQuestions = [
     topic: 'TYM',
     type: 'mcq',
     prompt: 'Tayammum is NOT permitted out of fear of missing which of the following?',
-    options: ['Jumuʿah or a regular obligatory prayer', 'The Janāzah prayer', 'The ʿĪd prayer', 'None — tayammum is always permitted for any missed prayer'],
+    options: [
+      'Jumuʿah or a regular obligatory prayer',
+      'The Janāzah prayer',
+      'The ʿĪd prayer',
+      'None — tayammum is always permitted for any missed prayer',
+    ],
     answerIndex: 0,
-    explanation: 'Tayammum is not permitted out of fear of missing Jumuʿah or a regular obligatory prayer, unlike Janāzah or ʿĪd.',
+    explanation:
+      'Tayammum is not permitted out of fear of missing Jumuʿah or a regular obligatory prayer, unlike Janāzah or ʿĪd.',
   },
   {
     id: 'FQH-TYM-Q12',
     sourceIds: ['FQH-TYM-09', 'FQH-TYM-10', 'FQH-TYM-11'],
     topic: 'TYM',
     type: 'mcq',
-    prompt: 'What distinguishes Janāzah/ʿĪd from Jumuʿah/regular obligatory prayers regarding tayammum for fear of missing them?',
+    prompt:
+      'What distinguishes Janāzah/ʿĪd from Jumuʿah/regular obligatory prayers regarding tayammum for fear of missing them?',
     options: [
       'Tayammum is permitted for fear of missing Janāzah/ʿĪd, but not for Jumuʿah/regular obligatory prayers',
       'Tayammum is permitted for all four equally',
@@ -126,16 +142,19 @@ export const tayammumQuestions = [
       'Tayammum is only permitted for Jumuʿah specifically',
     ],
     answerIndex: 0,
-    explanation: 'Janāzah and ʿĪd are time-limited and cannot be made up in the same way, so tayammum is permitted for fear of missing them, unlike Jumuʿah or regular obligatory prayers.',
+    explanation:
+      'Janāzah and ʿĪd are time-limited and cannot be made up in the same way, so tayammum is permitted for fear of missing them, unlike Jumuʿah or regular obligatory prayers.',
   },
   {
     id: 'FQH-TYM-Q13',
     sourceIds: ['FQH-TYM-12'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: If a person forgets that water is available to them (e.g. in their car) and performs tayammum, their Ṣalāh is valid and does not need to be repeated.',
+    prompt:
+      'True or False: If a person forgets that water is available to them (e.g. in their car) and performs tayammum, their Ṣalāh is valid and does not need to be repeated.',
     answer: true,
-    explanation: 'Correct — genuinely forgetting about available water does not invalidate the resulting Ṣalāh.',
+    explanation:
+      'Correct — genuinely forgetting about available water does not invalidate the resulting Ṣalāh.',
   },
   {
     id: 'FQH-TYM-Q14',
@@ -190,7 +209,8 @@ export const tayammumQuestions = [
     sourceIds: ['FQH-TYM-18'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: Dust, including dust settled on surfaces, is a permissible material for tayammum.',
+    prompt:
+      'True or False: Dust, including dust settled on surfaces, is a permissible material for tayammum.',
     answer: true,
     explanation: 'Correct — dust on surfaces is included among the permissible materials.',
   },
@@ -202,14 +222,16 @@ export const tayammumQuestions = [
     prompt: 'Which of the following is NOT a permissible material for tayammum?',
     options: ['Cotton cloth', 'Sand', 'Limestone', 'Dust on a surface'],
     answerIndex: 0,
-    explanation: 'Cotton cloth is not a permissible material for tayammum; sand, limestone, and dust all are.',
+    explanation:
+      'Cotton cloth is not a permissible material for tayammum; sand, limestone, and dust all are.',
   },
   {
     id: 'FQH-TYM-Q21',
     sourceIds: ['FQH-TYM-19'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: Farḍ 1 of the method of tayammum is to intend to remove ritual impurity.',
+    prompt:
+      'True or False: Farḍ 1 of the method of tayammum is to intend to remove ritual impurity.',
     answer: true,
     explanation: 'Correct — the intention is the first farḍ of tayammum.',
   },
@@ -219,7 +241,12 @@ export const tayammumQuestions = [
     topic: 'TYM',
     type: 'mcq',
     prompt: 'Farḍ 2 of the method of tayammum is to do what?',
-    options: ['Strike the earth once and wipe the entire face', 'Strike the earth twice for the face', 'Wipe only half of the face', 'Wipe the hands only, not the face'],
+    options: [
+      'Strike the earth once and wipe the entire face',
+      'Strike the earth twice for the face',
+      'Wipe only half of the face',
+      'Wipe the hands only, not the face',
+    ],
     answerIndex: 0,
     explanation: 'Farḍ 2 is to strike the earth once and wipe the entire face.',
   },
@@ -228,7 +255,8 @@ export const tayammumQuestions = [
     sourceIds: ['FQH-TYM-21'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: Farḍ 3 of the method of tayammum is to strike the earth a second time and wipe the arms up to and including the elbows.',
+    prompt:
+      'True or False: Farḍ 3 of the method of tayammum is to strike the earth a second time and wipe the arms up to and including the elbows.',
     answer: true,
     explanation: 'Correct — this is the second strike and covers the arms to the elbows.',
   },
@@ -237,7 +265,8 @@ export const tayammumQuestions = [
     sourceIds: ['FQH-TYM-19', 'FQH-TYM-20', 'FQH-TYM-21'],
     topic: 'TYM',
     type: 'mcq',
-    prompt: 'How many strikes of the earth are involved in the farḍ method of tayammum, and what do they cover?',
+    prompt:
+      'How many strikes of the earth are involved in the farḍ method of tayammum, and what do they cover?',
     options: [
       'Two strikes — one for the face, one for the arms to the elbows',
       'One strike covering both the face and arms',
@@ -245,7 +274,8 @@ export const tayammumQuestions = [
       'Four strikes, matching the four farāʾiḍ of wuḍūʾ',
     ],
     answerIndex: 0,
-    explanation: 'Two strikes are required: the first for wiping the face, the second for wiping the arms up to the elbows.',
+    explanation:
+      'Two strikes are required: the first for wiping the face, the second for wiping the arms up to the elbows.',
   },
   {
     id: 'FQH-TYM-Q25',
@@ -281,7 +311,12 @@ export const tayammumQuestions = [
     topic: 'TYM',
     type: 'mcq',
     prompt: 'What is a sunnah of tayammum done with the hands after striking the earth?',
-    options: ['Shaking the dust or earth off the hands', 'Rubbing the hands together vigorously for a minute', 'Washing the hands with water afterward', 'Leaving all the dust on the hands'],
+    options: [
+      'Shaking the dust or earth off the hands',
+      'Rubbing the hands together vigorously for a minute',
+      'Washing the hands with water afterward',
+      'Leaving all the dust on the hands',
+    ],
     answerIndex: 0,
     explanation: 'Shaking the dust or earth off the hands is a sunnah of tayammum.',
   },
@@ -300,9 +335,15 @@ export const tayammumQuestions = [
     topic: 'TYM',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the sunnahs of tayammum?',
-    options: ['Repeating each strike three times', 'Saying Bismillāh at the start', 'Following the correct sequence (tartīb)', 'Spreading the fingers during the strikes'],
+    options: [
+      'Repeating each strike three times',
+      'Saying Bismillāh at the start',
+      'Following the correct sequence (tartīb)',
+      'Spreading the fingers during the strikes',
+    ],
     answerIndex: 0,
-    explanation: 'Repeating each strike three times is not one of the sunnahs of tayammum (only two strikes are performed in total); the other three are genuine sunnahs.',
+    explanation:
+      'Repeating each strike three times is not one of the sunnahs of tayammum (only two strikes are performed in total); the other three are genuine sunnahs.',
   },
   {
     id: 'FQH-TYM-Q31',
@@ -326,23 +367,27 @@ export const tayammumQuestions = [
       'Standing up after sitting',
     ],
     answerIndex: 0,
-    explanation: 'Tayammum is invalidated when the excuse (e.g. lack of water, fear, illness) that permitted it no longer exists.',
+    explanation:
+      'Tayammum is invalidated when the excuse (e.g. lack of water, fear, illness) that permitted it no longer exists.',
   },
   {
     id: 'FQH-TYM-Q33',
     sourceIds: ['FQH-TYM-29'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: One may perform any number of prayers with a single tayammum, as long as it is not broken.',
+    prompt:
+      'True or False: One may perform any number of prayers with a single tayammum, as long as it is not broken.',
     answer: true,
-    explanation: 'Correct — a single tayammum can cover multiple prayers as long as it remains unbroken.',
+    explanation:
+      'Correct — a single tayammum can cover multiple prayers as long as it remains unbroken.',
   },
   {
     id: 'FQH-TYM-Q34',
     sourceIds: ['FQH-TYM-30'],
     topic: 'TYM',
     type: 'mcq',
-    prompt: 'Can a person combine tayammum and wuḍūʾ, e.g. wiping some limbs with earth and washing others with water?',
+    prompt:
+      'Can a person combine tayammum and wuḍūʾ, e.g. wiping some limbs with earth and washing others with water?',
     options: [
       'No — tayammum and wuḍūʾ cannot be combined',
       'Yes, as long as at least half of the limbs use water',
@@ -350,25 +395,35 @@ export const tayammumQuestions = [
       'Yes, but only for the face',
     ],
     answerIndex: 0,
-    explanation: 'Tayammum and wuḍūʾ cannot be combined — one cannot perform half of one and half of the other.',
+    explanation:
+      'Tayammum and wuḍūʾ cannot be combined — one cannot perform half of one and half of the other.',
   },
   {
     id: 'FQH-TYM-Q35',
     sourceIds: ['FQH-TYM-31'],
     topic: 'TYM',
     type: 'tf',
-    prompt: 'True or False: Ṣalāh performed with tayammum does not need to be repeated once water later becomes available.',
+    prompt:
+      'True or False: Ṣalāh performed with tayammum does not need to be repeated once water later becomes available.',
     answer: true,
-    explanation: 'Correct — a prayer validly performed with tayammum stands, even after water becomes available later.',
+    explanation:
+      'Correct — a prayer validly performed with tayammum stands, even after water becomes available later.',
   },
   {
     id: 'FQH-TYM-Q36',
     sourceIds: ['FQH-TYM-32'],
     topic: 'TYM',
     type: 'mcq',
-    prompt: 'For how long may tayammum remain valid, as long as the excuse permitting it continues and it is not broken?',
-    options: ['Months or years', 'Only until the next prayer', 'Only 24 hours', 'Only until sunset'],
+    prompt:
+      'For how long may tayammum remain valid, as long as the excuse permitting it continues and it is not broken?',
+    options: [
+      'Months or years',
+      'Only until the next prayer',
+      'Only 24 hours',
+      'Only until sunset',
+    ],
     answerIndex: 0,
-    explanation: 'Tayammum may remain valid for months or years, as long as the excuse continues and it is not otherwise broken.',
+    explanation:
+      'Tayammum may remain valid for months or years, as long as the excuse continues and it is not otherwise broken.',
   },
 ];

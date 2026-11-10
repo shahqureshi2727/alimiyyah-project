@@ -8,7 +8,15 @@ const MADHHAB_LABELS = {
 // Inline check/x icons matching the style used elsewhere in the app (TimedQuiz.jsx, IrabMode.jsx)
 function CheckIcon() {
   return (
-    <svg className="inline-icon check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg
+      className="inline-icon check"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      aria-hidden="true"
+      focusable="false"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -16,7 +24,15 @@ function CheckIcon() {
 
 function XIcon() {
   return (
-    <svg className="inline-icon x" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg
+      className="inline-icon x"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      aria-hidden="true"
+      focusable="false"
+    >
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
@@ -33,10 +49,18 @@ function XIcon() {
  * @param {*} props.currentAnswer - the answer the learner picked (option value for mcq, boolean for tf)
  * @param {(correct: boolean, answer: *) => void} props.onAnswer - called when the learner answers
  */
-export default function FiqhQuestionCard({ question, showFeedback, currentAnswer, onAnswer }) {
+export default function FiqhQuestionCard({
+  question,
+  headingId,
+  showFeedback,
+  currentAnswer,
+  onAnswer,
+}) {
   const shuffledOptions = useShuffledOptions(question.options, question.id);
   const madhhabBadge = question.madhhab && (
-    <span className="fiqh-madhhab-badge">{MADHHAB_LABELS[question.madhhab] || question.madhhab}</span>
+    <span className="fiqh-madhhab-badge">
+      {MADHHAB_LABELS[question.madhhab] || question.madhhab}
+    </span>
   );
 
   if (question.type === 'tf') {
@@ -48,8 +72,12 @@ export default function FiqhQuestionCard({ question, showFeedback, currentAnswer
     return (
       <div className="fiqh-question-card">
         {madhhabBadge}
-        <h2 className="fiqh-question-prompt">{question.prompt}</h2>
-        <div className={`fiqh-tf-choices ${showFeedback ? 'feedback-shown' : ''}`}>
+        <h2 id={headingId} className="fiqh-question-prompt">{question.prompt}</h2>
+        <div
+          className={`fiqh-tf-choices ${showFeedback ? 'feedback-shown' : ''}`}
+          role="group"
+          aria-labelledby={headingId}
+        >
           {tfOptions.map((opt) => {
             const isTapped = currentAnswer === opt.value;
             const isCorrectAnswer = opt.value === question.answer;
@@ -87,8 +115,12 @@ export default function FiqhQuestionCard({ question, showFeedback, currentAnswer
   return (
     <div className="fiqh-question-card">
       {madhhabBadge}
-      <h2 className="fiqh-question-prompt">{question.prompt}</h2>
-      <div className={`fiqh-mcq-choices ${showFeedback ? 'feedback-shown' : ''}`}>
+      <h2 id={headingId} className="fiqh-question-prompt">{question.prompt}</h2>
+      <div
+        className={`fiqh-mcq-choices ${showFeedback ? 'feedback-shown' : ''}`}
+        role="group"
+        aria-labelledby={headingId}
+      >
         {shuffledOptions.map((option, index) => {
           const isTapped = currentAnswer === option;
           const isCorrectAnswer = option === correctAnswer;

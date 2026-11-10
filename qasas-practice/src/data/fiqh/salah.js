@@ -51,7 +51,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-04'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Maghrib prayer time begins at the point of sunset and ends with the disappearance of the red twilight.',
+    prompt:
+      'True or False: Maghrib prayer time begins at the point of sunset and ends with the disappearance of the red twilight.',
     answer: true,
     explanation: 'Correct — this is the Maghrib time window.',
   },
@@ -75,17 +76,19 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-01', 'FQH-SLH-02', 'FQH-SLH-03', 'FQH-SLH-04', 'FQH-SLH-05'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'Which prayer\'s time begins immediately after zawāl (midday)?',
+    prompt: "Which prayer's time begins immediately after zawāl (midday)?",
     options: ['Ẓuhr', 'Fajr', 'Maghrib', 'ʿIshāʾ'],
     answerIndex: 0,
-    explanation: 'Ẓuhr begins immediately after zawāl (midday); the others begin at different points (true dawn, sunset, or after Maghrib).',
+    explanation:
+      'Ẓuhr begins immediately after zawāl (midday); the others begin at different points (true dawn, sunset, or after Maghrib).',
   },
   {
     id: 'FQH-SLH-Q07',
     sourceIds: ['FQH-SLH-06'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is mustaḥabb to pray Fajr when the light has begun to spread (isfār), rather than at the very earliest part of its time.',
+    prompt:
+      'True or False: It is mustaḥabb to pray Fajr when the light has begun to spread (isfār), rather than at the very earliest part of its time.',
     answer: true,
     explanation: 'Correct — praying Fajr during isfār is mustaḥabb.',
   },
@@ -102,14 +105,16 @@ export const salahQuestions = [
       'Always pray Ẓuhr immediately regardless of season',
     ],
     answerIndex: 0,
-    explanation: 'In winter, pray Ẓuhr as soon as its time enters; in summer, delay until it becomes cooler.',
+    explanation:
+      'In winter, pray Ẓuhr as soon as its time enters; in summer, delay until it becomes cooler.',
   },
   {
     id: 'FQH-SLH-Q09',
     sourceIds: ['FQH-SLH-08'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is mustaḥabb to delay ʿAṣr slightly, but before the sun changes colour.',
+    prompt:
+      'True or False: It is mustaḥabb to delay ʿAṣr slightly, but before the sun changes colour.',
     answer: true,
     explanation: 'Correct — a slight delay for ʿAṣr is mustaḥabb, within limits.',
   },
@@ -119,7 +124,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What is the mustaḥabb timing for Maghrib?',
-    options: ['Always pray it immediately when its time begins', 'Delay it until the stars appear', 'Delay it as long as possible', 'Pray it only after ʿIshāʾ enters'],
+    options: [
+      'Always pray it immediately when its time begins',
+      'Delay it until the stars appear',
+      'Delay it as long as possible',
+      'Pray it only after ʿIshāʾ enters',
+    ],
     answerIndex: 0,
     explanation: 'It is mustaḥabb to always pray Maghrib immediately when its time begins.',
   },
@@ -128,16 +138,19 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-10'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is mustaḥabb to delay ʿIshāʾ and pray it before one-third of the night has passed.',
+    prompt:
+      'True or False: It is mustaḥabb to delay ʿIshāʾ and pray it before one-third of the night has passed.',
     answer: true,
-    explanation: 'Correct — delaying ʿIshāʾ to before a third of the night has passed is mustaḥabb.',
+    explanation:
+      'Correct — delaying ʿIshāʾ to before a third of the night has passed is mustaḥabb.',
   },
   {
     id: 'FQH-SLH-Q12',
     sourceIds: ['FQH-SLH-11'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'In cloudy weather, what is recommended regarding ʿAṣr and ʿIshāʾ compared to the other prayers?',
+    prompt:
+      'In cloudy weather, what is recommended regarding ʿAṣr and ʿIshāʾ compared to the other prayers?',
     options: [
       'Pray ʿAṣr and ʿIshāʾ as soon as their time enters, while delaying the other prayers slightly out of caution',
       'Delay ʿAṣr and ʿIshāʾ, and pray the others immediately',
@@ -145,7 +158,8 @@ export const salahQuestions = [
       'Skip ʿAṣr and ʿIshāʾ entirely until the weather clears',
     ],
     answerIndex: 0,
-    explanation: 'In cloudy weather, ʿAṣr and ʿIshāʾ should be prayed as soon as their time enters, while the other prayers are delayed slightly out of caution.',
+    explanation:
+      'In cloudy weather, ʿAṣr and ʿIshāʾ should be prayed as soon as their time enters, while the other prayers are delayed slightly out of caution.',
   },
 
   // --- Fiqh-14: Prohibited/Disliked Times (FQH-SLH-12..23) ---
@@ -164,7 +178,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is a prohibited time for Ṣalāh?',
-    options: ['Midday (istiwāʾ/zenith)', 'Just after Fajr', 'Just before Maghrib begins', 'Mid-afternoon'],
+    options: [
+      'Midday (istiwāʾ/zenith)',
+      'Just after Fajr',
+      'Just before Maghrib begins',
+      'Mid-afternoon',
+    ],
     answerIndex: 0,
     explanation: 'Midday (istiwāʾ/zenith) is one of the three prohibited times.',
   },
@@ -173,9 +192,11 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-14'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Ṣalāh is prohibited at sunset, except that a day\'s ʿAṣr may still be completed at sunset if not yet prayed.',
+    prompt:
+      "True or False: Ṣalāh is prohibited at sunset, except that a day's ʿAṣr may still be completed at sunset if not yet prayed.",
     answer: true,
-    explanation: 'Correct — sunset is prohibited, with the specific exception for a not-yet-prayed ʿAṣr.',
+    explanation:
+      'Correct — sunset is prohibited, with the specific exception for a not-yet-prayed ʿAṣr.',
   },
   {
     id: 'FQH-SLH-Q16',
@@ -183,7 +204,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What are the three prohibited times for Ṣalāh?',
-    options: ['Sunrise, midday, and sunset', 'Fajr, Ẓuhr, and ʿAṣr', 'Midnight, dawn, and noon', 'After Maghrib, after ʿIshāʾ, and before Fajr'],
+    options: [
+      'Sunrise, midday, and sunset',
+      'Fajr, Ẓuhr, and ʿAṣr',
+      'Midnight, dawn, and noon',
+      'After Maghrib, after ʿIshāʾ, and before Fajr',
+    ],
     answerIndex: 0,
     explanation: 'The three prohibited times are sunrise, midday (istiwāʾ), and sunset.',
   },
@@ -209,14 +235,16 @@ export const salahQuestions = [
       'After ʿIshāʾ',
     ],
     answerIndex: 0,
-    explanation: 'Voluntary prayer is disliked before Fajr, except for the two rakʿahs of the Fajr sunnah.',
+    explanation:
+      'Voluntary prayer is disliked before Fajr, except for the two rakʿahs of the Fajr sunnah.',
   },
   {
     id: 'FQH-SLH-Q19',
     sourceIds: ['FQH-SLH-17'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Voluntary prayer is disliked after performing Fajr, continuing until after sunrise.',
+    prompt:
+      'True or False: Voluntary prayer is disliked after performing Fajr, continuing until after sunrise.',
     answer: true,
     explanation: 'Correct — this window is disliked for voluntary prayer.',
   },
@@ -247,16 +275,19 @@ export const salahQuestions = [
     prompt: 'Voluntary prayer is disliked before and after which prayer while at the muṣallā?',
     options: ['The ʿĪd prayer', 'Jumuʿah', 'Witr', 'Tarāwīḥ'],
     answerIndex: 0,
-    explanation: 'Voluntary prayer is disliked before and after the ʿĪd prayer while at the muṣallā.',
+    explanation:
+      'Voluntary prayer is disliked before and after the ʿĪd prayer while at the muṣallā.',
   },
   {
     id: 'FQH-SLH-Q23',
     sourceIds: ['FQH-SLH-21'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Prayer is disliked when the time remaining for an obligatory prayer is short.',
+    prompt:
+      'True or False: Prayer is disliked when the time remaining for an obligatory prayer is short.',
     answer: true,
-    explanation: 'Correct — starting a lengthy voluntary prayer when little time remains for the obligatory one is disliked.',
+    explanation:
+      'Correct — starting a lengthy voluntary prayer when little time remains for the obligatory one is disliked.',
   },
   {
     id: 'FQH-SLH-Q24',
@@ -264,16 +295,23 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Prayer is disliked at meal time under which condition?',
-    options: ['If one strongly desires the food that has been served', 'If the meal is cold', 'If eating alone', 'Regardless of desire for the food'],
+    options: [
+      'If one strongly desires the food that has been served',
+      'If the meal is cold',
+      'If eating alone',
+      'Regardless of desire for the food',
+    ],
     answerIndex: 0,
-    explanation: 'Prayer is disliked at meal time if one strongly desires the food that has been served.',
+    explanation:
+      'Prayer is disliked at meal time if one strongly desires the food that has been served.',
   },
   {
     id: 'FQH-SLH-Q25',
     sourceIds: ['FQH-SLH-23'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Prayer is disliked when something distracts the person, preventing full focus and breaking concentration.',
+    prompt:
+      'True or False: Prayer is disliked when something distracts the person, preventing full focus and breaking concentration.',
     answer: true,
     explanation: 'Correct — praying while distracted is disliked.',
   },
@@ -285,7 +323,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What is the first condition (shart) of Ṣalāh?',
-    options: ['Ritual purity — free from minor and major impurity', 'Facing the qiblah', 'Covering the ʿawrah', 'Making the intention'],
+    options: [
+      'Ritual purity — free from minor and major impurity',
+      'Facing the qiblah',
+      'Covering the ʿawrah',
+      'Making the intention',
+    ],
     answerIndex: 0,
     explanation: 'The first condition of Ṣalāh is ritual purity.',
   },
@@ -294,7 +337,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-25'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The second condition of Ṣalāh is cleanliness from physical filth (najāsah) on the body, clothing, and place of prayer.',
+    prompt:
+      'True or False: The second condition of Ṣalāh is cleanliness from physical filth (najāsah) on the body, clothing, and place of prayer.',
     answer: true,
     explanation: 'Correct — this is the second condition.',
   },
@@ -304,16 +348,23 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'The third condition of Ṣalāh, covering the ʿawrah, requires what for men?',
-    options: ['The area from below the navel to below the knees', 'The entire body except the face and hands', 'Only the private parts', 'The entire body including the face'],
+    options: [
+      'The area from below the navel to below the knees',
+      'The entire body except the face and hands',
+      'Only the private parts',
+      'The entire body including the face',
+    ],
     answerIndex: 0,
-    explanation: 'For men, covering the ʿawrah means the area from below the navel to below the knees.',
+    explanation:
+      'For men, covering the ʿawrah means the area from below the navel to below the knees.',
   },
   {
     id: 'FQH-SLH-Q29',
     sourceIds: ['FQH-SLH-26'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: For women, the ʿawrah is the entire body except the face, hands, and feet.',
+    prompt:
+      'True or False: For women, the ʿawrah is the entire body except the face, hands, and feet.',
     answer: true,
     explanation: 'Correct — this is the ʿawrah definition for women in Ṣalāh.',
   },
@@ -337,16 +388,19 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-28'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The fifth condition of Ṣalāh is that its prescribed time must have entered, with reasonable surety.',
+    prompt:
+      'True or False: The fifth condition of Ṣalāh is that its prescribed time must have entered, with reasonable surety.',
     answer: true,
-    explanation: 'Correct — the entering of prayer time, with reasonable surety, is the fifth condition.',
+    explanation:
+      'Correct — the entering of prayer time, with reasonable surety, is the fifth condition.',
   },
   {
     id: 'FQH-SLH-Q32',
     sourceIds: ['FQH-SLH-29'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'If someone prays without being reasonably sure the time has entered, but it turns out the time actually had entered, is the prayer valid?',
+    prompt:
+      'If someone prays without being reasonably sure the time has entered, but it turns out the time actually had entered, is the prayer valid?',
     options: [
       'No — it is invalid, since certainty was required at the time of praying',
       'Yes — since it turned out to be within the correct time',
@@ -354,14 +408,16 @@ export const salahQuestions = [
       'Valid only for voluntary prayers, not obligatory ones',
     ],
     answerIndex: 0,
-    explanation: 'The prayer is invalid if performed without reasonable surety, even if the time had actually entered.',
+    explanation:
+      'The prayer is invalid if performed without reasonable surety, even if the time had actually entered.',
   },
   {
     id: 'FQH-SLH-Q33',
     sourceIds: ['FQH-SLH-30'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The sixth condition, intention (niyyah), is located in the heart and does not need to be verbalized.',
+    prompt:
+      'True or False: The sixth condition, intention (niyyah), is located in the heart and does not need to be verbalized.',
     answer: true,
     explanation: 'Correct — niyyah is a heart-condition, not requiring verbalization.',
   },
@@ -378,11 +434,20 @@ export const salahQuestions = [
       'Written down before the prayer begins',
     ],
     answerIndex: 0,
-    explanation: 'Takbīrat al-Iḥrām must be said on the tongue, audible to oneself, aligned with the intention.',
+    explanation:
+      'Takbīrat al-Iḥrām must be said on the tongue, audible to oneself, aligned with the intention.',
   },
   {
     id: 'FQH-SLH-Q35',
-    sourceIds: ['FQH-SLH-24', 'FQH-SLH-25', 'FQH-SLH-26', 'FQH-SLH-27', 'FQH-SLH-28', 'FQH-SLH-30', 'FQH-SLH-31'],
+    sourceIds: [
+      'FQH-SLH-24',
+      'FQH-SLH-25',
+      'FQH-SLH-26',
+      'FQH-SLH-27',
+      'FQH-SLH-28',
+      'FQH-SLH-30',
+      'FQH-SLH-31',
+    ],
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the seven conditions (shurūṭ) of Ṣalāh?',
@@ -393,14 +458,16 @@ export const salahQuestions = [
       'Takbīrat al-Iḥrām',
     ],
     answerIndex: 0,
-    explanation: 'Wearing a specific colour of clothing is not one of the seven conditions; the other three genuinely are.',
+    explanation:
+      'Wearing a specific colour of clothing is not one of the seven conditions; the other three genuinely are.',
   },
   {
     id: 'FQH-SLH-Q36',
     sourceIds: ['FQH-SLH-32'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The conditions of Ṣalāh may be relaxed due to valid excuses, such as a lack of water or the absence of a proper garment.',
+    prompt:
+      'True or False: The conditions of Ṣalāh may be relaxed due to valid excuses, such as a lack of water or the absence of a proper garment.',
     answer: true,
     explanation: 'Correct — valid excuses can relax the conditions of Ṣalāh.',
   },
@@ -409,7 +476,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-33'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'If one is uncertain of the qiblah direction, what should be done, and what is the ruling if the guess is later proven wrong?',
+    prompt:
+      'If one is uncertain of the qiblah direction, what should be done, and what is the ruling if the guess is later proven wrong?',
     options: [
       'Make a reasonable effort (taḥarrī); the prayer is still valid even if later proven incorrect',
       'The prayer must always be repeated once the correct direction is known',
@@ -417,14 +485,16 @@ export const salahQuestions = [
       'Pray facing every possible direction one at a time',
     ],
     answerIndex: 0,
-    explanation: 'A reasonable effort (taḥarrī) is made, and the prayer remains valid even if the direction is later proven incorrect.',
+    explanation:
+      'A reasonable effort (taḥarrī) is made, and the prayer remains valid even if the direction is later proven incorrect.',
   },
   {
     id: 'FQH-SLH-Q38',
     sourceIds: ['FQH-SLH-34'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: If a mistake in the qiblah direction is discovered during the Ṣalāh, one must immediately turn toward the correct direction and continue, without needing to restart.',
+    prompt:
+      'True or False: If a mistake in the qiblah direction is discovered during the Ṣalāh, one must immediately turn toward the correct direction and continue, without needing to restart.',
     answer: true,
     explanation: 'Correct — the correction is made mid-prayer, with no need to restart.',
   },
@@ -436,7 +506,8 @@ export const salahQuestions = [
     topic: 'SLH',
     madhhab: 'Hanafi',
     type: 'mcq',
-    prompt: 'Regarding Takbīr al-Taḥrīmah, what is the difference in classification between Imam Muḥammad and Imams Abū Ḥanīfah/Abū Yūsuf?',
+    prompt:
+      'Regarding Takbīr al-Taḥrīmah, what is the difference in classification between Imam Muḥammad and Imams Abū Ḥanīfah/Abū Yūsuf?',
     options: [
       'Imam Muḥammad considers it a rukn (integral); Abū Ḥanīfah and Abū Yūsuf consider it a shart (condition)',
       'All three consider it a rukn',
@@ -444,14 +515,16 @@ export const salahQuestions = [
       'Imam Muḥammad considers it optional; the other two consider it mandatory',
     ],
     answerIndex: 0,
-    explanation: 'This is a documented difference of opinion within the Ḥanafī madhhab on the classification of Takbīr al-Taḥrīmah.',
+    explanation:
+      'This is a documented difference of opinion within the Ḥanafī madhhab on the classification of Takbīr al-Taḥrīmah.',
   },
   {
     id: 'FQH-SLH-Q40',
     sourceIds: ['FQH-SLH-36'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Standing (qiyām) is obligatory in farḍ prayers if physically able, but not obligatory in voluntary (nafl) prayers.',
+    prompt:
+      'True or False: Standing (qiyām) is obligatory in farḍ prayers if physically able, but not obligatory in voluntary (nafl) prayers.',
     answer: true,
     explanation: 'Correct — qiyām is required in farḍ prayers when able, but optional in nafl.',
   },
@@ -468,16 +541,18 @@ export const salahQuestions = [
       'It is never actually required, only recommended',
     ],
     answerIndex: 0,
-    explanation: 'Recitation is required in the first two rakʿahs of farḍ prayers, and in all rakʿahs of witr and nafl prayers.',
+    explanation:
+      'Recitation is required in the first two rakʿahs of farḍ prayers, and in all rakʿahs of witr and nafl prayers.',
   },
   {
     id: 'FQH-SLH-Q42',
     sourceIds: ['FQH-SLH-38'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The follower (muqtadī) praying behind an imam does not himself recite the Qurʾān during the prayer.',
+    prompt:
+      'True or False: The follower (muqtadī) praying behind an imam does not himself recite the Qurʾān during the prayer.',
     answer: true,
-    explanation: 'Correct — the imam\'s recitation suffices for the follower.',
+    explanation: "Correct — the imam's recitation suffices for the follower.",
   },
   {
     id: 'FQH-SLH-Q43',
@@ -489,16 +564,19 @@ export const salahQuestions = [
       'Bending forward to the extent the hands reach the knees, with the head level with the back',
       'A slight nod of the head',
       'Bending only the neck, not the back',
-      'Touching the toes without bending the back'],
+      'Touching the toes without bending the back',
+    ],
     answerIndex: 0,
-    explanation: 'Rukūʿ is bending forward until the hands reach the knees, with perfection being a head level with the back.',
+    explanation:
+      'Rukūʿ is bending forward until the hands reach the knees, with perfection being a head level with the back.',
   },
   {
     id: 'FQH-SLH-Q44',
     sourceIds: ['FQH-SLH-40'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The fifth integral, prostration (sujūd), requires the forehead, both hands, both knees, and the toes of both feet to be on the ground.',
+    prompt:
+      'True or False: The fifth integral, prostration (sujūd), requires the forehead, both hands, both knees, and the toes of both feet to be on the ground.',
     answer: true,
     explanation: 'Correct — all five points must be on the ground for valid sujūd.',
   },
@@ -508,7 +586,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'The sixth integral, the final sitting (qaʿdah akhīrah), must last at least how long?',
-    options: ['The duration of the tashahhud', 'One full minute', 'Ten seconds', 'There is no minimum duration'],
+    options: [
+      'The duration of the tashahhud',
+      'One full minute',
+      'Ten seconds',
+      'There is no minimum duration',
+    ],
     answerIndex: 0,
     explanation: 'The final sitting must last at least the duration of the tashahhud.',
   },
@@ -517,7 +600,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-42'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is farḍ for the one praying to exit the Ṣalāh through their own action, rather than it ending automatically.',
+    prompt:
+      'True or False: It is farḍ for the one praying to exit the Ṣalāh through their own action, rather than it ending automatically.',
     answer: true,
     explanation: 'Correct — one must actively exit the prayer (e.g. via salām).',
   },
@@ -534,7 +618,8 @@ export const salahQuestions = [
       'Prostration (sujūd)',
     ],
     answerIndex: 0,
-    explanation: 'A specific mandatory duʿāʾ between sajdahs is not one of the integrals; standing, rukūʿ, and sujūd all are.',
+    explanation:
+      'A specific mandatory duʿāʾ between sajdahs is not one of the integrals; standing, rukūʿ, and sujūd all are.',
   },
 
   // --- Fiqh-17: Wajib Acts (FQH-SLH-43..54) ---
@@ -543,7 +628,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-43'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Wājib 1 of Ṣalāh is to say the specific words "Allāhu Akbar" for the takbīr, rather than a synonym.',
+    prompt:
+      'True or False: Wājib 1 of Ṣalāh is to say the specific words "Allāhu Akbar" for the takbīr, rather than a synonym.',
     answer: true,
     explanation: 'Correct — a synonym does not fulfil this wājib.',
   },
@@ -560,16 +646,19 @@ export const salahQuestions = [
       'Only when praying alone, never in congregation',
     ],
     answerIndex: 0,
-    explanation: 'This additional recitation is wājib in the first two rakʿahs of farḍ prayers and all rakʿahs of nafl prayers.',
+    explanation:
+      'This additional recitation is wājib in the first two rakʿahs of farḍ prayers and all rakʿahs of nafl prayers.',
   },
   {
     id: 'FQH-SLH-Q50',
     sourceIds: ['FQH-SLH-45'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The additional recitation (al-Fātiḥah plus a sūrah) is wājib specifically in the first two rakʿahs of an obligatory prayer, not the later rakʿahs.',
+    prompt:
+      'True or False: The additional recitation (al-Fātiḥah plus a sūrah) is wājib specifically in the first two rakʿahs of an obligatory prayer, not the later rakʿahs.',
     answer: true,
-    explanation: 'Correct — later rakʿahs of an obligatory prayer do not require the additional sūrah.',
+    explanation:
+      'Correct — later rakʿahs of an obligatory prayer do not require the additional sūrah.',
   },
   {
     id: 'FQH-SLH-Q51',
@@ -591,7 +680,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-47'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Wājib 4 is being still for a moment in each pillar (rukn) of the prayer.',
+    prompt:
+      'True or False: Wājib 4 is being still for a moment in each pillar (rukn) of the prayer.',
     answer: true,
     explanation: 'Correct — a moment of stillness (ṭumaʾnīnah) in each rukn is wājib.',
   },
@@ -601,7 +691,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Wājib 5, the first sitting (qaʿdah ūlā), applies to prayers of how many rakʿahs?',
-    options: ['Three or more rakʿahs', 'Only two rakʿahs', 'Only one rakʿah', 'Only four rakʿahs, never three'],
+    options: [
+      'Three or more rakʿahs',
+      'Only two rakʿahs',
+      'Only one rakʿah',
+      'Only four rakʿahs, never three',
+    ],
     answerIndex: 0,
     explanation: 'The first sitting is wājib in prayers of three or more rakʿahs.',
   },
@@ -610,7 +705,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-49'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Wājib 6 is reciting the full tashahhud in both the first and final sittings.',
+    prompt:
+      'True or False: Wājib 6 is reciting the full tashahhud in both the first and final sittings.',
     answer: true,
     explanation: 'Correct — the full tashahhud is wājib in both sittings.',
   },
@@ -620,7 +716,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Wājib 7 of Ṣalāh is what?',
-    options: ['Saying the salām to end the prayer', 'Standing for qiyām', 'Reciting al-Fātiḥah', 'Making the intention'],
+    options: [
+      'Saying the salām to end the prayer',
+      'Standing for qiyām',
+      'Reciting al-Fātiḥah',
+      'Making the intention',
+    ],
     answerIndex: 0,
     explanation: 'Saying the salām to end the prayer is Wājib 7.',
   },
@@ -648,7 +749,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-53'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Wājib 10 requires the imam to recite the Qurʾān aloud in the first two rakʿahs of prayers recited aloud.',
+    prompt:
+      'True or False: Wājib 10 requires the imam to recite the Qurʾān aloud in the first two rakʿahs of prayers recited aloud.',
     answer: true,
     explanation: 'Correct — this is Wājib 10, applying to the imam in aloud prayers.',
   },
@@ -658,9 +760,15 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Wājib 11 requires silent recitation in the remaining rakʿahs for whom?',
-    options: ['Both the imam and an individual praying alone', 'Only the imam', 'Only an individual praying alone', 'Only the follower behind an imam'],
+    options: [
+      'Both the imam and an individual praying alone',
+      'Only the imam',
+      'Only an individual praying alone',
+      'Only the follower behind an imam',
+    ],
     answerIndex: 0,
-    explanation: 'Wājib 11 applies to both the imam and someone praying alone in the remaining rakʿahs.',
+    explanation:
+      'Wājib 11 applies to both the imam and someone praying alone in the remaining rakʿahs.',
   },
   {
     id: 'FQH-SLH-Q60',
@@ -684,8 +792,14 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-55'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'When raising the hands at Takbīr al-Taḥrīmah, where do men and women raise them to, respectively?',
-    options: ['Men to their ears, women to their shoulders', 'Both to their ears', 'Both to their shoulders', 'Men to their shoulders, women to their ears'],
+    prompt:
+      'When raising the hands at Takbīr al-Taḥrīmah, where do men and women raise them to, respectively?',
+    options: [
+      'Men to their ears, women to their shoulders',
+      'Both to their ears',
+      'Both to their shoulders',
+      'Men to their shoulders, women to their ears',
+    ],
     answerIndex: 0,
     explanation: 'Men raise their hands to their ears; women raise theirs to their shoulders.',
   },
@@ -694,7 +808,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-56'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is sunnah to keep the fingers slightly spaced when raising the hands for Takbīr al-Taḥrīmah.',
+    prompt:
+      'True or False: It is sunnah to keep the fingers slightly spaced when raising the hands for Takbīr al-Taḥrīmah.',
     answer: true,
     explanation: 'Correct — slightly spaced fingers are sunnah during the takbīr.',
   },
@@ -703,8 +818,14 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-57'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'After Takbīr al-Taḥrīmah, where do men and women place their right hand over the left, respectively?',
-    options: ['Men below the navel, women on the chest', 'Both below the navel', 'Both on the chest', 'Men on the chest, women below the navel'],
+    prompt:
+      'After Takbīr al-Taḥrīmah, where do men and women place their right hand over the left, respectively?',
+    options: [
+      'Men below the navel, women on the chest',
+      'Both below the navel',
+      'Both on the chest',
+      'Men on the chest, women below the navel',
+    ],
     answerIndex: 0,
     explanation: 'Men place their hands below the navel; women place theirs on the chest.',
   },
@@ -732,9 +853,11 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-60'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is sunnah to recite the Basmalah before al-Fātiḥah in every rakʿah, except for a follower praying behind an imam.',
+    prompt:
+      'True or False: It is sunnah to recite the Basmalah before al-Fātiḥah in every rakʿah, except for a follower praying behind an imam.',
     answer: true,
-    explanation: 'Correct — a follower does not recite the Basmalah since he does not recite al-Fātiḥah himself.',
+    explanation:
+      'Correct — a follower does not recite the Basmalah since he does not recite al-Fātiḥah himself.',
   },
   {
     id: 'FQH-SLH-Q67',
@@ -761,7 +884,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'How are the Thanāʾ, Taʿawwudh, Basmalah, Āmīn, and Tahmīd recited?',
-    options: ['Silently', 'Aloud, always', 'Aloud only by the imam', 'They are not recited at all, only intended'],
+    options: [
+      'Silently',
+      'Aloud, always',
+      'Aloud only by the imam',
+      'They are not recited at all, only intended',
+    ],
     answerIndex: 0,
     explanation: 'All five of these are recited silently.',
   },
@@ -780,7 +908,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'It is sunnah to say the takbīr at which of the following transitions?',
-    options: ['Going into rukūʿ, going into sujūd, and rising from sujūd', 'Only at the very start of the prayer', 'Only during the final sitting', 'Only when the imam forgets a rukn'],
+    options: [
+      'Going into rukūʿ, going into sujūd, and rising from sujūd',
+      'Only at the very start of the prayer',
+      'Only during the final sitting',
+      'Only when the imam forgets a rukn',
+    ],
     answerIndex: 0,
     explanation: 'Takbīrs are said as sunnah at these three transitions.',
   },
@@ -798,14 +931,17 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-67'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'In which rakʿahs is it sunnah to recite al-Fātiḥah alone, without an additional sūrah?',
+    prompt:
+      'In which rakʿahs is it sunnah to recite al-Fātiḥah alone, without an additional sūrah?',
     options: [
       'The last two rakʿahs of a four-rakʿah prayer, and the third rakʿah of Maghrib',
       'The first two rakʿahs of any prayer',
       'Every rakʿah of every prayer',
-      'Only in Witr'],
+      'Only in Witr',
+    ],
     answerIndex: 0,
-    explanation: 'Al-Fātiḥah alone (no additional sūrah) is sunnah in the last two rakʿahs of a four-rakʿah prayer and the third rakʿah of Maghrib.',
+    explanation:
+      'Al-Fātiḥah alone (no additional sūrah) is sunnah in the last two rakʿahs of a four-rakʿah prayer and the third rakʿah of Maghrib.',
   },
   {
     id: 'FQH-SLH-Q74',
@@ -820,14 +956,16 @@ export const salahQuestions = [
       'Saying "Āmīn" after al-Fātiḥah',
     ],
     answerIndex: 0,
-    explanation: 'Reciting the entire Qurʾān in one rakʿah is not a sunnah act; the other three genuinely are.',
+    explanation:
+      'Reciting the entire Qurʾān in one rakʿah is not a sunnah act; the other three genuinely are.',
   },
   {
     id: 'FQH-SLH-Q75',
     sourceIds: ['FQH-SLH-68'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is adab for men to remove their hands from loose sleeves when saying Takbīr al-Taḥrīmah.',
+    prompt:
+      'True or False: It is adab for men to remove their hands from loose sleeves when saying Takbīr al-Taḥrīmah.',
     answer: true,
     explanation: 'Correct — this is one of the adab of Ṣalāh.',
   },
@@ -836,17 +974,24 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-69'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'Where should one\'s gaze be focused during sujūd, as adab?',
-    options: ['The tip of the nose', 'The place of sujūd', 'The top of the feet', 'Toward each shoulder'],
+    prompt: "Where should one's gaze be focused during sujūd, as adab?",
+    options: [
+      'The tip of the nose',
+      'The place of sujūd',
+      'The top of the feet',
+      'Toward each shoulder',
+    ],
     answerIndex: 0,
-    explanation: 'During sujūd, the gaze should be at the tip of the nose (standing: place of sujūd; rukūʿ: top of feet; sitting: lap; salām: each shoulder).',
+    explanation:
+      'During sujūd, the gaze should be at the tip of the nose (standing: place of sujūd; rukūʿ: top of feet; sitting: lap; salām: each shoulder).',
   },
   {
     id: 'FQH-SLH-Q77',
     sourceIds: ['FQH-SLH-70'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is adab to maintain composure and stillness in Ṣalāh, avoiding coughing as much as possible and keeping the mouth closed when yawning.',
+    prompt:
+      'True or False: It is adab to maintain composure and stillness in Ṣalāh, avoiding coughing as much as possible and keeping the mouth closed when yawning.',
     answer: true,
     explanation: 'Correct — composure and stillness are part of the adab of Ṣalāh.',
   },
@@ -857,7 +1002,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-71'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Uttering any word outside the prescribed words of prayer, even out of forgetfulness, invalidates Ṣalāh.',
+    prompt:
+      'True or False: Uttering any word outside the prescribed words of prayer, even out of forgetfulness, invalidates Ṣalāh.',
     answer: true,
     explanation: 'Correct — even forgetful speech invalidates the prayer.',
   },
@@ -867,7 +1013,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following invalidates Ṣalāh?',
-    options: ['Excessive movement', 'A single small hand gesture', 'Blinking', 'Breathing normally'],
+    options: [
+      'Excessive movement',
+      'A single small hand gesture',
+      'Blinking',
+      'Breathing normally',
+    ],
     answerIndex: 0,
     explanation: 'Excessive movement invalidates Ṣalāh.',
   },
@@ -876,7 +1027,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-73'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Eating anything during the prayer, even a small amount, invalidates Ṣalāh.',
+    prompt:
+      'True or False: Eating anything during the prayer, even a small amount, invalidates Ṣalāh.',
     answer: true,
     explanation: 'Correct — any amount of eating invalidates the prayer.',
   },
@@ -886,7 +1038,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What happens if a person drinks water during the prayer?',
-    options: ['The Ṣalāh is invalidated', 'Only the current rakʿah is invalidated', 'Nothing, if it is only a sip', 'It is only disliked, not invalidating'],
+    options: [
+      'The Ṣalāh is invalidated',
+      'Only the current rakʿah is invalidated',
+      'Nothing, if it is only a sip',
+      'It is only disliked, not invalidating',
+    ],
     answerIndex: 0,
     explanation: 'Drinking water or any other liquid during the prayer invalidates it.',
   },
@@ -895,7 +1052,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-75'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Clearing the throat in a way that produces letters, without a valid excuse, invalidates Ṣalāh.',
+    prompt:
+      'True or False: Clearing the throat in a way that produces letters, without a valid excuse, invalidates Ṣalāh.',
     answer: true,
     explanation: 'Correct — this counts as speech and invalidates the prayer.',
   },
@@ -904,10 +1062,17 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-76'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'Crying out loud due to a calamity invalidates Ṣalāh, EXCEPT when the crying is due to what?',
-    options: ['Remembrance of Paradise or Hellfire', 'Remembrance of a happy memory', 'Physical exhaustion', 'Hunger'],
+    prompt:
+      'Crying out loud due to a calamity invalidates Ṣalāh, EXCEPT when the crying is due to what?',
+    options: [
+      'Remembrance of Paradise or Hellfire',
+      'Remembrance of a happy memory',
+      'Physical exhaustion',
+      'Hunger',
+    ],
     answerIndex: 0,
-    explanation: 'Crying due to remembrance of Paradise or Hellfire is excused and does not invalidate the prayer.',
+    explanation:
+      'Crying due to remembrance of Paradise or Hellfire is excused and does not invalidate the prayer.',
   },
   {
     id: 'FQH-SLH-Q84',
@@ -924,7 +1089,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following invalidates Ṣalāh?',
-    options: ['Shaking hands', 'Making a fist quietly', 'Gently swaying while standing', 'Blinking rapidly'],
+    options: [
+      'Shaking hands',
+      'Making a fist quietly',
+      'Gently swaying while standing',
+      'Blinking rapidly',
+    ],
     answerIndex: 0,
     explanation: 'Shaking hands invalidates Ṣalāh.',
   },
@@ -933,7 +1103,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-79'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Responding to someone\'s speech — even with a phrase from the Qurʾān or dhikr — invalidates Ṣalāh.',
+    prompt:
+      "True or False: Responding to someone's speech — even with a phrase from the Qurʾān or dhikr — invalidates Ṣalāh.",
     answer: true,
     explanation: 'Correct — even a Qurʾānic response used conversationally invalidates the prayer.',
   },
@@ -943,7 +1114,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Turning the torso away from the qiblah by how many degrees invalidates Ṣalāh?',
-    options: ['More than 45 degrees on either side', 'Any amount at all', 'More than 90 degrees only', 'It never invalidates the prayer'],
+    options: [
+      'More than 45 degrees on either side',
+      'Any amount at all',
+      'More than 90 degrees only',
+      'It never invalidates the prayer',
+    ],
     answerIndex: 0,
     explanation: 'Turning more than 45 degrees on either side invalidates Ṣalāh.',
   },
@@ -952,7 +1128,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-81'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Making duʿāʾ using normal human speech, or asking for something that could be asked of a human being, invalidates Ṣalāh.',
+    prompt:
+      'True or False: Making duʿāʾ using normal human speech, or asking for something that could be asked of a human being, invalidates Ṣalāh.',
     answer: true,
     explanation: 'Correct — this is the "worldly supplication" invalidator.',
   },
@@ -962,7 +1139,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What invalidates Ṣalāh when saying the takbīr ("Allāhu Akbar")?',
-    options: ['Extending the hamzah', 'Saying it too quietly', 'Saying it while sitting', 'Saying it with the wrong hand position'],
+    options: [
+      'Extending the hamzah',
+      'Saying it too quietly',
+      'Saying it while sitting',
+      'Saying it with the wrong hand position',
+    ],
     answerIndex: 0,
     explanation: 'Extending the hamzah in the takbīr invalidates Ṣalāh.',
   },
@@ -971,9 +1153,11 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-83'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Any part of the ʿawrah (at least one-fourth of a limb) becoming uncovered for long enough to perform an integral invalidates Ṣalāh.',
+    prompt:
+      'True or False: Any part of the ʿawrah (at least one-fourth of a limb) becoming uncovered for long enough to perform an integral invalidates Ṣalāh.',
     answer: true,
-    explanation: 'Correct — sustained exposure of the ʿawrah during an integral invalidates the prayer.',
+    explanation:
+      'Correct — sustained exposure of the ʿawrah during an integral invalidates the prayer.',
   },
   {
     id: 'FQH-SLH-Q91',
@@ -981,7 +1165,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Carrying an unexcused amount of najāsah during the prayer has what effect?',
-    options: ['It invalidates Ṣalāh', 'It only makes the prayer makrūh', 'It has no effect if unnoticed', 'It only matters if noticed by others'],
+    options: [
+      'It invalidates Ṣalāh',
+      'It only makes the prayer makrūh',
+      'It has no effect if unnoticed',
+      'It only matters if noticed by others',
+    ],
     answerIndex: 0,
     explanation: 'An unexcused amount of najāsah during the prayer invalidates Ṣalāh.',
   },
@@ -990,9 +1179,10 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-85'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: A follower preceding the imam in an integral, or missing an integral the imam performed, invalidates that follower\'s Ṣalāh.',
+    prompt:
+      "True or False: A follower preceding the imam in an integral, or missing an integral the imam performed, invalidates that follower's Ṣalāh.",
     answer: true,
-    explanation: 'Correct — incorrect following of the imam invalidates the follower\'s prayer.',
+    explanation: "Correct — incorrect following of the imam invalidates the follower's prayer.",
   },
   {
     id: 'FQH-SLH-Q93',
@@ -1001,13 +1191,14 @@ export const salahQuestions = [
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the 15 invalidators of Ṣalāh?',
     options: [
-      'Slightly adjusting one\'s prayer mat with the foot before beginning',
+      "Slightly adjusting one's prayer mat with the foot before beginning",
       'Human speech outside the prescribed words',
       'Greeting someone',
       'Shaking hands',
     ],
     answerIndex: 0,
-    explanation: 'Adjusting the prayer mat before beginning (i.e. before the prayer starts) is not one of the 15 invalidators; the other three are.',
+    explanation:
+      'Adjusting the prayer mat before beginning (i.e. before the prayer starts) is not one of the 15 invalidators; the other three are.',
   },
 
   // --- Fiqh-20: Makruhat (FQH-SLH-86..117) ---
@@ -1025,17 +1216,20 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-87'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'Playing with one\'s clothing or body during Ṣalāh, without amounting to excessive movement, is what?',
+    prompt:
+      "Playing with one's clothing or body during Ṣalāh, without amounting to excessive movement, is what?",
     options: ['Makrūh', 'An invalidator', 'Sunnah', 'Wājib'],
     answerIndex: 0,
-    explanation: 'Playing with clothing/body (without excessive movement) is makrūh, not an invalidator.',
+    explanation:
+      'Playing with clothing/body (without excessive movement) is makrūh, not an invalidator.',
   },
   {
     id: 'FQH-SLH-Q96',
     sourceIds: ['FQH-SLH-88'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Wiping pebbles or dirt repeatedly at the place of sajdah is makrūh; it is permitted only once.',
+    prompt:
+      'True or False: Wiping pebbles or dirt repeatedly at the place of sajdah is makrūh; it is permitted only once.',
     answer: true,
     explanation: 'Correct — repeated wiping is makrūh, one wipe is permitted.',
   },
@@ -1045,9 +1239,9 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is makrūh during Ṣalāh?',
-    options: ['Cracking one\'s knuckles', 'Blinking', 'Swallowing saliva', 'Breathing deeply'],
+    options: ["Cracking one's knuckles", 'Blinking', 'Swallowing saliva', 'Breathing deeply'],
     answerIndex: 0,
-    explanation: 'Cracking one\'s knuckles during Ṣalāh is makrūh.',
+    explanation: "Cracking one's knuckles during Ṣalāh is makrūh.",
   },
   {
     id: 'FQH-SLH-Q98',
@@ -1064,9 +1258,14 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is makrūh during Ṣalāh?',
-    options: ['Turning one\'s neck', 'Looking straight ahead at the place of sujūd', 'Standing upright', 'Keeping the feet shoulder-width apart'],
+    options: [
+      "Turning one's neck",
+      'Looking straight ahead at the place of sujūd',
+      'Standing upright',
+      'Keeping the feet shoulder-width apart',
+    ],
     answerIndex: 0,
-    explanation: 'Turning one\'s neck during Ṣalāh is makrūh.',
+    explanation: "Turning one's neck during Ṣalāh is makrūh.",
   },
   {
     id: 'FQH-SLH-Q100',
@@ -1083,16 +1282,22 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is makrūh during sujūd?',
-    options: ['Resting the forearms on the ground', 'Having the toes pointed toward the qiblah', 'Keeping the elbows off the ground', 'Placing the forehead on the ground'],
+    options: [
+      'Resting the forearms on the ground',
+      'Having the toes pointed toward the qiblah',
+      'Keeping the elbows off the ground',
+      'Placing the forehead on the ground',
+    ],
     answerIndex: 0,
-    explanation: 'Resting the forearms on the ground during sujūd is makrūh (like an animal lying down).',
+    explanation:
+      'Resting the forearms on the ground during sujūd is makrūh (like an animal lying down).',
   },
   {
     id: 'FQH-SLH-Q102',
     sourceIds: ['FQH-SLH-94'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Rolling up one\'s sleeves during Ṣalāh is makrūh.',
+    prompt: "True or False: Rolling up one's sleeves during Ṣalāh is makrūh.",
     answer: true,
     explanation: 'Correct — rolled-up sleeves during prayer are makrūh.',
   },
@@ -1109,14 +1314,16 @@ export const salahQuestions = [
       'It is always makrūh, regardless of ability to cover more',
     ],
     answerIndex: 0,
-    explanation: 'It is makrūh only when he has the ability to cover his whole body but chooses not to.',
+    explanation:
+      'It is makrūh only when he has the ability to cover his whole body but chooses not to.',
   },
   {
     id: 'FQH-SLH-Q104',
     sourceIds: ['FQH-SLH-96'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Gathering one\'s garment close to the body before going into prostration is makrūh.',
+    prompt:
+      "True or False: Gathering one's garment close to the body before going into prostration is makrūh.",
     answer: true,
     explanation: 'Correct — this is makrūh, similar to rolling up sleeves.',
   },
@@ -1150,7 +1357,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is makrūh during Ṣalāh?',
-    options: ['Yawning', 'Standing still', 'Reciting silently', 'Placing the right hand over the left'],
+    options: [
+      'Yawning',
+      'Standing still',
+      'Reciting silently',
+      'Placing the right hand over the left',
+    ],
     answerIndex: 0,
     explanation: 'Yawning during Ṣalāh is makrūh.',
   },
@@ -1169,7 +1381,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What is makrūh regarding the mouth or nose during Ṣalāh?',
-    options: ['Covering them unnecessarily', 'Breathing through them normally', 'Reciting through them clearly', 'Keeping them uncovered at all times'],
+    options: [
+      'Covering them unnecessarily',
+      'Breathing through them normally',
+      'Reciting through them clearly',
+      'Keeping them uncovered at all times',
+    ],
     answerIndex: 0,
     explanation: 'Covering the mouth or nose unnecessarily during Ṣalāh is makrūh.',
   },
@@ -1188,7 +1405,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'What is makrūh regarding the surface one prostrates on?',
-    options: ['Prostrating on a picture', 'Prostrating on a plain rug', 'Prostrating on tile', 'Prostrating on grass'],
+    options: [
+      'Prostrating on a picture',
+      'Prostrating on a plain rug',
+      'Prostrating on tile',
+      'Prostrating on grass',
+    ],
     answerIndex: 0,
     explanation: 'Prostrating on a picture (of an animate creature) is makrūh.',
   },
@@ -1226,9 +1448,15 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Praying while needing which of the following is makrūh?',
-    options: ['The bathroom or needing to relieve gas', 'Sleep, after a full night\'s rest', 'A drink of water when not thirsty', 'A change of scenery'],
+    options: [
+      'The bathroom or needing to relieve gas',
+      "Sleep, after a full night's rest",
+      'A drink of water when not thirsty',
+      'A change of scenery',
+    ],
     answerIndex: 0,
-    explanation: 'Praying while needing the bathroom or to relieve gas is makrūh, since it distracts from the prayer.',
+    explanation:
+      'Praying while needing the bathroom or to relieve gas is makrūh, since it distracts from the prayer.',
   },
   {
     id: 'FQH-SLH-Q116',
@@ -1245,7 +1473,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Praying in a garment bearing what is makrūh?',
-    options: ['A picture of an animate creature', 'A solid colour', 'A geometric pattern', 'Arabic calligraphy'],
+    options: [
+      'A picture of an animate creature',
+      'A solid colour',
+      'A geometric pattern',
+      'Arabic calligraphy',
+    ],
     answerIndex: 0,
     explanation: 'Praying in a garment with a picture of an animate creature is makrūh.',
   },
@@ -1254,9 +1487,11 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-110'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Praying with one\'s head uncovered is makrūh, unless done deliberately out of humility.',
+    prompt:
+      "True or False: Praying with one's head uncovered is makrūh, unless done deliberately out of humility.",
     answer: true,
-    explanation: 'Correct — head-covering is otherwise recommended, but deliberate humility is an exception.',
+    explanation:
+      'Correct — head-covering is otherwise recommended, but deliberate humility is an exception.',
   },
   {
     id: 'FQH-SLH-Q119',
@@ -1264,7 +1499,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Praying when food has been served is makrūh under what condition?',
-    options: ['One desires the food', 'The food is cold', 'The food is for guests', 'It is always makrūh regardless of desire'],
+    options: [
+      'One desires the food',
+      'The food is cold',
+      'The food is for guests',
+      'It is always makrūh regardless of desire',
+    ],
     answerIndex: 0,
     explanation: 'It is makrūh only if one desires the served food, distracting from the prayer.',
   },
@@ -1275,7 +1515,8 @@ export const salahQuestions = [
     type: 'tf',
     prompt: 'True or False: Praying in the presence of a picture of an animate creature is makrūh.',
     answer: true,
-    explanation: 'Correct — this is makrūh, distinct from prostrating on such a picture (also makrūh).',
+    explanation:
+      'Correct — this is makrūh, distinct from prostrating on such a picture (also makrūh).',
   },
   {
     id: 'FQH-SLH-Q121',
@@ -1283,7 +1524,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Praying around what is makrūh?',
-    options: ['Something that would distract the person', 'A quiet, empty room', 'A closed door', 'Natural light'],
+    options: [
+      'Something that would distract the person',
+      'A quiet, empty room',
+      'A closed door',
+      'Natural light',
+    ],
     answerIndex: 0,
     explanation: 'Praying around something distracting is makrūh.',
   },
@@ -1292,7 +1538,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-114'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Praying in a congregation while standing alone in a row, rather than alongside others, is makrūh.',
+    prompt:
+      'True or False: Praying in a congregation while standing alone in a row, rather than alongside others, is makrūh.',
     answer: true,
     explanation: 'Correct — standing alone in a row is makrūh.',
   },
@@ -1320,24 +1567,34 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-117'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: According to the source slide, wiping dirt or sweat off one\'s face during Ṣalāh in a way that does NOT distract is listed alongside the makrūh actions (though this item is flagged in the vault as possibly a mismatch, since a non-distracting action being disliked is unusual).',
+    prompt:
+      "True or False: According to the source slide, wiping dirt or sweat off one's face during Ṣalāh in a way that does NOT distract is listed alongside the makrūh actions (though this item is flagged in the vault as possibly a mismatch, since a non-distracting action being disliked is unusual).",
     answer: true,
-    explanation: 'This is recorded as stated on the source slide — see the flag in content/Fiqh/_Fiqh-MOC.md regarding possible ambiguity on this specific item.',
+    explanation:
+      'This is recorded as stated on the source slide — see the flag in content/Fiqh/_Fiqh-MOC.md regarding possible ambiguity on this specific item.',
   },
   {
     id: 'FQH-SLH-Q126',
-    sourceIds: ['FQH-SLH-89', 'FQH-SLH-98', 'FQH-SLH-99', 'FQH-SLH-100', 'FQH-SLH-104', 'FQH-SLH-105'],
+    sourceIds: [
+      'FQH-SLH-89',
+      'FQH-SLH-98',
+      'FQH-SLH-99',
+      'FQH-SLH-100',
+      'FQH-SLH-104',
+      'FQH-SLH-105',
+    ],
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Which of the following is NOT one of the makrūh actions in Ṣalāh?',
     options: [
       'Standing perfectly still with eyes open, focused on the place of sujūd',
-      'Cracking one\'s knuckles',
+      "Cracking one's knuckles",
       'Closing the eyes',
       'Praying near filth',
     ],
     answerIndex: 0,
-    explanation: 'Standing still with eyes open focused on the place of sujūd is actually the recommended adab, not makrūh; the other three are genuinely makrūh.',
+    explanation:
+      'Standing still with eyes open focused on the place of sujūd is actually the recommended adab, not makrūh; the other three are genuinely makrūh.',
   },
 
   // --- Fiqh-21: Permissible Actions; Breaking/Abandoning the Prayer (FQH-SLH-118..132) ---
@@ -1346,7 +1603,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-118'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is mustaḥabb to place a sutrah (barrier) in front of oneself while praying.',
+    prompt:
+      'True or False: It is mustaḥabb to place a sutrah (barrier) in front of oneself while praying.',
     answer: true,
     explanation: 'Correct — placing a sutrah is mustaḥabb.',
   },
@@ -1355,8 +1613,14 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-119'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'If someone attempts to pass in front of a worshipper, what may the worshipper (a man) do?',
-    options: ['Say "Subḥān Allāh" or gesture to prevent them passing', 'Stop the prayer entirely to speak to them', 'Ignore it, since nothing may be done', 'Shout at them to stop'],
+    prompt:
+      'If someone attempts to pass in front of a worshipper, what may the worshipper (a man) do?',
+    options: [
+      'Say "Subḥān Allāh" or gesture to prevent them passing',
+      'Stop the prayer entirely to speak to them',
+      'Ignore it, since nothing may be done',
+      'Shout at them to stop',
+    ],
     answerIndex: 0,
     explanation: 'A man may say "Subḥān Allāh" or gesture to prevent the person from passing.',
   },
@@ -1365,7 +1629,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-120'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: A woman will ward off someone attempting to pass in front of her without raising her voice.',
+    prompt:
+      'True or False: A woman will ward off someone attempting to pass in front of her without raising her voice.',
     answer: true,
     explanation: 'Correct — a woman uses a gesture rather than raising her voice.',
   },
@@ -1375,7 +1640,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Is wearing a belt around the waist during Ṣalāh permissible?',
-    options: ['Yes, it is permissible', 'No, it invalidates the prayer', 'No, it is makrūh', 'Only for the imam'],
+    options: [
+      'Yes, it is permissible',
+      'No, it invalidates the prayer',
+      'No, it is makrūh',
+      'Only for the imam',
+    ],
     answerIndex: 0,
     explanation: 'Wearing a belt around the waist during Ṣalāh is permissible.',
   },
@@ -1384,7 +1654,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-122'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Carrying a sword or similar item during Ṣalāh is permissible, provided it is not distracting.',
+    prompt:
+      'True or False: Carrying a sword or similar item during Ṣalāh is permissible, provided it is not distracting.',
     answer: true,
     explanation: 'Correct — this is permissible as long as it does not distract from the prayer.',
   },
@@ -1394,18 +1665,26 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Praying while facing which of the following is permissible?',
-    options: ['A copy of the Qurʾān, a sword, a seated person\'s back, or a candle', 'A mirror reflecting oneself', 'An open flame directly at head height', 'Nothing — one must face an empty wall'],
+    options: [
+      "A copy of the Qurʾān, a sword, a seated person's back, or a candle",
+      'A mirror reflecting oneself',
+      'An open flame directly at head height',
+      'Nothing — one must face an empty wall',
+    ],
     answerIndex: 0,
-    explanation: 'Facing a copy of the Qurʾān, a sword, the back of a seated person, or a candle/lamp is all permissible.',
+    explanation:
+      'Facing a copy of the Qurʾān, a sword, the back of a seated person, or a candle/lamp is all permissible.',
   },
   {
     id: 'FQH-SLH-Q133',
     sourceIds: ['FQH-SLH-124'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: Killing a snake or scorpion during Ṣalāh, if harm is feared, is permissible with no more than two strikes.',
+    prompt:
+      'True or False: Killing a snake or scorpion during Ṣalāh, if harm is feared, is permissible with no more than two strikes.',
     answer: true,
-    explanation: 'Correct — this is permissible, even if it requires a slight movement away from the qiblah.',
+    explanation:
+      'Correct — this is permissible, even if it requires a slight movement away from the qiblah.',
   },
   {
     id: 'FQH-SLH-Q134',
@@ -1413,7 +1692,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'Is praying on carpets or rugs permissible?',
-    options: ['Yes, it is permissible', 'No, one must pray directly on bare ground', 'Only carpets without any pattern', 'Only in the masjid, not at home'],
+    options: [
+      'Yes, it is permissible',
+      'No, one must pray directly on bare ground',
+      'Only carpets without any pattern',
+      'Only in the masjid, not at home',
+    ],
     answerIndex: 0,
     explanation: 'Praying on carpets, rugs, or similar coverings is permissible.',
   },
@@ -1422,7 +1706,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-126'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is permissible to break the Ṣalāh to protect property of value, even if it belongs to someone else.',
+    prompt:
+      'True or False: It is permissible to break the Ṣalāh to protect property of value, even if it belongs to someone else.',
     answer: true,
     explanation: 'Correct — protecting valuable property permits breaking the prayer.',
   },
@@ -1432,7 +1717,12 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'A shepherd may break his Ṣalāh under which circumstance?',
-    options: ['If a wolf threatens his flock', 'If it starts to rain lightly', 'If he becomes bored', 'If the flock simply wanders slightly'],
+    options: [
+      'If a wolf threatens his flock',
+      'If it starts to rain lightly',
+      'If he becomes bored',
+      'If the flock simply wanders slightly',
+    ],
     answerIndex: 0,
     explanation: 'A shepherd may break his Ṣalāh if a wolf threatens his flock.',
   },
@@ -1441,7 +1731,8 @@ export const salahQuestions = [
     sourceIds: ['FQH-SLH-128'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: It is wājib to break the Ṣalāh when responding to a genuine emergency, such as a blind person falling into a well.',
+    prompt:
+      'True or False: It is wājib to break the Ṣalāh when responding to a genuine emergency, such as a blind person falling into a well.',
     answer: true,
     explanation: 'Correct — genuine danger to life makes breaking the prayer wājib.',
   },
@@ -1451,18 +1742,26 @@ export const salahQuestions = [
     topic: 'SLH',
     type: 'mcq',
     prompt: 'A midwife may delay the prayer under which circumstance?',
-    options: ['Concern for the safety of the mother or baby during childbirth', 'If she simply prefers to finish her task first', 'If she is tired', 'Only if she is also the mother giving birth'],
+    options: [
+      'Concern for the safety of the mother or baby during childbirth',
+      'If she simply prefers to finish her task first',
+      'If she is tired',
+      'Only if she is also the mother giving birth',
+    ],
     answerIndex: 0,
-    explanation: 'A midwife may delay the prayer, even past its time, if concerned for the safety of mother or baby.',
+    explanation:
+      'A midwife may delay the prayer, even past its time, if concerned for the safety of mother or baby.',
   },
   {
     id: 'FQH-SLH-Q139',
     sourceIds: ['FQH-SLH-130'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The same ruling that permits a midwife to delay prayer also applies to a traveller who fears attack from highway robbers.',
+    prompt:
+      'True or False: The same ruling that permits a midwife to delay prayer also applies to a traveller who fears attack from highway robbers.',
     answer: true,
-    explanation: 'Correct — both situations permit delaying the prayer past its time due to genuine danger.',
+    explanation:
+      'Correct — both situations permit delaying the prayer past its time due to genuine danger.',
   },
   {
     id: 'FQH-SLH-Q140',
@@ -1477,30 +1776,35 @@ export const salahQuestions = [
       'They are fined a small amount of money',
     ],
     answerIndex: 0,
-    explanation: 'Intentional abandonment of prayer out of laziness carries serious disciplinary punishment by the Islamic authority.',
+    explanation:
+      'Intentional abandonment of prayer out of laziness carries serious disciplinary punishment by the Islamic authority.',
   },
   {
     id: 'FQH-SLH-Q141',
     sourceIds: ['FQH-SLH-132'],
     topic: 'SLH',
     type: 'tf',
-    prompt: 'True or False: The same disciplinary ruling for abandoning prayer out of laziness also applies to one who does not fast in Ramaḍān.',
+    prompt:
+      'True or False: The same disciplinary ruling for abandoning prayer out of laziness also applies to one who does not fast in Ramaḍān.',
     answer: true,
-    explanation: 'Correct — abandoning fasting in Ramaḍān carries the same disciplinary consequence.',
+    explanation:
+      'Correct — abandoning fasting in Ramaḍān carries the same disciplinary consequence.',
   },
   {
     id: 'FQH-SLH-Q142',
     sourceIds: ['FQH-SLH-126', 'FQH-SLH-127', 'FQH-SLH-128', 'FQH-SLH-129', 'FQH-SLH-130'],
     topic: 'SLH',
     type: 'mcq',
-    prompt: 'What is the difference between a "permissible" reason to break the prayer and a "wājib" reason to break it?',
+    prompt:
+      'What is the difference between a "permissible" reason to break the prayer and a "wājib" reason to break it?',
     options: [
-      'Permissible reasons (e.g. protecting property, a shepherd\'s flock) allow breaking the prayer as a choice; wājib reasons (e.g. a life-threatening emergency) require it',
+      "Permissible reasons (e.g. protecting property, a shepherd's flock) allow breaking the prayer as a choice; wājib reasons (e.g. a life-threatening emergency) require it",
       'There is no difference — both are always required',
       'Permissible reasons are for the imam only; wājib reasons are for followers only',
       'Wājib reasons only apply to voluntary prayers',
     ],
     answerIndex: 0,
-    explanation: 'Permissible reasons make breaking the prayer optional; genuine danger to life (wājib reasons) require breaking it.',
+    explanation:
+      'Permissible reasons make breaking the prayer optional; genuine danger to life (wājib reasons) require breaking it.',
   },
 ];

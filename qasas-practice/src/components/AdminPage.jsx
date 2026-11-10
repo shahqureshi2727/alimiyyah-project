@@ -4,19 +4,15 @@
 // find their document, and change role from "student" to "admin". This is the
 // only way, by design.
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { getUserDoc } from '../lib/auth';
-import { getAllQuizResults, getWeekStart, formatRelativeTime } from '../lib/quiz';
-import { getAllTopicStatsProfiles } from '../lib/topic-stats-firestore';
-import { statusFor } from '../lib/weakness';
-import { irab, nounFeatures, roles, vocab } from '../data/arabic';
-import { getFiqhQuestions } from '../data/fiqh';
-import { getHadithQuestions } from '../data/hadith';
-import { getTafsirQuestions } from '../data/tafsir';
-import { ARABIC_TOPICS, FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS, QUIZ_MODES } from '../config/subjects';
-import { WeaknessHeatmap } from './WeaknessDashboard';
+import { getAdminUserDoc } from '../lib/admin-queries';
+import { loadBank } from '../lib/quiz-banks';
+import { FIQH_TOPICS, HADITH_TOPICS, TAFSIR_TOPICS } from '../config/subjects';
+import { error as logError } from '../lib/logger';
+import ClassStats from './admin/ClassStats';
+import AdminWeaknessView from './admin/AdminWeaknessView';
 import './AdminPage.css';
 
 function NotFoundPage() {
@@ -30,6 +26,17 @@ function NotFoundPage() {
 
 function BankViewer() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [banks, setBanks] = useState({
+    irab: [],
+    nounFeatures: [],
+    roles: [],
+    vocab: [],
+    fiqh: [],
+    hadith: [],
+    tafsir: [],
+  });
+  const [banksLoading, setBanksLoading] = useState(true);
+  const [banksError, setBanksError] = useState(null);
   const [expandedSections, setExpandedSections] = useState({
     irab: false,
     noun: false,
@@ -39,6 +46,33 @@ function BankViewer() {
     hadith: false,
     tafsir: false,
   });
+
+  const loadBanks = useCallback(async () => {
+    setBanksLoading(true);
+    setBanksError(null);
+
+    try {
+      const [irab, nounFeatures, roles, vocab, fiqh, hadith, tafsir] = await Promise.all([
+        loadBank('irab'),
+        loadBank('nounFeatures'),
+        loadBank('roles'),
+        loadBank('vocab'),
+        loadBank('fiqh', 'all'),
+        loadBank('hadith', 'all'),
+        loadBank('tafsir', 'all'),
+      ]);
+      setBanks({ irab, nounFeatures, roles, vocab, fiqh, hadith, tafsir });
+    } catch (err) {
+      logError('Could not load admin question banks.', err);
+      setBanksError("Couldn't load question banks. Retry.");
+    } finally {
+      setBanksLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    Promise.resolve().then(loadBanks);
+  }, [loadBanks]);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -50,10 +84,7 @@ function BankViewer() {
   // Filter functions
   const filterIrab = (item) => {
     if (!searchQuery) return true;
-    return (
-      item.sentence.includes(searchQuery) ||
-      item.target.includes(searchQuery)
-    );
+    return item.sentence.includes(searchQuery) || item.target.includes(searchQuery);
   };
 
   const filterNoun = (item) => {
@@ -69,8 +100,7 @@ function BankViewer() {
   const filterVocab = (item) => {
     if (!searchQuery) return true;
     return (
-      item.ar.includes(searchQuery) ||
-      item.en.toLowerCase().includes(searchQuery.toLowerCase())
+      item.ar.includes(searchQuery) || item.en.toLowerCase().includes(searchQuery.toLowerCase())
     );
   };
 
@@ -99,15 +129,15 @@ function BankViewer() {
     );
   };
 
-  const filteredIrab = irab.filter(filterIrab);
-  const filteredNoun = nounFeatures.filter(filterNoun);
-  const filteredRole = roles.filter(filterRole);
-  const filteredVocab = vocab.filter(filterVocab);
-  const allFiqhQuestions = getFiqhQuestions('all');
+  const filteredIrab = banks.irab.filter(filterIrab);
+  const filteredNoun = banks.nounFeatures.filter(filterNoun);
+  const filteredRole = banks.roles.filter(filterRole);
+  const filteredVocab = banks.vocab.filter(filterVocab);
+  const allFiqhQuestions = banks.fiqh;
   const filteredFiqh = allFiqhQuestions.filter(filterFiqh);
-  const allHadithQuestions = getHadithQuestions('all');
+  const allHadithQuestions = banks.hadith;
   const filteredHadith = allHadithQuestions.filter(filterHadith);
-  const allTafsirQuestions = getTafsirQuestions('all');
+  const allTafsirQuestions = banks.tafsir;
   const filteredTafsir = allTafsirQuestions.filter(filterTafsir);
 
   const caseColors = {
@@ -138,14 +168,40 @@ function BankViewer() {
     plural: 'Plural',
   };
 
+  if (banksLoading) {
+    return (
+      <div className="bank-viewer">
+        <div className="bank-summary">Loading question banks...</div>
+      </div>
+    );
+  }
+
+  if (banksError) {
+    return (
+      <div className="bank-viewer">
+        <div className="bank-summary">{banksError}</div>
+        <button className="try-quiz-link" onClick={loadBanks}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="bank-viewer">
       <div className="bank-summary">
-        I'rab: {irab.length} &middot; Noun features: {nounFeatures.length} &middot; Roles: {roles.length} &middot; Vocab: {vocab.length} &middot; Fiqh: {allFiqhQuestions.length} &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir: {allTafsirQuestions.length}
+        I'rab: {banks.irab.length} &middot; Noun features: {banks.nounFeatures.length} &middot;
+        Roles: {banks.roles.length} &middot; Vocab: {banks.vocab.length} &middot; Fiqh:{' '}
+        {allFiqhQuestions.length} &middot; Hadith: {allHadithQuestions.length} &middot; Tafsir:{' '}
+        {allTafsirQuestions.length}
       </div>
 
       <div className="bank-search">
+        <label className="sr-only" htmlFor="bank-search">
+          Search Arabic text
+        </label>
         <input
+          id="bank-search"
           type="text"
           placeholder="Search Arabic text..."
           value={searchQuery}
@@ -161,10 +217,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('irab')}
+            aria-expanded={expandedSections.irab}
           >
             <span className="section-title">I'rab</span>
             <span className="section-count">{filteredIrab.length}</span>
-            <span className={`section-arrow ${expandedSections.irab ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.irab ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -172,13 +229,11 @@ function BankViewer() {
             <div className="section-content">
               {filteredIrab.map((item, idx) => (
                 <div key={idx} className="irab-row">
-                  <div className="irab-sentence" dir="rtl">
+                  <div className="irab-sentence" dir="rtl" lang="ar">
                     {item.sentence.split(item.target).map((part, i, arr) => (
                       <span key={i}>
                         {part}
-                        {i < arr.length - 1 && (
-                          <span className="irab-target">{item.target}</span>
-                        )}
+                        {i < arr.length - 1 && <span className="irab-target">{item.target}</span>}
                       </span>
                     ))}
                   </div>
@@ -199,10 +254,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('noun')}
+            aria-expanded={expandedSections.noun}
           >
             <span className="section-title">Noun Features</span>
             <span className="section-count">{filteredNoun.length}</span>
-            <span className={`section-arrow ${expandedSections.noun ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.noun ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -210,7 +266,9 @@ function BankViewer() {
             <div className="section-content">
               {filteredNoun.map((item, idx) => (
                 <div key={idx} className="noun-row">
-                  <span className="noun-word" dir="rtl">{item.word}</span>
+                  <span className="noun-word" dir="rtl" lang="ar">
+                    {item.word}
+                  </span>
                   <div className="noun-tags">
                     <span className="noun-tag tag-def">{defLabels[item.def]}</span>
                     <span className="noun-tag tag-gender">{genderLabels[item.gender]}</span>
@@ -227,10 +285,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('role')}
+            aria-expanded={expandedSections.role}
           >
             <span className="section-title">Roles</span>
             <span className="section-count">{filteredRole.length}</span>
-            <span className={`section-arrow ${expandedSections.role ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.role ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -238,12 +297,9 @@ function BankViewer() {
             <div className="section-content">
               {filteredRole.map((item, idx) => (
                 <div key={idx} className="role-row">
-                  <div className="role-sentence" dir="rtl">
+                  <div className="role-sentence" dir="rtl" lang="ar">
                     {item.words.map((word, i) => (
-                      <span
-                        key={i}
-                        className={i === item.answerIndex ? 'role-answer' : ''}
-                      >
+                      <span key={i} className={i === item.answerIndex ? 'role-answer' : ''}>
                         {word}
                         {i < item.words.length - 1 && ' '}
                       </span>
@@ -264,10 +320,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('vocab')}
+            aria-expanded={expandedSections.vocab}
           >
             <span className="section-title">Vocab</span>
             <span className="section-count">{filteredVocab.length}</span>
-            <span className={`section-arrow ${expandedSections.vocab ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.vocab ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -275,7 +332,9 @@ function BankViewer() {
             <div className="section-content">
               {filteredVocab.map((item, idx) => (
                 <div key={idx} className="vocab-row">
-                  <span className="vocab-ar" dir="rtl">{item.ar}</span>
+                  <span className="vocab-ar" dir="rtl" lang="ar">
+                    {item.ar}
+                  </span>
                   <span className="vocab-en">{item.en}</span>
                 </div>
               ))}
@@ -288,10 +347,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('fiqh')}
+            aria-expanded={expandedSections.fiqh}
           >
             <span className="section-title">Fiqh</span>
             <span className="section-count">{filteredFiqh.length}</span>
-            <span className={`section-arrow ${expandedSections.fiqh ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.fiqh ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -302,17 +362,23 @@ function BankViewer() {
                 if (topicQuestions.length === 0) return null;
                 return (
                   <div key={topicMeta.code} className="fiqh-topic-group">
-                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    <h4 className="fiqh-topic-heading">
+                      {topicMeta.label} ({topicQuestions.length})
+                    </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
                         <div className="fiqh-row-prompt">
                           {item.prompt}
-                          {item.madhhab && <span className="fiqh-row-madhhab"> [{item.madhhab}]</span>}
+                          {item.madhhab && (
+                            <span className="fiqh-row-madhhab"> [{item.madhhab}]</span>
+                          )}
                         </div>
                         <div className="fiqh-row-details">
                           <span className="fiqh-row-type">{item.type.toUpperCase()}</span>
                           <span className="fiqh-row-answer">
-                            {item.type === 'mcq' ? item.options[item.answerIndex] : String(item.answer)}
+                            {item.type === 'mcq'
+                              ? item.options[item.answerIndex]
+                              : String(item.answer)}
                           </span>
                           <span className="fiqh-row-sources">{item.sourceIds.join(', ')}</span>
                         </div>
@@ -330,10 +396,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('hadith')}
+            aria-expanded={expandedSections.hadith}
           >
             <span className="section-title">Hadith</span>
             <span className="section-count">{filteredHadith.length}</span>
-            <span className={`section-arrow ${expandedSections.hadith ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.hadith ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -344,10 +411,12 @@ function BankViewer() {
                 if (topicQuestions.length === 0) return null;
                 return (
                   <div key={topicMeta.code} className="fiqh-topic-group">
-                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    <h4 className="fiqh-topic-heading">
+                      {topicMeta.label} ({topicQuestions.length})
+                    </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
-                        <div className="fiqh-row-prompt" dir="rtl">
+                        <div className="fiqh-row-prompt" dir="rtl" lang="ar">
                           {item.arabicText}
                         </div>
                         <div className="fiqh-row-details">
@@ -369,10 +438,11 @@ function BankViewer() {
           <button
             className="section-header"
             onClick={() => toggleSection('tafsir')}
+            aria-expanded={expandedSections.tafsir}
           >
             <span className="section-title">Tafsir</span>
             <span className="section-count">{filteredTafsir.length}</span>
-            <span className={`section-arrow ${expandedSections.tafsir ? 'expanded' : ''}`}>
+            <span className={`section-arrow ${expandedSections.tafsir ? 'expanded' : ''}`} aria-hidden="true">
               &#9662;
             </span>
           </button>
@@ -383,10 +453,12 @@ function BankViewer() {
                 if (topicQuestions.length === 0) return null;
                 return (
                   <div key={topicMeta.code} className="fiqh-topic-group">
-                    <h4 className="fiqh-topic-heading">{topicMeta.label} ({topicQuestions.length})</h4>
+                    <h4 className="fiqh-topic-heading">
+                      {topicMeta.label} ({topicQuestions.length})
+                    </h4>
                     {topicQuestions.map((item) => (
                       <div key={item.id} className="fiqh-row">
-                        <div className="fiqh-row-prompt" dir="rtl">
+                        <div className="fiqh-row-prompt" dir="rtl" lang="ar">
                           {item.arabicText}
                         </div>
                         <div className="fiqh-row-details">
@@ -407,447 +479,38 @@ function BankViewer() {
   );
 }
 
-const MODE_LABELS = QUIZ_MODES;
-
-function ClassStats() {
-  const [allResults, setAllResults] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('avgScoreWeek');
-  const [sortDirection, setSortDirection] = useState('asc');
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const results = await getAllQuizResults();
-        setAllResults(results);
-      } catch (err) {
-        console.error('Error fetching quiz results:', err);
-        setError('Failed to load quiz results.');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  // Compute statistics
-  const stats = useMemo(() => {
-    const weekStart = getWeekStart();
-
-    // Filter results for this week
-    const weekResults = allResults.filter(
-      (r) => r.completedAt >= weekStart
-    );
-
-    // Class overview
-    const totalQuizzesWeek = weekResults.length;
-    const totalQuizzesAllTime = allResults.length;
-    const uniqueStudentsWeek = new Set(weekResults.map((r) => r.userId)).size;
-    const avgScoreWeek =
-      weekResults.length > 0
-        ? weekResults.reduce((sum, r) => sum + r.score, 0) / weekResults.length
-        : 0;
-
-    // Per-student stats
-    const studentMap = new Map();
-
-    for (const result of allResults) {
-      if (!studentMap.has(result.userId)) {
-        studentMap.set(result.userId, {
-          userId: result.userId,
-          username: result.username,
-          allResults: [],
-          weekResults: [],
-          modeScores: {},
-        });
-      }
-
-      const student = studentMap.get(result.userId);
-      student.allResults.push(result);
-
-      if (result.completedAt >= weekStart) {
-        student.weekResults.push(result);
-      }
-
-      // Track scores by mode
-      if (!student.modeScores[result.mode]) {
-        student.modeScores[result.mode] = [];
-      }
-      student.modeScores[result.mode].push(result.score);
-    }
-
-    // Compute per-student aggregates
-    const students = Array.from(studentMap.values()).map((student) => {
-      const quizzesWeek = student.weekResults.length;
-      const avgScoreWeek =
-        quizzesWeek > 0
-          ? student.weekResults.reduce((sum, r) => sum + r.score, 0) / quizzesWeek
-          : null;
-
-      // Find weakest mode (mode with lowest average, must have at least 2 different modes)
-      let weakestMode = null;
-      const modeAverages = Object.entries(student.modeScores).map(([mode, scores]) => ({
-        mode,
-        avg: scores.reduce((sum, s) => sum + s, 0) / scores.length,
-      }));
-
-      if (modeAverages.length >= 2) {
-        const sorted = modeAverages.sort((a, b) => a.avg - b.avg);
-        weakestMode = sorted[0].mode;
-      }
-
-      // Last active
-      const lastResult = student.allResults.sort(
-        (a, b) => b.completedAt - a.completedAt
-      )[0];
-
-      return {
-        userId: student.userId,
-        username: student.username,
-        quizzesWeek,
-        avgScoreWeek,
-        weakestMode,
-        lastActive: lastResult?.completedAt || null,
-      };
-    });
-
-    return {
-      totalQuizzesWeek,
-      totalQuizzesAllTime,
-      uniqueStudentsWeek,
-      avgScoreWeek,
-      students,
-    };
-  }, [allResults]);
-
-  // Filter and sort students
-  const filteredStudents = useMemo(() => {
-    let result = stats.students;
-
-    // Filter by search query
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter((s) =>
-        s.username.toLowerCase().includes(query)
-      );
-    }
-
-    // Sort
-    result = [...result].sort((a, b) => {
-      let aVal, bVal;
-
-      switch (sortBy) {
-        case 'username':
-          aVal = a.username.toLowerCase();
-          bVal = b.username.toLowerCase();
-          return sortDirection === 'asc'
-            ? aVal.localeCompare(bVal)
-            : bVal.localeCompare(aVal);
-
-        case 'quizzesWeek':
-          aVal = a.quizzesWeek;
-          bVal = b.quizzesWeek;
-          break;
-
-        case 'avgScoreWeek':
-          // Null values should go last
-          aVal = a.avgScoreWeek ?? (sortDirection === 'asc' ? Infinity : -Infinity);
-          bVal = b.avgScoreWeek ?? (sortDirection === 'asc' ? Infinity : -Infinity);
-          break;
-
-        case 'lastActive':
-          aVal = a.lastActive?.getTime() ?? 0;
-          bVal = b.lastActive?.getTime() ?? 0;
-          break;
-
-        default:
-          return 0;
-      }
-
-      if (typeof aVal === 'number' && typeof bVal === 'number') {
-        return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
-      }
-      return 0;
-    });
-
-    return result;
-  }, [stats.students, searchQuery, sortBy, sortDirection]);
-
-  const handleSort = (column) => {
-    if (sortBy === column) {
-      setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
-    } else {
-      setSortBy(column);
-      // Default to ascending for avgScoreWeek (to show struggling students first)
-      // and descending for others
-      setSortDirection(column === 'avgScoreWeek' ? 'asc' : 'desc');
-    }
-  };
-
-  const sortIcon = (column) => {
-    if (sortBy !== column) return null;
-    return <span className="sort-icon">{sortDirection === 'asc' ? ' \u25B2' : ' \u25BC'}</span>;
-  };
-
-  if (loading) {
-    return <div className="stats-loading">Loading class statistics...</div>;
-  }
-
-  if (error) {
-    return <div className="stats-error">{error}</div>;
-  }
-
-  return (
-    <div className="class-stats">
-      {/* Class overview */}
-      <section className="stats-overview">
-        <h2>Class Overview</h2>
-        <div className="overview-grid">
-          <div className="overview-card">
-            <span className="overview-value">{stats.totalQuizzesWeek}</span>
-            <span className="overview-label">Quizzes this week</span>
-          </div>
-          <div className="overview-card">
-            <span className="overview-value">{stats.totalQuizzesAllTime}</span>
-            <span className="overview-label">Quizzes all-time</span>
-          </div>
-          <div className="overview-card">
-            <span className="overview-value">{stats.uniqueStudentsWeek}</span>
-            <span className="overview-label">Active students this week</span>
-          </div>
-          <div className="overview-card">
-            <span className="overview-value">
-              {stats.avgScoreWeek.toFixed(1)}
-            </span>
-            <span className="overview-label">Average score this week</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Per-student table */}
-      <section className="stats-students">
-        <h2>Per-Student Breakdown</h2>
-
-        <div className="student-search">
-          <input
-            type="text"
-            placeholder="Search by username..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
-
-        {filteredStudents.length === 0 ? (
-          <p className="no-students">No students found.</p>
-        ) : (
-          <div className="student-table-container">
-            <table className="student-table">
-              <thead>
-                <tr>
-                  <th
-                    className="sortable"
-                    onClick={() => handleSort('username')}
-                  >
-                    Username
-                    {sortIcon('username')}
-                  </th>
-                  <th
-                    className="sortable col-num"
-                    onClick={() => handleSort('quizzesWeek')}
-                  >
-                    Quizzes (Week)
-                    {sortIcon('quizzesWeek')}
-                  </th>
-                  <th
-                    className="sortable col-num"
-                    onClick={() => handleSort('avgScoreWeek')}
-                  >
-                    Avg Score (Week)
-                    {sortIcon('avgScoreWeek')}
-                  </th>
-                  <th className="col-mode">Weakest Mode</th>
-                  <th
-                    className="sortable col-date"
-                    onClick={() => handleSort('lastActive')}
-                  >
-                    Last Active
-                    {sortIcon('lastActive')}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredStudents.map((student) => (
-                  <tr key={student.userId}>
-                    <td>{student.username}</td>
-                    <td className="col-num">{student.quizzesWeek}</td>
-                    <td className="col-num">
-                      {student.avgScoreWeek !== null
-                        ? student.avgScoreWeek.toFixed(1)
-                        : '-'}
-                    </td>
-                    <td className="col-mode">
-                      {student.weakestMode
-                        ? MODE_LABELS[student.weakestMode]?.label
-                        : '-'}
-                    </td>
-                    <td className="col-date">
-                      {student.lastActive
-                        ? formatRelativeTime(student.lastActive)
-                        : '-'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
-    </div>
-  );
-}
-
-function AdminWeaknessView() {
-  const [profiles, setProfiles] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchProfiles() {
-      try {
-        const rows = await getAllTopicStatsProfiles();
-        setProfiles(rows);
-        setSelectedUserId(rows[0]?.userId || rows[0]?.id || null);
-      } catch (err) {
-        console.error('Error loading weakness profiles:', err);
-        setError('Failed to load weakness profiles.');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchProfiles();
-  }, []);
-
-  const topicMeta = useMemo(() => [...FIQH_TOPICS, ...HADITH_TOPICS, ...TAFSIR_TOPICS, ...ARABIC_TOPICS], []);
-
-  const classProfile = useMemo(() => {
-    const topics = {};
-
-    for (const topic of topicMeta) {
-      const states = profiles
-        .map((profile) => profile.topics?.[topic.code])
-        .filter(Boolean);
-      if (states.length === 0) continue;
-
-      const attempts = states.reduce((sum, state) => sum + (state.attempts || 0), 0);
-      const score = states.reduce((sum, state) => sum + (state.score || 0), 0) / states.length;
-      topics[topic.code] = {
-        attempts,
-        score,
-        status: statusFor(score, attempts),
-      };
-    }
-
-    return { topics };
-  }, [profiles, topicMeta]);
-
-  const reteachTopics = useMemo(() => topicMeta
-    .map((topic) => {
-      const states = profiles
-        .map((profile) => profile.topics?.[topic.code])
-        .filter(Boolean);
-      const weakCount = states.filter((state) => state.status === 'weak').length;
-      return {
-        ...topic,
-        weakShare: states.length > 0 ? weakCount / states.length : 0,
-        studentCount: states.length,
-      };
-    })
-    .filter((topic) => topic.studentCount > 0 && topic.weakShare > 0)
-    .sort((a, b) => b.weakShare - a.weakShare)
-    .slice(0, 8), [profiles, topicMeta]);
-
-  const selectedProfile = profiles.find((profile) => (profile.userId || profile.id) === selectedUserId);
-
-  if (loading) return <div className="stats-loading">Loading weakness data...</div>;
-  if (error) return <div className="stats-error">{error}</div>;
-  if (profiles.length === 0) return <p className="no-students">No weakness profiles yet.</p>;
-
-  return (
-    <div className="admin-weakness">
-      <section className="stats-overview">
-        <h2>Topics To Reteach</h2>
-        <div className="reteach-list">
-          {reteachTopics.length === 0 ? (
-            <p className="no-students">No weak class topics yet.</p>
-          ) : reteachTopics.map((topic) => (
-            <div key={topic.code} className="reteach-row">
-              <span>{topic.label}</span>
-              <strong>{Math.round(topic.weakShare * 100)}% weak</strong>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <WeaknessHeatmap profile={classProfile} title="Class Heatmap" />
-
-      <section className="student-drilldown">
-        <h2>Student Drill-Down</h2>
-        <select
-          className="student-select"
-          value={selectedUserId || ''}
-          onChange={(event) => setSelectedUserId(event.target.value)}
-        >
-          {profiles.map((profile) => (
-            <option key={profile.userId || profile.id} value={profile.userId || profile.id}>
-              {profile.username || profile.userId || profile.id}
-            </option>
-          ))}
-        </select>
-        {selectedProfile && (
-          <WeaknessHeatmap
-            profile={selectedProfile}
-            title={`${selectedProfile.username || 'Student'} Heatmap`}
-          />
-        )}
-      </section>
-    </div>
-  );
-}
-
 export default function AdminPage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [adminError, setAdminError] = useState(null);
   const [activeTab, setActiveTab] = useState('bank');
 
-  useEffect(() => {
-    async function checkAdminStatus() {
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        // Always fetch fresh from Firestore - don't trust cached values
-        const userDoc = await getUserDoc(user.uid);
-        setIsAdmin(userDoc?.role === 'admin');
-      } catch (err) {
-        console.error('Error checking admin status:', err);
-        setIsAdmin(false);
-      } finally {
-        setLoading(false);
-      }
+  const checkAdminStatus = useCallback(async () => {
+    if (!user) {
+      setLoading(false);
+      return;
     }
 
-    checkAdminStatus();
+    setLoading(true);
+    setAdminError(null);
+    try {
+      // Always fetch fresh from Firestore - don't trust cached values
+      const userDoc = await getAdminUserDoc(user.uid);
+      setIsAdmin(userDoc?.role === 'admin');
+    } catch (err) {
+      logError('Could not check admin status.', err, { uid: user.uid });
+      setIsAdmin(false);
+      setAdminError("Couldn't check admin access. Retry.");
+    } finally {
+      setLoading(false);
+    }
   }, [user]);
+
+  useEffect(() => {
+    Promise.resolve().then(checkAdminStatus);
+  }, [checkAdminStatus]);
 
   if (loading) {
     return (
@@ -857,12 +520,23 @@ export default function AdminPage() {
     );
   }
 
+  if (adminError) {
+    return (
+      <div className="admin-loading">
+        <p>{adminError}</p>
+        <button className="try-quiz-link" onClick={checkAdminStatus}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   if (!isAdmin) {
     return <NotFoundPage />;
   }
 
   return (
-    <div className="admin-page">
+    <main className="admin-page">
       <header className="admin-header">
         <h1 className="admin-title">Admin Dashboard</h1>
         <button className="back-to-home-btn" onClick={() => navigate('/')}>
@@ -870,7 +544,7 @@ export default function AdminPage() {
         </button>
       </header>
 
-      <div className="admin-tabs">
+      <nav className="admin-tabs" aria-label="Admin sections">
         <button
           className={`admin-tab ${activeTab === 'bank' ? 'active' : ''}`}
           onClick={() => setActiveTab('bank')}
@@ -889,13 +563,13 @@ export default function AdminPage() {
         >
           Weakness
         </button>
-      </div>
+      </nav>
 
-      <div className="admin-content">
+      <section className="admin-content">
         {activeTab === 'bank' && <BankViewer />}
         {activeTab === 'stats' && <ClassStats />}
         {activeTab === 'weakness' && <AdminWeaknessView />}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

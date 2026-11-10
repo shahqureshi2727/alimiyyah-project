@@ -42,10 +42,7 @@ describe('tafsir free-response scoring', () => {
   });
 
   it('reports extra student words separately', () => {
-    const result = scoreTafsirAnswer(
-      'By the passage of time',
-      'By the long passage of time today'
-    );
+    const result = scoreTafsirAnswer('By the passage of time', 'By the long passage of time today');
 
     expect(result.status).toBe('correct');
     expect(result.extraWords).toEqual(['long', 'today']);

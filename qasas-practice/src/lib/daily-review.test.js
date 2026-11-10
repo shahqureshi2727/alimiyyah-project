@@ -18,24 +18,19 @@ function questionsFor(topic, count, reviewMode, reviewCategory) {
 }
 
 describe('daily review selection', () => {
-  it('builds a mixed bank with all current categories and render modes', () => {
-    const bank = buildDailyReviewBank();
+  it('builds a mixed bank from caller-provided sources', () => {
+    const bank = buildDailyReviewBank([
+      { reviewCategory: 'arabic', reviewMode: 'irab', questions: questionsFor('IRB', 1, 'irab', 'arabic') },
+      { reviewCategory: 'fiqh', reviewMode: 'fiqh', questions: questionsFor('WUD', 1, 'fiqh', 'fiqh') },
+    ]);
     const categories = new Set(bank.map((item) => item.reviewCategory));
     const modes = new Set(bank.map((item) => item.reviewMode));
 
     expect(DAILY_REVIEW_LENGTH).toBe(15);
     expect(DAILY_REVIEW_COMPOSITION).toEqual({ weak: 6, due: 5, general: 4 });
-    expect(categories).toEqual(new Set(['arabic', 'fiqh', 'hadith', 'tafsir']));
-    expect(modes).toEqual(new Set([
-      'irab',
-      'nounFeatures',
-      'roles',
-      'vocab',
-      'morphology',
-      'fiqh',
-      'hadith',
-      'tafsir',
-    ]));
+    expect(categories).toEqual(new Set(['arabic', 'fiqh']));
+    expect(modes).toEqual(new Set(['irab', 'fiqh']));
+    expect(bank.every((item) => item.reviewCategory && item.reviewMode)).toBe(true);
   });
 
   it('front-loads weak topics, prefers missed questions inside them, then adds due topics', () => {
@@ -51,10 +46,34 @@ describe('daily review selection', () => {
     const selected = selectDailyReviewQuestions({
       bank,
       topicStats: [
-        { category: 'fiqh', subtopic: 'WUD', attempts: 5, ewmaScore: 0.2, nextDueAt: new Date('2026-07-30T12:00:00.000Z') },
-        { category: 'hadith', subtopic: 'ARB40', attempts: 5, ewmaScore: 0.35, nextDueAt: new Date('2026-07-30T12:00:00.000Z') },
-        { category: 'tafsir', subtopic: 'FIL', attempts: 5, ewmaScore: 0.95, nextDueAt: new Date('2026-07-22T12:00:00.000Z') },
-        { category: 'arabic', subtopic: 'IRB', attempts: 5, ewmaScore: 0.9, nextDueAt: new Date('2026-07-30T12:00:00.000Z') },
+        {
+          category: 'fiqh',
+          subtopic: 'WUD',
+          attempts: 5,
+          ewmaScore: 0.2,
+          nextDueAt: new Date('2026-07-30T12:00:00.000Z'),
+        },
+        {
+          category: 'hadith',
+          subtopic: 'ARB40',
+          attempts: 5,
+          ewmaScore: 0.35,
+          nextDueAt: new Date('2026-07-30T12:00:00.000Z'),
+        },
+        {
+          category: 'tafsir',
+          subtopic: 'FIL',
+          attempts: 5,
+          ewmaScore: 0.95,
+          nextDueAt: new Date('2026-07-22T12:00:00.000Z'),
+        },
+        {
+          category: 'arabic',
+          subtopic: 'IRB',
+          attempts: 5,
+          ewmaScore: 0.9,
+          nextDueAt: new Date('2026-07-30T12:00:00.000Z'),
+        },
       ],
       missedQuestionIds: new Set(['WUD-3', 'ARB40-2']),
       now,
@@ -96,7 +115,9 @@ describe('daily review selection', () => {
   });
 
   it('normalizes Firestore timestamps, dates, millis, and strings for due checks', () => {
-    expect(toMillis(new Date('2026-07-23T00:00:00.000Z'))).toBe(Date.parse('2026-07-23T00:00:00.000Z'));
+    expect(toMillis(new Date('2026-07-23T00:00:00.000Z'))).toBe(
+      Date.parse('2026-07-23T00:00:00.000Z')
+    );
     expect(toMillis({ toMillis: () => 123 })).toBe(123);
     expect(toMillis({ seconds: 2, nanoseconds: 500000000 })).toBe(2500);
     expect(toMillis('2026-07-23T00:00:00.000Z')).toBe(Date.parse('2026-07-23T00:00:00.000Z'));

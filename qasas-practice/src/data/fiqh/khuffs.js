@@ -8,7 +8,8 @@ export const khuffsQuestions = [
     sourceIds: ['FQH-KHF-01'],
     topic: 'KHF',
     type: 'tf',
-    prompt: 'True or False: For khuffs to be wiped over instead of washing the feet, they must cover both ankles.',
+    prompt:
+      'True or False: For khuffs to be wiped over instead of washing the feet, they must cover both ankles.',
     answer: true,
     explanation: 'Correct — covering both ankles is a condition for wiping over khuffs.',
   },
@@ -18,16 +19,23 @@ export const khuffsQuestions = [
     topic: 'KHF',
     type: 'mcq',
     prompt: 'Are khuffs made from thick wool valid for wiping over?',
-    options: ['Yes, provided they meet the other conditions', 'No, only leather khuffs are valid', 'No, wool khuffs are never valid', 'Only if lined with leather'],
+    options: [
+      'Yes, provided they meet the other conditions',
+      'No, only leather khuffs are valid',
+      'No, wool khuffs are never valid',
+      'Only if lined with leather',
+    ],
     answerIndex: 0,
-    explanation: 'Khuffs made from thick wool or similar material are valid, provided the other conditions are met.',
+    explanation:
+      'Khuffs made from thick wool or similar material are valid, provided the other conditions are met.',
   },
   {
     id: 'FQH-KHF-Q03',
     sourceIds: ['FQH-KHF-03'],
     topic: 'KHF',
     type: 'tf',
-    prompt: 'True or False: Khuffs must be durable and cover the required area of the foot completely to be wiped over validly.',
+    prompt:
+      'True or False: Khuffs must be durable and cover the required area of the foot completely to be wiped over validly.',
     answer: true,
     explanation: 'Correct — durability and complete coverage are conditions for valid wiping.',
   },
@@ -44,7 +52,8 @@ export const khuffsQuestions = [
       'The khuffs must be black in colour',
     ],
     answerIndex: 0,
-    explanation: 'One must have completed wuḍūʾ and be in a state of purity before putting on the khuffs.',
+    explanation:
+      'One must have completed wuḍūʾ and be in a state of purity before putting on the khuffs.',
   },
   {
     id: 'FQH-KHF-Q05',
@@ -59,16 +68,19 @@ export const khuffsQuestions = [
       'One must have wuḍūʾ before putting them on',
     ],
     answerIndex: 0,
-    explanation: 'Colour is not a condition for khuffs; covering the ankles, durability/coverage, and prior wuḍūʾ all are.',
+    explanation:
+      'Colour is not a condition for khuffs; covering the ankles, durability/coverage, and prior wuḍūʾ all are.',
   },
   {
     id: 'FQH-KHF-Q06',
     sourceIds: ['FQH-KHF-05'],
     topic: 'KHF',
     type: 'tf',
-    prompt: 'True or False: A resident may wipe over khuffs for one full day and night (24 hours) from the moment wuḍūʾ is nullified.',
+    prompt:
+      'True or False: A resident may wipe over khuffs for one full day and night (24 hours) from the moment wuḍūʾ is nullified.',
     answer: true,
-    explanation: 'Correct — a resident\'s duration of wiping is 24 hours from when wuḍūʾ is nullified.',
+    explanation:
+      "Correct — a resident's duration of wiping is 24 hours from when wuḍūʾ is nullified.",
   },
   {
     id: 'FQH-KHF-Q07',
@@ -76,7 +88,12 @@ export const khuffsQuestions = [
     topic: 'KHF',
     type: 'mcq',
     prompt: 'For how long may a traveller wipe over khuffs, from the moment wuḍūʾ is nullified?',
-    options: ['Three full days and nights (72 hours)', 'One full day and night (24 hours)', 'One week', 'There is no time limit for travellers'],
+    options: [
+      'Three full days and nights (72 hours)',
+      'One full day and night (24 hours)',
+      'One week',
+      'There is no time limit for travellers',
+    ],
     answerIndex: 0,
     explanation: 'A traveller may wipe over khuffs for three full days and nights (72 hours).',
   },
@@ -85,7 +102,8 @@ export const khuffsQuestions = [
     sourceIds: ['FQH-KHF-07'],
     topic: 'KHF',
     type: 'tf',
-    prompt: 'True or False: The minimum area that must be wiped on top of each khuff is a surface area equal to three of the smallest fingers.',
+    prompt:
+      'True or False: The minimum area that must be wiped on top of each khuff is a surface area equal to three of the smallest fingers.',
     answer: true,
     explanation: 'Correct — this is the minimum wiping area required.',
   },
@@ -95,7 +113,12 @@ export const khuffsQuestions = [
     topic: 'KHF',
     type: 'mcq',
     prompt: 'When assessing holes in the khuffs, how is each khuff treated?',
-    options: ['Each khuff is considered separately', 'Both khuffs together as a single unit', 'Only the right khuff matters', 'Only the left khuff matters'],
+    options: [
+      'Each khuff is considered separately',
+      'Both khuffs together as a single unit',
+      'Only the right khuff matters',
+      'Only the left khuff matters',
+    ],
     answerIndex: 0,
     explanation: 'Each khuff is considered separately when assessing holes in it.',
   },
@@ -104,9 +127,11 @@ export const khuffsQuestions = [
     sourceIds: ['FQH-KHF-09'],
     topic: 'KHF',
     type: 'tf',
-    prompt: 'True or False: Wiping over a khuff becomes invalid if the holes in that khuff equal the surface area of three of the smallest toes.',
+    prompt:
+      'True or False: Wiping over a khuff becomes invalid if the holes in that khuff equal the surface area of three of the smallest toes.',
     answer: true,
-    explanation: 'Correct — holes equal to the area of three smallest toes invalidate wiping over that khuff.',
+    explanation:
+      'Correct — holes equal to the area of three smallest toes invalidate wiping over that khuff.',
   },
   {
     id: 'FQH-KHF-Q11',
@@ -121,7 +146,8 @@ export const khuffsQuestions = [
       'Wipe three times in a circular motion',
     ],
     answerIndex: 0,
-    explanation: 'The sunnah method begins at the toes, with fingers spread, wiping once from the toes toward the shin, on the top of the khuff.',
+    explanation:
+      'The sunnah method begins at the toes, with fingers spread, wiping once from the toes toward the shin, on the top of the khuff.',
   },
   {
     id: 'FQH-KHF-Q12',
@@ -138,7 +164,12 @@ export const khuffsQuestions = [
     topic: 'KHF',
     type: 'mcq',
     prompt: 'What happens if a person removes even one khuff?',
-    options: ['The wiping over khuffs becomes invalid', 'Only that khuff\'s wiping is invalid, the other remains valid', 'Nothing changes, as long as it is put back on quickly', 'It only invalidates the wiping if both khuffs are removed'],
+    options: [
+      'The wiping over khuffs becomes invalid',
+      "Only that khuff's wiping is invalid, the other remains valid",
+      'Nothing changes, as long as it is put back on quickly',
+      'It only invalidates the wiping if both khuffs are removed',
+    ],
     answerIndex: 0,
     explanation: 'Removing even one khuff invalidates the wiping over khuffs.',
   },
@@ -147,7 +178,8 @@ export const khuffsQuestions = [
     sourceIds: ['FQH-KHF-13'],
     topic: 'KHF',
     type: 'tf',
-    prompt: 'True or False: The expiration of the permitted time period (24 or 72 hours) invalidates the wiping over khuffs.',
+    prompt:
+      'True or False: The expiration of the permitted time period (24 or 72 hours) invalidates the wiping over khuffs.',
     answer: true,
     explanation: 'Correct — once the permitted duration expires, the wiping is invalidated.',
   },
@@ -156,7 +188,8 @@ export const khuffsQuestions = [
     sourceIds: ['FQH-KHF-14'],
     topic: 'KHF',
     type: 'mcq',
-    prompt: 'What happens if most of the foot exits the khuff (e.g. it becomes loose and slips down)?',
+    prompt:
+      'What happens if most of the foot exits the khuff (e.g. it becomes loose and slips down)?',
     options: [
       'It invalidates the wiping over that khuff',
       'It has no effect on validity',
@@ -179,6 +212,7 @@ export const khuffsQuestions = [
       'Most of the foot exiting the khuff',
     ],
     answerIndex: 0,
-    explanation: 'Re-wiping before the duration expires does not invalidate anything; removing a khuff, expiration of time, and the foot exiting the khuff all do.',
+    explanation:
+      'Re-wiping before the duration expires does not invalidate anything; removing a khuff, expiration of time, and the foot exiting the khuff all do.',
   },
 ];

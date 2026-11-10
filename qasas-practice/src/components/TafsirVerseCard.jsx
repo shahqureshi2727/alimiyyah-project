@@ -78,20 +78,10 @@ export default function TafsirVerseCard({
             <Percent value={feedback.score} />
           </div>
 
-          <p className="tafsir-reference">
-            Reference: {verse.referenceTranslation}
-          </p>
+          <p className="tafsir-reference">Reference: {verse.referenceTranslation}</p>
 
-          <WordList
-            title="Missing words"
-            words={feedback.missingWords}
-            empty="No missing words"
-          />
-          <WordList
-            title="Extra words"
-            words={feedback.extraWords}
-            empty="No extra words"
-          />
+          <WordList title="Missing words" words={feedback.missingWords} empty="No missing words" />
+          <WordList title="Extra words" words={feedback.extraWords} empty="No extra words" />
 
           {verse.commentary?.length > 0 && (
             <div className="tafsir-notes">

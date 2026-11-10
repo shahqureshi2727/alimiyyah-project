@@ -12,24 +12,17 @@
 // DO NOT add fake "anti-cheat" measures (like obfuscating the write payload) that would
 // give a false sense of protection.
 
-import {
-  collection,
-  addDoc,
-  doc,
-  query,
-  where,
-  orderBy,
-  limit,
-  getDocs,
-  serverTimestamp,
-  Timestamp,
-  writeBatch,
-} from 'firebase/firestore';
-import { db } from './firebase';
 import { recordAttempts } from './topic-stats-firestore';
+import { createAnswerEvents } from './repositories/answer-events';
+import {
+  createQuizResult,
+  listAdminQuizResults,
+  listLeaderboardResults,
+  listRecentQuizResults,
+  listUserBestQuizResult,
+} from './repositories/quiz-results';
 
-const QUIZ_RESULTS_COLLECTION = 'quizResults';
-const ANSWER_EVENTS_COLLECTION = 'answerEvents';
+export const ADMIN_QUIZ_RESULTS_LIMIT = 500;
 
 /**
  * Submit a quiz result to Firestore.
@@ -43,8 +36,16 @@ const ANSWER_EVENTS_COLLECTION = 'answerEvents';
  * @param {number} params.durationSeconds - Total quiz duration in seconds
  * @returns {Promise<string>} The document ID of the created result
  */
-export async function submitQuizResult({ userId, username, mode, bankSource, score, total = 10, durationSeconds }) {
-  const docRef = await addDoc(collection(db, QUIZ_RESULTS_COLLECTION), {
+export async function submitQuizResult({
+  userId,
+  username,
+  mode,
+  bankSource,
+  score,
+  total = 10,
+  durationSeconds,
+}) {
+  return createQuizResult({
     userId,
     username,
     mode,
@@ -52,9 +53,7 @@ export async function submitQuizResult({ userId, username, mode, bankSource, sco
     score,
     total,
     durationSeconds,
-    completedAt: serverTimestamp(),
   });
-  return docRef.id;
 }
 
 /**
@@ -63,32 +62,24 @@ export async function submitQuizResult({ userId, username, mode, bankSource, sco
  * class use; a future Cloud Function on answerEvents is the upgrade path if
  * server-side integrity becomes necessary.
  */
-export async function submitAnswerEvents({ userId, username, mode, bankSource, results, quizResultId = null }) {
-  const validResults = (results || []).filter(
-    (result) => result?.questionId && result?.topic && typeof result.correct === 'boolean'
-  );
+export async function submitAnswerEvents({
+  userId,
+  username,
+  mode,
+  bankSource,
+  results,
+  quizResultId = null,
+}) {
+  const validResults = await createAnswerEvents({
+    userId,
+    username,
+    mode,
+    bankSource,
+    results,
+    quizResultId,
+  });
 
-  if (validResults.length === 0) return null;
-
-  const batch = writeBatch(db);
-
-  for (const result of validResults) {
-    const eventRef = doc(collection(db, ANSWER_EVENTS_COLLECTION));
-    batch.set(eventRef, {
-      userId,
-      username,
-      mode,
-      bankSource,
-      topic: result.topic,
-      group: result.group || null,
-      questionId: result.questionId,
-      correct: result.correct,
-      answeredAt: serverTimestamp(),
-      quizResultId,
-    });
-  }
-
-  await batch.commit();
+  if (!validResults) return null;
   return recordAttempts({ userId, mode, bankSource, results: validResults });
 }
 
@@ -99,19 +90,7 @@ export async function submitAnswerEvents({ userId, username, mode, bankSource, r
  * @returns {Promise<Array>} Array of quiz result objects
  */
 export async function getUserRecentResults(userId, maxResults = 5) {
-  const q = query(
-    collection(db, QUIZ_RESULTS_COLLECTION),
-    where('userId', '==', userId),
-    orderBy('completedAt', 'desc'),
-    limit(maxResults)
-  );
-
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data(),
-    completedAt: doc.data().completedAt?.toDate() || new Date(),
-  }));
+  return listRecentQuizResults({ userId, maxResults });
 }
 
 /**
@@ -139,38 +118,18 @@ export function getWeekStart() {
  * @param {number} params.maxResults - Maximum results to return (default 20)
  * @returns {Promise<Array>} Array of leaderboard entries
  */
-export async function getLeaderboard({ mode, allTime = false, bankSource = 'qasas', maxResults = 20 }) {
-  let q;
-
+export async function getLeaderboard({
+  mode,
+  allTime = false,
+  bankSource = 'qasas',
+  maxResults = 20,
+}) {
   if (allTime) {
-    q = query(
-      collection(db, QUIZ_RESULTS_COLLECTION),
-      where('mode', '==', mode),
-      where('bankSource', '==', bankSource),
-      orderBy('score', 'desc'),
-      orderBy('durationSeconds', 'asc'),
-      limit(maxResults)
-    );
+    return listLeaderboardResults({ mode, bankSource, allTime, maxResults });
   } else {
     const weekStart = getWeekStart();
-    q = query(
-      collection(db, QUIZ_RESULTS_COLLECTION),
-      where('mode', '==', mode),
-      where('bankSource', '==', bankSource),
-      where('completedAt', '>=', Timestamp.fromDate(weekStart)),
-      orderBy('completedAt', 'desc'),
-      orderBy('score', 'desc'),
-      orderBy('durationSeconds', 'asc'),
-      limit(maxResults)
-    );
+    return listLeaderboardResults({ mode, bankSource, since: weekStart, maxResults });
   }
-
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data(),
-    completedAt: doc.data().completedAt?.toDate() || new Date(),
-  }));
 }
 
 /**
@@ -183,60 +142,20 @@ export async function getLeaderboard({ mode, allTime = false, bankSource = 'qasa
  * @returns {Promise<Object|null>} The user's best result or null
  */
 export async function getUserBestResult({ userId, mode, allTime = false, bankSource = 'qasas' }) {
-  let q;
-
   if (allTime) {
-    q = query(
-      collection(db, QUIZ_RESULTS_COLLECTION),
-      where('userId', '==', userId),
-      where('mode', '==', mode),
-      where('bankSource', '==', bankSource),
-      orderBy('score', 'desc'),
-      orderBy('durationSeconds', 'asc'),
-      limit(1)
-    );
+    return listUserBestQuizResult({ userId, mode, bankSource, allTime, maxResults: 1 });
   } else {
     const weekStart = getWeekStart();
-    q = query(
-      collection(db, QUIZ_RESULTS_COLLECTION),
-      where('userId', '==', userId),
-      where('mode', '==', mode),
-      where('bankSource', '==', bankSource),
-      where('completedAt', '>=', Timestamp.fromDate(weekStart)),
-      orderBy('completedAt', 'desc'),
-      orderBy('score', 'desc'),
-      orderBy('durationSeconds', 'asc'),
-      limit(1)
-    );
+    return listUserBestQuizResult({ userId, mode, bankSource, since: weekStart, maxResults: 1 });
   }
-
-  const snapshot = await getDocs(q);
-  if (snapshot.empty) return null;
-
-  const doc = snapshot.docs[0];
-  return {
-    id: doc.id,
-    ...doc.data(),
-    completedAt: doc.data().completedAt?.toDate() || new Date(),
-  };
 }
 
 /**
  * Get all quiz results (for admin stats).
  * @returns {Promise<Array>} Array of all quiz results
  */
-export async function getAllQuizResults() {
-  const q = query(
-    collection(db, QUIZ_RESULTS_COLLECTION),
-    orderBy('completedAt', 'desc')
-  );
-
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data(),
-    completedAt: doc.data().completedAt?.toDate() || new Date(),
-  }));
+export async function getAllQuizResults(maxResults) {
+  return listAdminQuizResults({ maxResults });
 }
 
 /**

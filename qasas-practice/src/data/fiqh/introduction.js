@@ -16,7 +16,8 @@ export const introductionQuestions = [
       'The memorization of Ḥadīth chains of narration',
     ],
     answerIndex: 0,
-    explanation: 'Fiqh is the science of understanding and applying Islamic law derived from detailed evidence — in practice, Islamic law applied to daily life.',
+    explanation:
+      'Fiqh is the science of understanding and applying Islamic law derived from detailed evidence — in practice, Islamic law applied to daily life.',
   },
   {
     id: 'FQH-INT-Q02',
@@ -24,7 +25,12 @@ export const introductionQuestions = [
     topic: 'INT',
     type: 'mcq',
     prompt: 'What are the two primary sources of Islamic law?',
-    options: ['The Qurʾān and the Sunnah', 'Ijmāʿ and Qiyās', 'The Qurʾān and Ijmāʿ', 'The Sunnah and Qiyās'],
+    options: [
+      'The Qurʾān and the Sunnah',
+      'Ijmāʿ and Qiyās',
+      'The Qurʾān and Ijmāʿ',
+      'The Sunnah and Qiyās',
+    ],
     answerIndex: 0,
     explanation: 'The two primary sources of Islamic law are the Qurʾān and the Sunnah.',
   },
@@ -41,7 +47,8 @@ export const introductionQuestions = [
       'Ḥadīth and Sīrah',
     ],
     answerIndex: 0,
-    explanation: 'The two secondary sources of Islamic law are Ijmāʿ (scholarly consensus) and Qiyās (analogical reasoning).',
+    explanation:
+      'The two secondary sources of Islamic law are Ijmāʿ (scholarly consensus) and Qiyās (analogical reasoning).',
   },
   {
     id: 'FQH-INT-Q04',
@@ -95,17 +102,20 @@ export const introductionQuestions = [
     sourceIds: ['FQH-INT-04', 'FQH-INT-05', 'FQH-INT-06', 'FQH-INT-07', 'FQH-INT-08'],
     topic: 'INT',
     type: 'mcq',
-    prompt: 'Which of the following is NOT one of the five ruling categories (Farḍ, Sunnah, Mustaḥabb, Mubāḥ, Ḥarām)?',
+    prompt:
+      'Which of the following is NOT one of the five ruling categories (Farḍ, Sunnah, Mustaḥabb, Mubāḥ, Ḥarām)?',
     options: ['Wājib', 'Sunnah', 'Mubāḥ', 'Ḥarām'],
     answerIndex: 0,
-    explanation: 'Wājib is a distinct legal category in some madhhabs (e.g. Ḥanafī) but is not one of the five categories listed on this introductory slide.',
+    explanation:
+      'Wājib is a distinct legal category in some madhhabs (e.g. Ḥanafī) but is not one of the five categories listed on this introductory slide.',
   },
   {
     id: 'FQH-INT-Q10',
     sourceIds: ['FQH-INT-09'],
     topic: 'INT',
     type: 'mcq',
-    prompt: 'A Faqīh (فَقِيه) is analogous to a baker producing bread from ingredients. What do the "ingredients" represent?',
+    prompt:
+      'A Faqīh (فَقِيه) is analogous to a baker producing bread from ingredients. What do the "ingredients" represent?',
     options: [
       'The sources of Islamic law',
       'The rulings themselves',
@@ -113,14 +123,16 @@ export const introductionQuestions = [
       'The Arabic language',
     ],
     answerIndex: 0,
-    explanation: 'A Faqīh derives rulings (the "final product") from the sources of Islamic law (the "ingredients") — like a baker producing bread from ingredients.',
+    explanation:
+      'A Faqīh derives rulings (the "final product") from the sources of Islamic law (the "ingredients") — like a baker producing bread from ingredients.',
   },
   {
     id: 'FQH-INT-Q11',
     sourceIds: ['FQH-INT-10'],
     topic: 'INT',
     type: 'tf',
-    prompt: 'True or False: Farḍ ʿAyn (فَرْض عَيْن) is an obligation every individually responsible Muslim must personally fulfil, and no one else can fulfil it on their behalf.',
+    prompt:
+      'True or False: Farḍ ʿAyn (فَرْض عَيْن) is an obligation every individually responsible Muslim must personally fulfil, and no one else can fulfil it on their behalf.',
     answer: true,
     explanation: 'Correct — this is the definition of Farḍ ʿAyn.',
   },
@@ -137,7 +149,8 @@ export const introductionQuestions = [
       'A permissible act with no reward either way',
     ],
     answerIndex: 0,
-    explanation: 'Farḍ Kifāyah is a communal obligation — if enough people fulfil it, the rest of the community is absolved of it.',
+    explanation:
+      'Farḍ Kifāyah is a communal obligation — if enough people fulfil it, the rest of the community is absolved of it.',
   },
   {
     id: 'FQH-INT-Q13',
@@ -152,6 +165,7 @@ export const introductionQuestions = [
       'There is no difference — they are the same obligation',
     ],
     answerIndex: 0,
-    explanation: 'Farḍ ʿAyn must be personally fulfilled by every responsible Muslim; Farḍ Kifāyah is satisfied for the whole community once enough people perform it.',
+    explanation:
+      'Farḍ ʿAyn must be personally fulfilled by every responsible Muslim; Farḍ Kifāyah is satisfied for the whole community once enough people perform it.',
   },
 ];

@@ -53,12 +53,14 @@ describe('questionResultFromAnswer', () => {
   it('falls back to mode and session id when metadata is missing', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    expect(questionResultFromAnswer({
-      question: {},
-      correct: false,
-      mode: 'irab',
-      index: 2,
-    })).toEqual({
+    expect(
+      questionResultFromAnswer({
+        question: {},
+        correct: false,
+        mode: 'irab',
+        index: 2,
+      })
+    ).toEqual({
       questionId: 'irab-3',
       topic: 'irab',
       group: 'irab',

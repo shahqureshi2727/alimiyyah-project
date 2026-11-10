@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { signIn } from '../lib/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Auth.css';
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,8 +16,11 @@ export default function Login() {
     setLoading(true);
 
     try {
+      const { signIn } = await import('../lib/auth');
       await signIn(username, password);
-      navigate('/');
+      const from = location.state?.from;
+      const target = from ? `${from.pathname || '/'}${from.search || ''}${from.hash || ''}` : '/';
+      navigate(target, { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -26,7 +29,7 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
+    <main className="auth-container">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h1 className="auth-title">Sign In</h1>
         <p className="auth-subtitle">Welcome back to Qasas Practice</p>
@@ -40,6 +43,8 @@ export default function Login() {
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
             disabled={loading}
+            required
+            aria-describedby={error ? 'login-error' : undefined}
           />
         </div>
 
@@ -52,10 +57,16 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             disabled={loading}
+            required
+            aria-describedby={error ? 'login-error' : undefined}
           />
         </div>
 
-        {error && <p className="auth-error">{error}</p>}
+        {error && (
+          <p id="login-error" className="auth-error" role="alert">
+            {error}
+          </p>
+        )}
 
         <button type="submit" className="auth-btn" disabled={loading}>
           {loading ? 'Signing in...' : 'Sign in'}
@@ -71,6 +82,6 @@ export default function Login() {
           </Link>
         </div>
       </form>
-    </div>
+    </main>
   );
 }

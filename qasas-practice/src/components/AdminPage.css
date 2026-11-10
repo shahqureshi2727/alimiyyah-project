@@ -589,12 +589,22 @@
   white-space: nowrap;
 }
 
-.student-table th.sortable {
+.student-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: inherit;
+  min-height: var(--touch-target-min);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
   cursor: pointer;
   user-select: none;
 }
 
-.student-table th.sortable:hover {
+.student-sort-btn:hover {
   color: var(--ink);
 }
 

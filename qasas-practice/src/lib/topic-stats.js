@@ -35,7 +35,8 @@ function timestampMillis(value) {
     const parsed = Date.parse(value);
     return Number.isNaN(parsed) ? 0 : parsed;
   }
-  if (typeof value.seconds === 'number') return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1e6);
+  if (typeof value.seconds === 'number')
+    return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1e6);
   return 0;
 }
 
@@ -55,7 +56,15 @@ export function nextReviewSchedule({ existing, wasCorrect, answeredAt }) {
   };
 }
 
-export function nextTopicStat({ userId, category, subtopic, existing, wasCorrect, lastAttempted, answeredAt = lastAttempted }) {
+export function nextTopicStat({
+  userId,
+  category,
+  subtopic,
+  existing,
+  wasCorrect,
+  lastAttempted,
+  answeredAt = lastAttempted,
+}) {
   const previousScore =
     typeof existing?.ewmaScore === 'number' ? existing.ewmaScore : TOPIC_STAT_INITIAL_SCORE;
   const resultScore = wasCorrect ? 1 : 0;

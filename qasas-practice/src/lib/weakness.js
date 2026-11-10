@@ -38,7 +38,11 @@ export function updateProfile(profile = {}, events = []) {
 
   for (const event of events) {
     if (!event?.topic) continue;
-    topics[event.topic] = applyAnswer(topics[event.topic], Boolean(event.correct), event.answeredAt);
+    topics[event.topic] = applyAnswer(
+      topics[event.topic],
+      Boolean(event.correct),
+      event.answeredAt
+    );
   }
 
   return {
@@ -56,7 +60,7 @@ function seenTime(value) {
 }
 
 export function getWeakTopics(profile = {}, limit = 10) {
-  return Object.entries(profile.topics || {})
+  return Object.entries(profile?.topics || {})
     .filter(([, state]) => state.status === 'weak' || state.status === 'developing')
     .sort(([, a], [, b]) => {
       if (a.score !== b.score) return a.score - b.score;
