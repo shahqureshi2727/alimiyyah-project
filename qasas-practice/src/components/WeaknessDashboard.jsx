@@ -97,7 +97,13 @@ export default function WeaknessDashboard() {
         setProfile(await getUserTopicProfile(user.uid));
       } catch (err) {
         console.error('Error loading weakness profile:', err);
-        setError('Could not load weakness data.');
+        const errCode = err?.code || '';
+        const errMsg = err?.message || '';
+        if (errCode === 'permission-denied' || errMsg.includes('permission')) {
+          setError('Permission denied. Please try signing out and back in.');
+        } else {
+          setError(`Could not load weakness data: ${errMsg || errCode || 'Unknown error'}`);
+        }
       } finally {
         setLoading(false);
       }

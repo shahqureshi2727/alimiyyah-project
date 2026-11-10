@@ -83,9 +83,16 @@ export default function Leaderboard() {
         }
       } catch (err) {
         console.error('Error fetching leaderboard:', err);
-        setError(
-          'Could not load leaderboard. If this is your first time, the database index may need to be created. Check the browser console for a link to create it.'
-        );
+        // Show specific error message for common Firebase issues
+        const errCode = err?.code || '';
+        const errMsg = err?.message || '';
+        if (errCode === 'permission-denied' || errMsg.includes('permission')) {
+          setError('Permission denied. Please try signing out and back in.');
+        } else if (errCode === 'failed-precondition' || errMsg.includes('index')) {
+          setError('Database index is being created. Please try again in a few minutes.');
+        } else {
+          setError(`Could not load leaderboard: ${errMsg || errCode || 'Unknown error'}`);
+        }
       } finally {
         setLoading(false);
       }
