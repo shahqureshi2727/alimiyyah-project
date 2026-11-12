@@ -19,6 +19,7 @@
     "preview": "vite preview",
     "validate:fiqh": "node scripts/validate-fiqh-bank.mjs",
     "validate:morphology": "node scripts/validate-morphology-bank.mjs",
+    "build:qasas-bank": "node scripts/build-qasas-translation-bank.mjs",
     "migrate:topic-stats": "node scripts/migrate-topic-stats.mjs"
   },
   "dependencies": {

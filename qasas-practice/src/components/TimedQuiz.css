@@ -806,3 +806,9 @@
     grid-column: 2 / 4;
   }
 }
+
+/* Next button for typed modes that wait for the student before advancing. */
+.quiz-next-btn {
+  display: block;
+  margin: var(--space-4) auto 0;
+}

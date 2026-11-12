@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useBlocker, useNavigate } from 'react-router-dom';
-import { QUIZ_MODES } from '../config/subjects';
+import { QUIZ_MODES, quizTimerSecondsFor } from '../config/subjects';
 import { useAuth } from '../contexts/AuthContext';
 import { useCountdown } from '../hooks/useCountdown';
 import { useQuizEngine } from '../hooks/useQuizEngine';
@@ -26,6 +26,7 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   const allowNavigationRef = useRef(false);
   const exitButtonRef = useRef(null);
   const questionRegionRef = useRef(null);
+  const nextButtonRef = useRef(null);
   const announcedThresholdsRef = useRef(new Set());
   const blocker = useBlocker(
     ({ currentLocation, nextLocation }) =>
@@ -42,7 +43,11 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
     !exitDialogVisible &&
     !engine.questionsLoading &&
     engine.questions.length > 0;
-  const timerSeconds = QUIZ_MODES[mode].timerSeconds;
+  // Typed modes (e.g. Qasas translation) size the timer to the sentence, even
+  // inside Today's Review; every other mode keeps the quiz-wide timer.
+  const timerSeconds = engine.manualAdvance
+    ? quizTimerSecondsFor(engine.currentMode, engine.current)
+    : QUIZ_MODES[mode].timerSeconds;
   const quizRoute = resolveQuizRoute({ mode, topic });
   const quizLabel = quizRoute.status === 'ok' ? quizRoute.label : QUIZ_MODES[mode].label;
   const { timeLeft } = useCountdown({
@@ -83,12 +88,22 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
   useEffect(() => {
     if (timeLeft === 0 && !quizComplete) {
       const announceTimer = setTimeout(() => {
-        setExpiryAnnouncement(`Question ${currentIndex + 1}: time expired. Moving to the next question.`);
+        setExpiryAnnouncement(
+          engine.manualAdvance
+            ? `Question ${currentIndex + 1}: time expired. Review the answer, then choose Next.`
+            : `Question ${currentIndex + 1}: time expired. Moving to the next question.`
+        );
       }, 0);
       return () => clearTimeout(announceTimer);
     }
     return undefined;
-  }, [currentIndex, quizComplete, timeLeft]);
+  }, [currentIndex, engine.manualAdvance, quizComplete, timeLeft]);
+
+  // Typed modes wait on a Next button; focus it so Enter moves on.
+  const manualFeedbackShown = engine.manualAdvance && engine.showFeedback;
+  useEffect(() => {
+    if (manualFeedbackShown) nextButtonRef.current?.focus();
+  }, [manualFeedbackShown, currentIndex]);
 
   const handleExitClick = () => {
     setShowExitDialog(true);
@@ -234,6 +249,16 @@ export default function TimedQuiz({ mode, topic, onBack, onPlayAgain, onQuizComp
             onAnswer={engine.handleAnswer}
           />
         </ErrorBoundary>
+        {engine.manualAdvance && engine.showFeedback && (
+          <button
+            type="button"
+            className="next-btn quiz-next-btn"
+            onClick={engine.advanceQuestion}
+            ref={nextButtonRef}
+          >
+            {engine.currentIndex >= engine.questions.length - 1 ? 'See results' : 'Next'}
+          </button>
+        )}
       </section>
 
       {exitDialogVisible && (

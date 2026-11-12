@@ -52,6 +52,13 @@ const QUIZ_GROUPS = {
       timer: '10 sec per card',
     },
     {
+      target: { mode: 'qasasTranslation' },
+      titleAr: 'تَرْجَمَةُ القَصَص',
+      titleEn: 'Qasas Translation',
+      format: '10 sentences',
+      timer: '45-150 sec, by sentence length',
+    },
+    {
       target: { mode: 'morphology' },
       titleAr: 'تَصْرِيفُ الأَفْعَال',
       titleEn: 'Morphology: Mixed Review',

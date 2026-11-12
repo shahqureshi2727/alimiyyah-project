@@ -1,0 +1,257 @@
+.qasas-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.qasas-source-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.qasas-chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--cream);
+  color: var(--text-secondary);
+  font-size: var(--type-caption);
+  font-weight: 600;
+}
+
+.qasas-heading {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Arabic is content: generous line-height, no overflow clipping, no
+   transforms, so diacritics are never cut off in either script mode. */
+.qasas-arabic {
+  width: 100%;
+  margin: 0;
+  padding: var(--space-5);
+  border-block: 2px solid var(--accent-light);
+  border-inline: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  color: var(--text-primary);
+  font-family: var(--arabic-font);
+  font-size: var(--type-display);
+  line-height: var(--arabic-line-display);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.qasas-answer-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.qasas-answer-label {
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+  font-weight: 600;
+}
+
+.qasas-answer-input {
+  width: 100%;
+  min-height: 5.5rem;
+  resize: vertical;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  color: var(--text-primary);
+  font: inherit;
+  line-height: var(--line-body);
+}
+
+.qasas-answer-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 var(--space-1) var(--accent-light);
+}
+
+.qasas-answer-input:disabled {
+  opacity: 0.8;
+}
+
+.qasas-submit-btn {
+  align-self: flex-start;
+  min-height: var(--touch-target-min);
+  padding: var(--space-3) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--parchment);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.qasas-submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.qasas-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+}
+
+.qasas-feedback.is-correct {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.qasas-feedback.is-incorrect {
+  border-color: var(--error);
+}
+
+.qasas-summary-line {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.qasas-word-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qasas-word-row {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, auto) auto 1fr;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-inline-start-width: 4px;
+  border-radius: var(--radius-sm);
+  background: var(--parchment);
+}
+
+.qasas-word-ar {
+  color: var(--text-primary);
+  font-family: var(--arabic-font);
+  font-size: var(--type-lead);
+  line-height: var(--arabic-line-reading);
+  text-align: right;
+}
+
+.qasas-word-status {
+  justify-self: start;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-caption);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.qasas-word-detail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: var(--text-primary);
+  font-size: var(--type-small);
+  line-height: var(--line-small);
+  overflow-wrap: anywhere;
+}
+
+.qasas-word-typed {
+  font-weight: 600;
+}
+
+.qasas-word-expected {
+  color: var(--text-secondary);
+}
+
+.qasas-word-row.status-correct {
+  border-inline-start-color: var(--success);
+}
+
+.qasas-word-row.status-correct .qasas-word-status {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.qasas-word-row.status-accepted,
+.qasas-word-row.status-typo {
+  border-inline-start-color: var(--warning);
+}
+
+.qasas-word-row.status-accepted .qasas-word-status,
+.qasas-word-row.status-typo .qasas-word-status {
+  background: var(--warning-bg);
+  color: var(--text-primary);
+}
+
+.qasas-word-row.status-article,
+.qasas-word-row.status-missing {
+  border-inline-start-color: var(--error);
+}
+
+.qasas-word-row.status-article .qasas-word-status,
+.qasas-word-row.status-missing .qasas-word-status {
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.qasas-word-row.status-skipped,
+.qasas-word-row.status-note {
+  opacity: 0.75;
+}
+
+.qasas-word-row.status-skipped .qasas-word-status,
+.qasas-word-row.status-note .qasas-word-status {
+  color: var(--text-secondary);
+}
+
+.qasas-reference {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.qasas-reference-label {
+  color: var(--text-secondary);
+  font-size: var(--type-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.qasas-extra {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+}
+
+@media (max-width: 480px) {
+  .qasas-word-row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .qasas-word-detail {
+    grid-column: 1 / -1;
+  }
+}

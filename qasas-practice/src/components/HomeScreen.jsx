@@ -54,6 +54,12 @@ const ARABIC_MODES = [
     description: 'Flashcard recall from Qasas',
   },
   {
+    target: { mode: 'qasas' },
+    titleAr: 'تَرْجَمَةُ القَصَص',
+    titleEn: 'Qasas Translation',
+    description: 'Translate random sentences word by word',
+  },
+  {
     target: { mode: 'morphology' },
     titleAr: 'تَصْرِيفُ الأَفْعَال',
     titleEn: 'Morphology',
@@ -66,6 +72,7 @@ const MODE_LABELS = {
   nounFeatures: 'Noun Features',
   roles: 'Roles',
   vocab: 'Vocab',
+  qasasTranslation: 'Qasas Translation',
   morphology: 'Morphology',
   fiqh: 'Fiqh',
   hadith: 'Hadith',

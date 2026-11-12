@@ -19,6 +19,7 @@ const IrabMode = lazy(() => import('./components/IrabMode'));
 const NounMode = lazy(() => import('./components/NounMode'));
 const RoleMode = lazy(() => import('./components/RoleMode'));
 const VocabMode = lazy(() => import('./components/VocabMode'));
+const QasasTranslationMode = lazy(() => import('./components/QasasTranslationMode'));
 const MorphologyMode = lazy(() => import('./components/MorphologyMode'));
 const FiqhPracticeMode = lazy(() => import('./components/FiqhPracticeMode'));
 const HadithPracticeMode = lazy(() => import('./components/HadithPracticeMode'));
@@ -133,6 +134,8 @@ function PracticeSession({ route, navigate }) {
       return <RoleMode onBack={goHome} />;
     case 'vocab':
       return <VocabMode onBack={goHome} />;
+    case 'qasas':
+      return <QasasTranslationMode onBack={goHome} />;
     case 'morphology':
       return (
         <MorphologyMode

@@ -11,7 +11,7 @@ import './Leaderboard.css';
 
 const MODE_GROUPS = [
   { id: 'review', label: 'Review', modes: ['review'] },
-  { id: 'arabic', label: 'Arabic', modes: ['irab', 'nounFeatures', 'roles', 'vocab', 'morphology'] },
+  { id: 'arabic', label: 'Arabic', modes: ['irab', 'nounFeatures', 'roles', 'vocab', 'qasasTranslation', 'morphology'] },
   { id: 'fiqh', label: 'Fiqh', modes: ['fiqh'] },
   { id: 'hadith', label: 'Hadith', modes: ['hadith'] },
   { id: 'tafsir', label: 'Tafsir', modes: ['tafsir'] },

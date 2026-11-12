@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { QUIZ_MODES } from '../config/subjects';
+import { QUIZ_MODES, quizModeAdvancesManually } from '../config/subjects';
 import {
   DAILY_REVIEW_LENGTH,
   selectDailyReviewQuestions,
@@ -154,9 +154,13 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
     questionStartTimeRef.current = currentTime();
   }, [currentIndex, onQuizComplete, questions.length]);
 
+  const manualAdvance = quizModeAdvancesManually(currentMode);
+
   const scheduleAdvance = useCallback(() => {
+    // Typed modes keep the feedback on screen until the student taps Next.
+    if (manualAdvance) return;
     advanceTimerRef.current = setTimeout(() => advanceQuestion(), 1000);
-  }, [advanceQuestion]);
+  }, [advanceQuestion, manualAdvance]);
 
   const recordResult = useCallback(
     ({ question, correct, answerEvent, target, timeTaken }) => {
@@ -345,5 +349,7 @@ export function useQuizEngine({ mode, topic, user, username, onQuizComplete }) {
     handleAnswer,
     handleTimeout,
     handleSkipQuestion,
+    manualAdvance,
+    advanceQuestion,
   };
 }

@@ -2,6 +2,7 @@ import { irabQuestions } from './irab.js';
 import { nounFeaturesQuestions } from './noun-features.js';
 import { rolesQuestions } from './roles.js';
 import { vocabQuestions } from './vocab.js';
+import { qasasTranslationQuestions } from './qasas-translation.js';
 
 // Topic banks for Arabic questions, matching the pattern used in fiqh/index.js
 const TOPIC_BANKS = {
@@ -9,6 +10,7 @@ const TOPIC_BANKS = {
   NF: nounFeaturesQuestions,
   ROL: rolesQuestions,
   VOC: vocabQuestions,
+  QSS: qasasTranslationQuestions,
 };
 
 // Mode-to-topic mapping for backwards compatibility with existing mode names
@@ -17,6 +19,7 @@ const MODE_TO_TOPIC = {
   nounFeatures: 'NF',
   roles: 'ROL',
   vocab: 'VOC',
+  qasasTranslation: 'QSS',
 };
 
 /**
@@ -39,6 +42,13 @@ export const irab = irabQuestions;
 export const nounFeatures = nounFeaturesQuestions;
 export const roles = rolesQuestions;
 export const vocab = vocabQuestions;
+export const qasasTranslation = qasasTranslationQuestions;
 
 // Also export the question arrays with their new names
-export { irabQuestions, nounFeaturesQuestions, rolesQuestions, vocabQuestions };
+export {
+  irabQuestions,
+  nounFeaturesQuestions,
+  rolesQuestions,
+  vocabQuestions,
+  qasasTranslationQuestions,
+};

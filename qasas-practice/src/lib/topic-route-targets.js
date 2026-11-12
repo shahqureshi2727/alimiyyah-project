@@ -10,6 +10,7 @@ const ARABIC_PRACTICE_MODES = {
   nounFeatures: 'noun',
   roles: 'role',
   vocab: 'vocab',
+  qasasTranslation: 'qasas',
 };
 
 const MORPHOLOGY_SCOPE_BY_PREFIX = [

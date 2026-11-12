@@ -16,7 +16,17 @@ describe('quiz bank selection', () => {
 
     expect(categories).toEqual(new Set(['arabic', 'fiqh', 'hadith', 'tafsir']));
     expect(modes).toEqual(
-      new Set(['irab', 'nounFeatures', 'roles', 'vocab', 'morphology', 'fiqh', 'hadith', 'tafsir'])
+      new Set([
+        'irab',
+        'nounFeatures',
+        'roles',
+        'vocab',
+        'qasasTranslation',
+        'morphology',
+        'fiqh',
+        'hadith',
+        'tafsir',
+      ])
     );
   });
 

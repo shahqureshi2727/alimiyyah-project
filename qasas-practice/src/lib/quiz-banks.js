@@ -37,6 +37,10 @@ const ARABIC_BANK_LOADERS = {
     import('../data/arabic/noun-features.js').then((module) => module.nounFeaturesQuestions),
   roles: () => import('../data/arabic/roles.js').then((module) => module.rolesQuestions),
   vocab: () => import('../data/arabic/vocab.js').then((module) => module.vocabQuestions),
+  qasasTranslation: () =>
+    import('../data/arabic/qasas-translation.js').then(
+      (module) => module.qasasTranslationQuestions
+    ),
   morphology: () => import('../data/morphology.js').then((module) => module.morphology),
 };
 
@@ -64,6 +68,7 @@ async function loadDailyReviewBank() {
     nounFeatures,
     roles,
     vocab,
+    qasasTranslation,
     morphology,
     fiqh,
     hadith,
@@ -73,6 +78,7 @@ async function loadDailyReviewBank() {
     ARABIC_BANK_LOADERS.nounFeatures(),
     ARABIC_BANK_LOADERS.roles(),
     ARABIC_BANK_LOADERS.vocab(),
+    ARABIC_BANK_LOADERS.qasasTranslation(),
     ARABIC_BANK_LOADERS.morphology(),
     loadFiqhQuestions('all'),
     import('../data/hadith/index.js').then((module) => module.getHadithQuestions('all')),
@@ -84,6 +90,11 @@ async function loadDailyReviewBank() {
     { reviewCategory: 'arabic', reviewMode: 'nounFeatures', questions: nounFeatures },
     { reviewCategory: 'arabic', reviewMode: 'roles', questions: roles },
     { reviewCategory: 'arabic', reviewMode: 'vocab', questions: vocab },
+    {
+      reviewCategory: 'arabic',
+      reviewMode: 'qasasTranslation',
+      questions: qasasTranslation,
+    },
     { reviewCategory: 'arabic', reviewMode: 'morphology', questions: morphology },
     { reviewCategory: 'fiqh', reviewMode: 'fiqh', questions: fiqh },
     { reviewCategory: 'hadith', reviewMode: 'hadith', questions: hadith },

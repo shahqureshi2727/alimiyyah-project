@@ -3,6 +3,7 @@ import NounFeaturesQuizRenderer from './renderers/NounFeaturesQuizRenderer';
 import RolesQuizRenderer from './renderers/RolesQuizRenderer';
 import MorphologyQuizRenderer from './renderers/MorphologyQuizRenderer';
 import VocabQuizRenderer from './renderers/VocabQuizRenderer';
+import QasasTranslationQuizRenderer from './renderers/QasasTranslationQuizRenderer';
 import FiqhQuizRenderer from './renderers/FiqhQuizRenderer';
 import HadithQuizRenderer from './renderers/HadithQuizRenderer';
 import TafsirQuizRenderer from './renderers/TafsirQuizRenderer';
@@ -13,6 +14,7 @@ const QUIZ_RENDERERS = {
   roles: RolesQuizRenderer,
   morphology: MorphologyQuizRenderer,
   vocab: VocabQuizRenderer,
+  qasasTranslation: QasasTranslationQuizRenderer,
   fiqh: FiqhQuizRenderer,
   hadith: HadithQuizRenderer,
   tafsir: TafsirQuizRenderer,

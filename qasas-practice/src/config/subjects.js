@@ -11,6 +11,16 @@ export const QUIZ_MODES = {
   roles: { label: 'Grammatical Role', bankSource: 'qasas', timerSeconds: 20 },
   vocab: { label: 'Vocabulary', bankSource: 'qasas', timerSeconds: 10 },
   morphology: { label: 'Morphology', bankSource: 'qasas', timerSeconds: 20 },
+  // Typed sentence translation: the timer scales with sentence length and the
+  // quiz waits for "Next" so the word-by-word feedback can be read.
+  qasasTranslation: {
+    label: 'Qasas Translation',
+    bankSource: 'qasas',
+    timerSeconds: 90,
+    timerSecondsFor: (question) =>
+      Math.min(150, Math.max(45, 20 + 7 * (question?.words?.length || 0))),
+    manualAdvance: true,
+  },
   fiqh: { label: 'Fiqh', bankSource: 'fiqh', timerSeconds: 25 },
   hadith: { label: 'Hadith', bankSource: 'hadith', timerSeconds: 25 },
   tafsir: { label: 'Tafsir', bankSource: 'tafsir', timerSeconds: 25 },
@@ -23,6 +33,7 @@ export const QUIZ_QUESTION_TARGETS = {
   roles: (question) => question.words[question.answerIndex],
   morphology: (question) => question.verb,
   vocab: (question) => question.ar,
+  qasasTranslation: (question) => question.ar,
   fiqh: (question) => question.prompt,
   hadith: (question) => question.arabicText,
   tafsir: (question) => question.arabicText,
@@ -33,6 +44,7 @@ export const UNTITLED_PRACTICE_MODES = [
   { id: 'noun', label: 'Noun Features' },
   { id: 'role', label: 'Grammatical Role' },
   { id: 'vocab', label: 'Vocabulary' },
+  { id: 'qasas', label: 'Qasas Translation' },
 ];
 
 export const MORPHOLOGY_TOPICS = [
@@ -49,6 +61,7 @@ export const ARABIC_TOPICS = [
   { code: 'NF', label: 'Noun Features', mode: 'nounFeatures' },
   { code: 'ROL', label: 'Grammatical Role', mode: 'roles' },
   { code: 'VOC', label: 'Vocabulary', mode: 'vocab' },
+  { code: 'QSS', label: 'Qasas Translation', mode: 'qasasTranslation' },
   { code: 'MOR_PST_ACT', label: 'Morphology: Past Active', mode: 'morphology' },
   { code: 'MOR_PST_PAS', label: 'Morphology: Past Passive', mode: 'morphology' },
   { code: 'MOR_MDR_ACT', label: 'Morphology: Mudari Active', mode: 'morphology' },
@@ -144,3 +157,15 @@ export const TAFSIR_TOPICS = [
     description: 'Verse-by-verse translation and tafsir notes',
   },
 ];
+
+// Per-question timer and advance behaviour for a quiz mode. Most modes use a
+// fixed timer and auto-advance; typed modes can override both.
+export function quizTimerSecondsFor(mode, question) {
+  const config = QUIZ_MODES[mode];
+  if (!config) return 20;
+  return config.timerSecondsFor ? config.timerSecondsFor(question) : config.timerSeconds;
+}
+
+export function quizModeAdvancesManually(mode) {
+  return Boolean(QUIZ_MODES[mode]?.manualAdvance);
+}

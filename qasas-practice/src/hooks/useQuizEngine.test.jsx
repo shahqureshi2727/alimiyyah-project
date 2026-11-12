@@ -50,14 +50,14 @@ function fiqhQuestion(id, prompt, answerIndex = 0) {
   };
 }
 
-async function renderLoadedEngine(bank) {
+async function renderLoadedEngine(bank, { mode = 'fiqh', topic = 'WUD' } = {}) {
   loadBank.mockResolvedValue(bank);
   const onQuizComplete = vi.fn();
   const user = { uid: 'student-1' };
   const rendered = renderHook(() =>
     useQuizEngine({
-      mode: 'fiqh',
-      topic: 'WUD',
+      mode,
+      topic,
       user,
       username: 'student',
       onQuizComplete,
@@ -115,6 +115,44 @@ describe('useQuizEngine', () => {
         correct: true,
       },
     });
+  });
+
+  it('waits for an explicit advance in typed translation mode', async () => {
+    const sentence = {
+      id: 'QSS-C1-S01',
+      topic: 'QSS',
+      type: 'qasasTranslation',
+      ar: 'قَبْلَ أَيَّامٍ',
+      en: 'Before days',
+      words: [{ ar: 'قَبْلَ', en: ['before'] }],
+    };
+    const { result } = await renderLoadedEngine([sentence], {
+      mode: 'qasasTranslation',
+      topic: null,
+    });
+    vi.useFakeTimers();
+
+    expect(result.current.manualAdvance).toBe(true);
+    act(() => {
+      result.current.handleAnswer(true, { correct: true });
+    });
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(result.current.currentIndex).toBe(0);
+    expect(result.current.showFeedback).toBe(true);
+    expect(result.current.results[0].answerEvent).toMatchObject({
+      questionId: 'QSS-C1-S01',
+      topic: 'QSS',
+      group: 'qasasTranslation',
+      correct: true,
+    });
+
+    act(() => {
+      result.current.advanceQuestion();
+    });
+    expect(result.current.currentIndex).toBe(1);
+    expect(result.current.showFeedback).toBe(false);
   });
 
   it('records an expired timer as an incorrect answer and advances to the next question', async () => {

@@ -4,6 +4,14 @@ This project was developed in phases before a formal changelog existed. The entr
 
 ## Unreleased
 
+### Qasas Translation
+
+- Added a Qasas translation mode: random sentences from Qasas chapters 1-7 (93 sentences), typed as one English sentence and graded word by word.
+- Grading accepts natural English word order, listed synonyms and small typos (showing the textbook answer), and enforces definiteness ("the" vs "a/an" vs none).
+- Available as untimed practice, a 10-sentence timed quiz with leaderboard (timer scales with sentence length, Next button instead of auto-advance), and in Today's Review / Strength Map under topic `QSS`.
+- Sentence bank is generated from `scripts/qasas-translation-source.txt` with `npm run build:qasas-bank`.
+- Firestore rules: `qasasTranslation` added to valid quiz modes (rules must be deployed before quiz results can save).
+
 ### Phase 1 - Audit, CI, And Guardrails
 
 - Added a repo/app audit in `docs/AUDIT.md`.

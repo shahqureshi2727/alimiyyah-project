@@ -1,0 +1,1025 @@
+# Qasas an-Nabiyyin, Ibrahim chapters 1-7. Sentence translation bank source.
+# Format:
+#   ## <chapter number> | <chapter title en> | <chapter title ar>
+#   > <Arabic sentence as printed>
+#   = <English reference translation>
+#   <arabic token> : <canonical> | <alternative> | ...
+#   Prefix the token with ? to make it optional (not graded if missing).
+#   A leading "a "/"an "/"the " on an answer is an article requirement.
+#   $IBR expands to the accepted spellings of Ibrahim; $AZAR and $ALLAH likewise.
+
+## 1 | The Seller of the Idols | بَائِعُ الأَصْنَامِ
+
+> قَبْلَ أَيَّامٍ كَثِيرَةٍ، كَثِيرَةٍ جِدًّا.
+= Before many days, very many.
+قَبْلَ : before | ago
+أَيَّامٍ : days
+كَثِيرَةٍ : many | a lot of | numerous
+كَثِيرَةٍ : many | a lot of | numerous
+جِدًّا : very | so | really
+
+> كَانَ فِي قَرْيَةٍ رَجُلٌ مَشْهُورٌ جِدًّا.
+= There was in a village a very famous man.
+كَانَ : there was | was | there lived | lived
+فِي : in
+قَرْيَةٍ : a village | a town
+رَجُلٌ : a man
+مَشْهُورٌ : famous | well known
+جِدًّا : very | really
+
+> وَكَانَ اسْمُ هٰذَا الرَّجُلِ آزَرَ.
+= And the name of this man was Azar.
+وَ : and
+كَانَ : was
+اسْمُ : the name | name
+هٰذَا : this
+الرَّجُلِ : man
+آزَرَ : $AZAR
+
+> وَكَانَ آزَرُ يَبِيعُ الْأَصْنَامَ.
+= And Azar used to / would sell idols.
+وَ : and
+كَانَ : used to | would | was
+آزَرُ : $AZAR
+يَبِيعُ : sell | selling | sold
+الْأَصْنَامَ : idols | the idols
+
+> وَكَانَ فِي هٰذِهِ الْقَرْيَةِ بَيْتٌ كَبِيرٌ جِدًّا.
+= And there was a very large house in this town.
+وَ : and
+كَانَ : there was | was
+فِي : in
+هٰذِهِ : this
+الْقَرْيَةِ : town | village
+بَيْتٌ : a house | a home | a building
+كَبِيرٌ : large | big | huge
+جِدًّا : very | really
+
+> وَكَانَ فِي هٰذَا الْبَيْتِ أَصْنَامٌ، أَصْنَامٌ كَثِيرَةٌ جِدًّا.
+= And there were idols in this house, very many idols.
+وَ : and
+كَانَ : there were | were | there was | was
+فِي : in
+هٰذَا : this
+الْبَيْتِ : house | home | building
+أَصْنَامٌ : idols
+أَصْنَامٌ : idols
+كَثِيرَةٌ : many | numerous
+جِدًّا : very | really
+
+> وَكَانَ النَّاسُ يَسْجُدُونَ لِهٰذِهِ الْأَصْنَامِ.
+= And the people would prostrate to these idols.
+وَ : and
+كَانَ : would | used to | were
+النَّاسُ : the people | people
+يَسْجُدُونَ : prostrate | prostrating | bow down | bowing down | bow | bowing
+لِـ : to | before | for
+هٰذِهِ : these
+الْأَصْنَامِ : idols
+
+> وَكَانَ آزَرُ يَسْجُدُ لِهٰذِهِ الْأَصْنَامِ.
+= And Azar would prostrate to these idols.
+وَ : and
+كَانَ : would | used to | was
+آزَرُ : $AZAR
+يَسْجُدُ : prostrate | prostrating | bow down | bowing down | bow | bowing
+لِـ : to | before | for
+هٰذِهِ : these
+الْأَصْنَامِ : idols
+
+> وَكَانَ آزَرُ يَعْبُدُ هٰذِهِ الْأَصْنَامَ.
+= And Azar would worship these idols.
+وَ : and
+كَانَ : would | used to | was
+آزَرُ : $AZAR
+يَعْبُدُ : worship | worshipping | worshiping
+هٰذِهِ : these
+الْأَصْنَامَ : idols
+
+## 2 | Azar's Son | وَلَدُ آزَرَ
+
+> وَكَانَ آزَرُ لَهُ وَلَدٌ رَشِيدٌ، رَشِيدٌ جِدًّا.
+= And Azar had a very intelligent son. (Literally: And Azar, there was for him a son, intelligent, very intelligent.)
+وَ : and
+?كَانَ : there was | was
+آزَرُ : $AZAR
+لَهُ : had | for him | he had
+وَلَدٌ : a son | a boy | a child
+رَشِيدٌ : intelligent | wise | smart | sensible | rightly guided | sound minded
+?رَشِيدٌ : intelligent | wise | smart | sensible | rightly guided | sound minded
+جِدًّا : very | really
+
+> وَكَانَ اسْمُ هٰذَا الْوَلَدِ إِبْرَاهِيمَ.
+= And the name of this boy was Ibrahim.
+وَ : and
+كَانَ : was
+اسْمُ : the name | name
+هٰذَا : this
+الْوَلَدِ : boy | son | child
+إِبْرَاهِيمَ : $IBR
+
+> وَكَانَ إِبْرَاهِيمُ يَرَى النَّاسَ يَسْجُدُونَ لِلْأَصْنَامِ.
+= And Ibrahim would see the people prostrating to the idols.
+وَ : and
+كَانَ : would | used to | was
+إِبْرَاهِيمُ : $IBR
+يَرَى : see | seeing | saw | watch | watching
+النَّاسَ : the people | people
+يَسْجُدُونَ : prostrating | prostrate | bowing down | bow down | bowing | bow
+لِـ : to | before | for
+الْأَصْنَامِ : the idols | idols
+
+> وَيَرَى النَّاسَ يَعْبُدُونَ الْأَصْنَامَ.
+= And he would see the people worshipping the idols.
+وَ : and
+يَرَى : see | seeing | saw | watch | watching
+النَّاسَ : the people | people
+يَعْبُدُونَ : worshipping | worship | worshiping
+الْأَصْنَامَ : the idols | idols
+
+> وَكَانَ إِبْرَاهِيمُ يَعْرِفُ أَنَّ الْأَصْنَامَ حِجَارَةٌ.
+= And Ibrahim would recognize that the idols were stone.
+وَ : and
+كَانَ : would | used to | was
+إِبْرَاهِيمُ : $IBR
+يَعْرِفُ : recognize | recognise | know | realize | realise | recognizing | knowing | knew | understand
+أَنَّ : that
+الْأَصْنَامَ : the idols | idols
+حِجَارَةٌ : stone | stones | rock | rocks
+
+> وَكَانَ يَعْرِفُ أَنَّ الْأَصْنَامَ لَا تَتَكَلَّمُ وَلَا تَسْمَعُ.
+= And he would recognize that idols do not speak and do not listen / hear.
+وَ : and
+كَانَ : would | used to | was
+يَعْرِفُ : recognize | recognise | know | realize | realise | recognizing | knowing | knew | understand
+أَنَّ : that
+الْأَصْنَامَ : idols | the idols
+لَا : do not | does not | not | can not
+تَتَكَلَّمُ : speak | talk
+?وَ : and | or
+لَا : do not | does not | not | nor | neither | can not
+تَسْمَعُ : listen | hear
+
+> وَكَانَ يَعْرِفُ أَنَّ الْأَصْنَامَ لَا تَضُرُّ وَلَا تَنْفَعُ.
+= And he would recognize that idols do not harm and do not bring benefit.
+وَ : and
+كَانَ : would | used to | was
+يَعْرِفُ : recognize | recognise | know | realize | realise | recognizing | knowing | knew | understand
+أَنَّ : that
+الْأَصْنَامَ : idols | the idols
+لَا : do not | does not | not | can not
+تَضُرُّ : harm | hurt | cause harm
+?وَ : and | or
+لَا : do not | does not | not | nor | neither | can not
+تَنْفَعُ : bring benefit | benefit | help | bring any benefit
+
+> وَكَانَ يَرَى أَنَّ الذُّبَابَ يَجْلِسُ عَلَى الْأَصْنَامِ فَلَا تَدْفَعُ.
+= And he would see that the fly sits upon the idols [and] then they do not defend [against it].
+وَ : and
+كَانَ : would | used to | was
+يَرَى : see | saw | notice | seeing
+أَنَّ : that
+الذُّبَابَ : the fly | the flies
+يَجْلِسُ : sits | sit | sitting | sat | lands | land | landing
+عَلَى : upon | on | on top of
+الْأَصْنَامِ : the idols | idols
+فَـ : then | so | and | yet | but
+لَا : do not | does not | not | can not
+تَدْفَعُ : defend | push away | repel | push it away | drive away | drive it away | defend themselves | resist | push
+
+> وَكَانَ يَرَى الْفَأْرَ يَأْكُلُ طَعَامَ الْأَصْنَامِ فَلَا تَمْنَعُ.
+= And he would see the mouse eating the idol's food [and] then they do not prevent [it].
+وَ : and
+كَانَ : would | used to | was
+يَرَى : see | saw | notice | seeing | watch
+الْفَأْرَ : the mouse | the mice | the rat
+يَأْكُلُ : eating | eat | eats | ate
+طَعَامَ : the food | food
+الْأَصْنَامِ : the idols | idols | the idol | idol
+فَـ : then | so | and | yet | but
+لَا : do not | does not | not | can not
+تَمْنَعُ : prevent | prevent it | stop | stop it | forbid
+
+> وَكَانَ إِبْرَاهِيمُ يَقُولُ فِي نَفْسِهِ: لِمَاذَا يَسْجُدُ النَّاسُ لِلْأَصْنَامِ؟
+= And Ibrahim would say to himself (literally: in himself): Why do the people prostrate to the idols?
+وَ : and
+كَانَ : would | used to | was
+إِبْرَاهِيمُ : $IBR
+يَقُولُ : say | saying | said | think | thinking
+فِي : to | in | within
+نَفْسِهِ : himself
+لِمَاذَا : why | for what reason
+يَسْجُدُ : prostrate | bow down | bow
+النَّاسُ : the people | people
+لِـ : to | before | for
+الْأَصْنَامِ : the idols | idols
+
+> وَكَانَ إِبْرَاهِيمُ يَسْأَلُ نَفْسَهُ: لِمَاذَا يَسْأَلُ النَّاسُ الْأَصْنَامَ؟
+= And Ibrahim would ask himself: Why do the people ask the idols?
+وَ : and
+كَانَ : would | used to | was
+إِبْرَاهِيمُ : $IBR
+يَسْأَلُ : ask | asking | asked
+نَفْسَهُ : himself
+لِمَاذَا : why | for what reason
+يَسْأَلُ : ask | pray to | supplicate
+النَّاسُ : the people | people
+الْأَصْنَامَ : the idols | idols
+
+## 3 | The Advice of Ibrahim | نَصِيحَةُ إِبْرَاهِيمَ
+
+> وَكَانَ إِبْرَاهِيمُ يَقُولُ لِوَالِدِهِ:
+= And Ibrahim would say to his father:
+وَ : and
+كَانَ : would | used to | was
+إِبْرَاهِيمُ : $IBR
+يَقُولُ : say | saying | said | tell | telling
+لِـ : to
+وَالِدِهِ : his father | his parent | his dad
+
+> يَا أَبِي، لِمَاذَا تَعْبُدُ هٰذِهِ الْأَصْنَامَ؟
+= O my father, why do you worship these idols?
+يَا : o | oh
+أَبِي : my father | father | my dad | dad
+لِمَاذَا : why | for what reason
+تَعْبُدُ : worship | you worship
+هٰذِهِ : these
+الْأَصْنَامَ : idols
+
+> وَيَا أَبِي لِمَاذَا تَسْجُدُ لِهٰذِهِ الْأَصْنَامِ؟
+= And O my father, why do you prostrate to these idols?
+وَ : and
+يَا : o | oh
+أَبِي : my father | father | my dad | dad
+لِمَاذَا : why | for what reason
+تَسْجُدُ : prostrate | you prostrate | bow down | bow
+لِـ : to | before | for
+هٰذِهِ : these
+الْأَصْنَامِ : idols
+
+> وَيَا أَبِي لِمَاذَا تَسْأَلُ هٰذِهِ الْأَصْنَامَ؟
+= And O my father, why do you ask these idols?
+وَ : and
+يَا : o | oh
+أَبِي : my father | father | my dad | dad
+لِمَاذَا : why | for what reason
+تَسْأَلُ : ask | you ask | pray to
+هٰذِهِ : these
+الْأَصْنَامَ : idols
+
+> إِنَّ هٰذِهِ الْأَصْنَامَ لَا تَتَكَلَّمُ وَلَا تَسْمَعُ!
+= Verily these idols do not speak and do not hear.
+إِنَّ : verily | indeed | truly | surely | certainly
+هٰذِهِ : these
+الْأَصْنَامَ : idols
+لَا : do not | does not | not | can not
+تَتَكَلَّمُ : speak | talk
+?وَ : and | or
+لَا : do not | does not | not | nor | neither | can not
+تَسْمَعُ : hear | listen
+
+> وَإِنَّ هٰذِهِ الْأَصْنَامَ لَا تَضُرُّ وَلَا تَنْفَعُ!
+= And verily these idols do not harm and do not benefit.
+وَ : and
+إِنَّ : verily | indeed | truly | surely | certainly
+هٰذِهِ : these
+الْأَصْنَامَ : idols
+لَا : do not | does not | not | can not
+تَضُرُّ : harm | hurt | cause harm
+?وَ : and | or
+لَا : do not | does not | not | nor | neither | can not
+تَنْفَعُ : benefit | bring benefit | help
+
+> وَلِأَيِّ شَيْءٍ تَضَعُ لَهَا الطَّعَامَ وَالشَّرَابَ؟
+= And for what [reason] do you put for them food and drink,
+وَ : and
+لِـ : for
+أَيِّ : what | which
+شَيْءٍ : reason | thing | purpose
+تَضَعُ : put | place | set | lay | you put | you place
+لَهَا : for them | for it | to them | before them
+الطَّعَامَ : food | the food
+?وَ : and
+الشَّرَابَ : drink | the drink | drinks
+
+> وَإِنَّ هٰذِهِ الْأَصْنَامَ يَا أَبِي لَا تَأْكُلُ وَلَا تَشْرَبُ!
+= Although these idols, O my father, do not eat and do not drink?
+وَ : although | even though | while | when | and
+?إِنَّ : verily | indeed | truly | surely | certainly
+هٰذِهِ : these
+الْأَصْنَامَ : idols
+يَا : o | oh
+أَبِي : my father | father | my dad | dad
+لَا : do not | does not | not | can not
+تَأْكُلُ : eat
+?وَ : and | or
+لَا : do not | does not | not | nor | neither | can not
+تَشْرَبُ : drink
+
+> وَكَانَ آزَرُ يَغْضَبُ وَلَا يَفْهَمُ.
+= And Azar would become angry and not understand.
+وَ : and
+كَانَ : would | used to | was
+آزَرُ : $AZAR
+يَغْضَبُ : become angry | get angry | be angry | getting angry | became angry | got angry | angry
+وَ : and
+لَا : not | do not | does not | did not | would not
+يَفْهَمُ : understand | understanding
+
+> وَكَانَ إِبْرَاهِيمُ يَنْصَحُ لِقَوْمِهِ، وَكَانَ النَّاسُ يَغْضَبُونَ وَلَا يَفْهَمُونَ.
+= And Ibrahim would advise his people. And the people would become angry and not understand.
+وَ : and
+كَانَ : would | used to | was
+إِبْرَاهِيمُ : $IBR
+يَنْصَحُ : advise | advising | counsel | counselling | counseling | give advice to | give advice
+?لِـ : to | for
+قَوْمِهِ : his people | his nation | his community | his folk
+وَ : and
+كَانَ : would | used to | were
+النَّاسُ : the people | people
+يَغْضَبُونَ : become angry | get angry | be angry | getting angry | became angry | got angry | angry
+وَ : and
+لَا : not | do not | did not | would not
+يَفْهَمُونَ : understand | understanding
+
+> قَالَ إِبْرَاهِيمُ: أَنَا أَكْسِرُ الْأَصْنَامَ إِذَا ذَهَبَ النَّاسُ،
+= Ibrahim said: I will break the idols when the people go out.
+قَالَ : said | says
+إِبْرَاهِيمُ : $IBR
+أَنَا : i
+أَكْسِرُ : will break | break | shall break | will smash | smash | will destroy
+الْأَصْنَامَ : the idols
+إِذَا : when | once | if
+ذَهَبَ : go out | leave | go | go away | have gone | are gone | have left | left | went
+النَّاسُ : the people | people
+
+> وَحِينَئِذٍ يَفْهَمُ النَّاسُ.
+= And thereupon the people will understand.
+وَ : and
+حِينَئِذٍ : thereupon | then | at that time | at that point | at that moment
+يَفْهَمُ : will understand | understand | would understand | shall understand
+النَّاسُ : the people | people
+
+## 4 | Ibrahim Breaks the Idols | إِبْرَاهِيمُ يَكْسِرُ الأَصْنَامَ
+
+> وَجَاءَ يَوْمُ عِيدٍ فَفَرِحَ النَّاسُ.
+= And the day of eid (celebration) came, so the people rejoiced.
+وَ : and
+جَاءَ : came | arrived | came around
+يَوْمُ : the day | a day | day
+عِيدٍ : eid | celebration | festival | a celebration | a festival
+فَـ : so | then | and
+فَرِحَ : rejoiced | were happy | became happy | celebrated | were glad | were joyful
+النَّاسُ : the people | people
+
+> وَخَرَجَ النَّاسُ لِلْعِيدِ وَخَرَجَ الْأَطْفَالُ.
+= And the people left (went out) for the eid and the children left.
+وَ : and
+خَرَجَ : left | went out | came out | went | exited
+النَّاسُ : the people | people
+لِـ : for | to
+الْعِيدِ : the eid | eid | the celebration | the festival
+وَ : and
+خَرَجَ : left | went out | came out | went | exited
+الْأَطْفَالُ : the children | children | the kids | kids
+
+> وَخَرَجَ وَالِدُ إِبْرَاهِيمَ وَقَالَ لِإِبْرَاهِيمَ: أَلَا تَخْرُجُ مَعَنَا؟
+= And Ibrahim's father left and he said to Ibrahim: Are you not leaving with us?
+وَ : and
+خَرَجَ : left | went out | came out | went | exited
+وَالِدُ : the father | father
+إِبْرَاهِيمَ : $IBR
+وَ : and
+قَالَ : said
+لِـ : to
+إِبْرَاهِيمَ : $IBR
+أَلَا : not | do not | will not
+تَخْرُجُ : leaving | leave | going out | go out | coming out | come out | coming | come | going | go
+مَعَنَا : with us
+
+> قَالَ إِبْرَاهِيمُ: أَنَا سَقِيمٌ!
+= Ibrahim said: I am sick.
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+أَنَا : i
+سَقِيمٌ : sick | ill | unwell
+
+> وَذَهَبَ النَّاسُ وَبَقِيَ إِبْرَاهِيمُ فِي الْبَيْتِ.
+= And the people went and Ibrahim remained in the house.
+وَ : and
+ذَهَبَ : went | left | went away | departed | went out
+النَّاسُ : the people | people
+وَ : and
+بَقِيَ : remained | stayed
+إِبْرَاهِيمُ : $IBR
+فِي : in | at
+الْبَيْتِ : the house | the home | home
+
+> وَجَاءَ إِبْرَاهِيمُ إِلَى الْأَصْنَامِ، وَقَالَ لِلْأَصْنَامِ: أَلَا تَتَكَلَّمُونَ؟ أَلَا تَسْمَعُونَ؟
+= And Ibrahim came to the idols, and he said to the idols: Do you not speak? Do you not hear?
+وَ : and
+جَاءَ : came | went
+إِبْرَاهِيمُ : $IBR
+إِلَى : to | towards | toward | up to
+الْأَصْنَامِ : the idols | idols
+وَ : and
+قَالَ : said
+لِـ : to
+الْأَصْنَامِ : the idols | idols | them
+أَلَا : not | do not
+تَتَكَلَّمُونَ : speak | talk
+أَلَا : not | do not
+تَسْمَعُونَ : hear | listen
+
+> هٰذَا طَعَامٌ وَشَرَابٌ! أَلَا تَأْكُلُونَ؟ أَلَا تَشْرَبُونَ؟
+= This is food and drink! Do you not eat? [Do you not drink?]
+هٰذَا : this | here is
+طَعَامٌ : food
+وَ : and
+شَرَابٌ : drink | drinks
+أَلَا : not | do not
+تَأْكُلُونَ : eat
+أَلَا : not | do not
+تَشْرَبُونَ : drink
+
+> وَسَكَتَتِ الْأَصْنَامُ لِأَنَّهَا حِجَارَةٌ لَا تَنْطِقُ.
+= And the idols remained silent because they are stones and do not speak.
+وَ : and
+سَكَتَتِ : remained silent | were silent | became silent | stayed silent | kept silent | remained quiet | were quiet | became quiet | stayed quiet | kept quiet | silent | quiet
+الْأَصْنَامُ : the idols | idols
+لِأَنَّهَا : because they | because they are | since they | because
+حِجَارَةٌ : stones | stone | rocks | rock
+لَا : do not | does not | not | can not
+تَنْطِقُ : speak | talk
+
+> قَالَ إِبْرَاهِيمُ: مَا لَكُمْ لَا تَنْطِقُونَ؟
+= Ibrahim said: What is with you [that] you do not speak?
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+مَا : what
+لَكُمْ : with you | wrong with you | the matter with you | for you | to you
+لَا : do not | not | can not
+تَنْطِقُونَ : speak | talk
+
+> وَسَكَتَتِ الْأَصْنَامُ وَمَا نَطَقَتْ.
+= And the idols remained silent and did not speak.
+وَ : and
+سَكَتَتِ : remained silent | were silent | became silent | stayed silent | kept silent | remained quiet | were quiet | became quiet | stayed quiet | kept quiet | silent | quiet
+الْأَصْنَامُ : the idols | idols
+وَ : and
+مَا : did not | not | never
+نَطَقَتْ : speak | spoke | talk | say anything
+
+> حِينَئِذٍ غَضِبَ إِبْرَاهِيمُ وَأَخَذَ الْفَأْسَ.
+= Thereupon Ibrahim became angry and took the axe.
+حِينَئِذٍ : thereupon | then | at that point | at that time | at that moment
+غَضِبَ : became angry | got angry | was angry | grew angry | angry
+إِبْرَاهِيمُ : $IBR
+وَ : and
+أَخَذَ : took | grabbed | picked up | seized
+الْفَأْسَ : the axe | the ax | the hatchet
+
+> وَضَرَبَ إِبْرَاهِيمُ الْأَصْنَامَ بِالْفَأْسِ وَكَسَرَ الْأَصْنَامَ.
+= And Ibrahim hit the idols with the axe and he broke the idols.
+وَ : and
+ضَرَبَ : hit | struck | beat | smote
+إِبْرَاهِيمُ : $IBR
+الْأَصْنَامَ : the idols
+بِـ : with | using
+الْفَأْسِ : the axe | the ax | the hatchet
+وَ : and
+كَسَرَ : broke | smashed | destroyed | shattered
+الْأَصْنَامَ : the idols | them
+
+> وَتَرَكَ إِبْرَاهِيمُ الصَّنَمَ الْأَكْبَرَ وَعَلَّقَ الْفَأْسَ فِي عُنُقِهِ.
+= And Ibrahim left the biggest idol and hung the axe on its neck.
+وَ : and
+تَرَكَ : left | spared | left alone
+إِبْرَاهِيمُ : $IBR
+الصَّنَمَ : the idol
+الْأَكْبَرَ : biggest | largest | greatest | big | chief
+وَ : and
+عَلَّقَ : hung | hanged | hang | placed | put
+الْفَأْسَ : the axe | the ax | the hatchet
+فِي : on | in | around | over
+عُنُقِهِ : its neck | his neck
+
+## 5 | Who Did This? | مَنْ فَعَلَ هٰذَا؟
+
+> وَرَجَعَ النَّاسُ وَدَخَلُوا فِي بَيْتِ الْأَصْنَامِ.
+= And the people returned and they entered (in) the idols' house.
+وَ : and
+رَجَعَ : returned | came back | went back | came home
+النَّاسُ : the people | people
+وَ : and
+دَخَلُوا : entered | went into | went in | came into | came in
+?فِي : in | into
+بَيْتِ : the house | house | the temple | temple
+الْأَصْنَامِ : the idols | idols | the idol | idol
+
+> وَأَرَادَ النَّاسُ أَنْ يَسْجُدُوا لِلْأَصْنَامِ لِأَنَّهُ يَوْمُ عِيدٍ.
+= And the people intended to prostrate to the idols because it is the day of Eid.
+وَ : and
+أَرَادَ : intended | wanted | wished | desired | meant
+النَّاسُ : the people | people
+أَنْ : to
+يَسْجُدُوا : prostrate | bow down | bow
+لِـ : to | before | for
+الْأَصْنَامِ : the idols | idols
+لِأَنَّهُ : because it | because it is | because it was | since it | because
+يَوْمُ : the day | a day | day
+عِيدٍ : eid | celebration | festival | a celebration | a festival
+
+> وَلٰكِنْ تَعَجَّبَ النَّاسُ وَدَهِشُوا.
+= However the people became astonished and they were shocked.
+?وَ : and
+لٰكِنْ : however | but | yet
+تَعَجَّبَ : became astonished | were astonished | became amazed | were amazed | were surprised | became surprised | astonished | amazed | surprised
+النَّاسُ : the people | people
+وَ : and
+دَهِشُوا : were shocked | became shocked | were stunned | were astounded | were bewildered | shocked | stunned | astounded | bewildered
+
+> وَتَأَسَّفَ النَّاسُ وَغَضِبُوا.
+= And the people became regretful and they became angry.
+وَ : and
+تَأَسَّفَ : became regretful | were regretful | regretted | were sorry | became sorry | felt sorry | grieved | were grieved | became sad | were sad | regretful | sorry
+النَّاسُ : the people | people
+وَ : and
+غَضِبُوا : became angry | got angry | were angry | grew angry | angry
+
+> قَالُوا: مَنْ فَعَلَ هٰذَا بِآلِهَتِنَا؟
+= They said: Who did this with our gods?
+قَالُوا : they said | said
+مَنْ : who
+فَعَلَ : did | has done | done
+هٰذَا : this
+بِـ : with | to
+آلِهَتِنَا : our gods | our deities
+
+> قَالُوا: سَمِعْنَا فَتًى يَذْكُرُهُمْ يُقَالُ لَهُ إِبْرَاهِيمُ.
+= They said: We heard a youth mentioning them; he is called Ibrahim.
+قَالُوا : they said | said
+سَمِعْنَا : we heard | heard
+فَتًى : a youth | a young man | a boy | a lad
+يَذْكُرُهُمْ : mentioning them | mention them | mentions them | talking about them | talk about them | speaking of them | speak of them | speaking about them
+يُقَالُ : is called | called | is named | named | it is said
+?لَهُ : to him | about him | him
+إِبْرَاهِيمُ : $IBR
+
+> قَالُوا: أَأَنْتَ فَعَلْتَ هٰذَا بِآلِهَتِنَا يَا إِبْرَاهِيمُ؟
+= They said: Did you do this to our gods, O Ibrahim?
+قَالُوا : they said | said
+أَ : did | was it | is it | have
+أَنْتَ : you
+فَعَلْتَ : do | did | done | have done
+هٰذَا : this
+بِـ : to | with
+آلِهَتِنَا : our gods | our deities
+يَا : o | oh
+إِبْرَاهِيمُ : $IBR
+
+> قَالَ: بَلْ فَعَلَهُ كَبِيرُهُمْ هٰذَا، فَاسْأَلُوهُمْ إِنْ كَانُوا يَنْطِقُونَ.
+= He said: Rather, this big one of them did it, so ask them if they can speak.
+قَالَ : he said | said
+بَلْ : rather | nay | but | actually | no rather
+فَعَلَهُ : did it | has done it | done it | did
+كَبِيرُهُمْ : big one of them | biggest of them | the big one | the biggest one | the biggest | their big one | their biggest | their chief | their leader | the chief
+هٰذَا : this
+فَـ : so | then
+اسْأَلُوهُمْ : ask them | ask
+إِنْ : if
+كَانُوا : they can | they could | they are | they were | can | could | are | were
+يَنْطِقُونَ : speak | talk | speaking
+
+> وَكَانَ النَّاسُ يَعْرِفُونَ أَنَّ الْأَصْنَامَ حِجَارَةٌ.
+= And the people were recognizing that the idols were rock.
+وَ : and
+كَانَ : were | would | used to
+النَّاسُ : the people | people
+يَعْرِفُونَ : recognizing | recognising | recognize | recognise | knew | know | knowing | realize | realizing | aware
+أَنَّ : that
+الْأَصْنَامَ : the idols | idols
+حِجَارَةٌ : rock | rocks | stone | stones
+
+> وَكَانُوا يَعْرِفُونَ أَنَّ الْحِجَارَةَ لَا تَسْمَعُ وَلَا تَنْطِقُ.
+= And they were recognizing that rock does not hear nor speak.
+وَ : and
+كَانُوا : they were | they would | they used to | were | would | used to
+يَعْرِفُونَ : recognizing | recognising | recognize | recognise | knew | know | knowing | realize | realizing | aware
+أَنَّ : that
+الْحِجَارَةَ : rock | rocks | stone | stones | the rocks | the stones
+لَا : does not | do not | not | can not
+تَسْمَعُ : hear | listen
+?وَ : and | or
+لَا : nor | not | does not | do not | neither | can not
+تَنْطِقُ : speak | talk
+
+> وَكَانُوا يَعْرِفُونَ أَنَّ الصَّنَمَ الْأَكْبَرَ أَيْضًا حَجَرٌ.
+= And they were recognizing that the biggest idol was also a rock.
+وَ : and
+كَانُوا : they were | they would | they used to | were | would | used to
+يَعْرِفُونَ : recognizing | recognising | recognize | recognise | knew | know | knowing | realize | realizing | aware
+أَنَّ : that
+الصَّنَمَ : the idol
+الْأَكْبَرَ : biggest | largest | greatest | big | chief
+أَيْضًا : also | too | as well
+حَجَرٌ : a rock | a stone
+
+> وَأَنَّ الصَّنَمَ الْأَكْبَرَ لَا يَقْدِرُ أَنْ يَمْشِيَ وَيَتَحَرَّكَ.
+= And that the biggest idol is not able to walk and move.
+وَ : and
+أَنَّ : that
+الصَّنَمَ : the idol
+الْأَكْبَرَ : biggest | largest | greatest | big | chief
+لَا : not | does not | is not
+يَقْدِرُ : able | can | capable
+?أَنْ : to
+يَمْشِيَ : walk
+وَ : and | or
+يَتَحَرَّكَ : move
+
+> وَأَنَّ الصَّنَمَ الْأَكْبَرَ لَا يَقْدِرُ أَنْ يَكْسِرَ الْأَصْنَامَ.
+= And that the biggest idol is not able to break the idols.
+وَ : and
+أَنَّ : that
+الصَّنَمَ : the idol
+الْأَكْبَرَ : biggest | largest | greatest | big | chief
+لَا : not | does not | is not
+يَقْدِرُ : able | can | capable
+?أَنْ : to
+يَكْسِرَ : break | smash | destroy
+الْأَصْنَامَ : the idols
+
+> فَقَالُوا لِإِبْرَاهِيمَ: أَنْتَ تَعْلَمُ أَنَّ الْأَصْنَامَ لَا تَنْطِقُ.
+= So they said to Ibrahim: You know that idols do not speak.
+فَـ : so | then | and
+قَالُوا : they said | said
+لِـ : to
+إِبْرَاهِيمَ : $IBR
+أَنْتَ : you
+تَعْلَمُ : know | are aware
+أَنَّ : that
+الْأَصْنَامَ : idols | the idols
+لَا : do not | does not | not | can not
+تَنْطِقُ : speak | talk
+
+> قَالَ إِبْرَاهِيمُ: فَكَيْفَ تَعْبُدُونَ الْأَصْنَامَ وَإِنَّهَا لَا تَضُرُّ وَلَا تَنْفَعُ؟
+= Ibrahim said: So how do you worship idols although they do not harm nor benefit?
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+فَـ : so | then
+كَيْفَ : how
+تَعْبُدُونَ : worship | you worship
+الْأَصْنَامَ : idols | the idols
+وَ : although | even though | while | when | and
+إِنَّهَا : they | they indeed | indeed they | verily they | truly they
+لَا : do not | does not | not | can not
+تَضُرُّ : harm | hurt
+?وَ : and | or
+لَا : nor | not | do not | does not | neither | can not
+تَنْفَعُ : benefit | help
+
+> وَكَيْفَ تَسْأَلُونَ الْأَصْنَامَ وَإِنَّهَا لَا تَنْطِقُ وَلَا تَسْمَعُ؟
+= And how do you ask idols although they do not speak and do not hear?
+وَ : and
+كَيْفَ : how
+تَسْأَلُونَ : ask | you ask | pray to
+الْأَصْنَامَ : idols | the idols
+وَ : although | even though | while | when | and
+إِنَّهَا : they | they indeed | indeed they | verily they | truly they
+لَا : do not | does not | not | can not
+تَنْطِقُ : speak | talk
+?وَ : and | or
+لَا : do not | does not | not | nor | neither | can not
+تَسْمَعُ : hear | listen
+
+> أَلَا تَفْهَمُونَ شَيْئًا؟ أَفَلَا تَعْقِلُونَ؟
+= Don't you understand anything? Don't you have any sense?
+أَلَا : do not | not
+تَفْهَمُونَ : understand
+شَيْئًا : anything | something | a thing
+?أَ : do | is it
+?فَـ : then | so
+لَا : do not | not
+تَعْقِلُونَ : have any sense | have sense | use reason | use your reason | use your intellect | use your minds | reason | think | understand | comprehend | reflect
+
+> وَسَكَتَ النَّاسُ وَخَجِلُوا!
+= And the people became quiet and they became embarrassed.
+وَ : and
+سَكَتَ : became quiet | were quiet | went quiet | fell silent | were silent | became silent | remained silent | silent | quiet
+النَّاسُ : the people | people
+وَ : and
+خَجِلُوا : became embarrassed | were embarrassed | felt embarrassed | got embarrassed | embarrassed | were ashamed | felt ashamed | became ashamed | ashamed
+
+## 6 | A Cold Fire | نَارٌ بَارِدَةٌ
+
+> اجْتَمَعَ النَّاسُ وَقَالُوا: مَاذَا نَفْعَلُ؟
+= The people gathered and they said: What do we do?
+اجْتَمَعَ : gathered | assembled | came together | got together | met
+النَّاسُ : the people | people
+وَ : and
+قَالُوا : they said | said
+مَاذَا : what
+نَفْعَلُ : do we do | should we do | shall we do | will we do | can we do | we do | do
+
+> إِنَّ إِبْرَاهِيمَ كَسَرَ الْأَصْنَامَ وَأَهَانَ الْآلِهَةَ!
+= Indeed Ibrahim broke the idols and he disgraced the gods!
+إِنَّ : indeed | verily | truly | surely | certainly
+إِبْرَاهِيمَ : $IBR
+كَسَرَ : broke | has broken | smashed | destroyed | shattered
+الْأَصْنَامَ : the idols
+وَ : and
+أَهَانَ : disgraced | has disgraced | insulted | humiliated | dishonored | dishonoured | disrespected
+الْآلِهَةَ : the gods | the deities
+
+> وَسَأَلَ النَّاسُ: مَا عِقَابُ إِبْرَاهِيمَ؟ مَا جَزَاءُ إِبْرَاهِيمَ؟
+= And the people asked: What is Ibrahim's punishment? What is Ibrahim's recompense?
+وَ : and
+سَأَلَ : asked
+النَّاسُ : the people | people
+مَا : what
+عِقَابُ : punishment | the punishment
+إِبْرَاهِيمَ : $IBR
+مَا : what
+جَزَاءُ : recompense | the recompense | requital | the requital | penalty | the penalty | retribution | consequence | the consequence | punishment
+إِبْرَاهِيمَ : $IBR
+
+> كَانَ الْجَوَابُ: حَرِّقُوهُ وَانْصُرُوا آلِهَتَكُمْ.
+= The reply was: Burn him and support your gods.
+كَانَ : was
+الْجَوَابُ : the reply | the answer | the response
+حَرِّقُوهُ : burn him | burn him up
+وَ : and
+انْصُرُوا : support | help | defend | aid | stand up for | give victory to
+آلِهَتَكُمْ : your gods | your deities
+
+> وَهٰكَذَا كَانَ: أَوْقَدُوا نَارًا وَأَلْقَوْا فِيهَا إِبْرَاهِيمَ.
+= And likewise it came to be: They ignited a fire and they threw Ibrahim in it.
+وَ : and
+هٰكَذَا : likewise | thus | so | like this | in this way | this is how
+كَانَ : it came to be | came to be | it happened | happened | it was | was
+أَوْقَدُوا : ignited | lit | kindled | started | built | made
+نَارًا : a fire | a blaze
+وَ : and
+أَلْقَوْا : threw | cast | flung | tossed
+فِيهَا : in it | into it | inside it | in | into
+إِبْرَاهِيمَ : $IBR
+
+> وَلٰكِنَّ اللهَ نَصَرَ إِبْرَاهِيمَ وَقَالَ لِلنَّارِ:
+= However Allah helped Ibrahim and He said to the fire:
+?وَ : and
+لٰكِنَّ : however | but | yet
+اللهَ : $ALLAH
+نَصَرَ : helped | aided | supported | saved | rescued | protected | gave victory to
+إِبْرَاهِيمَ : $IBR
+وَ : and
+قَالَ : said
+لِـ : to
+النَّارِ : the fire
+
+> يَا نَارُ كُونِي بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.
+= O fire! Be (become) cold and peaceful upon Ibrahim.
+يَا : o | oh
+نَارُ : fire
+كُونِي : be | become
+بَرْدًا : cold | coolness | coldness | cool
+وَ : and
+سَلَامًا : peaceful | peace | safe | safety
+عَلَى : upon | on | for | to
+إِبْرَاهِيمَ : $IBR
+
+> وَهٰكَذَا كَانَ، كَانَتِ النَّارُ بَرْدًا وَسَلَامًا عَلَى إِبْرَاهِيمَ.
+= And likewise it came to be: The fire was cold and peaceful upon Ibrahim.
+وَ : and
+هٰكَذَا : likewise | thus | so | like this | in this way | this is how
+كَانَ : it came to be | came to be | it happened | happened | it was
+كَانَتِ : was | became
+النَّارُ : the fire
+بَرْدًا : cold | coolness | coldness | cool
+وَ : and
+سَلَامًا : peaceful | peace | safe | safety
+عَلَى : upon | on | for | to
+إِبْرَاهِيمَ : $IBR
+
+> وَرَأَى النَّاسُ أَنَّ النَّارَ لَا تَضُرُّ إِبْرَاهِيمَ.
+= And the people saw that the fire does not harm Ibrahim.
+وَ : and
+رَأَى : saw | noticed | observed
+النَّاسُ : the people | people
+أَنَّ : that
+النَّارَ : the fire
+لَا : does not | did not | do not | would not | not
+تَضُرُّ : harm | hurt | burn
+إِبْرَاهِيمَ : $IBR
+
+> وَرَأَى النَّاسُ أَنَّ إِبْرَاهِيمَ مَسْرُورٌ، وَأَنَّ إِبْرَاهِيمَ سَالِمٌ.
+= And the people saw that Ibrahim is happy and that Ibrahim is safe.
+وَ : and
+رَأَى : saw | noticed | observed
+النَّاسُ : the people | people
+أَنَّ : that
+إِبْرَاهِيمَ : $IBR
+مَسْرُورٌ : happy | pleased | joyful | delighted | glad | cheerful
+وَ : and
+أَنَّ : that
+إِبْرَاهِيمَ : $IBR
+سَالِمٌ : safe | unharmed | sound | well
+
+> وَدَهِشَ النَّاسُ وَتَحَيَّرُوا.
+= And the people were shocked and they became bewildered.
+وَ : and
+دَهِشَ : were shocked | became shocked | were astonished | were amazed | were stunned | were astounded | shocked | astonished | amazed | stunned
+النَّاسُ : the people | people
+وَ : and
+تَحَيَّرُوا : became bewildered | were bewildered | became confused | were confused | were perplexed | were puzzled | were baffled | bewildered | confused | perplexed | puzzled | baffled
+
+## 7 | Who Is My Lord? | مَنْ رَبِّي؟
+
+> وَذَاتَ لَيْلَةٍ رَأَى إِبْرَاهِيمُ كَوْكَبًا، فَقَالَ: هٰذَا رَبِّي.
+= One night, Ibrahim saw a star. So he said: This is my lord.
+?وَ : and
+ذَاتَ : one | on one | a certain | once
+لَيْلَةٍ : night
+رَأَى : saw
+إِبْرَاهِيمُ : $IBR
+كَوْكَبًا : a star | a planet
+فَـ : so | then | and
+قَالَ : said | he said
+هٰذَا : this
+رَبِّي : my lord | my sustainer
+
+> وَلَمَّا غَابَ الْكَوْكَبُ، قَالَ إِبْرَاهِيمُ: لَا! هٰذَا لَيْسَ بِرَبِّي!
+= And when the star disappeared, Ibrahim said: No! This is not my lord.
+وَ : and
+لَمَّا : when | once | after
+غَابَ : disappeared | set | vanished | went down | went away | faded | was gone
+الْكَوْكَبُ : the star | the planet
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+لَا : no
+هٰذَا : this
+لَيْسَ : is not | not
+?بِـ : (emphasis; not translated)
+رَبِّي : my lord | my sustainer
+
+> وَرَأَى إِبْرَاهِيمُ الْقَمَرَ فَقَالَ: هٰذَا رَبِّي.
+= And Ibrahim saw the moon, so he said: This is my lord.
+وَ : and
+رَأَى : saw
+إِبْرَاهِيمُ : $IBR
+الْقَمَرَ : the moon
+فَـ : so | then | and
+قَالَ : said | he said
+هٰذَا : this
+رَبِّي : my lord | my sustainer
+
+> وَلَمَّا غَابَ الْقَمَرُ، قَالَ إِبْرَاهِيمُ: لَا! هٰذَا لَيْسَ بِرَبِّي!
+= And when the moon disappeared, Ibrahim said: No! This is not my lord.
+وَ : and
+لَمَّا : when | once | after
+غَابَ : disappeared | set | vanished | went down | went away | faded | was gone
+الْقَمَرُ : the moon
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+لَا : no
+هٰذَا : this
+لَيْسَ : is not | not
+?بِـ : (emphasis; not translated)
+رَبِّي : my lord | my sustainer
+
+> وَطَلَعَتِ الشَّمْسُ، فَقَالَ إِبْرَاهِيمُ: هٰذَا رَبِّي، هٰذَا أَكْبَرُ.
+= And the sun rose, so Ibrahim said: This is my lord, this is biggest.
+وَ : and
+طَلَعَتِ : rose | came up | came out | appeared | rises
+الشَّمْسُ : the sun
+فَـ : so | then | and
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+هٰذَا : this
+رَبِّي : my lord | my sustainer
+هٰذَا : this
+أَكْبَرُ : biggest | bigger | greatest | greater | largest | larger | the biggest | the greatest | the largest
+
+> وَلَمَّا غَابَتِ الشَّمْسُ فِي اللَّيْلِ، قَالَ إِبْرَاهِيمُ: لَا! هٰذَا لَيْسَ بِرَبِّي.
+= And when the sun disappeared in the night, Ibrahim said: No! This is not my lord.
+وَ : and
+لَمَّا : when | once | after
+غَابَتِ : disappeared | set | vanished | went down | went away | faded | was gone
+الشَّمْسُ : the sun
+فِي : in | at | into
+اللَّيْلِ : the night | night
+قَالَ : said
+إِبْرَاهِيمُ : $IBR
+لَا : no
+هٰذَا : this
+لَيْسَ : is not | not
+?بِـ : (emphasis; not translated)
+رَبِّي : my lord | my sustainer
+
+> إِنَّ اللهَ حَيٌّ لَا يَمُوتُ.
+= Truly Allah is Living, He does not die.
+إِنَّ : truly | indeed | verily | surely | certainly
+اللهَ : $ALLAH
+حَيٌّ : living | alive | ever living
+لَا : does not | do not | not | never | will not
+يَمُوتُ : die | dies
+
+> إِنَّ اللهَ بَاقٍ لَا يَغِيبُ.
+= Indeed Allah is remaining, He does not disappear.
+إِنَّ : indeed | truly | verily | surely | certainly
+اللهَ : $ALLAH
+بَاقٍ : remaining | everlasting | ever lasting | eternal | lasting | enduring | abiding | permanent
+لَا : does not | do not | not | never | will not
+يَغِيبُ : disappear | disappears | vanish | vanishes | set | sets | go away | fade
+
+> إِنَّ اللهَ قَوِيٌّ لَا يَغْلِبُهُ شَيْءٌ.
+= Indeed Allah is strong, nothing overpowers Him.
+إِنَّ : indeed | truly | verily | surely | certainly
+اللهَ : $ALLAH
+قَوِيٌّ : strong | powerful | mighty
+?لَا : no | not
+يَغْلِبُهُ : overpowers him | overpower him | overcomes him | overcome him | defeats him | defeat him | overwhelms him | overwhelm him | beats him | dominates him
+شَيْءٌ : nothing | thing | anything | something
+
+> وَالْكَوْكَبُ ضَعِيفٌ يَغْلِبُهُ الصُّبْحُ.
+= And the star is weak, the morning overpowers it.
+وَ : and
+الْكَوْكَبُ : the star | the planet
+ضَعِيفٌ : weak | feeble
+يَغْلِبُهُ : overpowers it | overpower it | overcomes it | overcome it | defeats it | overwhelms it | beats it
+الصُّبْحُ : the morning | morning | the dawn | dawn | daybreak | the daybreak
+
+> وَالْقَمَرُ ضَعِيفٌ تَغْلِبُهُ الشَّمْسُ.
+= And the moon is weak, the sun overpowers it.
+وَ : and
+الْقَمَرُ : the moon
+ضَعِيفٌ : weak | feeble
+تَغْلِبُهُ : overpowers it | overpower it | overcomes it | overcome it | defeats it | overwhelms it | beats it
+الشَّمْسُ : the sun
+
+> وَالشَّمْسُ ضَعِيفَةٌ يَغْلِبُهَا اللَّيْلُ وَيَغْلِبُهَا الْغَيْمُ.
+= And the sun is weak, the night overpowers it, and clouds overpower it.
+وَ : and
+الشَّمْسُ : the sun
+ضَعِيفَةٌ : weak | feeble
+يَغْلِبُهَا : overpowers it | overpower it | overcomes it | overcome it | defeats it | overwhelms it | beats it | overpowers her
+اللَّيْلُ : the night | night
+وَ : and
+يَغْلِبُهَا : overpower it | overpowers it | overcome it | overcomes it | defeat it | defeats it | overwhelm it | overwhelms it | beat it | overpowers her
+الْغَيْمُ : clouds | the clouds | the cloud | cloud
+
+> وَلَا يَنْصُرُنِي الْكَوْكَبُ لِأَنَّهُ ضَعِيفٌ.
+= And the star will not help me, because it is weak.
+وَ : and
+لَا : will not | does not | do not | can not | not
+يَنْصُرُنِي : help me | helps me | aid me | support me | save me | give me victory
+الْكَوْكَبُ : the star | the planet
+لِأَنَّهُ : because it | because it is | since it | because
+ضَعِيفٌ : weak | feeble
+
+> وَلَا يَنْصُرُنِي الْقَمَرُ لِأَنَّهُ ضَعِيفٌ.
+= And the moon will not help me, because it is weak.
+وَ : and
+لَا : will not | does not | do not | can not | not
+يَنْصُرُنِي : help me | helps me | aid me | support me | save me | give me victory
+الْقَمَرُ : the moon
+لِأَنَّهُ : because it | because it is | since it | because
+ضَعِيفٌ : weak | feeble
+
+> وَلَا تَنْصُرُنِي الشَّمْسُ لِأَنَّهَا ضَعِيفَةٌ.
+= And the sun will not help me, because it is weak.
+وَ : and
+لَا : will not | does not | do not | can not | not
+تَنْصُرُنِي : help me | helps me | aid me | support me | save me | give me victory
+الشَّمْسُ : the sun
+لِأَنَّهَا : because it | because it is | because she | since it | because
+ضَعِيفَةٌ : weak | feeble
+
+> وَيَنْصُرُنِي اللهُ.
+= And Allah will help me.
+وَ : and
+يَنْصُرُنِي : will help me | helps me | help me | will aid me | will support me | will save me | will give me victory | aids me | supports me | saves me
+اللهُ : $ALLAH
+
+> لِأَنَّ اللهَ حَيٌّ لَا يَمُوتُ.
+= Because Allah is alive, He does not die.
+لِأَنَّ : because | since
+اللهَ : $ALLAH
+حَيٌّ : alive | living | ever living
+لَا : does not | do not | not | never | will not
+يَمُوتُ : die | dies
+
+> وَبَاقٍ لَا يَغِيبُ.
+= And (He is) remaining, He does not disappear.
+وَ : and
+بَاقٍ : remaining | everlasting | ever lasting | eternal | lasting | enduring | abiding | permanent
+لَا : does not | do not | not | never | will not
+يَغِيبُ : disappear | disappears | vanish | vanishes | set | sets | go away | fade
+
+> وَقَوِيٌّ لَا يَغْلِبُهُ شَيْءٌ.
+= And (He is) powerful, nothing overpowers Him.
+وَ : and
+قَوِيٌّ : powerful | strong | mighty
+?لَا : no | not
+يَغْلِبُهُ : overpowers him | overpower him | overcomes him | overcome him | defeats him | defeat him | overwhelms him | overwhelm him | beats him | dominates him
+شَيْءٌ : nothing | thing | anything | something

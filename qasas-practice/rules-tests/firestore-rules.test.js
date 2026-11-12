@@ -131,6 +131,29 @@ describe('firestore rules', () => {
     await assertSucceeds(setDoc(doc(authedDb('alice'), 'answerEvents/good'), answerEvent()));
   });
 
+  it('accepts Qasas translation quiz results and answer events', async () => {
+    const db = authedDb('alice');
+    await assertSucceeds(
+      setDoc(
+        doc(db, 'quizResults/qasas'),
+        quizResult({ mode: 'qasasTranslation', bankSource: 'qasas' })
+      )
+    );
+    await assertSucceeds(
+      setDoc(
+        doc(db, 'answerEvents/qasas'),
+        answerEvent({
+          mode: 'qasasTranslation',
+          bankSource: 'qasas',
+          topic: 'QSS',
+          group: 'qasasTranslation',
+          questionId: 'QSS-C1-S01',
+          quizResultId: null,
+        })
+      )
+    );
+  });
+
   it('accepts a signed-in user writing their own bounded topic stats', async () => {
     await assertSucceeds(
       setDoc(doc(authedDb('alice'), 'users/alice/topicStats/fiqh_WUD'), {
